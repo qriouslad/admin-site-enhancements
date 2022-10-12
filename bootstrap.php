@@ -36,8 +36,59 @@ class WP_Enhancements {
 	 */
 	private function __construct() {
 
-		// Register admin menu and subsequently the main admin page
-		add_action( 'wpenha_csf_loaded', [ $this, 'register_admin_menu_page' ] );
+		if ( is_admin() && $this->is_wpenha() ) {
+
+			// Register admin menu and subsequently the main admin page. This is using CodeStar Framework (CSF).
+			add_action( 'wpenha_csf_loaded', [ $this, 'register_admin_menu_page' ] );
+
+		} elseif ( is_admin() && ( ! $this->is_wpenha() ) ) {
+
+			// Register admin menu and empty admin page using core functions.
+			add_action( 'admin_menu', [ $this, 'register_admin_menu_page_placeholder' ] );
+
+		}
+
+		// Remove CodeStar Framework submenu under tools
+		add_action( 'admin_menu', [ $this, 'remove_codestar_submenu' ] );
+
+		// Add action links in plugins page
+		add_filter( 'plugin_action_links_' . WPENHA_SLUG . '/' . WPENHA_SLUG . '.php', [ $this, 'add_plugin_action_links' ] );
+
+		if ( is_admin() ) {
+
+			if ( $this->is_wpenha() ) {
+
+				// Enqueue admin scripts and styles only on the plugin's main page
+				add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Register admin menu placeholder
+	 */
+	public function register_admin_menu_page_placeholder() {
+
+	    add_submenu_page(
+	        'tools.php',
+	        'WP Enhancements',
+	        'WP Enhancements',
+	        'manage_options',
+	        'wp-enhancements',
+	        [ $this, 'register_admin_page_placeholder' ]
+	    );
+
+	}
+
+	/**
+	 * Admin page placeholder
+	 */
+	public function register_admin_page_placeholder() {
+
+		echo 'Nothinig to show here...';
 
 	}
 
@@ -52,45 +103,186 @@ class WP_Enhancements {
 
 			// Set a unique slug-like ID
 
-			$prefix = 'wpenha';
+			$prefix = 'wp-enhancements';
 
 			// Create options
 
 			WPENHA_CSF::createOptions ( $prefix, array(
-				'menu_title' 		=> 'Enhancements',
-				'menu_slug' 		=> 'wpenha',
-				'menu_type'			=> 'submenu',
-				// 'menu_parent'		=> 'options-general.php',
-				'menu_parent'		=> 'tools.php',
-				// 'menu_position'		=> 8,
+
+			    // framework title
+				'framework_title' 		=> 'WP Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
+				'framework_class' 		=> 'wpenha',
+
+				// menu settings
+				'menu_title' 			=> 'WP Enhancements',
+				'menu_slug' 			=> 'wp-enhancements',
+				'menu_type'				=> 'submenu',
+				'menu_capability'		=> 'manage_options',
 				// 'menu_icon'			=> 'dashicons-arrow-up-alt2',
-				'framework_title' 	=> 'WP Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
-				'framework_class' 	=> 'wpenha',
-				'show_bar_menu' 	=> false,
-				'show_search' 		=> false,
-				'show_reset_all' 	=> false,
-				'show_reset_section' => false,
-				'show_form_warning' => false,
-				'save_defaults'		=> true,
-				'show_footer' 		=> false,
-				'footer_credit'		=> 'WP Enhancements.',
+				// 'menu_position'		=> 8,
+				'menu_hidden'			=> false,
+				'menu_parent'			=> 'tools.php',
+
+				// menu extras
+				'show_bar_menu' 		=> false,
+				'show_sub_menu' 		=> false,
+				'show_in_network' 		=> false,
+				'show_in_customizer' 	=> false,
+				'show_search' 			=> true,
+				'show_reset_all'		=> false,
+				'show_reset_section'	=> false,
+				'show_footer' 			=> true,
+				'show_all_options' 		=> true,
+				'show_form_warning' 	=> false,
+				'sticky_header'			=> true,
+				'save_defaults'			=> true,
+				'ajax_save'				=> true,
+
+				// admin bar menu settings
+				'admin_bar_menu_icon'     => '',
+				'admin_bar_menu_priority' => 80,
+
+				// footer
+				'footer_text'			=> '',
+				// 'footer_after'			=> 'Footer after',
+				'footer_credit'			=> '<a href="https://wordpress.org/plugins/wp-enhancements/" target="_blank">WP Enhancements</a> is on <a href="https://github.com/qriouslad/wp-enhancements" target="_blank">github</a>.',
+
+				// database model
+				'database'                => 'options', // options, transient, theme_mod, network
+				'transient_time'          => 0,
+
+				// contextual help
+				'contextual_help'         => array(),
+				'contextual_help_sidebar' => '',
+
+				// typography options
+				'enqueue_webfont'         => true,
+				'async_webfont'           => false,
+
+				// others
+				'output_css'              => true,
+
+				// theme and wrapper classname
+				'nav'                     => 'normal',
+				'theme'                   => 'light',
+				'class'                   => '',
+
+				// external default values
+				'defaults'                => array(),
+
 			) );
 
 			WPENHA_CSF::createSection( $prefix, array(
-				'title'  => 'Tab Title 1',
+				'title'  => 'Content',
+				'icon'   => 'fas fa-rocket',
 				'fields' => array(
 
-					// A text field
 					array(
-						'id'    => 'opt-text',
-						'type'  => 'text',
-						'title' => 'Simple Text',
+					  'id'    => 'show-ids',
+					  'type'  => 'switcher',
+					  'title' => 'Show IDs',
+					  'label' => 'Show ID column in page, post, custom posts, taxonomies and users listings.',
 					),
 
 				)
 			) );
 
+			// WPENHA_CSF::createSection( $prefix, array(
+			//   'id'    => 'basic_fields',
+			//   'title' => 'Basic Fields',
+			//   'icon'  => 'fas fa-plus-circle',
+			// ) );
+
+			// WPENHA_CSF::createSection( $prefix, array(
+			// 	'parent'      => 'basic_fields',
+			// 	'title'       => 'Text',
+			// 	'icon'        => 'far fa-square',
+			// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=text" target="_blank">Field: text</a>',
+			// 	'fields'      => array(
+
+			// 		array(
+			// 		'id'    => 'opt-text-1',
+			// 		'type'  => 'text',
+			// 		'title' => 'Text',
+			// 		),
+
+			// 	)
+			// ) );
+
+			// WPENHA_CSF::createSection( $prefix, array(
+			// 	'parent'      => 'basic_fields',
+			// 	'title'       => 'Textarea',
+			// 	'icon'        => 'far fa-square',
+			// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=textarea" target="_blank">Field: textrea</a>',
+			// 	'fields'      => array(
+
+			// 		array(
+			// 		'id'    => 'opt-textarea-1',
+			// 		'type'  => 'textarea',
+			// 		'title' => 'Textarea',
+			// 		),
+
+			// 	)
+			// ) );
+
 		}
+
+	}
+
+	/**
+	 * Remove CodeStar framework welcome / ads page
+	 *
+	 * @since 1.0.0
+	 */
+	public function remove_codestar_submenu() {
+
+		remove_submenu_page( 'tools.php', 'csf-welcome' );
+
+	}
+
+	/**
+	 * Add 'Access now' plugin action link.
+	 *
+	 * @since    1.0.0
+	 */
+	
+	public function add_plugin_action_links( $links ) {
+
+		$settings_link = '<a href="tools.php?page=' . WPENHA_SLUG . '">Access now</a>';
+
+		array_unshift($links, $settings_link); 
+
+		return $links; 
+
+	}
+
+
+	/**
+	 * Check if current screen is this plugin's main page
+	 *
+	 * @since 1.0.0
+	 */
+	public function is_wpenha() {
+
+		$request_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] ); // e.g. /wp-admin/index.php?page=page-slug
+
+		if ( strpos( $request_uri, 'tools.php?page=' . WPENHA_SLUG ) !== false ) {
+			return true; // Yes, this is the plugin's main page
+		} else {
+			return false; // Nope, this is NOT the plugin's page
+		}
+
+	}
+
+	/**
+	 * Enqueue admin scripts
+	 *
+	 * @since 1.0.0
+	 */
+	public function admin_scripts() {
+
+		wp_enqueue_style( 'wpenha-admin', WPENHA_URL . 'assets/css/admin.css', array(), WPENHA_VERSION );
+		wp_enqueue_script( 'wpenha-app', WPENHA_URL . 'assets/js/admin.js', array(), WPENHA_VERSION, false );
 
 	}
 
