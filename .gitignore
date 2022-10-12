@@ -1,2 +1,6 @@
 sftp-config.json
 *.DS_Store
+.gitignore
+composer.json
+composer.lock
+/vendor/
