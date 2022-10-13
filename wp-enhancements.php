@@ -4,7 +4,7 @@
  * Plugin Name:       WP Enhancements
  * Plugin URI:        https://wordpress.org/plugins/wp-enhancements/
  * Description:       Easily enable various admin- and public- facing enhancements to a WordPress installation.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Author:            Bowo
  * Author URI:        https://bowo.io
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPENHA_VERSION', '0.3.0' );
+define( 'WPENHA_VERSION', '0.4.0' );
 define( 'WPENHA_SLUG', 'wp-enhancements' );
 define( 'WPENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
 define( 'WPENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
