@@ -16,6 +16,8 @@ class Activation {
 	 */
 	public function activate() {
 
+		add_option( WPENHA_SLUG, array(), '', 'yes' );
+
 	}
 
 }

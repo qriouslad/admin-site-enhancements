@@ -36,17 +36,8 @@ class WP_Enhancements {
 	 */
 	private function __construct() {
 
-		if ( is_admin() && $this->is_wpenha() ) {
-
-			// Register admin menu and subsequently the main admin page. This is using CodeStar Framework (CSF).
-			add_action( 'wpenha_csf_loaded', [ $this, 'register_admin_menu_page' ] );
-
-		} elseif ( is_admin() && ( ! $this->is_wpenha() ) ) {
-
-			// Register admin menu and empty admin page using core functions.
-			add_action( 'admin_menu', [ $this, 'register_admin_menu_page_placeholder' ] );
-
-		}
+		// Register admin menu and subsequently the main admin page. This is using CodeStar Framework (CSF).
+		add_action( 'wpenha_csf_loaded', [ $this, 'register_admin_menu_page' ] );
 
 		// Remove CodeStar Framework submenu under tools
 		add_action( 'admin_menu', [ $this, 'remove_codestar_submenu' ] );
@@ -54,41 +45,48 @@ class WP_Enhancements {
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . WPENHA_SLUG . '/' . WPENHA_SLUG . '.php', [ $this, 'add_plugin_action_links' ] );
 
-		if ( is_admin() ) {
+		// Enqueue admin scripts and styles only on the plugin's main page
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 
-			if ( $this->is_wpenha() ) {
+		// Get all WP Enhancements options, default to empty array in case it's not been created yet
+		$wpenha_options = get_option( 'wp-enhancements', array() );
 
-				// Enqueue admin scripts and styles only on the plugin's main page
-				add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
+		// Instantiate object for Content Admin functionalities
+		$content_admin = new WPENHA\Classes\Content_Admin;
 
-			}
+		// Content Admin >> Show IDs
+		if ( array_key_exists( 'show-ids', $wpenha_options ) && $wpenha_options['show-ids'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_ids' ], 10, 1 );
+		}
+		
+	}
+
+	/**
+	 * Enqueue admin scripts
+	 *
+	 * @since 1.0.0
+	 */
+	public function admin_scripts() {
+
+		// For main page of this plugin
+
+		if ( $this->is_wpenha() ) {
+
+			wp_enqueue_style( 'wpenha-admin', WPENHA_URL . 'assets/css/admin.css', array(), WPENHA_VERSION );
+			wp_enqueue_script( 'wpenha-admin', WPENHA_URL . 'assets/js/admin.js', array(), WPENHA_VERSION, false );
 
 		}
 
-	}
+		// CSS for Content Admin >> Show IDs, for list tables in wp-admin, e.g. All Posts page
 
-	/**
-	 * Register admin menu placeholder
-	 */
-	public function register_admin_menu_page_placeholder() {
+		$current_screen = get_current_screen();
 
-	    add_submenu_page(
-	        'tools.php',
-	        'WP Enhancements',
-	        'WP Enhancements',
-	        'manage_options',
-	        'wp-enhancements',
-	        [ $this, 'register_admin_page_placeholder' ]
-	    );
-
-	}
-
-	/**
-	 * Admin page placeholder
-	 */
-	public function register_admin_page_placeholder() {
-
-		echo 'Nothinig to show here...';
+		if ( 
+			( false !== strpos( $current_screen->base, 'edit' ) ) || 
+			( false !== strpos( $current_screen->base, 'users' ) ) || 
+			( false !== strpos( $current_screen->base, 'upload' ) ) ) {
+			wp_enqueue_style( 'wpenha-edit', WPENHA_URL . 'assets/css/edit.css', array(), WPENHA_VERSION );
+		}
 
 	}
 
@@ -135,12 +133,12 @@ class WP_Enhancements {
 				'show_all_options' 		=> true,
 				'show_form_warning' 	=> false,
 				'sticky_header'			=> true,
-				'save_defaults'			=> true,
+				'save_defaults'			=> false,
 				'ajax_save'				=> true,
 
 				// admin bar menu settings
-				'admin_bar_menu_icon'     => '',
-				'admin_bar_menu_priority' => 80,
+				// 'admin_bar_menu_icon'     => '',
+				// 'admin_bar_menu_priority' => 80,
 
 				// footer
 				'footer_text'			=> '',
@@ -148,19 +146,19 @@ class WP_Enhancements {
 				'footer_credit'			=> '<a href="https://wordpress.org/plugins/wp-enhancements/" target="_blank">WP Enhancements</a> is on <a href="https://github.com/qriouslad/wp-enhancements" target="_blank">github</a>.',
 
 				// database model
-				'database'                => 'options', // options, transient, theme_mod, network
-				'transient_time'          => 0,
+				// 'database'                => 'options', // options, transient, theme_mod, network
+				// 'transient_time'          => 0,
 
 				// contextual help
-				'contextual_help'         => array(),
-				'contextual_help_sidebar' => '',
+				// 'contextual_help'         => array(),
+				// 'contextual_help_sidebar' => '',
 
 				// typography options
-				'enqueue_webfont'         => true,
-				'async_webfont'           => false,
+				// 'enqueue_webfont'         => true,
+				// 'async_webfont'           => false,
 
 				// others
-				'output_css'              => true,
+				// 'output_css'              => true,
 
 				// theme and wrapper classname
 				'nav'                     => 'normal',
@@ -168,7 +166,7 @@ class WP_Enhancements {
 				'class'                   => '',
 
 				// external default values
-				'defaults'                => array(),
+				// 'defaults'                => array(),
 
 			) );
 
@@ -181,7 +179,7 @@ class WP_Enhancements {
 					  'id'    => 'show-ids',
 					  'type'  => 'switcher',
 					  'title' => 'Show IDs',
-					  'label' => 'Show ID column in page, post, custom posts, taxonomies and users listings.',
+					  'label' => 'Show ID column in posts, taxonomies, media and user listings.',
 					),
 
 				)
@@ -266,23 +264,11 @@ class WP_Enhancements {
 
 		$request_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] ); // e.g. /wp-admin/index.php?page=page-slug
 
-		if ( strpos( $request_uri, 'tools.php?page=' . WPENHA_SLUG ) !== false ) {
+		if ( strpos( $request_uri, 'page=' . WPENHA_SLUG ) !== false ) {
 			return true; // Yes, this is the plugin's main page
 		} else {
 			return false; // Nope, this is NOT the plugin's page
 		}
-
-	}
-
-	/**
-	 * Enqueue admin scripts
-	 *
-	 * @since 1.0.0
-	 */
-	public function admin_scripts() {
-
-		wp_enqueue_style( 'wpenha-admin', WPENHA_URL . 'assets/css/admin.css', array(), WPENHA_VERSION );
-		wp_enqueue_script( 'wpenha-app', WPENHA_URL . 'assets/js/admin.js', array(), WPENHA_VERSION, false );
 
 	}
 
