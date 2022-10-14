@@ -58,6 +58,11 @@ class WP_Enhancements {
 		if ( array_key_exists( 'show-ids', $wpenha_options ) && $wpenha_options['show-ids'] ) {
 			add_action( 'admin_init', [ $content_admin, 'show_ids' ], 10, 1 );
 		}
+
+		// Content Admin >> Show Featured Images
+		if ( array_key_exists( 'show-featured-images', $wpenha_options ) && $wpenha_options['show-featured-images'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_featured_images' ], 10, 1 );
+		}
 		
 	}
 
@@ -126,10 +131,10 @@ class WP_Enhancements {
 				'show_sub_menu' 		=> false,
 				'show_in_network' 		=> false,
 				'show_in_customizer' 	=> false,
-				'show_search' 			=> true,
+				'show_search' 			=> false,
 				'show_reset_all'		=> false,
 				'show_reset_section'	=> false,
-				'show_footer' 			=> true,
+				'show_footer' 			=> false,
 				'show_all_options' 		=> true,
 				'show_form_warning' 	=> false,
 				'sticky_header'			=> true,
@@ -172,14 +177,21 @@ class WP_Enhancements {
 
 			WPENHA_CSF::createSection( $prefix, array(
 				'title'  => 'Content',
-				'icon'   => 'fas fa-rocket',
+				// 'icon'   => 'fas fa-rocket',
 				'fields' => array(
 
 					array(
 					  'id'    => 'show-ids',
 					  'type'  => 'switcher',
 					  'title' => 'Show IDs',
-					  'label' => 'Show ID column in posts, taxonomies, media and user listings.',
+					  'label' => 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.',
+					),
+
+					array(
+					  'id'    => 'show-featured-images',
+					  'type'  => 'switcher',
+					  'title' => 'Show Featured Images',
+					  'label' => 'Show Featured Image column in list tables for pages and post types that support featured images.',
 					),
 
 				)
