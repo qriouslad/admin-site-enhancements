@@ -86,6 +86,20 @@ function wpenha_admin_menu_page() {
 			'fields' => array(
 
 				array(
+				  'id'    => 'show-featured-image-column',
+				  'type'  => 'switcher',
+				  'title' => 'Show Featured Image Column',
+				  'label' => 'Show featured image column in list tables for pages and post types that support featured images.',
+				),
+
+				array(
+				  'id'    => 'show-excerpt-column',
+				  'type'  => 'switcher',
+				  'title' => 'Show Excerpt Column',
+				  'label' => 'Show excerpt column in list tables for pages and post types that support excerpt.',
+				),
+
+				array(
 				  'id'    => 'show-id-column',
 				  'type'  => 'switcher',
 				  'title' => 'Show ID Column',
@@ -93,17 +107,10 @@ function wpenha_admin_menu_page() {
 				),
 
 				array(
-				  'id'    => 'show-featured-image-column',
-				  'type'  => 'switcher',
-				  'title' => 'Show Featured Image Column',
-				  'label' => 'Show Featured Image column in list tables for pages and post types that support featured images.',
-				),
-
-				array(
 				  'id'    => 'hide-comments-column',
 				  'type'  => 'switcher',
 				  'title' => 'Hide Comments Column',
-				  'label' => 'Hide comments column in list tables for pages and post types that support comments.',
+				  'label' => 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.',
 				),
 
 				array(
@@ -204,7 +211,7 @@ function wpenha_remove_codestar_submenu() {
  * @since    1.0.0
  */
 
-function wpenha_add_plugin_action_links( $links ) {
+function wpenha_plugin_action_links( $links ) {
 
 	$settings_link = '<a href="tools.php?page=' . WPENHA_SLUG . '">Access now</a>';
 
