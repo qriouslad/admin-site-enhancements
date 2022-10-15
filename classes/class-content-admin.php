@@ -10,6 +10,11 @@ namespace WPENHA\Classes;
 class Content_Admin {
 
 	/**
+	 * Current post type. For Content Admin >> Show Custom Taxonomy Filters functionality.
+	 */
+	public $post_type;
+
+	/**
 	 * Show featured images column in list tables for pages and post types that support featured image
 	 *
 	 * @since 1.0.0
@@ -18,12 +23,12 @@ class Content_Admin {
 
 		$post_types = get_post_types( array( 'public' => true ), 'names' );
 
-		foreach ( $post_types as $post_type_key => $post_type_value ) {
+		foreach ( $post_types as $post_type_key => $post_type_name ) {
 
 			if ( post_type_supports( $post_type_key, 'thumbnail' ) ) {
 
-				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'add_featured_image_column' ] );
-				add_action( "manage_{$post_type_value}_posts_custom_column", [ $this, 'add_featured_image' ], 10, 2 );
+				add_filter( "manage_{$post_type_name}_posts_columns",[ $this, 'add_featured_image_column' ] );
+				add_action( "manage_{$post_type_name}_posts_custom_column", [ $this, 'add_featured_image' ], 10, 2 );
 
 			}
 
@@ -93,12 +98,12 @@ class Content_Admin {
 
 		$post_types = get_post_types( array( 'public' => true ), 'names' );
 
-		foreach ( $post_types as $post_type_key => $post_type_value ) {
+		foreach ( $post_types as $post_type_key => $post_type_name ) {
 
 			if ( post_type_supports( $post_type_key, 'excerpt' ) ) {
 
-				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'add_excerpt_column' ] );
-				add_action( "manage_{$post_type_value}_posts_custom_column", [ $this, 'add_excerpt' ], 10, 2 );
+				add_filter( "manage_{$post_type_name}_posts_columns",[ $this, 'add_excerpt_column' ] );
+				add_action( "manage_{$post_type_name}_posts_custom_column", [ $this, 'add_excerpt' ], 10, 2 );
 
 			}
 
@@ -256,14 +261,14 @@ class Content_Admin {
 
 		$post_types = get_post_types( array( 'public' => true ), 'names' );
 
-		foreach ( $post_types as $post_type_key => $post_type_value ) {
+		foreach ( $post_types as $post_type_key => $post_type_name ) {
 
 			if ( post_type_supports( $post_type_key, 'comments' ) ) {
 
-				if ( 'attachment' != $post_type_value ) {
+				if ( 'attachment' != $post_type_name ) {
 
 					// For list tables of pages, posts and other post types
-					add_filter( "manage_{$post_type_value}_posts_columns", [ $this, 'remove_comment_column' ] );
+					add_filter( "manage_{$post_type_name}_posts_columns", [ $this, 'remove_comment_column' ] );
 
 				} else {
 
@@ -302,9 +307,9 @@ class Content_Admin {
 
 		$post_types = get_post_types( array( 'public' => true ), 'names' );
 
-		foreach ( $post_types as $post_type_key => $post_type_value ) {
+		foreach ( $post_types as $post_type_key => $post_type_name ) {
 
-			if ( $post_type_value == 'post' ) {
+			if ( $post_type_name == 'post' ) {
 
 				add_filter( "manage_posts_columns", [ $this, 'remove_post_tags_column' ] );
 
@@ -326,6 +331,53 @@ class Content_Admin {
 		unset( $columns['tags'] );
 
 		return $columns;
+
+	}
+
+	/**
+	 * Show custom (hierarchical) taxonomy filter(s) for all post types.
+	 *
+	 * @since 1.0.0
+	 */
+	public function show_custom_taxonomy_filters( $post_type ) {
+
+		$post_taxonomies = get_object_taxonomies( $post_type, 'objects' );
+
+		// Only show custom taxonomy filters for post types other than 'post'
+
+		if ( 'post' != $post_type ) {
+
+			array_walk( $post_taxonomies, [ $this, 'output_taxonomy_filter' ] );
+
+		}
+
+	}
+
+	/**
+	 * Output filter on the post type's list table for a taxonomy
+	 *
+	 * @since 1.0.0
+	 */
+	public function output_taxonomy_filter( $post_taxonomy ) {
+
+		// Only show taxonomy filter when the taxonomy is hierarchical
+
+		if ( true === $post_taxonomy->hierarchical ) {
+
+			wp_dropdown_categories( array(
+				'show_option_all'	=> sprintf( 'All %s', $post_taxonomy->label ),
+				'orderby'			=> 'name',
+				'order'				=> 'ASC',
+				'hide_empty'		=> false,
+				'hide_if_empty'		=> true,
+				'selected'			=> filter_input( INPUT_GET, $post_taxonomy->query_var, FILTER_SANITIZE_STRING ),
+				'hierarchical'		=> true,
+				'name'				=> $post_taxonomy->query_var,
+				'taxonomy'			=> $post_taxonomy->name,
+				'value_field'		=> 'slug',
+			) );
+
+		}
 
 	}
 
