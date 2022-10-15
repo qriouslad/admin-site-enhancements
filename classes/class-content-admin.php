@@ -14,7 +14,7 @@ class Content_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function show_ids() {
+	public function show_id_column() {
 
 		// For pages and hierarchical post types list table
 
@@ -107,7 +107,7 @@ class Content_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function show_featured_images() {
+	public function show_featured_image_column() {
 
 		$post_types = get_post_types( array( 'public' => true ), 'names' );
 
@@ -177,5 +177,40 @@ class Content_Admin {
 
 	}
 
+	/**
+	 * Hide comments column in list tables for pages and post types that support comments.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hide_comments_column() {
+
+		$post_types = get_post_types( array( 'public' => true ), 'names' );
+
+		foreach ( $post_types as $post_type_key => $post_type_value ) {
+
+			if ( post_type_supports( $post_type_key, 'comments' ) ) {
+
+				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'remove_comment_column' ] );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add a column called ID
+	 *
+	 * @param mixed $columns
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function remove_comment_column( $columns ) {
+
+		unset( $columns['comments'] );
+
+		return $columns;
+
+	}
 
 }

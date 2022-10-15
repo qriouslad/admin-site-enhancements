@@ -54,14 +54,19 @@ class WP_Enhancements {
 		// Instantiate object for Content Admin functionalities
 		$content_admin = new WPENHA\Classes\Content_Admin;
 
-		// Content Admin >> Show IDs
-		if ( array_key_exists( 'show-ids', $wpenha_options ) && $wpenha_options['show-ids'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_ids' ], 10, 1 );
+		// Content Admin >> Show ID Column
+		if ( array_key_exists( 'show-id-column', $wpenha_options ) && $wpenha_options['show-id-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_id_column' ], 10, 1 );
 		}
 
-		// Content Admin >> Show Featured Images
-		if ( array_key_exists( 'show-featured-images', $wpenha_options ) && $wpenha_options['show-featured-images'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_featured_images' ], 10, 1 );
+		// Content Admin >> Show Featured Image Column
+		if ( array_key_exists( 'show-featured-image-column', $wpenha_options ) && $wpenha_options['show-featured-image-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ], 10, 1 );
+		}
+
+		// Content Admin >> Hide Comments Column
+		if ( array_key_exists( 'hide-comments-column', $wpenha_options ) && $wpenha_options['hide-comments-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'hide_comments_column' ], 10, 1 );
 		}
 		
 	}
@@ -181,17 +186,24 @@ class WP_Enhancements {
 				'fields' => array(
 
 					array(
-					  'id'    => 'show-ids',
+					  'id'    => 'show-id-column',
 					  'type'  => 'switcher',
-					  'title' => 'Show IDs',
+					  'title' => 'Show ID Column',
 					  'label' => 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.',
 					),
 
 					array(
-					  'id'    => 'show-featured-images',
+					  'id'    => 'show-featured-image-column',
 					  'type'  => 'switcher',
-					  'title' => 'Show Featured Images',
+					  'title' => 'Show Featured Image Column',
 					  'label' => 'Show Featured Image column in list tables for pages and post types that support featured images.',
+					),
+
+					array(
+					  'id'    => 'hide-comments-column',
+					  'type'  => 'switcher',
+					  'title' => 'Hide Comments Column',
+					  'label' => 'Hide comments column in list tables for pages and post types that support comments.',
 					),
 
 				)
