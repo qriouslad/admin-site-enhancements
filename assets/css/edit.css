@@ -1,5 +1,17 @@
 /* Content Admin >> Show IDs */
 
-#wpenha-show-ids {
+#wpenha-id {
 	width: 50px;
+}
+
+/* Content Admin >> Show Featured Images */
+
+#wpenha-featured-image {
+	width: 110px;
+}
+
+.wpenha-featured-image img {
+	width: 110px;
+	height: auto;
+	border: 1px solid #e5e5e5;
 }

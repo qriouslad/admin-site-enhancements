@@ -22,3 +22,34 @@
     line-height: 30px;
     margin-left: 16px;
 }
+
+/* CodeStar Framework */
+
+.csf-field,
+.csf-field.csf-field-switcher .csf-fieldset {
+    display: flex;
+}
+
+.csf-field {
+
+}
+
+.csf-field .csf-title,
+.csf-field .csf-fieldset,
+.csf-field-switcher .csf--switcher,
+.csf-field-switcher .csf--label {
+    float: none;
+}
+
+.csf-field.csf-field-switcher,
+.csf-field.csf-field-switcher .csf-fieldset {
+    align-items: center;
+}
+
+.csf-field-switcher .csf--switcher {
+    margin-right: 4px;
+}
+
+.csf-field-switcher .csf--label {
+    margin-top: 0;
+}
