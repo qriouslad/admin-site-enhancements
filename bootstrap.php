@@ -60,17 +60,22 @@ class WP_Enhancements {
 
 		// Content Admin >> Show ID Column
 		if ( array_key_exists( 'show-id-column', $wpenha_options ) && $wpenha_options['show-id-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_id_column' ], 10, 1 );
+			add_action( 'admin_init', [ $content_admin, 'show_id_column' ] );
 		}
 
 		// Content Admin >> Show Featured Image Column
 		if ( array_key_exists( 'show-featured-image-column', $wpenha_options ) && $wpenha_options['show-featured-image-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ], 10, 1 );
+			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ] );
 		}
 
 		// Content Admin >> Hide Comments Column
 		if ( array_key_exists( 'hide-comments-column', $wpenha_options ) && $wpenha_options['hide-comments-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'hide_comments_column' ], 10, 1 );
+			add_action( 'admin_init', [ $content_admin, 'hide_comments_column' ] );
+		}
+
+		// Content Admin >> Hide Post Tags Column
+		if ( array_key_exists( 'hide-post-tags-column', $wpenha_options ) && $wpenha_options['hide-post-tags-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'hide_post_tags_column' ] );
 		}
 		
 	}

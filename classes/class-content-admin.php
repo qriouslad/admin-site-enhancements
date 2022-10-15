@@ -190,7 +190,7 @@ class Content_Admin {
 
 			if ( post_type_supports( $post_type_key, 'comments' ) ) {
 
-				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'remove_comment_column' ] );
+				add_filter( "manage_{$post_type_value}_posts_columns", [ $this, 'remove_comment_column' ] );
 
 			}
 
@@ -208,6 +208,42 @@ class Content_Admin {
 	public function remove_comment_column( $columns ) {
 
 		unset( $columns['comments'] );
+
+		return $columns;
+
+	}
+
+	/**
+	 * Hide tags column in list tables for posts.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hide_post_tags_column() {
+
+		$post_types = get_post_types( array( 'public' => true ), 'names' );
+
+		foreach ( $post_types as $post_type_key => $post_type_value ) {
+
+			if ( $post_type_value == 'post' ) {
+
+				add_filter( "manage_posts_columns", [ $this, 'remove_post_tags_column' ] );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add a column called ID
+	 *
+	 * @param mixed $columns
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function remove_post_tags_column( $columns ) {
+
+		unset( $columns['tags'] );
 
 		return $columns;
 
