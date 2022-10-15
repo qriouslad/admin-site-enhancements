@@ -99,5 +99,8 @@ register_deactivation_hook( __FILE__, 'wpenha_on_deactivation' );
 // Autoload libraries whose namaspaces and/or classes have been prefixed with 'WPENHA_' string
 require_once WPENHA_PATH . 'libs/codestar-wpenha/codestar-framework.php';
 
+// Set up admin menu and page
+require_once WPENHA_PATH . 'includes/setup-admin-menu-page.php';
+
 // Bootstrap the core functionalities of this plugin
 require WPENHA_PATH . 'bootstrap.php';
