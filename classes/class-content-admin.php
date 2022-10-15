@@ -190,7 +190,17 @@ class Content_Admin {
 
 			if ( post_type_supports( $post_type_key, 'comments' ) ) {
 
-				add_filter( "manage_{$post_type_value}_posts_columns", [ $this, 'remove_comment_column' ] );
+				if ( 'attachment' != $post_type_value ) {
+
+					// For list tables of pages, posts and other post types
+					add_filter( "manage_{$post_type_value}_posts_columns", [ $this, 'remove_comment_column' ] );
+
+				} else {
+
+					// For list table of media/attachment
+					add_filter( 'manage_media_columns', [ $this, 'remove_comment_column' ] );
+
+				}
 
 			}
 
