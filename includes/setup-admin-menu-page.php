@@ -106,6 +106,13 @@ function wpenha_admin_menu_page() {
 				  'label' => 'Hide comments column in list tables for pages and post types that support comments.',
 				),
 
+				array(
+				  'id'    => 'hide-post-tags-column',
+				  'type'  => 'switcher',
+				  'title' => 'Hide Post Tags Column',
+				  'label' => 'Hide tags column in list tables for posts.',
+				),
+
 			)
 		) );
 
