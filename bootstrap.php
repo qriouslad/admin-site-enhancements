@@ -82,6 +82,11 @@ class WP_Enhancements {
 		if ( array_key_exists( 'hide-post-tags-column', $wpenha_options ) && $wpenha_options['hide-post-tags-column'] ) {
 			add_action( 'admin_init', [ $content_admin, 'hide_post_tags_column' ] );
 		}
+
+		// Content Admin >> Show Custom Taxonomy Filters
+		if ( array_key_exists( 'show-custom-taxonomy-filters', $wpenha_options ) && $wpenha_options['show-custom-taxonomy-filters'] ) {
+			add_action( 'restrict_manage_posts', [ $content_admin, 'show_custom_taxonomy_filters' ] );
+		}
 		
 	}
 

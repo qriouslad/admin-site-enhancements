@@ -81,7 +81,7 @@ function wpenha_admin_menu_page() {
 		) );
 
 		WPENHA_CSF::createSection( $prefix, array(
-			'title'  => 'Content',
+			'title'  => 'Content Admin',
 			// 'icon'   => 'fas fa-rocket',
 			'fields' => array(
 
@@ -118,6 +118,13 @@ function wpenha_admin_menu_page() {
 				  'type'  => 'switcher',
 				  'title' => 'Hide Post Tags Column',
 				  'label' => 'Hide tags column in list tables for posts.',
+				),
+
+				array(
+				  'id'    => 'show-custom-taxonomy-filters',
+				  'type'  => 'switcher',
+				  'title' => 'Show Custom Taxonomy Filters',
+				  'label' => 'Show custom taxonomy filter(s) on list tables of all post types if the taxonomy is hierarchical like Post Categories.',
 				),
 
 			)
