@@ -58,14 +58,19 @@ class WP_Enhancements {
 		// Instantiate object for Content Admin functionalities
 		$content_admin = new WPENHA\Classes\Content_Admin;
 
-		// Content Admin >> Show ID Column
-		if ( array_key_exists( 'show-id-column', $wpenha_options ) && $wpenha_options['show-id-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_id_column' ] );
-		}
-
 		// Content Admin >> Show Featured Image Column
 		if ( array_key_exists( 'show-featured-image-column', $wpenha_options ) && $wpenha_options['show-featured-image-column'] ) {
 			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ] );
+		}
+
+		// Content Admin >> Show Excerpt Column
+		if ( array_key_exists( 'show-excerpt-column', $wpenha_options ) && $wpenha_options['show-excerpt-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_excerpt_column' ] );
+		}
+
+		// Content Admin >> Show ID Column
+		if ( array_key_exists( 'show-id-column', $wpenha_options ) && $wpenha_options['show-id-column'] ) {
+			add_action( 'admin_init', [ $content_admin, 'show_id_column' ] );
 		}
 
 		// Content Admin >> Hide Comments Column

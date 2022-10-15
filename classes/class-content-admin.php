@@ -10,6 +10,151 @@ namespace WPENHA\Classes;
 class Content_Admin {
 
 	/**
+	 * Show featured images column in list tables for pages and post types that support featured image
+	 *
+	 * @since 1.0.0
+	 */
+	public function show_featured_image_column() {
+
+		$post_types = get_post_types( array( 'public' => true ), 'names' );
+
+		foreach ( $post_types as $post_type_key => $post_type_value ) {
+
+			if ( post_type_supports( $post_type_key, 'thumbnail' ) ) {
+
+				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'add_featured_image_column' ] );
+				add_action( "manage_{$post_type_value}_posts_custom_column", [ $this, 'add_featured_image' ], 10, 2 );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add a column called Featured Image as the first column
+	 *
+	 * @param mixed $columns
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function add_featured_image_column( $columns ) {
+
+		$new_columns = array();
+
+		foreach ( $columns as $key => $value ) {
+
+			if ( $key == 'title' ) {
+
+				$new_columns['wpenha-featured-image'] = 'Featured Image';	
+
+			}
+
+			$new_columns[$key] = $value;
+
+		}
+
+		return $new_columns;
+
+	}
+
+	/**
+	 * Echo featured image's in thumbnail size to a column
+	 *
+	 * @param mixed $column_name
+	 * @param mixed $id
+	 * @since 1.0.0
+	 */
+	public function add_featured_image( $column_name, $id ) {
+
+		if ( 'wpenha-featured-image' === $column_name ) {
+
+			if ( has_post_thumbnail( $id ) ) {
+
+				$size = 'thumbnail';
+
+				echo get_the_post_thumbnail( $id, $size, '' );
+
+			} else {
+
+				echo '<img src="' . esc_url( plugins_url( 'assets/img/default_featured_image.jpg', __DIR__ ) ) . '" />';
+
+			}
+		}
+
+	}
+
+	/**
+	 * Show excerpt column in list tables for pages and post types that support excerpt.
+	 *
+	 * @since 1.0.0
+	 */
+	public function show_excerpt_column() {
+
+		$post_types = get_post_types( array( 'public' => true ), 'names' );
+
+		foreach ( $post_types as $post_type_key => $post_type_value ) {
+
+			if ( post_type_supports( $post_type_key, 'excerpt' ) ) {
+
+				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'add_excerpt_column' ] );
+				add_action( "manage_{$post_type_value}_posts_custom_column", [ $this, 'add_excerpt' ], 10, 2 );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add a column called Featured Image as the first column
+	 *
+	 * @param mixed $columns
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function add_excerpt_column( $columns ) {
+
+		$new_columns = array();
+
+		foreach ( $columns as $key => $value ) {
+
+			$new_columns[$key] = $value;
+
+			if ( $key == 'title' ) {
+
+				$new_columns['wpenha-excerpt'] = 'Excerpt';	
+
+			}
+
+		}
+
+		return $new_columns;
+
+	}
+
+	/**
+	 * Echo featured image's in thumbnail size to a column
+	 *
+	 * @param mixed $column_name
+	 * @param mixed $id
+	 * @since 1.0.0
+	 */
+	public function add_excerpt( $column_name, $id ) {
+
+		if ( 'wpenha-excerpt' === $column_name ) {
+
+			$excerpt = get_the_excerpt( $id ); // about 310 characters
+			$excerpt = substr( $excerpt, 0, 160 ); // truncate to 160 characters
+			$short_excerpt = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
+
+			echo $short_excerpt;
+
+		}
+
+	}
+
+	/**
 	 * Add ID column list table of pages, posts, custom post types, media, taxonomies, custom taxonomies, users amd comments
 	 *
 	 * @since 1.0.0
@@ -103,82 +248,7 @@ class Content_Admin {
 	}
 
 	/**
-	 * Show featured images column in list tables for pages and post types that support featured image
-	 *
-	 * @since 1.0.0
-	 */
-	public function show_featured_image_column() {
-
-		$post_types = get_post_types( array( 'public' => true ), 'names' );
-
-		foreach ( $post_types as $post_type_key => $post_type_value ) {
-
-			if ( post_type_supports( $post_type_key, 'thumbnail' ) ) {
-
-				add_filter( "manage_{$post_type_value}_posts_columns",[ $this, 'add_featured_image_column' ] );
-				add_action( "manage_{$post_type_value}_posts_custom_column", [ $this, 'add_featured_image' ], 10, 2 );
-
-			}
-
-		}
-
-	}
-
-	/**
-	 * Add a column called Featured Image as the first column
-	 *
-	 * @param mixed $columns
-	 * @return void
-	 * @since 1.0.0
-	 */
-	public function add_featured_image_column( $columns ) {
-
-		$new_columns = array();
-
-		foreach ( $columns as $key => $value ) {
-
-			if ( $key == 'title' ) {
-
-				$new_columns['wpenha-featured-image'] = 'Featured Image';	
-
-			}
-
-			$new_columns[$key] = $value;
-
-		}
-
-		return $new_columns;
-
-	}
-
-	/**
-	 * Echo featured image's in thumbnail size to a column
-	 *
-	 * @param mixed $column_name
-	 * @param mixed $id
-	 * @since 1.0.0
-	 */
-	public function add_featured_image( $column_name, $id ) {
-
-		if ( 'wpenha-featured-image' === $column_name ) {
-
-			if ( has_post_thumbnail( $id ) ) {
-
-				$size = 'thumbnail';
-
-				echo get_the_post_thumbnail( $id, $size, '' );
-
-			} else {
-
-				echo '<img src="' . esc_url( plugins_url( 'assets/img/default_featured_image.jpg', __DIR__ ) ) . '" />';
-
-			}
-		}
-
-	}
-
-	/**
-	 * Hide comments column in list tables for pages and post types that support comments.
+	 * Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.
 	 *
 	 * @since 1.0.0
 	 */
