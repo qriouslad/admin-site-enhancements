@@ -10,7 +10,7 @@
  *
  * @since 1.0.0
  */
-class WP_Enhancements {
+class Admin_Site_Enhancements {
 
 	// Refers to a single instance of this class
 	private static $instance = null;
@@ -18,13 +18,15 @@ class WP_Enhancements {
 	/**
 	 * Creates or returns a single instance of this class
 	 *
-	 * @return WP_Enhancements a single instance of this class
+	 * @return Admin_Site_Enhancements a single instance of this class
 	 * @since 1.0.0
 	 */
 	public static function get_instance() {
 
 		if ( null == self::$instance ) {
+
 			self::$instance = new self;
+
 		}
 
 		return self::$instance;
@@ -53,7 +55,7 @@ class WP_Enhancements {
 		// Selectively enable enhancements based on options value
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
-		$wpenha_options = get_option( 'wp-enhancements', array() );
+		$wpenha_options = get_option( 'admin-site-enhancements', array() );
 
 		// Instantiate object for Content Admin functionalities
 		$content_admin = new WPENHA\Classes\Content_Admin;
@@ -87,9 +89,16 @@ class WP_Enhancements {
 		if ( array_key_exists( 'show-custom-taxonomy-filters', $wpenha_options ) && $wpenha_options['show-custom-taxonomy-filters'] ) {
 			add_action( 'restrict_manage_posts', [ $content_admin, 'show_custom_taxonomy_filters' ] );
 		}
+
+		// Content Admin >> Enable Page and Post Duplication
+		if ( array_key_exists( 'enable-duplication', $wpenha_options ) && $wpenha_options['enable-duplication'] ) {
+			add_action( 'admin_action_wpenha_enable_duplication', [ $content_admin, 'wpenha_enable_duplication' ] );
+			add_filter( 'page_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
+			add_filter( 'post_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
+		}
 		
 	}
 
 }
 
-WP_Enhancements::get_instance();
+Admin_Site_Enhancements::get_instance();

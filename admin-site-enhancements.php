@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Plugin Name:       WP Enhancements
- * Plugin URI:        https://wordpress.org/plugins/wp-enhancements/
- * Description:       Easily enable various admin- and public- facing enhancements to a WordPress installation.
- * Version:           0.8.0
+ * Plugin Name:       Admin and Site Enhancements
+ * Plugin URI:        https://wordpress.org/plugins/admin-site-enhancements/
+ * Description:       Easily enable enhancements and features that you usually do with multiple plugins.
+ * Version:           1.0.0
  * Author:            Bowo
  * Author URI:        https://bowo.io
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wp-enhancements
+ * Text Domain:       admin-site-enhancements
  * Domain Path:       /languages
  */
 
@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPENHA_VERSION', '0.8.0' );
-define( 'WPENHA_SLUG', 'wp-enhancements' );
+define( 'WPENHA_VERSION', '1.0.0' );
+define( 'WPENHA_SLUG', 'admin-site-enhancements' );
 define( 'WPENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
 define( 'WPENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
-// define( 'WPE_BASE', plugin_basename( __FILE__ ) ); // e.g. plugin-slug/this-file.php
-// define( 'WPE_FILE', __FILE__ ); // /home/user/apps/wp-root/wp-content/plugins/this-plugin/this-file.php
+// define( 'WPENHA_BASE', plugin_basename( __FILE__ ) ); // e.g. plugin-slug/this-file.php
+// define( 'WPENHA_FILE', __FILE__ ); // /home/user/apps/wp-root/wp-content/plugins/this-plugin/this-file.php
 
 // Register autoloading classes
 spl_autoload_register( 'wpenha_autoloader' );
@@ -96,11 +96,11 @@ register_activation_hook( __FILE__, 'wpenha_on_activation');
 // Register code that runs on plugin deactivation
 register_deactivation_hook( __FILE__, 'wpenha_on_deactivation' );
 
-// Autoload libraries whose namaspaces and/or classes have been prefixed with 'WPENHA_' string
+// Load libraries whose namaspaces and/or classes have been prefixed with 'WPENHA_' string
 require_once WPENHA_PATH . 'libs/codestar-wpenha/codestar-framework.php';
 
 // Set up admin menu and page
 require_once WPENHA_PATH . 'includes/setup-admin-menu-page.php';
 
-// Bootstrap the core functionalities of this plugin
-require WPENHA_PATH . 'bootstrap.php';
+// Bootstrap all the functionalities of this plugin
+require_once WPENHA_PATH . 'bootstrap.php';
