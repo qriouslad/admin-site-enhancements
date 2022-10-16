@@ -30,10 +30,6 @@
     display: flex;
 }
 
-.csf-field {
-
-}
-
 .csf-field .csf-title,
 .csf-field .csf-fieldset,
 .csf-field-switcher .csf--switcher,
@@ -44,6 +40,10 @@
 .csf-field.csf-field-switcher,
 .csf-field.csf-field-switcher .csf-fieldset {
     align-items: center;
+}
+
+.csf-field.csf-field-switcher .csf-title h4 {
+    margin-right: 8px;
 }
 
 .csf-field-switcher .csf--switcher {
