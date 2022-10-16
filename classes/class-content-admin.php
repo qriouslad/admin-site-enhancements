@@ -381,4 +381,119 @@ class Content_Admin {
 
 	}
 
+	/**
+	 * Enable duplication of pages, posts and custom posts
+	 *
+	 * @since 1.0.0
+	 */
+	public function wpenha_enable_duplication() {
+
+		$original_post_id = intval( sanitize_text_field( $_REQUEST['post'] ) );
+		$nonce = sanitize_text_field( $_REQUEST['nonce'] );
+
+		if ( wp_verify_nonce( $nonce, 'wpenha-duplicate-' . $original_post_id ) && current_user_can( 'edit_posts' ) ) {
+
+			$original_post = get_post( $original_post_id );
+
+			// Set some attributes for the duplicate post
+
+			$new_post_title_suffix = ' (DUPLICATE)';
+			$new_post_status = 'draft';
+			$current_user = wp_get_current_user();
+			$new_post_author_id = $current_user->ID;
+
+			// Create the duplicate post and store the ID
+			
+			$args = array(
+
+				'comment_status'	=> $original_post->comment_status,
+				'ping_status'		=> $original_post->ping_status,
+				'post_author'		=> $new_post_author_id,
+				'post_content'		=> $original_post->post_content,
+				'post_excerpt'		=> $original_post->post_excerpt,
+				'post_parent'		=> $original_post->post_parent,
+				'post_password'		=> $original_post->post_password,
+				'post_status'		=> $new_post_status,
+				'post_title'		=> $original_post->post_title . $new_post_title_suffix,
+				'post_type'			=> $original_post->post_type,
+				'to_ping'			=> $original_post->to_ping,
+				'menu_order'		=> $original_post->menu_order,
+
+			);
+
+			$new_post_id = wp_insert_post( $args );
+
+			// Copy over the taxonomies
+
+			$original_taxonomies = get_object_taxonomies( $original_post->post_type );
+
+			if ( ! empty( $original_taxonomies ) && is_array( $original_taxonomies ) ) {
+
+				foreach( $original_taxonomies as $taxonomy ) {
+
+					$original_post_terms = wp_get_object_terms( $original_post_id, $taxonomy, array( 'fields' => 'slugs' ) );
+
+					wp_set_object_terms( $new_post_id, $original_post_terms, $taxonomy, false );
+
+				}
+
+			}
+
+			// Copy over the post meta
+			
+			$original_post_metas = get_post_meta( $original_post_id ); // all meta keys and the corresponding values
+
+			if ( ! empty( $original_post_metas ) ) {
+
+				foreach( $original_post_metas as $meta_key => $meta_values ) {
+
+					foreach( $meta_values as $meta_value ) {
+
+						add_post_meta( $new_post_id, $meta_key, $meta_value );
+
+					}
+
+				}
+
+			}
+
+			// Redirect to list table of the corresponding post type of original post
+			
+			$post_type = get_post_type( $original_post_id );
+
+			if ( 'post'	== $post_type ) {
+
+				wp_redirect( admin_url( 'edit.php' ) );
+
+			} else {
+
+				wp_redirect( admin_url( 'edit.php?post_type=' . $post_type ) );
+
+			}
+
+		} else {
+
+			wp_die( 'You do not have permission to perform this action.' );
+
+		}
+
+	}
+
+	/** 
+	 * Add row action link to perform duplication in page/post list tables
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_duplication_action_link( $actions, $post ) {
+
+		if ( current_user_can( 'edit_posts' ) ) {
+
+			$actions['wpenha-duplicate'] = '<a href="admin.php?action=wpenha_enable_duplication&amp;post=' . $post->ID . '&amp;nonce=' . wp_create_nonce( 'wpenha-duplicate-' . $post->ID ) . '" title="Duplicate this as draft">Duplicate</a>';
+
+		}
+
+		return $actions;
+
+	}
+
 }

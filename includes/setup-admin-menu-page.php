@@ -124,7 +124,14 @@ function wpenha_admin_menu_page() {
 				  'id'    => 'show-custom-taxonomy-filters',
 				  'type'  => 'switcher',
 				  'title' => 'Show Custom Taxonomy Filters',
-				  'label' => 'Show custom taxonomy filter(s) on list tables of all post types if the taxonomy is hierarchical like Post Categories.',
+				  'label' => 'Show custom taxonomy filter(s) on list tables of all post types if the taxonomy is hierarchical like post categories.',
+				),
+
+				array(
+				  'id'    => 'enable-duplication',
+				  'type'  => 'switcher',
+				  'title' => 'Enable Page and Post Duplication',
+				  'label' => 'Enable one-click duplication of pages, posts and custom posts.',
 				),
 
 			)

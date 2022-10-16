@@ -24,7 +24,9 @@ class WP_Enhancements {
 	public static function get_instance() {
 
 		if ( null == self::$instance ) {
+
 			self::$instance = new self;
+
 		}
 
 		return self::$instance;
@@ -86,6 +88,13 @@ class WP_Enhancements {
 		// Content Admin >> Show Custom Taxonomy Filters
 		if ( array_key_exists( 'show-custom-taxonomy-filters', $wpenha_options ) && $wpenha_options['show-custom-taxonomy-filters'] ) {
 			add_action( 'restrict_manage_posts', [ $content_admin, 'show_custom_taxonomy_filters' ] );
+		}
+
+		// Content Admin >> Enable Page and Post Duplication
+		if ( array_key_exists( 'enable-duplication', $wpenha_options ) && $wpenha_options['enable-duplication'] ) {
+			add_action( 'admin_action_wpenha_enable_duplication', [ $content_admin, 'wpenha_enable_duplication' ] );
+			add_filter( 'page_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
+			add_filter( 'post_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
 		}
 		
 	}
