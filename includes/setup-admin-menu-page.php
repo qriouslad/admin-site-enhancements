@@ -11,19 +11,19 @@ function wpenha_admin_menu_page() {
 
 		// Set a unique slug-like ID
 
-		$prefix = 'wp-enhancements';
+		$prefix = 'admin-site-enhancements';
 
 		// Create options
 
 		WPENHA_CSF::createOptions ( $prefix, array(
 
 		    // framework title
-			'framework_title' 		=> 'WP Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
+			'framework_title' 		=> 'Admin and Site Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
 			'framework_class' 		=> 'wpenha',
 
 			// menu settings
-			'menu_title' 			=> 'WP Enhancements',
-			'menu_slug' 			=> 'wp-enhancements',
+			'menu_title' 			=> 'Enhancements',
+			'menu_slug' 			=> 'admin-site-enhancements',
 			'menu_type'				=> 'submenu',
 			'menu_capability'		=> 'manage_options',
 			// 'menu_icon'			=> 'dashicons-arrow-up-alt2',
@@ -53,7 +53,7 @@ function wpenha_admin_menu_page() {
 			// footer
 			'footer_text'			=> '',
 			// 'footer_after'			=> 'Footer after',
-			'footer_credit'			=> '<a href="https://wordpress.org/plugins/wp-enhancements/" target="_blank">WP Enhancements</a> is on <a href="https://github.com/qriouslad/wp-enhancements" target="_blank">github</a>.',
+			'footer_credit'			=> '<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank">Admin and Site Enhancements</a> is on <a href="https://github.com/qriouslad/admin-site-enhancements" target="_blank">github</a>.',
 
 			// database model
 			// 'database'                => 'options', // options, transient, theme_mod, network

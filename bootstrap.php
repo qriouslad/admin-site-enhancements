@@ -10,7 +10,7 @@
  *
  * @since 1.0.0
  */
-class WP_Enhancements {
+class Admin_Site_Enhancements {
 
 	// Refers to a single instance of this class
 	private static $instance = null;
@@ -18,7 +18,7 @@ class WP_Enhancements {
 	/**
 	 * Creates or returns a single instance of this class
 	 *
-	 * @return WP_Enhancements a single instance of this class
+	 * @return Admin_Site_Enhancements a single instance of this class
 	 * @since 1.0.0
 	 */
 	public static function get_instance() {
@@ -55,7 +55,7 @@ class WP_Enhancements {
 		// Selectively enable enhancements based on options value
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
-		$wpenha_options = get_option( 'wp-enhancements', array() );
+		$wpenha_options = get_option( 'admin-site-enhancements', array() );
 
 		// Instantiate object for Content Admin functionalities
 		$content_admin = new WPENHA\Classes\Content_Admin;
@@ -101,4 +101,4 @@ class WP_Enhancements {
 
 }
 
-WP_Enhancements::get_instance();
+Admin_Site_Enhancements::get_instance();
