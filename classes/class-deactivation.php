@@ -1,6 +1,6 @@
 <?php
 
-namespace WPENHA\Classes;
+namespace ASENHA\Classes;
 
 /**
  * Plugin Deactivation
