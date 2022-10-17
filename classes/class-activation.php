@@ -1,6 +1,6 @@
 <?php
 
-namespace WPENHA\Classes;
+namespace ASENHA\Classes;
 
 /**
  * Plugin Activation
@@ -16,7 +16,7 @@ class Activation {
 	 */
 	public function activate() {
 
-		add_option( WPENHA_SLUG, array(), '', 'yes' );
+		add_option( ASENHA_SLUG, array(), '', 'yes' );
 
 	}
 

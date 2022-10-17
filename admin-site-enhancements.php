@@ -18,25 +18,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPENHA_VERSION', '1.0.0' );
-define( 'WPENHA_SLUG', 'admin-site-enhancements' );
-define( 'WPENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
-define( 'WPENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
-// define( 'WPENHA_BASE', plugin_basename( __FILE__ ) ); // e.g. plugin-slug/this-file.php
-// define( 'WPENHA_FILE', __FILE__ ); // /home/user/apps/wp-root/wp-content/plugins/this-plugin/this-file.php
+define( 'ASENHA_VERSION', '1.0.0' );
+define( 'ASENHA_SLUG', 'admin-site-enhancements' );
+define( 'ASENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
+define( 'ASENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
+// define( 'ASENHA_BASE', plugin_basename( __FILE__ ) ); // e.g. plugin-slug/this-file.php
+// define( 'ASENHA_FILE', __FILE__ ); // /home/user/apps/wp-root/wp-content/plugins/this-plugin/this-file.php
 
 // Register autoloading classes
-spl_autoload_register( 'wpenha_autoloader' );
+spl_autoload_register( 'asenha_autoloader' );
 
 /**
  * Autoload classes defined by this plugin
  *
- * @param string $class_name e.g. \WPENHA\Classes\The_Name
+ * @param string $class_name e.g. \ASENHA\Classes\The_Name
  * @since 1.0.0
  */
-function wpenha_autoloader( $class_name ) {
+function asenha_autoloader( $class_name ) {
 
-	$namespace = 'WPENHA';
+	$namespace = 'ASENHA';
 
 	// Only process classes within this plugin's namespace
 
@@ -44,7 +44,7 @@ function wpenha_autoloader( $class_name ) {
 
 		// Assemble file path where class is defined
 
-		// \WPENHA\Classes\The_Name => \Classes\The_Name
+		// \ASENHA\Classes\The_Name => \Classes\The_Name
 		$path = str_replace( $namespace, "", $class_name );
 
 		// \Classes\The_Name => /classes/the_name
@@ -60,7 +60,7 @@ function wpenha_autoloader( $class_name ) {
 		$path = substr( $path, 1 );
 
 		// Get /plugin-path/classes/class-the-name.php
-		$path = WPENHA_PATH . $path;
+		$path = ASENHA_PATH . $path;
 
 		if ( file_exists( $path ) ) {
 			require_once( $path );
@@ -75,8 +75,8 @@ function wpenha_autoloader( $class_name ) {
  * 
  * @since 1.0.0
  */
-function wpenha_on_activation() {
-	$activation = new WPENHA\Classes\Activation;
+function asenha_on_activation() {
+	$activation = new ASENHA\Classes\Activation;
     $activation->activate();
 }
 
@@ -85,22 +85,22 @@ function wpenha_on_activation() {
  * 
  * @since 1.0.0
  */
-function wpenha_on_deactivation() {
-    $deactivation = new WPENHA\Classes\Deactivation;
+function asenha_on_deactivation() {
+    $deactivation = new ASENHA\Classes\Deactivation;
     $deactivation->deactivate();
 }
 
 // Register code that runs on plugin activation
-register_activation_hook( __FILE__, 'wpenha_on_activation');
+register_activation_hook( __FILE__, 'asenha_on_activation');
 
 // Register code that runs on plugin deactivation
-register_deactivation_hook( __FILE__, 'wpenha_on_deactivation' );
+register_deactivation_hook( __FILE__, 'asenha_on_deactivation' );
 
-// Load libraries whose namaspaces and/or classes have been prefixed with 'WPENHA_' string
-require_once WPENHA_PATH . 'libs/codestar-wpenha/codestar-framework.php';
+// Load libraries whose namaspaces and/or classes have been prefixed with 'ASENHA_' string
+require_once ASENHA_PATH . 'libs/codestar-asenha/codestar-framework.php';
 
 // Set up admin menu and page
-require_once WPENHA_PATH . 'includes/setup-admin-menu-page.php';
+require_once ASENHA_PATH . 'includes/setup-admin-menu-page.php';
 
 // Bootstrap all the functionalities of this plugin
-require_once WPENHA_PATH . 'bootstrap.php';
+require_once ASENHA_PATH . 'bootstrap.php';

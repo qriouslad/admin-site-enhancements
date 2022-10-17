@@ -1,16 +1,16 @@
 /* Content Admin >> Show IDs */
 
-#wpenha-id {
+#asenha-id {
 	width: 50px;
 }
 
 /* Content Admin >> Show Featured Images */
 
-#wpenha-featured-image {
+#asenha-featured-image {
 	width: 110px;
 }
 
-.wpenha-featured-image img {
+.asenha-featured-image img {
 	width: 110px;
 	height: auto;
 	border: 1px solid #e5e5e5;

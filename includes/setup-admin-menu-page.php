@@ -5,9 +5,9 @@
  *
  * @since 1.0.0
  */
-function wpenha_admin_menu_page() {
+function asenha_admin_menu_page() {
 
-	if ( class_exists( 'WPENHA_CSF' ) ) {
+	if ( class_exists( 'ASENHA_CSF' ) ) {
 
 		// Set a unique slug-like ID
 
@@ -15,15 +15,15 @@ function wpenha_admin_menu_page() {
 
 		// Create options
 
-		WPENHA_CSF::createOptions ( $prefix, array(
+		ASENHA_CSF::createOptions ( $prefix, array(
 
 		    // framework title
 			'framework_title' 		=> 'Admin and Site Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
-			'framework_class' 		=> 'wpenha',
+			'framework_class' 		=> 'asenha',
 
 			// menu settings
 			'menu_title' 			=> 'Enhancements',
-			'menu_slug' 			=> 'admin-site-enhancements',
+			'menu_slug' 			=> ASENHA_SLUG,
 			'menu_type'				=> 'submenu',
 			'menu_capability'		=> 'manage_options',
 			// 'menu_icon'			=> 'dashicons-arrow-up-alt2',
@@ -41,7 +41,7 @@ function wpenha_admin_menu_page() {
 			'show_reset_section'	=> false,
 			'show_footer' 			=> false,
 			'show_all_options' 		=> true,
-			'show_form_warning' 	=> false,
+			'show_form_warning' 	=> true,
 			'sticky_header'			=> true,
 			'save_defaults'			=> false,
 			'ajax_save'				=> true,
@@ -80,7 +80,7 @@ function wpenha_admin_menu_page() {
 
 		) );
 
-		WPENHA_CSF::createSection( $prefix, array(
+		ASENHA_CSF::createSection( $prefix, array(
 			'title'  => 'Content Admin',
 			// 'icon'   => 'fas fa-rocket',
 			'fields' => array(
@@ -137,13 +137,13 @@ function wpenha_admin_menu_page() {
 			)
 		) );
 
-		// WPENHA_CSF::createSection( $prefix, array(
+		// ASENHA_CSF::createSection( $prefix, array(
 		//   'id'    => 'basic_fields',
 		//   'title' => 'Basic Fields',
 		//   'icon'  => 'fas fa-plus-circle',
 		// ) );
 
-		// WPENHA_CSF::createSection( $prefix, array(
+		// ASENHA_CSF::createSection( $prefix, array(
 		// 	'parent'      => 'basic_fields',
 		// 	'title'       => 'Text',
 		// 	'icon'        => 'far fa-square',
@@ -159,7 +159,7 @@ function wpenha_admin_menu_page() {
 		// 	)
 		// ) );
 
-		// WPENHA_CSF::createSection( $prefix, array(
+		// ASENHA_CSF::createSection( $prefix, array(
 		// 	'parent'      => 'basic_fields',
 		// 	'title'       => 'Textarea',
 		// 	'icon'        => 'far fa-square',
@@ -184,14 +184,14 @@ function wpenha_admin_menu_page() {
  *
  * @since 1.0.0
  */
-function wpenha_admin_scripts() {
+function asenha_admin_scripts() {
 
 	// For main page of this plugin
 
-	if ( is_wpenha() ) {
+	if ( is_asenha() ) {
 
-		wp_enqueue_style( 'wpenha-admin', WPENHA_URL . 'assets/css/admin.css', array(), WPENHA_VERSION );
-		wp_enqueue_script( 'wpenha-admin', WPENHA_URL . 'assets/js/admin.js', array(), WPENHA_VERSION, false );
+		wp_enqueue_style( 'asenha-admin', ASENHA_URL . 'assets/css/admin.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-admin', ASENHA_URL . 'assets/js/admin.js', array(), ASENHA_VERSION, false );
 
 	}
 
@@ -203,7 +203,7 @@ function wpenha_admin_scripts() {
 		( false !== strpos( $current_screen->base, 'edit' ) ) || 
 		( false !== strpos( $current_screen->base, 'users' ) ) || 
 		( false !== strpos( $current_screen->base, 'upload' ) ) ) {
-		wp_enqueue_style( 'wpenha-edit', WPENHA_URL . 'assets/css/edit.css', array(), WPENHA_VERSION );
+		wp_enqueue_style( 'asenha-edit', ASENHA_URL . 'assets/css/edit.css', array(), ASENHA_VERSION );
 	}
 
 }
@@ -213,7 +213,7 @@ function wpenha_admin_scripts() {
  *
  * @since 1.0.0
  */
-function wpenha_remove_codestar_submenu() {
+function asenha_remove_codestar_submenu() {
 
 	remove_submenu_page( 'tools.php', 'csf-welcome' );
 
@@ -225,9 +225,9 @@ function wpenha_remove_codestar_submenu() {
  * @since    1.0.0
  */
 
-function wpenha_plugin_action_links( $links ) {
+function asenha_plugin_action_links( $links ) {
 
-	$settings_link = '<a href="tools.php?page=' . WPENHA_SLUG . '">Access now</a>';
+	$settings_link = '<a href="tools.php?page=' . ASENHA_SLUG . '">Access now</a>';
 
 	array_unshift($links, $settings_link); 
 
@@ -240,11 +240,11 @@ function wpenha_plugin_action_links( $links ) {
  *
  * @since 1.0.0
  */
-function is_wpenha() {
+function is_asenha() {
 
 	$request_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] ); // e.g. /wp-admin/index.php?page=page-slug
 
-	if ( strpos( $request_uri, 'page=' . WPENHA_SLUG ) !== false ) {
+	if ( strpos( $request_uri, 'page=' . ASENHA_SLUG ) !== false ) {
 		return true; // Yes, this is the plugin's main page
 	} else {
 		return false; // Nope, this is NOT the plugin's page

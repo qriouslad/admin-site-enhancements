@@ -1,6 +1,6 @@
 <?php
 
-namespace WPENHA\Classes;
+namespace ASENHA\Classes;
 
 /**
  * Class related to content administration enhancements
@@ -51,7 +51,7 @@ class Content_Admin {
 
 			if ( $key == 'title' ) {
 
-				$new_columns['wpenha-featured-image'] = 'Featured Image';	
+				$new_columns['asenha-featured-image'] = 'Featured Image';	
 
 			}
 
@@ -72,7 +72,7 @@ class Content_Admin {
 	 */
 	public function add_featured_image( $column_name, $id ) {
 
-		if ( 'wpenha-featured-image' === $column_name ) {
+		if ( 'asenha-featured-image' === $column_name ) {
 
 			if ( has_post_thumbnail( $id ) ) {
 
@@ -128,7 +128,7 @@ class Content_Admin {
 
 			if ( $key == 'title' ) {
 
-				$new_columns['wpenha-excerpt'] = 'Excerpt';	
+				$new_columns['asenha-excerpt'] = 'Excerpt';	
 
 			}
 
@@ -147,7 +147,7 @@ class Content_Admin {
 	 */
 	public function add_excerpt( $column_name, $id ) {
 
-		if ( 'wpenha-excerpt' === $column_name ) {
+		if ( 'asenha-excerpt' === $column_name ) {
 
 			$excerpt = get_the_excerpt( $id ); // about 310 characters
 			$excerpt = substr( $excerpt, 0, 160 ); // truncate to 160 characters
@@ -213,7 +213,7 @@ class Content_Admin {
 	 */
 	public function add_id_column( $columns ) {
 
-		$columns['wpenha-id'] = 'ID';
+		$columns['asenha-id'] = 'ID';
 
 		return $columns;
 
@@ -228,7 +228,7 @@ class Content_Admin {
 	 */
 	public function add_id_echo_value( $column_name, $id ) {
 
-		if ( 'wpenha-id' === $column_name ) {
+		if ( 'asenha-id' === $column_name ) {
 			echo $id;
 		}
 
@@ -244,7 +244,7 @@ class Content_Admin {
 	 */
 	public function add_id_return_value( $value, $column_name, $id ) {
 
-		if ( 'wpenha-id' === $column_name ) {
+		if ( 'asenha-id' === $column_name ) {
 			$value = $id;
 		}
 
@@ -386,12 +386,12 @@ class Content_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wpenha_enable_duplication() {
+	public function asenha_enable_duplication() {
 
 		$original_post_id = intval( sanitize_text_field( $_REQUEST['post'] ) );
 		$nonce = sanitize_text_field( $_REQUEST['nonce'] );
 
-		if ( wp_verify_nonce( $nonce, 'wpenha-duplicate-' . $original_post_id ) && current_user_can( 'edit_posts' ) ) {
+		if ( wp_verify_nonce( $nonce, 'asenha-duplicate-' . $original_post_id ) && current_user_can( 'edit_posts' ) ) {
 
 			$original_post = get_post( $original_post_id );
 
@@ -488,7 +488,7 @@ class Content_Admin {
 
 		if ( current_user_can( 'edit_posts' ) ) {
 
-			$actions['wpenha-duplicate'] = '<a href="admin.php?action=wpenha_enable_duplication&amp;post=' . $post->ID . '&amp;nonce=' . wp_create_nonce( 'wpenha-duplicate-' . $post->ID ) . '" title="Duplicate this as draft">Duplicate</a>';
+			$actions['asenha-duplicate'] = '<a href="admin.php?action=asenha_enable_duplication&amp;post=' . $post->ID . '&amp;nonce=' . wp_create_nonce( 'asenha-duplicate-' . $post->ID ) . '" title="Duplicate this as draft">Duplicate</a>';
 
 		}
 
