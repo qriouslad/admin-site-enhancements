@@ -36,7 +36,7 @@ function asenha_admin_menu_page() {
 			'show_sub_menu' 		=> false,
 			'show_in_network' 		=> false,
 			'show_in_customizer' 	=> false,
-			'show_search' 			=> false,
+			'show_search' 			=> true,
 			'show_reset_all'		=> false,
 			'show_reset_section'	=> false,
 			'show_footer' 			=> false,
@@ -81,9 +81,15 @@ function asenha_admin_menu_page() {
 		) );
 
 		ASENHA_CSF::createSection( $prefix, array(
-			'title'  => 'Content Admin',
+			'id'		=> 'content_admin',
+			'title'		=> 'Content Admin',
 			// 'icon'   => 'fas fa-rocket',
-			'fields' => array(
+		) );
+
+		ASENHA_CSF::createSection( $prefix, array(
+			'parent'	=> 'content_admin',
+			'title'		=> 'List Tables',
+			'fields'	=> array(
 
 				array(
 				  'id'    => 'show-featured-image-column',
@@ -124,56 +130,68 @@ function asenha_admin_menu_page() {
 				  'id'    => 'show-custom-taxonomy-filters',
 				  'type'  => 'switcher',
 				  'title' => 'Show Custom Taxonomy Filters',
-				  'label' => 'Show custom taxonomy filter(s) on list tables of all post types if the taxonomy is hierarchical like post categories.',
-				),
-
-				array(
-				  'id'    => 'enable-duplication',
-				  'type'  => 'switcher',
-				  'title' => 'Enable Page and Post Duplication',
-				  'label' => 'Enable one-click duplication of pages, posts and custom posts.',
+				  'label' => 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.',
 				),
 
 			)
 		) );
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		//   'id'    => 'basic_fields',
-		//   'title' => 'Basic Fields',
-		//   'icon'  => 'fas fa-plus-circle',
-		// ) );
+		ASENHA_CSF::createSection( $prefix, array(
+			'parent'	=> 'content_admin',
+			'title'		=> 'Tools',
+			'fields'	=> array(
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'      => 'basic_fields',
-		// 	'title'       => 'Text',
-		// 	'icon'        => 'far fa-square',
-		// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=text" target="_blank">Field: text</a>',
-		// 	'fields'      => array(
+				array(
+				  'id'    => 'enable-duplication',
+				  'type'  => 'switcher',
+				  'title' => 'Enable Page and Post Duplication',
+				  'label' => 'Enable one-click duplication of pages, posts and custom posts. Taxonomy terms and post metas are also duplicated.',
+				),
 
-		// 		array(
-		// 		'id'    => 'opt-text-1',
-		// 		'type'  => 'text',
-		// 		'title' => 'Text',
-		// 		),
+				array(
+				  'id'    => 'enable-media-replace',
+				  'type'  => 'switcher',
+				  'title' => 'Enable Media Replacement',
+				  'label' => 'Old media file will be replaced with newly uploaded file while retaining the file name and URL.',
+				),
 
-		// 	)
-		// ) );
+			)
+		) );
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'      => 'basic_fields',
-		// 	'title'       => 'Textarea',
-		// 	'icon'        => 'far fa-square',
-		// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=textarea" target="_blank">Field: textrea</a>',
-		// 	'fields'      => array(
+		ASENHA_CSF::createSection( $prefix, array(
+			'id'		=> 'admin_menu',
+			'title'		=> 'Admin Menu',
+			'fields'	=> array(
+			)
+		) );
 
-		// 		array(
-		// 		'id'    => 'opt-textarea-1',
-		// 		'type'  => 'textarea',
-		// 		'title' => 'Textarea',
-		// 		),
+		ASENHA_CSF::createSection( $prefix, array(
+			'parent'	=> 'admin_menu',
+			'title'		=> 'Admin Bar',
+			'fields'	=> array(
 
-		// 	)
-		// ) );
+				array(
+				'id'    => 'opt-text-1',
+				'type'  => 'text',
+				'title' => 'Text',
+				),
+
+			)
+		) );
+
+		ASENHA_CSF::createSection( $prefix, array(
+			'parent'	=> 'admin_menu',
+			'title'		=> 'Side Menu',
+			'fields'	=> array(
+
+				array(
+				'id'    => 'opt-text-1',
+				'type'  => 'text',
+				'title' => 'Text',
+				),
+
+			)
+		) );
 
 	}
 
