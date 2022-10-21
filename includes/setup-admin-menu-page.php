@@ -207,6 +207,8 @@ function asenha_admin_scripts() {
 	// For main page of this plugin
 
 	if ( is_asenha() ) {
+		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array(), ASENHA_VERSION, false );
 
 		wp_enqueue_style( 'asenha-admin', ASENHA_URL . 'assets/css/admin.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-admin', ASENHA_URL . 'assets/js/admin.js', array(), ASENHA_VERSION, false );
@@ -222,6 +224,7 @@ function asenha_admin_scripts() {
 		( false !== strpos( $current_screen->base, 'users' ) ) || 
 		( false !== strpos( $current_screen->base, 'upload' ) ) ) {
 		wp_enqueue_style( 'asenha-edit', ASENHA_URL . 'assets/css/edit.css', array(), ASENHA_VERSION );
+		wp_enqueue_style( 'asenha-list-table', ASENHA_URL . 'assets/css/list-table.css', array(), ASENHA_VERSION );
 	}
 
 }
