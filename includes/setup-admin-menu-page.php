@@ -133,14 +133,6 @@ function asenha_admin_menu_page() {
 				  'label' => 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.',
 				),
 
-			)
-		) );
-
-		ASENHA_CSF::createSection( $prefix, array(
-			'parent'	=> 'content_admin',
-			'title'		=> 'Tools',
-			'fields'	=> array(
-
 				array(
 				  'id'    => 'enable-duplication',
 				  'type'  => 'switcher',
@@ -152,46 +144,68 @@ function asenha_admin_menu_page() {
 				  'id'    => 'enable-media-replacement',
 				  'type'  => 'switcher',
 				  'title' => 'Enable Media Replacement',
-				  'label' => 'The current media file will be replaced with the uploaded and/or selected file while retaining the current file name.',
+				  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
 				),
 
 			)
 		) );
 
-		ASENHA_CSF::createSection( $prefix, array(
-			'id'		=> 'admin_menu',
-			'title'		=> 'Admin Menu',
-			'fields'	=> array(
-			)
-		) );
+		// ASENHA_CSF::createSection( $prefix, array(
+		// 	'parent'	=> 'content_admin',
+		// 	'title'		=> 'Tools',
+		// 	'fields'	=> array(
 
-		ASENHA_CSF::createSection( $prefix, array(
-			'parent'	=> 'admin_menu',
-			'title'		=> 'Admin Bar',
-			'fields'	=> array(
+		// 		array(
+		// 		  'id'    => 'enable-duplication',
+		// 		  'type'  => 'switcher',
+		// 		  'title' => 'Enable Page and Post Duplication',
+		// 		  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
+		// 		),
 
-				array(
-				'id'    => 'opt-text-1',
-				'type'  => 'text',
-				'title' => 'Text',
-				),
+		// 		array(
+		// 		  'id'    => 'enable-media-replacement',
+		// 		  'type'  => 'switcher',
+		// 		  'title' => 'Enable Media Replacement',
+		// 		  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
+		// 		),
 
-			)
-		) );
+		// 	)
+		// ) );
 
-		ASENHA_CSF::createSection( $prefix, array(
-			'parent'	=> 'admin_menu',
-			'title'		=> 'Side Menu',
-			'fields'	=> array(
+		// ASENHA_CSF::createSection( $prefix, array(
+		// 	'id'		=> 'admin_menu',
+		// 	'title'		=> 'Admin Menu',
+		// 	'fields'	=> array(
+		// 	)
+		// ) );
 
-				array(
-				'id'    => 'opt-text-1',
-				'type'  => 'text',
-				'title' => 'Text',
-				),
+		// ASENHA_CSF::createSection( $prefix, array(
+		// 	'parent'	=> 'admin_menu',
+		// 	'title'		=> 'Admin Bar',
+		// 	'fields'	=> array(
 
-			)
-		) );
+		// 		array(
+		// 		'id'    => 'opt-text-1',
+		// 		'type'  => 'text',
+		// 		'title' => 'Text',
+		// 		),
+
+		// 	)
+		// ) );
+
+		// ASENHA_CSF::createSection( $prefix, array(
+		// 	'parent'	=> 'admin_menu',
+		// 	'title'		=> 'Side Menu',
+		// 	'fields'	=> array(
+
+		// 		array(
+		// 		'id'    => 'opt-text-1',
+		// 		'type'  => 'text',
+		// 		'title' => 'Text',
+		// 		),
+
+		// 	)
+		// ) );
 
 	}
 

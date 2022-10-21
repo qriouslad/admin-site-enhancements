@@ -4,7 +4,7 @@
  * Plugin Name:       Admin and Site Enhancements
  * Plugin URI:        https://wordpress.org/plugins/admin-site-enhancements/
  * Description:       Easily enable enhancements and features that you usually do with multiple plugins.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Bowo
  * Author URI:        https://bowo.io
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ASENHA_VERSION', '1.0.0' );
+define( 'ASENHA_VERSION', '1.1.0' );
 define( 'ASENHA_SLUG', 'admin-site-enhancements' );
 define( 'ASENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
 define( 'ASENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
