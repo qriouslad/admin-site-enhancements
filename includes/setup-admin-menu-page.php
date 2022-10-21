@@ -145,14 +145,14 @@ function asenha_admin_menu_page() {
 				  'id'    => 'enable-duplication',
 				  'type'  => 'switcher',
 				  'title' => 'Enable Page and Post Duplication',
-				  'label' => 'Enable one-click duplication of pages, posts and custom posts. Taxonomy terms and post metas are also duplicated.',
+				  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
 				),
 
 				array(
-				  'id'    => 'enable-media-replace',
+				  'id'    => 'enable-media-replacement',
 				  'type'  => 'switcher',
 				  'title' => 'Enable Media Replacement',
-				  'label' => 'Old media file will be replaced with newly uploaded file while retaining the file name and URL.',
+				  'label' => 'The current media file will be replaced with the uploaded and/or selected file while retaining the current file name.',
 				),
 
 			)
@@ -202,29 +202,40 @@ function asenha_admin_menu_page() {
  *
  * @since 1.0.0
  */
-function asenha_admin_scripts() {
+function asenha_admin_scripts( $hook_suffix ) {
 
 	// For main page of this plugin
 
 	if ( is_asenha() ) {
 		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array(), ASENHA_VERSION, false );
-
-		wp_enqueue_style( 'asenha-admin', ASENHA_URL . 'assets/css/admin.css', array(), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin', ASENHA_URL . 'assets/js/admin.js', array(), ASENHA_VERSION, false );
-
 	}
 
-	// CSS for Content Admin >> Show IDs, for list tables in wp-admin, e.g. All Posts page
+	// Enqueue on all wp-admin
+
+	wp_enqueue_style( 'asenha-wp-admin', ASENHA_URL . 'assets/css/wp-admin.css', array(), ASENHA_VERSION );
+
 
 	$current_screen = get_current_screen();
 
-	if ( 
-		( false !== strpos( $current_screen->base, 'edit' ) ) || 
-		( false !== strpos( $current_screen->base, 'users' ) ) || 
-		( false !== strpos( $current_screen->base, 'upload' ) ) ) {
-		wp_enqueue_style( 'asenha-edit', ASENHA_URL . 'assets/css/edit.css', array(), ASENHA_VERSION );
+	// Content Admin >> Show IDs, for list tables in wp-admin, e.g. All Posts page
+
+	if ( ( false !== strpos( $current_screen->base, 'edit' ) ) // List tables for pages, posts, taxonomies
+		|| ( false !== strpos( $current_screen->base, 'users' ) ) // Users list table
+		|| ( false !== strpos( $current_screen->base, 'upload' ) ) // Media list table
+	) {
 		wp_enqueue_style( 'asenha-list-table', ASENHA_URL . 'assets/css/list-table.css', array(), ASENHA_VERSION );
+	}
+
+	// Content Admin >> Enable Media Replacement
+	
+	if ( ( $current_screen->base == 'upload' ) // Media list table
+		|| ( $current_screen->id == 'attachment' ) // Media edit page
+	) {
+		// wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
+		// wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
+		wp_enqueue_style( 'asenha-media-replace', ASENHA_URL . 'assets/css/media-replace.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-media-replace', ASENHA_URL . 'assets/js/media-replace.js', array(), ASENHA_VERSION, false );
 	}
 
 }

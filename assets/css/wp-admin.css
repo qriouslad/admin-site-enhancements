@@ -1,0 +1,4 @@
+/* Hide media replacement section on media dialog/frame */
+.media-sidebar .compat-item .compat-field-asenha-media-replace {
+	display: none;
+}

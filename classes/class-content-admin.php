@@ -496,4 +496,220 @@ class Content_Admin {
 
 	}
 
+	/**
+	 * Modify the 'Edit' link to be 'Edit or Replace'
+	 * 
+	 */
+	public function modify_media_list_table_edit_link( $actions, $post ) {
+
+		$new_actions = array();
+
+		foreach( $actions as $key => $value ) {
+
+			if ( $key == 'edit' ) {
+
+				$new_actions['edit'] = '<a href="' . get_edit_post_link( $post ) . '" aria-label="Edit or Replace">Edit or Replace</a>';
+
+			} else {
+
+				$new_actions[$key] = $value;
+
+			}
+
+		}
+
+		return $new_actions;
+
+	}
+
+	/**
+	 * Add media replacement button in the edit screen of media/attachment
+	 *
+	 * @since 1.1.0
+	 */
+	public function add_media_replacement_button( $fields ) {
+
+		// Enqueues all scripts, styles, settings, and templates necessary to use all media JS APIs.
+		// Reference: https://codex.wordpress.org/Javascript_Reference/wp.media
+		wp_enqueue_media();
+
+		// Add new field to attachment fields for the media replace functionality
+		$fields['asenha-media-replace'] = array();
+		$fields['asenha-media-replace']['label'] = '';
+		$fields['asenha-media-replace']['input'] = 'html';
+		$fields['asenha-media-replace']['html'] = '
+			<div id="media-replace-div" class="postbox">
+				<div class="postbox-header">
+					<h2 class="hndle ui-sortable-handle">Replace Media</h2>
+				</div>
+				<div class="inside">
+				<button type="button" id="asenha-media-replace" class="button-secondary button-large asenha-media-replace-button">Select New Media File</button>
+				<input type="hidden" id="new-attachment-id" name="new-attachment-id" />
+				<div class="asenha-media-replace-notes">The current media file will be replaced with the uploaded and/or selected file while retaining the current file name.</div>
+				</div>
+			</div>
+		';
+
+		return $fields;
+
+	}
+
+	/**
+	 * Replace existing media with the newly updated file
+	 *
+	 * @link https://plugins.trac.wordpress.org/browser/replace-image/tags/1.1.7/hm-replace-image.php#L55
+	 * @since 1.1.0
+	 */
+	public function replace_media( $old_attachment_id ) {
+
+		$old_post_meta = get_post( $old_attachment_id, ARRAY_A );
+		$old_post_mime = $old_post_meta['post_mime_type']; // e.g. 'image/jpeg'
+
+		// Get the new attachment/media ID, meta and mime type
+		$new_attachment_id = intval( sanitize_text_field( $_POST['new-attachment-id'] ) );
+		$new_post_meta = get_post( $new_attachment_id, ARRAY_A );
+		$new_post_mime = $new_post_meta['post_mime_type']; // e.g. 'image/jpeg'
+
+		// Check if the media file ID selected via the media frame and passed on to the #new-attachment-id hidden field
+		// Ensure the mime type matches too
+		if ( ( ! empty( $new_attachment_id ) ) && is_numeric( $new_attachment_id ) && ( $old_post_mime == $new_post_mime ) ) {
+
+			$new_attachment_meta = wp_get_attachment_metadata( $new_attachment_id );
+
+			// If original file is larger than 2560 pixel
+			// https://make.wordpress.org/core/2019/10/09/introducing-handling-of-big-images-in-wordpress-5-3/
+			if ( array_key_exists( 'original_image', $new_attachment_meta ) ) {
+
+				// Get the original media file path
+				$new_media_file_path = wp_get_original_image_path( $new_attachment_id );
+
+			} else {
+
+				// Get the path to newly uploaded media file. An image file name may end with '-scaled'.
+				$new_attachment_file = get_post_meta( $new_attachment_id, '_wp_attached_file', true );
+				$upload_dir = wp_upload_dir();
+				$new_media_file_path = $upload_dir['basedir'] . '/' . $new_attachment_file;
+
+			}
+
+			// Check if the new media file exist / was successfully uploaded
+			if ( ! is_file( $new_media_file_path ) ) {
+				return false;
+			}
+
+			// Delete existing/old media files. Post and post meta entries for it are still there in the database.
+			$this->delete_media_files( $old_attachment_id );
+
+			// If original file is larger than 2560 pixel
+			// https://make.wordpress.org/core/2019/10/09/introducing-handling-of-big-images-in-wordpress-5-3/
+			if ( array_key_exists( 'original_image', $new_attachment_meta ) ) {
+
+				// Get the original media file path
+				$old_media_file_path = wp_get_original_image_path( $old_attachment_id );
+
+			} else {
+
+				// Get the path to the old/existing media file that will be replaced and deleted. An image file name may end with '-scaled'.
+				$old_attachment_file = get_post_meta( $old_attachment_id, '_wp_attached_file', true );
+				$old_media_file_path = $upload_dir['basedir'] . '/' . $old_attachment_file;
+
+			}
+
+			// Check if the directory path to the old media file is still intact
+			if ( ! file_exists( dirname( $old_media_file_path ) ) ) {
+
+				// Recreate the directory path
+				mkdir( dirname( $old_media_file_path ), 0755, true );
+
+			}
+
+			// Copy the new media file into the old media file's path
+			copy( $new_media_file_path, $old_media_file_path );
+
+			// Regenerate attachment meta data and image sub-sizes from the new media file that was just copied to the old path
+			$old_media_post_meta_updated = wp_generate_attachment_metadata( $old_attachment_id, $old_media_file_path );
+
+			// Update new media file's meta data with the ones from the old media. i.e. new media file will carry over the post ID and post meta of the old media file. i.e. only the files are replaced for the old media's ID and post meta in the database.
+			wp_update_attachment_metadata( $old_attachment_id, $old_media_post_meta_updated );
+
+			// Delete the newly uploaded media file and it's sub-sizes, and also delete post and post meta entries for it in the database.
+			wp_delete_attachment( $new_attachment_id, true );
+
+		}
+
+	}
+
+	/**
+	 * Delete the existing/old media files when performing media replacement
+	 *
+	 * @link https://plugins.trac.wordpress.org/browser/replace-image/tags/1.1.7/hm-replace-image.php#L80
+	 * @since 1.1.0
+	 */
+	public function delete_media_files( $post_id ) {
+
+		$attachment_meta = wp_get_attachment_metadata( $post_id );
+
+		// Will get '-scaled' version if it exists, e.g. /path/to/uploads/year/month/file-name.jpg
+		$attachment_file_path = get_attached_file( $post_id ); 
+
+		// e.g. file-name.jpg
+		$attachment_file_basename = basename( $attachment_file_path );
+
+		// Delete intermediate images if there are any
+		
+		if ( isset( $attachment_meta['sizes'] ) && is_array( $attachment_meta['sizes'] ) ) {
+
+			foreach( $attachment_meta['sizes'] as $size => $size_info) {
+
+				// /path/to/uploads/year/month/file-name.jpg --> /path/to/uploads/year/month/file-name-1024x768.jpg
+				$intermediate_file_path = str_replace( $attachment_file_basename, $size_info['file'], $attachment_file_path );
+				wp_delete_file( $intermediate_file_path );
+
+			}
+
+		}
+
+		// Delete the attachment file, which maybe the '-scaled' version
+		wp_delete_file( $attachment_file_path );
+
+		// If original file is larger than 2560 pixel
+		// https://make.wordpress.org/core/2019/10/09/introducing-handling-of-big-images-in-wordpress-5-3/
+		if ( array_key_exists( 'original_image', $attachment_meta ) ) {
+
+			$attachment_original_file_path = wp_get_original_image_path( $post_id );
+
+			// Delete the original file
+			wp_delete_file( $attachment_original_file_path );
+
+		}
+
+	}
+
+	/**
+	 * Customize the attachment updated message
+	 *
+	 * @link https://github.com/WordPress/wordpress-develop/blob/6.0.2/src/wp-admin/edit-form-advanced.php#L180
+	 * @since 1.1.0
+	 */
+	public function attachment_updated_custom_message( $messages ) {
+
+		$new_messages = array();
+
+		foreach( $messages as $post_type => $messages_array ) {
+
+			if ( $post_type == 'attachment' ) {
+
+				// Message ID for successful edit/update of an attachment is 4. e.g. /wp-admin/post.php?post=a&action=edit&classic-editor&message=4 Customize it here.
+				$messages_array[4] = 'Media file updated. You may need to <a href="https://fabricdigital.co.nz/blog/how-to-hard-refresh-your-browser-and-clear-cache" target="_blank">hard refresh</a> your browser to see the updated media preview image below.';
+
+			}
+
+			$new_messages[$post_type] = $messages_array;
+
+		}
+
+		return $new_messages;
+
+	}
+
 }
