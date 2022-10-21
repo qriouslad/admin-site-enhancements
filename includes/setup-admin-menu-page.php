@@ -36,7 +36,7 @@ function asenha_admin_menu_page() {
 			'show_sub_menu' 		=> false,
 			'show_in_network' 		=> false,
 			'show_in_customizer' 	=> false,
-			'show_search' 			=> false,
+			'show_search' 			=> true,
 			'show_reset_all'		=> false,
 			'show_reset_section'	=> false,
 			'show_footer' 			=> false,
@@ -81,9 +81,15 @@ function asenha_admin_menu_page() {
 		) );
 
 		ASENHA_CSF::createSection( $prefix, array(
-			'title'  => 'Content Admin',
+			'id'		=> 'content_admin',
+			'title'		=> 'Content Admin',
 			// 'icon'   => 'fas fa-rocket',
-			'fields' => array(
+		) );
+
+		ASENHA_CSF::createSection( $prefix, array(
+			'parent'	=> 'content_admin',
+			'title'		=> 'List Tables',
+			'fields'	=> array(
 
 				array(
 				  'id'    => 'show-featured-image-column',
@@ -124,31 +130,59 @@ function asenha_admin_menu_page() {
 				  'id'    => 'show-custom-taxonomy-filters',
 				  'type'  => 'switcher',
 				  'title' => 'Show Custom Taxonomy Filters',
-				  'label' => 'Show custom taxonomy filter(s) on list tables of all post types if the taxonomy is hierarchical like post categories.',
+				  'label' => 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.',
 				),
 
 				array(
 				  'id'    => 'enable-duplication',
 				  'type'  => 'switcher',
 				  'title' => 'Enable Page and Post Duplication',
-				  'label' => 'Enable one-click duplication of pages, posts and custom posts.',
+				  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
+				),
+
+				array(
+				  'id'    => 'enable-media-replacement',
+				  'type'  => 'switcher',
+				  'title' => 'Enable Media Replacement',
+				  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
 				),
 
 			)
 		) );
 
 		// ASENHA_CSF::createSection( $prefix, array(
-		//   'id'    => 'basic_fields',
-		//   'title' => 'Basic Fields',
-		//   'icon'  => 'fas fa-plus-circle',
+		// 	'parent'	=> 'content_admin',
+		// 	'title'		=> 'Tools',
+		// 	'fields'	=> array(
+
+		// 		array(
+		// 		  'id'    => 'enable-duplication',
+		// 		  'type'  => 'switcher',
+		// 		  'title' => 'Enable Page and Post Duplication',
+		// 		  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
+		// 		),
+
+		// 		array(
+		// 		  'id'    => 'enable-media-replacement',
+		// 		  'type'  => 'switcher',
+		// 		  'title' => 'Enable Media Replacement',
+		// 		  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
+		// 		),
+
+		// 	)
 		// ) );
 
 		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'      => 'basic_fields',
-		// 	'title'       => 'Text',
-		// 	'icon'        => 'far fa-square',
-		// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=text" target="_blank">Field: text</a>',
-		// 	'fields'      => array(
+		// 	'id'		=> 'admin_menu',
+		// 	'title'		=> 'Admin Menu',
+		// 	'fields'	=> array(
+		// 	)
+		// ) );
+
+		// ASENHA_CSF::createSection( $prefix, array(
+		// 	'parent'	=> 'admin_menu',
+		// 	'title'		=> 'Admin Bar',
+		// 	'fields'	=> array(
 
 		// 		array(
 		// 		'id'    => 'opt-text-1',
@@ -160,16 +194,14 @@ function asenha_admin_menu_page() {
 		// ) );
 
 		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'      => 'basic_fields',
-		// 	'title'       => 'Textarea',
-		// 	'icon'        => 'far fa-square',
-		// 	'description' => 'Visit documentation for more details on this field: <a href="http://codestarframework.com/documentation/#/fields?id=textarea" target="_blank">Field: textrea</a>',
-		// 	'fields'      => array(
+		// 	'parent'	=> 'admin_menu',
+		// 	'title'		=> 'Side Menu',
+		// 	'fields'	=> array(
 
 		// 		array(
-		// 		'id'    => 'opt-textarea-1',
-		// 		'type'  => 'textarea',
-		// 		'title' => 'Textarea',
+		// 		'id'    => 'opt-text-1',
+		// 		'type'  => 'text',
+		// 		'title' => 'Text',
 		// 		),
 
 		// 	)
@@ -184,26 +216,40 @@ function asenha_admin_menu_page() {
  *
  * @since 1.0.0
  */
-function asenha_admin_scripts() {
+function asenha_admin_scripts( $hook_suffix ) {
 
 	// For main page of this plugin
 
 	if ( is_asenha() ) {
-
-		wp_enqueue_style( 'asenha-admin', ASENHA_URL . 'assets/css/admin.css', array(), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin', ASENHA_URL . 'assets/js/admin.js', array(), ASENHA_VERSION, false );
-
+		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array(), ASENHA_VERSION, false );
 	}
 
-	// CSS for Content Admin >> Show IDs, for list tables in wp-admin, e.g. All Posts page
+	// Enqueue on all wp-admin
+
+	wp_enqueue_style( 'asenha-wp-admin', ASENHA_URL . 'assets/css/wp-admin.css', array(), ASENHA_VERSION );
+
 
 	$current_screen = get_current_screen();
 
-	if ( 
-		( false !== strpos( $current_screen->base, 'edit' ) ) || 
-		( false !== strpos( $current_screen->base, 'users' ) ) || 
-		( false !== strpos( $current_screen->base, 'upload' ) ) ) {
-		wp_enqueue_style( 'asenha-edit', ASENHA_URL . 'assets/css/edit.css', array(), ASENHA_VERSION );
+	// Content Admin >> Show IDs, for list tables in wp-admin, e.g. All Posts page
+
+	if ( ( false !== strpos( $current_screen->base, 'edit' ) ) // List tables for pages, posts, taxonomies
+		|| ( false !== strpos( $current_screen->base, 'users' ) ) // Users list table
+		|| ( false !== strpos( $current_screen->base, 'upload' ) ) // Media list table
+	) {
+		wp_enqueue_style( 'asenha-list-table', ASENHA_URL . 'assets/css/list-table.css', array(), ASENHA_VERSION );
+	}
+
+	// Content Admin >> Enable Media Replacement
+	
+	if ( ( $current_screen->base == 'upload' ) // Media list table
+		|| ( $current_screen->id == 'attachment' ) // Media edit page
+	) {
+		// wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
+		// wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
+		wp_enqueue_style( 'asenha-media-replace', ASENHA_URL . 'assets/css/media-replace.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-media-replace', ASENHA_URL . 'assets/js/media-replace.js', array(), ASENHA_VERSION, false );
 	}
 
 }

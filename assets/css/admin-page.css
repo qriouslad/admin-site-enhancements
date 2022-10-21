@@ -25,6 +25,18 @@
 
 /* CodeStar Framework */
 
+.csf-nav ul li a {
+    font-size: 14px;
+}
+
+.csf-theme-light .csf-nav ul li a {
+    font-weight: 600;
+}
+
+.csf-theme-light .csf-nav ul ul li a {
+    font-weight: 500;
+}
+
 .csf-field,
 .csf-field.csf-field-switcher .csf-fieldset {
     display: flex;
@@ -52,4 +64,12 @@
 
 .csf-field-switcher .csf--label {
     margin-top: 0;
+    width: calc(100% - 60px);
+}
+
+.csf-form-warning {
+    position: absolute;
+    bottom: 4px;
+    right: 23px;
+    line-height: 18px;
 }

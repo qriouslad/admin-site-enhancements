@@ -96,6 +96,14 @@ class Admin_Site_Enhancements {
 			add_filter( 'page_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
 			add_filter( 'post_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
 		}
+
+		// Content Admin >> Enable Media Replacement
+		if ( array_key_exists( 'enable-media-replacement', $asenha_options ) && $asenha_options['enable-media-replacement'] ) {
+			add_filter( 'media_row_actions', [ $content_admin, 'modify_media_list_table_edit_link' ], 10, 2 );
+			add_filter( 'attachment_fields_to_edit', [ $content_admin, 'add_media_replacement_button' ] );
+			add_action( 'edit_attachment', [ $content_admin, 'replace_media' ] );
+			add_filter( 'post_updated_messages', [ $content_admin, 'attachment_updated_custom_message' ] );
+		}
 		
 	}
 
