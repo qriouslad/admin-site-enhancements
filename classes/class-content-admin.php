@@ -153,7 +153,7 @@ class Content_Admin {
 			$excerpt = substr( $excerpt, 0, 160 ); // truncate to 160 characters
 			$short_excerpt = substr( $excerpt, 0, strrpos( $excerpt, ' ' ) );
 
-			echo $short_excerpt;
+			echo wp_kses_post( $short_excerpt );
 
 		}
 
@@ -229,7 +229,7 @@ class Content_Admin {
 	public function add_id_echo_value( $column_name, $id ) {
 
 		if ( 'asenha-id' === $column_name ) {
-			echo $id;
+			echo esc_html( $id );
 		}
 
 	}
@@ -545,7 +545,7 @@ class Content_Admin {
 				<div class="inside">
 				<button type="button" id="asenha-media-replace" class="button-secondary button-large asenha-media-replace-button">Select New Media File</button>
 				<input type="hidden" id="new-attachment-id" name="new-attachment-id" />
-				<div class="asenha-media-replace-notes">The current media file will be replaced with the uploaded and/or selected file while retaining the current file name.</div>
+				<div class="asenha-media-replace-notes">The current file will be replaced with the uploaded and/or selected file while retaining the current ID and file name.</div>
 				</div>
 			</div>
 		';

@@ -19,7 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'ASENHA_VERSION', '1.1.0' );
+define( 'ASENHA_ID', 'asenha' );
 define( 'ASENHA_SLUG', 'admin-site-enhancements' );
+define( 'ASENHA_SLUG_U', 'admin_site_enhancements' );
 define( 'ASENHA_URL', plugins_url( '/', __FILE__ ) ); // e.g. https://www.example.com/wp-content/plugins/this-plugin/
 define( 'ASENHA_PATH', plugin_dir_path( __FILE__ ) ); // e.g. /home/user/apps/wp-root/wp-content/plugins/this-plugin/
 // define( 'ASENHA_BASE', plugin_basename( __FILE__ ) ); // e.g. plugin-slug/this-file.php
@@ -95,9 +97,6 @@ register_activation_hook( __FILE__, 'asenha_on_activation');
 
 // Register code that runs on plugin deactivation
 register_deactivation_hook( __FILE__, 'asenha_on_deactivation' );
-
-// Load libraries whose namaspaces and/or classes have been prefixed with 'ASENHA_' string
-require_once ASENHA_PATH . 'libs/codestar-asenha/codestar-framework.php';
 
 // Set up admin menu and page
 require_once ASENHA_PATH . 'includes/setup-admin-menu-page.php';

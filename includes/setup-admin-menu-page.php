@@ -1,212 +1,342 @@
 <?php
 
 /**
- * Register admin menu and page via Codestar framework
+ * Register admin menu
  *
  * @since 1.0.0
  */
-function asenha_admin_menu_page() {
+function asenha_register_admin_menu() {
 
-	if ( class_exists( 'ASENHA_CSF' ) ) {
+	add_submenu_page(
+		'tools.php', // Parent page/menu
+		'Admin and Site Enhancements', // Browser tab/window title
+		'Enhancements', // Sube menu title
+		'manage_options', // Minimal user capabililty
+		ASENHA_SLUG, // Page slug. Shows up in URL.
+		'asenha_add_settings_page'
+	);
 
-		// Set a unique slug-like ID
+}
 
-		$prefix = 'admin-site-enhancements';
+/**
+ * Create the settings page of the plugin
+ *
+ * @since 1.0.0
+ */
+function asenha_add_settings_page() {
+	?>
+	<div class="wrap asenha">
 
-		// Create options
+		<div id="asenha-header" class="asenha-header">
+			<div class="asenha-header-left">
+				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io" target="_blank">bowo.io</a></small></h1>
+				<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a>
+				<a href="https://wordpress.org/plugins/admin-site-enhancements/#reviews" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
+				<a href="https://wordpress.org/support/plugin/admin-site-enhancements/" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
+				<a href="https://paypal.me/qriouslad" target="_blank" class="asenha-header-action">&#9829; <?php esc_html_e( 'Donate', 'admin-site-enhancements' ); ?></a>
+			</div>
+			<div class="asenha-header-right">
+				<a class="button button-primary asenha-save-button">Save Changes</a>
+			</div>
+		</div>
 
-		ASENHA_CSF::createOptions ( $prefix, array(
+		<div class="asenha-body">
+			<form action="options.php" method="post">
+				<?php settings_fields( ASENHA_ID ); ?>
+				<?php do_settings_sections( ASENHA_SLUG ); ?>
+				<?php submit_button(
+					'Save Changes', // Button copy
+					'primary', // Type: 'primary', 'small', or 'large'
+					'submit', // The 'name' attribute
+					true, // Whether to wrap in <p> tag
+					array( 'id' => 'asenha-submit' ), // additional attributes
+				); ?>
+			</form>
+		</div>
 
-		    // framework title
-			'framework_title' 		=> 'Admin and Site Enhancements <small>by <a href="https://bowo.io" target="_blank">bowo.io</a></small>',
-			'framework_class' 		=> 'asenha',
+		<div class="asenha-footer">
+		</div>
 
-			// menu settings
-			'menu_title' 			=> 'Enhancements',
-			'menu_slug' 			=> ASENHA_SLUG,
-			'menu_type'				=> 'submenu',
-			'menu_capability'		=> 'manage_options',
-			// 'menu_icon'			=> 'dashicons-arrow-up-alt2',
-			// 'menu_position'		=> 8,
-			'menu_hidden'			=> false,
-			'menu_parent'			=> 'tools.php',
+	</div>
+	<?php
 
-			// menu extras
-			'show_bar_menu' 		=> false,
-			'show_sub_menu' 		=> false,
-			'show_in_network' 		=> false,
-			'show_in_customizer' 	=> false,
-			'show_search' 			=> true,
-			'show_reset_all'		=> false,
-			'show_reset_section'	=> false,
-			'show_footer' 			=> false,
-			'show_all_options' 		=> true,
-			'show_form_warning' 	=> true,
-			'sticky_header'			=> true,
-			'save_defaults'			=> false,
-			'ajax_save'				=> true,
+}
 
-			// admin bar menu settings
-			// 'admin_bar_menu_icon'     => '',
-			// 'admin_bar_menu_priority' => 80,
+/**
+ * Register plugin settings and the corresponding fields
+ *
+ * @link https://wpshout.com/making-an-admin-options-page-with-the-wordpress-settings-api/
+ * @link https://rudrastyh.com/wordpress/creating-options-pages.html
+ * @since 1.0.0
+ */
+function asenha_register_settings() {
+	
+	// Add "Content Admin" section
 
-			// footer
-			'footer_text'			=> '',
-			// 'footer_after'			=> 'Footer after',
-			'footer_credit'			=> '<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank">Admin and Site Enhancements</a> is on <a href="https://github.com/qriouslad/admin-site-enhancements" target="_blank">github</a>.',
+	add_settings_section(
+		'content-admin', // Section ID
+		'', // Section title. Can be blank.
+		'', // Callback function to output section intro. Can be blank.
+		ASENHA_SLUG // Settings page slug
+	);
 
-			// database model
-			// 'database'                => 'options', // options, transient, theme_mod, network
-			// 'transient_time'          => 0,
+	// Register main setttings
 
-			// contextual help
-			// 'contextual_help'         => array(),
-			// 'contextual_help_sidebar' => '',
+	register_setting( 
+		ASENHA_ID, // Option group or option_page
+		ASENHA_SLUG_U, // Option name in wp_options table
+		array(
+			'type'					=> 'array', // 'string', 'boolean', 'integer', 'number', 'array', or 'object'
+			'description'			=> '', // A description of the data attached to this setting.
+			'sanitize_callback'		=> 'asenha_sanitize_options',
+			'show_in_rest'			=> false,
+			'default'				=> array(), // When calling get_option()
+		)
+	);
 
-			// typography options
-			// 'enqueue_webfont'         => true,
-			// 'async_webfont'           => false,
+	// Register fields for "Content Admin" section
 
-			// others
-			// 'output_css'              => true,
+	// Show Featured Image Column
 
-			// theme and wrapper classname
-			'nav'                     => 'normal',
-			'theme'                   => 'light',
-			'class'                   => '',
+	$field_id = 'show_featured_image_column';
 
-			// external default values
-			// 'defaults'                => array(),
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Featured Image Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show featured image column in list tables for pages and post types that support featured images.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-		) );
+	// Show Excerpt Column
 
-		ASENHA_CSF::createSection( $prefix, array(
-			'id'		=> 'content_admin',
-			'title'		=> 'Content Admin',
-			// 'icon'   => 'fas fa-rocket',
-		) );
+	$field_id = 'show_excerpt_column';
 
-		ASENHA_CSF::createSection( $prefix, array(
-			'parent'	=> 'content_admin',
-			'title'		=> 'List Tables',
-			'fields'	=> array(
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Excerpt Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show excerpt column in list tables for pages and post types that support excerpt.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-				array(
-				  'id'    => 'show-featured-image-column',
-				  'type'  => 'switcher',
-				  'title' => 'Show Featured Image Column',
-				  'label' => 'Show featured image column in list tables for pages and post types that support featured images.',
-				),
+	// Show ID Column
 
-				array(
-				  'id'    => 'show-excerpt-column',
-				  'type'  => 'switcher',
-				  'title' => 'Show Excerpt Column',
-				  'label' => 'Show excerpt column in list tables for pages and post types that support excerpt.',
-				),
+	$field_id = 'show_id_column';
 
-				array(
-				  'id'    => 'show-id-column',
-				  'type'  => 'switcher',
-				  'title' => 'Show ID Column',
-				  'label' => 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.',
-				),
+	add_settings_field(
+		$field_id, // Field ID
+		'Show ID Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-				array(
-				  'id'    => 'hide-comments-column',
-				  'type'  => 'switcher',
-				  'title' => 'Hide Comments Column',
-				  'label' => 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.',
-				),
+	// Hide Comments Column
 
-				array(
-				  'id'    => 'hide-post-tags-column',
-				  'type'  => 'switcher',
-				  'title' => 'Hide Post Tags Column',
-				  'label' => 'Hide tags column in list tables for posts.',
-				),
+	$field_id = 'hide_comments_column';
 
-				array(
-				  'id'    => 'show-custom-taxonomy-filters',
-				  'type'  => 'switcher',
-				  'title' => 'Show Custom Taxonomy Filters',
-				  'label' => 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.',
-				),
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Comments Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-				array(
-				  'id'    => 'enable-duplication',
-				  'type'  => 'switcher',
-				  'title' => 'Enable Page and Post Duplication',
-				  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
-				),
+	// Hide Post Tags Column
 
-				array(
-				  'id'    => 'enable-media-replacement',
-				  'type'  => 'switcher',
-				  'title' => 'Enable Media Replacement',
-				  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
-				),
+	$field_id = 'hide_post_tags_column';
 
-			)
-		) );
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Post Tags Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide tags column in list tables for posts.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'	=> 'content_admin',
-		// 	'title'		=> 'Tools',
-		// 	'fields'	=> array(
+	// Show Custom Taxonomy Filters
 
-		// 		array(
-		// 		  'id'    => 'enable-duplication',
-		// 		  'type'  => 'switcher',
-		// 		  'title' => 'Enable Page and Post Duplication',
-		// 		  'label' => 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.',
-		// 		),
+	$field_id = 'show_custom_taxonomy_filters';
 
-		// 		array(
-		// 		  'id'    => 'enable-media-replacement',
-		// 		  'type'  => 'switcher',
-		// 		  'title' => 'Enable Media Replacement',
-		// 		  'label' => 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.',
-		// 		),
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Custom Taxonomy Filters', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-		// 	)
-		// ) );
+	// Enable Page and Post Duplication
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'id'		=> 'admin_menu',
-		// 	'title'		=> 'Admin Menu',
-		// 	'fields'	=> array(
-		// 	)
-		// ) );
+	$field_id = 'enable_duplication';
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'	=> 'admin_menu',
-		// 	'title'		=> 'Admin Bar',
-		// 	'fields'	=> array(
+	add_settings_field(
+		$field_id, // Field ID
+		'Enable Page and Post Duplication', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-		// 		array(
-		// 		'id'    => 'opt-text-1',
-		// 		'type'  => 'text',
-		// 		'title' => 'Text',
-		// 		),
+	// Enable Media Replacement
 
-		// 	)
-		// ) );
+	$field_id = 'enable_media_replacement';
 
-		// ASENHA_CSF::createSection( $prefix, array(
-		// 	'parent'	=> 'admin_menu',
-		// 	'title'		=> 'Side Menu',
-		// 	'fields'	=> array(
+	add_settings_field(
+		$field_id, // Field ID
+		'Enable Media Replacement', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-admin', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.', // Custom argument
+			'class'				=> 'asenha-toggle content-admin', // Custom class for the <tr> element
+		)
+	);
 
-		// 		array(
-		// 		'id'    => 'opt-text-1',
-		// 		'type'  => 'text',
-		// 		'title' => 'Text',
-		// 		),
+}
 
-		// 	)
-		// ) );
+/**
+ * Sanitize options
+ *
+ * @since 1.0.0
+ */
+function asenha_sanitize_options( $options ) {
 
+	// Show Featured Image Column
+	if ( ! isset( $options['show_featured_image_column'] ) ) $options['show_featured_image_column'] = false;
+	$options['show_featured_image_column'] = ( 'on' == $options['show_featured_image_column'] ? true : false );
+
+	// Show Excerpt Column
+	if ( ! isset( $options['show_excerpt_column'] ) ) $options['show_excerpt_column'] = false;
+	$options['show_excerpt_column'] = ( 'on' == $options['show_excerpt_column'] ? true : false );
+
+	// Show ID Column
+	if ( ! isset( $options['show_id_column'] ) ) $options['show_id_column'] = false;
+	$options['show_id_column'] = ( 'on' == $options['show_id_column'] ? true : false );
+
+	// Hide Comments Column
+	if ( ! isset( $options['hide_comments_column'] ) ) $options['hide_comments_column'] = false;
+	$options['hide_comments_column'] = ( 'on' == $options['hide_comments_column'] ? true : false );
+
+	// Hide Post Tags Column
+	if ( ! isset( $options['hide_post_tags_column'] ) ) $options['hide_post_tags_column'] = false;
+	$options['hide_post_tags_column'] = ( 'on' == $options['hide_post_tags_column'] ? true : false );
+
+	// Show Custom Taxonomy Filters
+	if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
+	$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
+
+	// Enable Page and Post Duplication
+	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
+	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
+
+	// Enable Media Replacement
+	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
+	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
+
+	return $options;
+
+}
+
+/**
+ * Sanitize checkbox field. For reference purpose. Not currently in use.
+ *
+ * @since 1.0.0
+ */
+function asenha_sanitize_checkbox_field( $value ) {
+
+	// A checked checkbox field will originally be saved as an 'on' value in the option. We transform that into true (shown as 1) or false (shown as empty value)
+	return 'on' === $value ? true : false;
+
+}
+
+/**
+ * Render checkbox fields
+ *
+ * @since 1.0.0
+ */
+function asenha_render_field_checkbox( $args ) {
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	$field_name = $args['field_name'];
+	$field_description = $args['field_description'];
+	$field_option_value = ( array_key_exists( $args['field_id'], $options ) ) ? $options[$args['field_id']] : false;
+
+	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-field-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
+	echo '<label for="' . esc_attr( $field_name ) . '"></label>';
+	echo '<div class="asenha-field-description">' . esc_html( $field_description ) . '</div>';
+
+}
+
+/**
+ * Notice for successful settings update
+ *
+ * @since 1.0.0
+ */
+function asenha_success_notice() {
+
+	if (
+		isset( $_GET[ 'page' ] ) 
+		&& ASENHA_SLUG == $_GET[ 'page' ]
+		&& isset( $_GET[ 'settings-updated' ] ) 
+		&& true == $_GET[ 'settings-updated' ]
+	) {
+		// Prevent notice from moved under page heading by adding 'inline' class: https://iandunn.name/2019/06/01/prevent-manual-admin-notices-from-being-moved-to-the-top/
+		?>
+			<div class="notice notice-success inline">
+				<p>
+					<strong>Changes have been saved.</strong>
+				</p>
+			</div>
+		<?php
 	}
 
 }
@@ -223,6 +353,7 @@ function asenha_admin_scripts( $hook_suffix ) {
 	if ( is_asenha() ) {
 		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array(), ASENHA_VERSION, false );
+		wp_enqueue_script( 'asenha-jsticky', DLM_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), DLM_VERSION, false );
 	}
 
 	// Enqueue on all wp-admin
@@ -255,17 +386,6 @@ function asenha_admin_scripts( $hook_suffix ) {
 }
 
 /**
- * Remove CodeStar framework welcome / ads page
- *
- * @since 1.0.0
- */
-function asenha_remove_codestar_submenu() {
-
-	remove_submenu_page( 'tools.php', 'csf-welcome' );
-
-}
-
-/**
  * Add 'Access now' plugin action link.
  *
  * @since    1.0.0
@@ -278,6 +398,21 @@ function asenha_plugin_action_links( $links ) {
 	array_unshift($links, $settings_link); 
 
 	return $links; 
+
+}
+
+/**
+ * Modify footer text
+ *
+ * @since 1.0.0
+ */
+function asenha_footer_text() {
+
+	if ( is_asenha() ) {
+		?>
+		<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank">Admin Site Enhancements</a> is on <a href="https://github.com/qriouslad/admin-site-enhancements" target="_blank">github</a>.
+		<?php
+	}
 
 }
 

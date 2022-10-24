@@ -1,75 +1,177 @@
-.asenha .csf-header-inner h1 small {
-    font-size: 13px;
-}
-
-.asenha .csf-header-left {
+.asenha-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 24px;
+    padding: 28px;
+    background-color: #fafafa;
+    border: 1px solid #ccd0d4;
+    transition: .25s;
 }
 
-.asenha .csf-header a {
+.asenha-header.asenha-sticky {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+}
+
+.asenha-header-left {
+    display: flex;
+}
+
+.asenha-header-right {
+    display: flex;
+}
+
+.asenha-body {
+    background-color: #fff;
+    border-right: 1px solid #ccd0d4;
+    border-bottom: 1px solid #ccd0d4;
+    border-left: 1px solid #ccd0d4;
+}
+
+.asenha .form-table {
+    margin-top: 0;
+}
+
+.asenha-footer {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    background-color: #fafafa;
+    border-right: 1px solid #ccd0d4;
+    border-bottom: 1px solid #ccd0d4;
+    border-left: 1px solid #ccd0d4;
+}
+
+.wrap h1.asenha-heading {
+    font-size: 1.5em;
+    line-height: 26px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.asenha-heading a {
     text-decoration: none;
     transition: .25s;
 }
 
-.asenha .csf-header a:hover {
+.asenha-heading a:hover {
     text-decoration: underline;
 }
 
-.asenha .header-action {
+.asenha-heading small {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.asenha-header-action {
     position: relative;
     top: 1px;
-    line-height: 30px;
     margin-left: 16px;
+    text-decoration: none;
+    transition: .25s;
+    line-height: 30px;
 }
 
-/* CodeStar Framework */
-
-.csf-nav ul li a {
-    font-size: 14px;
+.asenha-header-action:first-child {
+    margin-left: 0;
 }
 
-.csf-theme-light .csf-nav ul li a {
-    font-weight: 600;
+.asenha-header-action:hover {
+    text-decoration: underline;
 }
 
-.csf-theme-light .csf-nav ul ul li a {
-    font-weight: 500;
+.asenha-toggle {
+    border-bottom: 1px solid #eee;
 }
 
-.csf-field,
-.csf-field.csf-field-switcher .csf-fieldset {
-    display: flex;
+.form-table .asenha-toggle th {
+    padding: 32px 10px 28px 28px;
 }
 
-.csf-field .csf-title,
-.csf-field .csf-fieldset,
-.csf-field-switcher .csf--switcher,
-.csf-field-switcher .csf--label {
-    float: none;
+.form-table .asenha-toggle td {
+    padding: 30px 28px 28px 10px;
 }
 
-.csf-field.csf-field-switcher,
-.csf-field.csf-field-switcher .csf-fieldset {
-    align-items: center;
+.asenha-toggle:last-child {
+    border-bottom: 0;
 }
 
-.csf-field.csf-field-switcher .csf-title h4 {
-    margin-right: 8px;
+.asenha-field-description {
+    position: relative;
+    top: 2px;
+    color: #999;
 }
 
-.csf-field-switcher .csf--switcher {
-    margin-right: 4px;
+/* WP Core UI overrides */
+
+.wp-core-ui.tools_page_admin-site-enhancements .notice {
+    margin: 20px 20px 0 2px;
 }
 
-.csf-field-switcher .csf--label {
-    margin-top: 0;
-    width: calc(100% - 60px);
-}
-
-.csf-form-warning {
+.asenha .submit {
     position: absolute;
-    bottom: 4px;
-    right: 23px;
-    line-height: 18px;
+}
+
+.asenha .submit input {
+    display: none;
+}
+
+/* Toggle Styles -- https://codepen.io/deanelliott/pen/GRJjGqK */
+
+.form-table .asenha-toggle td {
+    display: flex;
+    align-items: flex-start;
+}
+
+:root {
+  --toggleHeight: 22px;
+  --toggleWidth: 40px;
+  --toggleGap: 2px;
+}
+
+.asenha-field-checkbox {
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0;
+  position: absolute;
+}
+
+.asenha-field-checkbox + label {
+  position: relative;
+  background: #c0c0c0;
+  width: var(--toggleWidth);
+  min-width: var(--toggleWidth);
+  height: var(--toggleHeight);
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  text-indent: calc( var(--toggleWidth) + 10px);
+}
+.asenha-field-checkbox + label:after {
+  content: "";
+  background: #fff;
+  width: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
+  height: calc(var(--toggleHeight) - (var(--toggleGap) * 2));
+  position: absolute;
+  top: var(--toggleGap);
+  left: var(--toggleGap);
+  border-radius: 50%;
+  transition: left 0.3s ease-in-out, background 0.2s ease-in-out;
+}
+
+.asenha-field-checkbox:checked + label {
+  background: seaGreen;
+}
+.asenha-field-checkbox:checked + label:after {
+  left: calc(100% - calc(var(--toggleHeight) - var(--toggleGap)));
 }
