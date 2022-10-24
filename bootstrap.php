@@ -63,52 +63,52 @@ class Admin_Site_Enhancements {
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( 'admin_site_enhancements', array() );
 
-		// Instantiate object for Content Admin functionalities
-		$content_admin = new ASENHA\Classes\Content_Admin;
+		// Instantiate object for Content Management functionalities
+		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Content Admin >> Show Featured Image Column
+		// Content Management >> Show Featured Image Column
 		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ] );
+			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
 		}
 
-		// Content Admin >> Show Excerpt Column
+		// Content Management >> Show Excerpt Column
 		if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_excerpt_column' ] );
+			add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
 		}
 
-		// Content Admin >> Show ID Column
+		// Content Management >> Show ID Column
 		if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_id_column' ] );
+			add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
 		}
 
-		// Content Admin >> Hide Comments Column
+		// Content Management >> Hide Comments Column
 		if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'hide_comments_column' ] );
+			add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
 		}
 
-		// Content Admin >> Hide Post Tags Column
+		// Content Management >> Hide Post Tags Column
 		if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'hide_post_tags_column' ] );
+			add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
 		}
 
-		// Content Admin >> Show Custom Taxonomy Filters
+		// Content Management >> Show Custom Taxonomy Filters
 		if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
-			add_action( 'restrict_manage_posts', [ $content_admin, 'show_custom_taxonomy_filters' ] );
+			add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
 		}
 
-		// Content Admin >> Enable Page and Post Duplication
+		// Content Management >> Enable Page and Post Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
-			add_action( 'admin_action_asenha_enable_duplication', [ $content_admin, 'asenha_enable_duplication' ] );
-			add_filter( 'page_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
-			add_filter( 'post_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
+			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
+			add_filter( 'page_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
+			add_filter( 'post_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 		}
 
-		// Content Admin >> Enable Media Replacement
+		// Content Management >> Enable Media Replacement
 		if ( array_key_exists( 'enable_media_replacement', $options ) && $options['enable_media_replacement'] ) {
-			add_filter( 'media_row_actions', [ $content_admin, 'modify_media_list_table_edit_link' ], 10, 2 );
-			add_filter( 'attachment_fields_to_edit', [ $content_admin, 'add_media_replacement_button' ] );
-			add_action( 'edit_attachment', [ $content_admin, 'replace_media' ] );
-			add_filter( 'post_updated_messages', [ $content_admin, 'attachment_updated_custom_message' ] );
+			add_filter( 'media_row_actions', [ $content_management, 'modify_media_list_table_edit_link' ], 10, 2 );
+			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
+			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
+			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
 		
 	}

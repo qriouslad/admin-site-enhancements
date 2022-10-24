@@ -7,7 +7,7 @@ namespace ASENHA\Classes;
  *
  * @since 1.0.0
  */
-class Content_Admin {
+class Content_Management {
 
 	/**
 	 * Current post type. For Content Admin >> Show Custom Taxonomy Filters functionality.
