@@ -317,11 +317,23 @@ function asenha_render_field_checkbox( $args ) {
 }
 
 /**
- * Notice for successful settings update
+ * Suppress all notices, then add notice for successful settings update
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
-function asenha_success_notice() {
+function asenha_notices() {
+
+	global $plugin_page;
+
+	// Suppress all notices
+
+	if ( ASENHA_SLUG === $plugin_page ) {
+
+		remove_all_actions( 'admin_notices' );
+
+	}
+
+	// Add notice for successful settings update
 
 	if (
 		isset( $_GET[ 'page' ] ) 
@@ -338,6 +350,16 @@ function asenha_success_notice() {
 			</div>
 		<?php
 	}
+}
+
+/**
+ *
+ *
+ * @since 1.0.0
+ */
+function asenha_success_notice() {
+
+
 
 }
 

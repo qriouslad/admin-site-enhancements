@@ -46,8 +46,8 @@ class Admin_Site_Enhancements {
 		// Register plugin settings
 		add_action( 'admin_init', 'asenha_register_settings' );
 
-		// Add notification for successful settings update
-		add_action( 'admin_notices', 'asenha_success_notice' );
+		// Suppress all notices on the plugin's main page. Then add notification for successful settings update.
+		add_action( 'admin_notices', 'asenha_notices', 5 );
 
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
