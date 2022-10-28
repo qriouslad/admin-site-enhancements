@@ -4,8 +4,8 @@ Contributors: qriouslad
 Donate link: https://paypal.me/qriouslad  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
-Tested up to: 6.0.2  
-Stable tag: 1.1.0  
+Tested up to: 6.0.3  
+Stable tag: 1.2.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Easily enable enhancements and features that you usually do with multiple plugin
 
 ## Description
 
-Admin and Site Enhancements enables enhancements and features that you usually do with multiple plugins. At v1.0.0 it allows you to: 
+Admin and Site Enhancements enables enhancements and features that usually require multiple plugins. It allows you to: 
 
 * **Show the featured image column** in the list tables for pages and post types that support featured images.
 * **Show the excerpt column** in the list tables for pages and post types that support excerpt.
@@ -26,6 +26,7 @@ Admin and Site Enhancements enables enhancements and features that you usually d
 * **Show custom taxonomy dropdown filter(s)** on the list tables of all post types for taxonomies that are hierarchical like post categories.
 * **Enable one-click duplication of pages and any post types**. Will also duplicate the taxonomies and post metas (custom fields).
 * **Enable media replacement**. Easily replace any type of media file with a new one while retaining the existing media ID and file name.
+* **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 
 Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
 
@@ -55,6 +56,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 1.2.0 (2022.10.28)
+
+* **[Added]** Hide Admin Notices: Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 
 ### 1.1.0 (2022.10.22)
 
