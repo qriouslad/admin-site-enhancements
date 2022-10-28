@@ -1,16 +1,23 @@
 (function( $ ) {
-	'use strict';
+   'use strict';
 
-     $(document).ready( function() {
+   $(document).ready( function() {
 
-        var addReview = '<a href="https://wordpress.org/plugins/admin-site-enhancements/#reviews" target="_blank" class="header-action"><span>&starf;</span> Review</a>';
-        var giveFeedback = '<a href="https://wordpress.org/support/plugin/admin-site-enhancements/" target="_blank" class="header-action">&#10010; Feedback</a>';
-        var donate = '<a href="https://paypal.me/qriouslad" target="_blank" class="header-action">&#9829; Donate</a>';
+      // Make page header sticky on scroll. Using https://github.com/AndrewHenderson/jSticky
 
-        $(addReview).appendTo('.csf-header-left');
-        $(giveFeedback).appendTo('.csf-header-left');
-        $(donate).appendTo('.csf-header-left');
+      $('#asenha-header').sticky({
+         topSpacing: 0, // Space between element and top of the viewport (in pixels)
+         zIndex: 100, // z-index
+         stopper: '', // Id, class, or number value
+         stickyClass: 'asenha-sticky' // Class applied to element when it's stuck. Class name or false.
+      })
 
-     });
+      // Clicking on header save button triggers click of the hidden form submit button
+      $('.asenha-save-button').click( function(e) {
+         e.preventDefault();
+         $('input[type="submit"]').click();
+      });
+
+   });
 
 })( jQuery );

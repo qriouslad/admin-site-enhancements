@@ -1,0 +1,27 @@
+.jBox-Modal.admin-notices-modal .jBox-container {
+	height: 100vh;
+	border-radius: 0;
+	background: #f0f0f1;
+}
+
+.admin-notices-modal.jBox-closeButton-box .jBox-closeButton {
+	top: 0;
+	right: 0;
+	background: none;
+}
+
+.admin-notices-modal.jBox-closeButton-box .jBox-closeButton svg {
+	width: 16px;
+	height: 16px;
+	margin-top: 0;
+	margin-right: -2px;
+}
+
+.jBox-Modal.admin-notices-modal .jBox-content {
+	padding: 8px 28px 32px;
+}
+
+.asenha-admin-notices-drawer > div {
+	margin: 0 0 16px 0;
+	padding: 12px;
+}

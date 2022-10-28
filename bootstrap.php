@@ -39,9 +39,15 @@ class Admin_Site_Enhancements {
 	private function __construct() {
 
 		// Setup admin menu, admin page, admin scripts, plugin action links, etc.
+	
+		// Register admin menu and add the settings page.
+		add_action( 'admin_menu', 'asenha_register_admin_menu' );
 
-		// Register admin menu and subsequently the main admin page. This is using CodeStar Framework (CSF).
-		add_action( 'asenha_csf_loaded', 'asenha_admin_menu_page' );
+		// Register plugin settings
+		add_action( 'admin_init', 'asenha_register_settings' );
+
+		// Suppress all notices on the plugin's main page. Then add notification for successful settings update.
+		add_action( 'admin_notices', 'asenha_notices', 5 );
 
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
@@ -49,60 +55,70 @@ class Admin_Site_Enhancements {
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
-		// Remove CodeStar Framework submenu under tools
-		add_action( 'admin_menu', 'asenha_remove_codestar_submenu' );
+		// Update footer text
+		add_filter( 'admin_footer_text', 'asenha_footer_text' );
 
 		// Selectively enable enhancements based on options value
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
-		$asenha_options = get_option( 'admin-site-enhancements', array() );
+		$options = get_option( 'admin_site_enhancements', array() );
 
-		// Instantiate object for Content Admin functionalities
-		$content_admin = new ASENHA\Classes\Content_Admin;
+		// Instantiate object for Content Management functionalities
+		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Content Admin >> Show Featured Image Column
-		if ( array_key_exists( 'show-featured-image-column', $asenha_options ) && $asenha_options['show-featured-image-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_featured_image_column' ] );
+		// Instantiate object for Admin Interface functionalities
+		$admin_interface = new ASENHA\Classes\Admin_Interface;
+
+		// Content Management >> Show Featured Image Column
+		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
+			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
 		}
 
-		// Content Admin >> Show Excerpt Column
-		if ( array_key_exists( 'show-excerpt-column', $asenha_options ) && $asenha_options['show-excerpt-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_excerpt_column' ] );
+		// Content Management >> Show Excerpt Column
+		if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
+			add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
 		}
 
-		// Content Admin >> Show ID Column
-		if ( array_key_exists( 'show-id-column', $asenha_options ) && $asenha_options['show-id-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'show_id_column' ] );
+		// Content Management >> Show ID Column
+		if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
+			add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
 		}
 
-		// Content Admin >> Hide Comments Column
-		if ( array_key_exists( 'hide-comments-column', $asenha_options ) && $asenha_options['hide-comments-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'hide_comments_column' ] );
+		// Content Management >> Hide Comments Column
+		if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
+			add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
 		}
 
-		// Content Admin >> Hide Post Tags Column
-		if ( array_key_exists( 'hide-post-tags-column', $asenha_options ) && $asenha_options['hide-post-tags-column'] ) {
-			add_action( 'admin_init', [ $content_admin, 'hide_post_tags_column' ] );
+		// Content Management >> Hide Post Tags Column
+		if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
+			add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
 		}
 
-		// Content Admin >> Show Custom Taxonomy Filters
-		if ( array_key_exists( 'show-custom-taxonomy-filters', $asenha_options ) && $asenha_options['show-custom-taxonomy-filters'] ) {
-			add_action( 'restrict_manage_posts', [ $content_admin, 'show_custom_taxonomy_filters' ] );
+		// Content Management >> Show Custom Taxonomy Filters
+		if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
+			add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
 		}
 
-		// Content Admin >> Enable Page and Post Duplication
-		if ( array_key_exists( 'enable-duplication', $asenha_options ) && $asenha_options['enable-duplication'] ) {
-			add_action( 'admin_action_asenha_enable_duplication', [ $content_admin, 'asenha_enable_duplication' ] );
-			add_filter( 'page_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
-			add_filter( 'post_row_actions', [ $content_admin, 'add_duplication_action_link' ], 10, 2 );
+		// Content Management >> Enable Page and Post Duplication
+		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
+			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
+			add_filter( 'page_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
+			add_filter( 'post_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 		}
 
-		// Content Admin >> Enable Media Replacement
-		if ( array_key_exists( 'enable-media-replacement', $asenha_options ) && $asenha_options['enable-media-replacement'] ) {
-			add_filter( 'media_row_actions', [ $content_admin, 'modify_media_list_table_edit_link' ], 10, 2 );
-			add_filter( 'attachment_fields_to_edit', [ $content_admin, 'add_media_replacement_button' ] );
-			add_action( 'edit_attachment', [ $content_admin, 'replace_media' ] );
-			add_filter( 'post_updated_messages', [ $content_admin, 'attachment_updated_custom_message' ] );
+		// Content Management >> Enable Media Replacement
+		if ( array_key_exists( 'enable_media_replacement', $options ) && $options['enable_media_replacement'] ) {
+			add_filter( 'media_row_actions', [ $content_management, 'modify_media_list_table_edit_link' ], 10, 2 );
+			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
+			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
+			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
+		}
+
+		// Content Management >> Hide Admin Notices
+		if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
+			add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
+			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
+			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
 		
 	}

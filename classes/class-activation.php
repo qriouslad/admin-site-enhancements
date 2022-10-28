@@ -16,8 +16,6 @@ class Activation {
 	 */
 	public function activate() {
 
-		add_option( ASENHA_SLUG, array(), '', 'yes' );
-
 	}
 
 }
