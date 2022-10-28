@@ -66,6 +66,9 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Content Management functionalities
 		$content_management = new ASENHA\Classes\Content_Management;
 
+		// Instantiate object for Admin Interface functionalities
+		$admin_interface = new ASENHA\Classes\Admin_Interface;
+
 		// Content Management >> Show Featured Image Column
 		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
 			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
@@ -109,6 +112,13 @@ class Admin_Site_Enhancements {
 			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
 			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
+		}
+
+		// Content Management >> Hide Admin Notices
+		if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
+			add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
+			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
+			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
 		
 	}

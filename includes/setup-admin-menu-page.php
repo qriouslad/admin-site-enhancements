@@ -240,6 +240,24 @@ function asenha_register_settings() {
 		)
 	);
 
+	// Hide Admin Notices
+
+	$field_id = 'hide_admin_notices';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Admin Notices', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
+			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+		)
+	);
+
 }
 
 /**
@@ -280,6 +298,10 @@ function asenha_sanitize_options( $options ) {
 	// Enable Media Replacement
 	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
 	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
+
+	// Hide Admin Notices
+	if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
+	$options['hide_admin_notices'] = ( 'on' == $options['hide_admin_notices'] ? true : false );
 
 	return $options;
 
@@ -353,37 +375,30 @@ function asenha_notices() {
 }
 
 /**
- *
- *
- * @since 1.0.0
- */
-function asenha_success_notice() {
-
-
-
-}
-
-/**
  * Enqueue admin scripts
  *
  * @since 1.0.0
  */
 function asenha_admin_scripts( $hook_suffix ) {
 
+	$current_screen = get_current_screen();
+
+	// Get all WP Enhancements options, default to empty array in case it's not been created yet
+	$options = get_option( 'admin_site_enhancements', array() );
+
 	// For main page of this plugin
 
 	if ( is_asenha() ) {
-		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array(), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array(), ASENHA_VERSION, false );
+		wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
 		wp_enqueue_script( 'asenha-jsticky', DLM_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), DLM_VERSION, false );
+		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox' ), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox' ), ASENHA_VERSION, false );
 	}
 
 	// Enqueue on all wp-admin
 
 	wp_enqueue_style( 'asenha-wp-admin', ASENHA_URL . 'assets/css/wp-admin.css', array(), ASENHA_VERSION );
-
-
-	$current_screen = get_current_screen();
 
 	// Content Management >> Show IDs, for list tables in wp-admin, e.g. All Posts page
 
@@ -403,6 +418,14 @@ function asenha_admin_scripts( $hook_suffix ) {
 		// wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
 		wp_enqueue_style( 'asenha-media-replace', ASENHA_URL . 'assets/css/media-replace.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-media-replace', ASENHA_URL . 'assets/js/media-replace.js', array(), ASENHA_VERSION, false );
+	}
+
+	// Content Management >> Hide Admin Notices
+	if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
+		wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
+		wp_enqueue_style( 'asenha-hide-admin-notices', ASENHA_URL . 'assets/css/hide-admin-notices.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-hide-admin-notices', ASENHA_URL . 'assets/js/hide-admin-notices.js', array( 'asenha-jbox' ), ASENHA_VERSION, false );
 	}
 
 }
