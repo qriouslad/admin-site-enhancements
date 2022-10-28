@@ -42,6 +42,24 @@ function asenha_add_settings_page() {
 
 		<div class="asenha-body">
 			<form action="options.php" method="post">
+				<div class="asenha-vertical-tabs">
+					<div class="asenha-tab-buttons">
+					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
+					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
+					</div>
+					<div class="asenha-tab-contents">
+					    <section class="asenha-fields fields-content-management"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-admin-interface"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					</div>
+				</div>
 				<?php settings_fields( ASENHA_ID ); ?>
 				<?php do_settings_sections( ASENHA_SLUG ); ?>
 				<?php submit_button(
@@ -96,117 +114,10 @@ function asenha_register_settings() {
 
 	// Register fields for "Content Management" section
 
-	// Show Featured Image Column
-
-	$field_id = 'show_featured_image_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Featured Image Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show featured image column in list tables for pages and post types that support featured images.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show Excerpt Column
-
-	$field_id = 'show_excerpt_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Excerpt Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show excerpt column in list tables for pages and post types that support excerpt.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show ID Column
-
-	$field_id = 'show_id_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show ID Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Hide Comments Column
-
-	$field_id = 'hide_comments_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Hide Comments Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Hide Post Tags Column
-
-	$field_id = 'hide_post_tags_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Hide Post Tags Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Hide tags column in list tables for posts.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show Custom Taxonomy Filters
-
-	$field_id = 'show_custom_taxonomy_filters';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Custom Taxonomy Filters', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
 	// Enable Page and Post Duplication
 
 	$field_id = 'enable_duplication';
+	$field_slug = 'enable-duplication';
 
 	add_settings_field(
 		$field_id, // Field ID
@@ -218,13 +129,14 @@ function asenha_register_settings() {
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
 	// Enable Media Replacement
 
 	$field_id = 'enable_media_replacement';
+	$field_slug = 'enable-media-replacement';
 
 	add_settings_field(
 		$field_id, // Field ID
@@ -236,13 +148,128 @@ function asenha_register_settings() {
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Featured Image Column
+
+	$field_id = 'show_featured_image_column';
+	$field_slug = 'show-featured-image-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Featured Image Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show featured image column in list tables for pages and post types that support featured images.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Excerpt Column
+
+	$field_id = 'show_excerpt_column';
+	$field_slug = 'show-excerpt-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Excerpt Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show excerpt column in list tables for pages and post types that support excerpt.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show ID Column
+
+	$field_id = 'show_id_column';
+	$field_slug = 'show-id-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show ID Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide Comments Column
+
+	$field_id = 'hide_comments_column';
+	$field_slug = 'hide-comments-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Comments Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide Post Tags Column
+
+	$field_id = 'hide_post_tags_column';
+	$field_slug = 'hide-post-tags-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Post Tags Column', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide tags column in list tables for posts.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Custom Taxonomy Filters
+
+	$field_id = 'show_custom_taxonomy_filters';
+	$field_slug = 'show-custom-taxonomy-filters';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Custom Taxonomy Filters', // Field title
+		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'content-management', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
 	// Hide Admin Notices
 
 	$field_id = 'hide_admin_notices';
+	$field_slug = 'hide-admin-notices';
 
 	add_settings_field(
 		$field_id, // Field ID
@@ -254,7 +281,7 @@ function asenha_register_settings() {
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
@@ -266,6 +293,14 @@ function asenha_register_settings() {
  * @since 1.0.0
  */
 function asenha_sanitize_options( $options ) {
+
+	// Enable Page and Post Duplication
+	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
+	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
+
+	// Enable Media Replacement
+	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
+	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
 
 	// Show Featured Image Column
 	if ( ! isset( $options['show_featured_image_column'] ) ) $options['show_featured_image_column'] = false;
@@ -290,14 +325,6 @@ function asenha_sanitize_options( $options ) {
 	// Show Custom Taxonomy Filters
 	if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
 	$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
-
-	// Enable Page and Post Duplication
-	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
-	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
-
-	// Enable Media Replacement
-	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
-	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
 
 	// Hide Admin Notices
 	if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
