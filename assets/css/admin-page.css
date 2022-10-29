@@ -16,11 +16,16 @@
 }
 
 .asenha-header-left {
+    position: relative;
     display: flex;
+    justify-content: flex-start;
 }
 
 .asenha-header-right {
+    position: relative;
     display: flex;
+    justify-content: flex-end;
+    min-width: 240px;
 }
 
 .asenha-body {
@@ -85,6 +90,16 @@
 
 .asenha-header-action:hover {
     text-decoration: underline;
+}
+
+.asenha-changes-saved {
+    position: absolute;
+    right: 0;
+    top: 33px;
+    background: seagreen;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
 }
 
 .asenha-toggle {

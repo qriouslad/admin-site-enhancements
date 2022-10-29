@@ -37,6 +37,7 @@ function asenha_add_settings_page() {
 			</div>
 			<div class="asenha-header-right">
 				<a class="button button-primary asenha-save-button">Save Changes</a>
+				<div class="asenha-changes-saved" style="display:none;">Changes have been saved.</div>
 			</div>
 		</div>
 
@@ -60,15 +61,17 @@ function asenha_add_settings_page() {
 					    </section>
 					</div>
 				</div>
-				<?php settings_fields( ASENHA_ID ); ?>
-				<?php do_settings_sections( ASENHA_SLUG ); ?>
-				<?php submit_button(
-					'Save Changes', // Button copy
-					'primary', // Type: 'primary', 'small', or 'large'
-					'submit', // The 'name' attribute
-					true, // Whether to wrap in <p> tag
-					array( 'id' => 'asenha-submit' ), // additional attributes
-				); ?>
+				<div style="display:none;"><!-- Hide to prevent flash of fields appearing at the bottom of the page -->
+					<?php settings_fields( ASENHA_ID ); ?>
+					<?php do_settings_sections( ASENHA_SLUG ); ?>
+					<?php submit_button(
+						'Save Changes', // Button copy
+						'primary', // Type: 'primary', 'small', or 'large'
+						'submit', // The 'name' attribute
+						true, // Whether to wrap in <p> tag
+						array( 'id' => 'asenha-submit' ), // additional attributes
+					); ?>
+				</div>
 			</form>
 		</div>
 
@@ -390,13 +393,13 @@ function asenha_notices() {
 		&& isset( $_GET[ 'settings-updated' ] ) 
 		&& true == $_GET[ 'settings-updated' ]
 	) {
-		// Prevent notice from moved under page heading by adding 'inline' class: https://iandunn.name/2019/06/01/prevent-manual-admin-notices-from-being-moved-to-the-top/
 		?>
-			<div class="notice notice-success inline">
-				<p>
-					<strong>Changes have been saved.</strong>
-				</p>
-			</div>
+			<script>
+				jQuery(document).ready( function() {
+					jQuery('.asenha-changes-saved').fadeIn(400).delay(2500).fadeOut(400);
+				});
+			</script>
+
 		<?php
 	}
 }
