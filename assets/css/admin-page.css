@@ -123,7 +123,7 @@
 .asenha-field-description {
     position: relative;
     top: 1px;
-    color: #999;
+    color: #3c434a;
 }
 
 /* WP Core UI overrides */
@@ -233,5 +233,31 @@
 
 .asenha-tab-contents > section {
     display: none;
-    background: white;
+    background: #ffffff;
+}
+
+/* Sub Fields */
+
+.form-table .asenha-subfields {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.form-table .asenha-subfields tr {
+    display: block;
+    width: 50%;
+}
+
+.form-table .asenha-subfields th {
+    display: none;
+}
+
+.form-table .asenha-subfields td {
+    padding: 0;
+}
+
+.form-table .asenha-subfields td label {
+    position: relative;
+    top: -2px;
 }

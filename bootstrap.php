@@ -120,6 +120,11 @@ class Admin_Site_Enhancements {
 			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
+
+		// Content Management >> Hide Admin Bar
+		if ( array_key_exists( 'hide_admin_bar', $options ) && $options['hide_admin_bar'] && array_key_exists( 'hide_admin_bar_for', $options ) && isset( $options['hide_admin_bar_for'] ) ) {
+			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
+		}
 		
 	}
 

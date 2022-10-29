@@ -4,7 +4,6 @@
    $(document).ready( function() {
 
       // Make page header sticky on scroll. Using https://github.com/AndrewHenderson/jSticky
-
       $('#asenha-header').sticky({
          topSpacing: 0, // Space between element and top of the viewport (in pixels)
          zIndex: 100, // z-index
@@ -18,7 +17,7 @@
          $('input[type="submit"]').click();
       });
 
-      // Content Management fields tab
+      // Place fields into the Content Management tab
       $('.enable-duplication').appendTo('.fields-content-management tbody');
       $('.enable-media-replacement').appendTo('.fields-content-management tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management tbody');
@@ -28,14 +27,16 @@
       $('.hide-post-tags-column').appendTo('.fields-content-management tbody');
       $('.show-custom-taxonomy-filters').appendTo('.fields-content-management tbody');
 
-      // Admin Interface fields tab
+      // Place fields into Admin Interface tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface tbody');
+      $('.hide-admin-bar').appendTo('.fields-admin-interface tbody');
+      $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
-      $('.form-table')[formTableCount-1].remove();
+      // $('.form-table')[formTableCount-1].remove();
 
-      // Show fields on tab clicks
+      // Show and hide corresponding fields on tab clicks
       $('#tab-content-management + label').click( function() {
          $('.fields-content-management').show();
          $('.asenha-fields:not(.fields-content-management)').hide();
@@ -48,11 +49,27 @@
          // window.location.hash = 'admin-interface';
       });
 
-      // Open Content Management tab
+      // Open Content Management tab on document ready
       $('#tab-content-management + label').trigger('click');
 
       // Open tab by URL hash. Defaults to Content Management tab.
       // var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+
+      // Hide Admin Bar => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[hide_admin_bar]').checked ) {
+         $('.hide-admin-bar .asenha-subfields').show();
+      } else {
+         $('.hide-admin-bar .asenha-subfields').hide();        
+      }
+
+      // Hide Admin Bar => show/hide roles checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[hide_admin_bar]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.hide-admin-bar .asenha-subfields').fadeIn();
+         } else {
+            $('.hide-admin-bar .asenha-subfields').fadeOut();
+         }
+      });
 
    });
 
