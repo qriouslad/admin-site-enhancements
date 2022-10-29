@@ -37,20 +37,41 @@ function asenha_add_settings_page() {
 			</div>
 			<div class="asenha-header-right">
 				<a class="button button-primary asenha-save-button">Save Changes</a>
+				<div class="asenha-changes-saved" style="display:none;">Changes have been saved.</div>
 			</div>
 		</div>
 
 		<div class="asenha-body">
 			<form action="options.php" method="post">
-				<?php settings_fields( ASENHA_ID ); ?>
-				<?php do_settings_sections( ASENHA_SLUG ); ?>
-				<?php submit_button(
-					'Save Changes', // Button copy
-					'primary', // Type: 'primary', 'small', or 'large'
-					'submit', // The 'name' attribute
-					true, // Whether to wrap in <p> tag
-					array( 'id' => 'asenha-submit' ), // additional attributes
-				); ?>
+				<div class="asenha-vertical-tabs">
+					<div class="asenha-tab-buttons">
+					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
+					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
+					</div>
+					<div class="asenha-tab-contents">
+					    <section class="asenha-fields fields-content-management"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-admin-interface"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					</div>
+				</div>
+				<div style="display:none;"><!-- Hide to prevent flash of fields appearing at the bottom of the page -->
+					<?php settings_fields( ASENHA_ID ); ?>
+					<?php do_settings_sections( ASENHA_SLUG ); ?>
+					<?php submit_button(
+						'Save Changes', // Button copy
+						'primary', // Type: 'primary', 'small', or 'large'
+						'submit', // The 'name' attribute
+						true, // Whether to wrap in <p> tag
+						array( 'id' => 'asenha-submit' ), // additional attributes
+					); ?>
+				</div>
 			</form>
 		</div>
 
@@ -74,7 +95,7 @@ function asenha_register_settings() {
 	// Add "Content Management" section
 
 	add_settings_section(
-		'content-management', // Section ID
+		'main-section', // Section ID
 		'', // Section title. Can be blank.
 		'', // Callback function to output section intro. Can be blank.
 		ASENHA_SLUG // Settings page slug
@@ -96,167 +117,242 @@ function asenha_register_settings() {
 
 	// Register fields for "Content Management" section
 
-	// Show Featured Image Column
-
-	$field_id = 'show_featured_image_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Featured Image Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show featured image column in list tables for pages and post types that support featured images.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show Excerpt Column
-
-	$field_id = 'show_excerpt_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Excerpt Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show excerpt column in list tables for pages and post types that support excerpt.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show ID Column
-
-	$field_id = 'show_id_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show ID Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Hide Comments Column
-
-	$field_id = 'hide_comments_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Hide Comments Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Hide Post Tags Column
-
-	$field_id = 'hide_post_tags_column';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Hide Post Tags Column', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Hide tags column in list tables for posts.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
-	// Show Custom Taxonomy Filters
-
-	$field_id = 'show_custom_taxonomy_filters';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Show Custom Taxonomy Filters', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
-		array(
-			'field_id'			=> $field_id, // Custom argument
-			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
-		)
-	);
-
 	// Enable Page and Post Duplication
 
 	$field_id = 'enable_duplication';
+	$field_slug = 'enable-duplication';
 
 	add_settings_field(
 		$field_id, // Field ID
 		'Enable Page and Post Duplication', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
 	// Enable Media Replacement
 
 	$field_id = 'enable_media_replacement';
+	$field_slug = 'enable-media-replacement';
 
 	add_settings_field(
 		$field_id, // Field ID
 		'Enable Media Replacement', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Featured Image Column
+
+	$field_id = 'show_featured_image_column';
+	$field_slug = 'show-featured-image-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Featured Image Column', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show featured image column in list tables for pages and post types that support featured images.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Excerpt Column
+
+	$field_id = 'show_excerpt_column';
+	$field_slug = 'show-excerpt-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Excerpt Column', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show excerpt column in list tables for pages and post types that support excerpt.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show ID Column
+
+	$field_id = 'show_id_column';
+	$field_slug = 'show-id-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show ID Column', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show ID column in list tables for pages, all post types, all taxonomies, media, users and comments.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide Comments Column
+
+	$field_id = 'hide_comments_column';
+	$field_slug = 'hide-comments-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Comments Column', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide comments column in list tables for pages, post types that support comments, and alse media/attachments.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide Post Tags Column
+
+	$field_id = 'hide_post_tags_column';
+	$field_slug = 'hide-post-tags-column';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Post Tags Column', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Hide tags column in list tables for posts.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Show Custom Taxonomy Filters
+
+	$field_id = 'show_custom_taxonomy_filters';
+	$field_slug = 'show-custom-taxonomy-filters';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Show Custom Taxonomy Filters', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'			=> $field_id, // Custom argument
+			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'	=> 'Show additional filter(s) for hierarchical, custom taxonomies on list tables of all post types. This will work similarly with the post categories filter.', // Custom argument
+			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
 	// Hide Admin Notices
 
 	$field_id = 'hide_admin_notices';
+	$field_slug = 'hide-admin-notices';
 
 	add_settings_field(
 		$field_id, // Field ID
 		'Hide Admin Notices', // Field title
-		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
-			'class'				=> 'asenha-toggle content-management', // Custom class for the <tr> element
+			'class'				=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
+
+	// Hide Admin Bar
+
+	$field_id = 'hide_admin_bar';
+	$field_slug = 'hide-admin-bar';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Admin Bar', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Hide admin bar on the front end for all or some user roles.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide Admin Bar
+
+	$field_id = 'hide_admin_bar';
+	$field_slug = 'hide-admin-bar';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Admin Bar', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Hide admin bar on the front end for all or some of the following user roles:', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_admin_bar_for';
+	$field_slug = 'hide-admin-bar-for';
+
+	global $wp_roles;
+	$roles = $wp_roles->get_names();
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+			add_settings_field(
+				$field_id . '_' . $role_slug, // Field ID
+				'', // Field title
+				'asenha_render_field_checkbox_subfield', // Callback to render field with custom arguments in the array below
+				ASENHA_SLUG, // Settings page slug
+				'main-section', // Section ID
+				array(
+					'parent_field_id'		=> $field_id, // Custom argument
+					'field_id'				=> $role_slug, // Custom argument
+					'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+					'field_label'			=> $role_label, // Custom argument
+					'class'					=> 'asenha-checkbox admin-interface ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+				)
+			);
+
+		}
+	}
 
 }
 
@@ -266,6 +362,14 @@ function asenha_register_settings() {
  * @since 1.0.0
  */
 function asenha_sanitize_options( $options ) {
+
+	// Enable Page and Post Duplication
+	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
+	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
+
+	// Enable Media Replacement
+	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
+	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
 
 	// Show Featured Image Column
 	if ( ! isset( $options['show_featured_image_column'] ) ) $options['show_featured_image_column'] = false;
@@ -291,17 +395,22 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
 	$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
 
-	// Enable Page and Post Duplication
-	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
-	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
-
-	// Enable Media Replacement
-	if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
-	$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
-
 	// Hide Admin Notices
 	if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
 	$options['hide_admin_notices'] = ( 'on' == $options['hide_admin_notices'] ? true : false );
+
+	// Hide Admin Bar
+	if ( ! isset( $options['hide_admin_bar'] ) ) $options['hide_admin_bar'] = false;
+	$options['hide_admin_bar'] = ( 'on' == $options['hide_admin_bar'] ? true : false );
+
+	global $wp_roles;
+	$roles = $wp_roles->get_names();
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+			if ( ! isset( $options['hide_admin_bar_for'][$role_slug] ) ) $options['hide_admin_bar_for'][$role_slug] = false;
+			$options['hide_admin_bar_for'][$role_slug] = ( 'on' == $options['hide_admin_bar_for'][$role_slug] ? true : false );
+		}
+	}
 
 	return $options;
 
@@ -320,11 +429,11 @@ function asenha_sanitize_checkbox_field( $value ) {
 }
 
 /**
- * Render checkbox fields
+ * Render checkbox field as a toggle/switcher
  *
  * @since 1.0.0
  */
-function asenha_render_field_checkbox( $args ) {
+function asenha_render_field_checkbox_toggle( $args ) {
 
 	$options = get_option( ASENHA_SLUG_U );
 
@@ -334,7 +443,36 @@ function asenha_render_field_checkbox( $args ) {
 
 	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-field-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
 	echo '<label for="' . esc_attr( $field_name ) . '"></label>';
+
+	// For field with additional options / sub-fields, we add a wrapper to enclose field descriptions
+	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
+		echo '<div class="asenha-field-with-options">';
+	}
+
 	echo '<div class="asenha-field-description">' . esc_html( $field_description ) . '</div>';
+
+	// For field with additional options / sub-fields, we add wrapper for them
+	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
+		echo '<div class="asenha-subfields" style="display:none"></div></div>';
+	}
+
+}
+
+/**
+ * Render checkbox field as sub-field of a toggle/switcher checkbox
+ *
+ * @since 1.3.0
+ */
+function asenha_render_field_checkbox_subfield( $args ) {
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	$field_name = $args['field_name'];
+	$field_label = $args['field_label'];
+	$field_option_value = ( isset( $options[$args['parent_field_id']][$args['field_id']] ) ) ? $options[$args['parent_field_id']][$args['field_id']] : false;
+
+	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
+	echo '<label for="' . esc_attr( $field_name ) . '">' . $field_label . '</label>';
 
 }
 
@@ -363,13 +501,13 @@ function asenha_notices() {
 		&& isset( $_GET[ 'settings-updated' ] ) 
 		&& true == $_GET[ 'settings-updated' ]
 	) {
-		// Prevent notice from moved under page heading by adding 'inline' class: https://iandunn.name/2019/06/01/prevent-manual-admin-notices-from-being-moved-to-the-top/
 		?>
-			<div class="notice notice-success inline">
-				<p>
-					<strong>Changes have been saved.</strong>
-				</p>
-			</div>
+			<script>
+				jQuery(document).ready( function() {
+					jQuery('.asenha-changes-saved').fadeIn(400).delay(2500).fadeOut(400);
+				});
+			</script>
+
 		<?php
 	}
 }
@@ -391,7 +529,7 @@ function asenha_admin_scripts( $hook_suffix ) {
 	if ( is_asenha() ) {
 		wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
-		wp_enqueue_script( 'asenha-jsticky', DLM_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), DLM_VERSION, false );
+		wp_enqueue_script( 'asenha-jsticky', ASENHA_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), ASENHA_VERSION, false );
 		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox' ), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox' ), ASENHA_VERSION, false );
 	}
