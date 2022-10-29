@@ -95,7 +95,7 @@ function asenha_register_settings() {
 	// Add "Content Management" section
 
 	add_settings_section(
-		'content-management', // Section ID
+		'main-section', // Section ID
 		'', // Section title. Can be blank.
 		'', // Callback function to output section intro. Can be blank.
 		ASENHA_SLUG // Settings page slug
@@ -127,7 +127,7 @@ function asenha_register_settings() {
 		'Enable Page and Post Duplication', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -146,7 +146,7 @@ function asenha_register_settings() {
 		'Enable Media Replacement', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -165,7 +165,7 @@ function asenha_register_settings() {
 		'Show Featured Image Column', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -184,7 +184,7 @@ function asenha_register_settings() {
 		'Show Excerpt Column', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -203,7 +203,7 @@ function asenha_register_settings() {
 		'Show ID Column', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -222,7 +222,7 @@ function asenha_register_settings() {
 		'Hide Comments Column', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -241,7 +241,7 @@ function asenha_register_settings() {
 		'Hide Post Tags Column', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -260,7 +260,7 @@ function asenha_register_settings() {
 		'Show Custom Taxonomy Filters', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
@@ -279,7 +279,7 @@ function asenha_register_settings() {
 		'Hide Admin Notices', // Field title
 		'asenha_render_field_checkbox', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
-		'content-management', // Section ID
+		'main-section', // Section ID
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
