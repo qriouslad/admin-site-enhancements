@@ -241,15 +241,18 @@
 .form-table .asenha-subfields {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .form-table .asenha-subfields tr {
     display: block;
+}
+
+.form-table .asenha-subfields tr.asenha-half {
     width: 50%;
 }
 
-.form-table .asenha-subfields th {
+.form-table .asenha-subfields .asenha-hide-th th {
     display: none;
 }
 
@@ -260,4 +263,35 @@
 .form-table .asenha-subfields td label {
     position: relative;
     top: -2px;
+}
+
+/* Text input subfield */
+
+.form-table .change-login-url .asenha-subfields {
+    margin-top: 8px;
+}
+
+
+.form-table .asenha-subfields tr.asenha-text.with-prefix-suffix {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix th {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    width: auto;
+    padding: 0;
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix td {
+    display: flex;
+    align-items: center;
+}
+
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix input {
+    margin: 0 4px;
 }

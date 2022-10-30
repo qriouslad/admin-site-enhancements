@@ -47,6 +47,7 @@ function asenha_add_settings_page() {
 					<div class="asenha-tab-buttons">
 					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
 					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
+					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
 					</div>
 					<div class="asenha-tab-contents">
 					    <section class="asenha-fields fields-content-management"> 
@@ -55,6 +56,11 @@ function asenha_add_settings_page() {
 					    	</table>
 					    </section>
 					    <section class="asenha-fields fields-admin-interface"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-security"> 
 					    	<table class="form-table" role="presentation">
 					    		<tbody></tbody>
 					    	</table>
@@ -308,26 +314,6 @@ function asenha_register_settings() {
 		)
 	);
 
-	// Hide Admin Bar
-
-	$field_id = 'hide_admin_bar';
-	$field_slug = 'hide-admin-bar';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'Hide Admin Bar', // Field title
-		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'		=> 'Hide admin bar on the front end for all or some of the following user roles:', // Custom argument
-			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
 	$field_id = 'hide_admin_bar_for';
 	$field_slug = 'hide-admin-bar-for';
 
@@ -347,13 +333,52 @@ function asenha_register_settings() {
 					'field_id'				=> $role_slug, // Custom argument
 					'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
 					'field_label'			=> $role_label, // Custom argument
-					'class'					=> 'asenha-checkbox admin-interface ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					'class'					=> 'asenha-checkbox asenha-hide-th asenha-half admin-interface ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
 				)
 			);
 
 		}
 	}
 
+	// Change Login URL
+
+	$field_id = 'change_login_url';
+	$field_slug = 'change-login-url';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Change Login URL', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'custom_login_slug';
+	$field_slug = 'custom-login-slug';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'New URL:', // Field title
+		'asenha_render_field_text_subfield', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_type'			=> 'with-prefix-suffix',
+			'field_prefix'			=> get_site_url() . '/',
+			'field_suffix'			=> '/',
+			'field_description'		=> '', // Custom argument
+			'class'					=> 'asenha-text with-prefix-suffix security ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
 }
 
 /**
@@ -411,6 +436,13 @@ function asenha_sanitize_options( $options ) {
 			$options['hide_admin_bar_for'][$role_slug] = ( 'on' == $options['hide_admin_bar_for'][$role_slug] ? true : false );
 		}
 	}
+
+	// Change Login URL
+	if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
+	$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
+
+	if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
+	$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
 
 	return $options;
 
@@ -472,7 +504,33 @@ function asenha_render_field_checkbox_subfield( $args ) {
 	$field_option_value = ( isset( $options[$args['parent_field_id']][$args['field_id']] ) ) ? $options[$args['parent_field_id']][$args['field_id']] : false;
 
 	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
-	echo '<label for="' . esc_attr( $field_name ) . '">' . $field_label . '</label>';
+	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . $field_label . '</label>';
+
+}
+
+/**
+ * Render text field as sub-field of a toggle/switcher checkbox
+ *
+ * @since 1.4.0
+ */
+function asenha_render_field_text_subfield( $args ) {
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	$field_id = $args['field_id'];
+	$field_name = $args['field_name'];
+	$field_type = $args['field_type'];
+	$field_prefix = $args['field_prefix'];
+	$field_suffix = $args['field_suffix'];
+	$field_description = $args['field_description'];
+	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+	if ( $field_id == 'custom_login_slug' ) {
+		$placeholder = 'e.g. backend';
+	}
+
+	echo $field_prefix . '<input type="text" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix;
+	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_label ) . '</label>';
 
 }
 
