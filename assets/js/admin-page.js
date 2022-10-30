@@ -36,6 +36,11 @@
       $('.change-login-url').appendTo('.fields-security tbody');
       $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
 
+      // Place fields into "Utilities" tab
+      $('.redirect-after-login').appendTo('.fields-utilities tbody');
+      $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
+      $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
+
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
       // $('.form-table')[formTableCount-1].remove();
@@ -58,6 +63,12 @@
          $('.fields-security').show();
          $('.asenha-fields:not(.fields-security)').hide();
          // window.location.hash = 'security';
+      });
+
+      $('#tab-utilities + label').click( function() {
+         $('.fields-utilities').show();
+         $('.asenha-fields:not(.fields-utilities)').hide();
+         // window.location.hash = 'utilities';
       });
 
       // Open Content Management tab on document ready
@@ -95,6 +106,22 @@
             $('.change-login-url .asenha-subfields').fadeIn();
          } else {
             $('.change-login-url .asenha-subfields').fadeOut();
+         }
+      });
+
+      // Redirect After Login => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[redirect_after_login]').checked ) {
+         $('.redirect-after-login .asenha-subfields').show();
+      } else {
+         $('.redirect-after-login .asenha-subfields').hide();        
+      }
+
+      // Redirect After Login => show/hide roles checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[redirect_after_login]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.redirect-after-login .asenha-subfields').fadeIn();
+         } else {
+            $('.redirect-after-login .asenha-subfields').fadeOut();
          }
       });
 

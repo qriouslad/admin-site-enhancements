@@ -63,7 +63,7 @@ class Admin_Site_Enhancements {
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( 'admin_site_enhancements', array() );
 
-		// Instantiate object for Content Management functionalities
+		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
 
 		// Content Management >> Show Featured Image Column
@@ -111,7 +111,7 @@ class Admin_Site_Enhancements {
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
 
-		// Instantiate object for Admin Interface functionalities
+		// Instantiate object for Admin Interface features
 		$admin_interface = new ASENHA\Classes\Admin_Interface;
 
 		// Admin Interface >> Hide Admin Notices
@@ -125,7 +125,8 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'hide_admin_bar', $options ) && $options['hide_admin_bar'] && array_key_exists( 'hide_admin_bar_for', $options ) && isset( $options['hide_admin_bar_for'] ) ) {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
 		}
-		// Instantiate object for Security functionalities
+
+		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
 		// Security >> Change Login URL
@@ -137,6 +138,20 @@ class Admin_Site_Enhancements {
 				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url' ] );
 			}
 		}
+
+		// Instantiate object for Utilities features
+		$utilities = new ASENHA\Classes\Utilities;
+
+		// Utilities >> Redirect After Login
+		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
+			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
+				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
+					add_filter( 'login_redirect', [ $utilities, 'redirect_for_roles_after_login' ], 10, 3 );
+				}
+
+			}
+		}
+
 		
 	}
 
