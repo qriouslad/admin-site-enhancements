@@ -66,9 +66,6 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Content Management functionalities
 		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Instantiate object for Admin Interface functionalities
-		$admin_interface = new ASENHA\Classes\Admin_Interface;
-
 		// Content Management >> Show Featured Image Column
 		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
 			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
@@ -114,16 +111,31 @@ class Admin_Site_Enhancements {
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
 
-		// Content Management >> Hide Admin Notices
+		// Instantiate object for Admin Interface functionalities
+		$admin_interface = new ASENHA\Classes\Admin_Interface;
+
+		// Admin Interface >> Hide Admin Notices
 		if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
 			add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
 			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
 
-		// Content Management >> Hide Admin Bar
+		// Admin Interface >> Hide Admin Bar
 		if ( array_key_exists( 'hide_admin_bar', $options ) && $options['hide_admin_bar'] && array_key_exists( 'hide_admin_bar_for', $options ) && isset( $options['hide_admin_bar_for'] ) ) {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
+		}
+		// Instantiate object for Security functionalities
+		$security = new ASENHA\Classes\Security;
+
+		// Security >> Change Login URL
+		if ( array_key_exists( 'change_login_url', $options ) && $options['change_login_url'] ) {
+			if ( array_key_exists( 'custom_login_slug', $options ) && ! empty( $options['custom_login_slug'] ) )  {
+				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
+				add_action( 'init', [ $security, 'redirect_on_custom_login_url' ] );
+				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url' ] );
+				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url' ] );
+			}
 		}
 		
 	}
