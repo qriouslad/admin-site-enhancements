@@ -3,7 +3,7 @@
 namespace ASENHA\Classes;
 
 /**
- * Class related to Security functionalities
+ * Class related to Security features
  *
  * @since 1.4.0
  */
