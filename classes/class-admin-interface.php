@@ -4,7 +4,7 @@ namespace ASENHA\Classes;
 use WP_Admin_Bar;
 
 /**
- * Class related to Admin Interface functionalities
+ * Class related to Admin Interface features
  *
  * @since 1.2.0
  */

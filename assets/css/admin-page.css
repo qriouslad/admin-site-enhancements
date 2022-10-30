@@ -267,7 +267,8 @@
 
 /* Text input subfield */
 
-.form-table .change-login-url .asenha-subfields {
+.form-table .change-login-url .asenha-subfields,
+.form-table .redirect-after-login .asenha-subfields {
     margin-top: 8px;
 }
 
@@ -283,8 +284,9 @@
     line-height: 30px;
     width: auto;
     padding: 0;
-    font-weight: 500;
     margin-right: 6px;
+    font-weight: normal;
+    color: #3c434a;
 }
 
 .form-table .asenha-toggle .asenha-text.with-prefix-suffix td {

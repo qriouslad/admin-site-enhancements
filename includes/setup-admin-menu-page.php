@@ -48,6 +48,7 @@ function asenha_add_settings_page() {
 					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
 					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
 					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
+					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities">Utilities</label>
 					</div>
 					<div class="asenha-tab-contents">
 					    <section class="asenha-fields fields-content-management"> 
@@ -61,6 +62,11 @@ function asenha_add_settings_page() {
 					    	</table>
 					    </section>
 					    <section class="asenha-fields fields-security"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-utilities"> 
 					    	<table class="form-table" role="presentation">
 					    		<tbody></tbody>
 					    	</table>
@@ -122,6 +128,11 @@ function asenha_register_settings() {
 	);
 
 	// Register fields for "Content Management" section
+
+	// Call WordPress globals required for the fields
+
+	global $wp_roles;
+	$roles = $wp_roles->get_names();
 
 	// Enable Page and Post Duplication
 
@@ -317,8 +328,6 @@ function asenha_register_settings() {
 	$field_id = 'hide_admin_bar_for';
 	$field_slug = 'hide-admin-bar-for';
 
-	global $wp_roles;
-	$roles = $wp_roles->get_names();
 	if ( is_array( $roles ) ) {
 		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
 
@@ -372,13 +381,78 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_type'			=> 'with-prefix-suffix',
-			'field_prefix'			=> get_site_url() . '/',
-			'field_suffix'			=> '/',
+			'field_type'			=> 'with-prefix-suffix', // Custom argument
+			'field_prefix'			=> get_site_url() . '/', // Custom argument
+			'field_suffix'			=> '/', // Custom argument
 			'field_description'		=> '', // Custom argument
 			'class'					=> 'asenha-text with-prefix-suffix security ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
+
+	// Redirect After Login
+
+	$field_id = 'redirect_after_login';
+	$field_slug = 'redirect-after-login';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Redirect After Login', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'redirect_after_login_to_slug';
+	$field_slug = 'redirect-after-login-to-slug';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Redirect to:', // Field title
+		'asenha_render_field_text_subfield', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_type'			=> 'with-prefix-suffix', // Custom argument
+			'field_prefix'			=> get_site_url() . '/', // Custom argument
+			'field_suffix'			=> '/ for:', // Custom argument
+			'field_description'		=> '', // Custom argument
+			'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'redirect_after_login_for';
+	$field_slug = 'redirect-after-login-for';
+
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+			add_settings_field(
+				$field_id . '_' . $role_slug, // Field ID
+				'', // Field title
+				'asenha_render_field_checkbox_subfield', // Callback to render field with custom arguments in the array below
+				ASENHA_SLUG, // Settings page slug
+				'main-section', // Section ID
+				array(
+					'parent_field_id'		=> $field_id, // Custom argument
+					'field_id'				=> $role_slug, // Custom argument
+					'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+					'field_label'			=> $role_label, // Custom argument
+					'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+				)
+			);
+
+		}
+	}
+
 }
 
 /**
@@ -387,6 +461,10 @@ function asenha_register_settings() {
  * @since 1.0.0
  */
 function asenha_sanitize_options( $options ) {
+
+	// Call WordPress globals required for validating the fields	
+	global $wp_roles;
+	$roles = $wp_roles->get_names();
 
 	// Enable Page and Post Duplication
 	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
@@ -428,8 +506,6 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['hide_admin_bar'] ) ) $options['hide_admin_bar'] = false;
 	$options['hide_admin_bar'] = ( 'on' == $options['hide_admin_bar'] ? true : false );
 
-	global $wp_roles;
-	$roles = $wp_roles->get_names();
 	if ( is_array( $roles ) ) {
 		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
 			if ( ! isset( $options['hide_admin_bar_for'][$role_slug] ) ) $options['hide_admin_bar_for'][$role_slug] = false;
@@ -443,6 +519,20 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
 	$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+
+	// Redirect After Login
+	if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
+	$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );
+
+	if ( ! isset( $options['redirect_after_login_to_slug'] ) ) $options['redirect_after_login_to_slug'] = '';
+	$options['redirect_after_login_to_slug'] = ( ! empty( $options['redirect_after_login_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_login_to_slug'] ) : '';
+
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+			if ( ! isset( $options['redirect_after_login_for'][$role_slug] ) ) $options['redirect_after_login_for'][$role_slug] = false;
+			$options['redirect_after_login_for'][$role_slug] = ( 'on' == $options['redirect_after_login_for'][$role_slug] ? true : false );
+		}
+	}
 
 	return $options;
 
@@ -527,6 +617,8 @@ function asenha_render_field_text_subfield( $args ) {
 
 	if ( $field_id == 'custom_login_slug' ) {
 		$placeholder = 'e.g. backend';
+	} elseif ( $field_id == 'redirect_after_login_to_slug' ) {
+		$placeholder = 'e.g. my-account';
 	}
 
 	echo $field_prefix . '<input type="text" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix;

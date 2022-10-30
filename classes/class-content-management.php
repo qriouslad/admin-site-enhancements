@@ -3,7 +3,7 @@
 namespace ASENHA\Classes;
 
 /**
- * Class related to content administration enhancements
+ * Class related to Content Management features
  *
  * @since 1.0.0
  */
