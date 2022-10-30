@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.0.3  
-Stable tag: 1.3.0  
+Stable tag: 1.4.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,10 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 * **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 
+### Security
+
+* **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend 
+
 Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
 
 ### Give Back
@@ -52,8 +56,12 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 
 ## Screenshots
 
-1. Admin and Site Enhancements main page
-   ![Admin and Site Enhancements main page](.wordpress-org/screenshot-1.png)
+1. Content Management
+   ![Content Management](.wordpress-org/screenshot-1.png)
+2. Admin Interface
+   ![Admin Interface](.wordpress-org/screenshot-2.png)
+3. Security
+   ![Security](.wordpress-org/screenshot-3.png)
 
 ## Frequently Asked Questions
 
@@ -62,6 +70,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 1.4.0 (2022.10.30)
+
+* **[Added]** Security >> Change Login URL: allow for setting a custom login URL to improve site security.
 
 ### 1.3.0 (2022.10.29)
 
