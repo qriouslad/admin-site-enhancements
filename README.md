@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.0.3  
-Stable tag: 1.5.0  
+Stable tag: 1.6.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,7 +40,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Utilities
 
-* **Redirect After Login**. Set custom redirect URL for all or some user roles after login.
+* **Redirect After Login / Logout**. Set custom redirect URL for all or some user roles after login / logout.
 
 Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
 
@@ -77,9 +77,13 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 1.6.0 (2022.10.31)
+
+* **[Added] Utilities >> Redirect After Logout**: Set custom redirect URL for all or some user roles after logout.
+
 ### 1.5.0 (2022.10.30)
 
-* **[Added] Security >> Redirect After Login**: Set custom redirect URL for all or some user roles after login.
+* **[Added] Utilities >> Redirect After Login**: Set custom redirect URL for all or some user roles after login.
 
 ### 1.4.0 (2022.10.30)
 

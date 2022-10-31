@@ -453,6 +453,70 @@ function asenha_register_settings() {
 		}
 	}
 
+	// Redirect After Logout
+
+	$field_id = 'redirect_after_logout';
+	$field_slug = 'redirect-after-logout';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Redirect After Logout', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'redirect_after_logout_to_slug';
+	$field_slug = 'redirect-after-logout-to-slug';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Redirect to:', // Field title
+		'asenha_render_field_text_subfield', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_type'			=> 'with-prefix-suffix', // Custom argument
+			'field_prefix'			=> get_site_url() . '/', // Custom argument
+			'field_suffix'			=> '/ for:', // Custom argument
+			'field_description'		=> '', // Custom argument
+			'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'redirect_after_logout_for';
+	$field_slug = 'redirect-after-logout-for';
+
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+			add_settings_field(
+				$field_id . '_' . $role_slug, // Field ID
+				'', // Field title
+				'asenha_render_field_checkbox_subfield', // Callback to render field with custom arguments in the array below
+				ASENHA_SLUG, // Settings page slug
+				'main-section', // Section ID
+				array(
+					'parent_field_id'		=> $field_id, // Custom argument
+					'field_id'				=> $role_slug, // Custom argument
+					'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+					'field_label'			=> $role_label, // Custom argument
+					'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+				)
+			);
+
+		}
+	}
+
 }
 
 /**
@@ -534,6 +598,19 @@ function asenha_sanitize_options( $options ) {
 		}
 	}
 
+	// Redirect After Logout
+	if ( ! isset( $options['redirect_after_logout'] ) ) $options['redirect_after_logout'] = false;
+	$options['redirect_after_logout'] = ( 'on' == $options['redirect_after_logout'] ? true : false );
+
+	if ( ! isset( $options['redirect_after_logout_to_slug'] ) ) $options['redirect_after_logout_to_slug'] = '';
+	$options['redirect_after_logout_to_slug'] = ( ! empty( $options['redirect_after_logout_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_logout_to_slug'] ) : '';
+
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+			if ( ! isset( $options['redirect_after_logout_for'][$role_slug] ) ) $options['redirect_after_logout_for'][$role_slug] = false;
+			$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
+		}
+	}
 	return $options;
 
 }
