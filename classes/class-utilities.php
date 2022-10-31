@@ -62,7 +62,7 @@ class Utilities {
 	 * @param string $redirect_to_url URL to redirect to. Default is admin dashboard URL.
 	 * @param string $origin_url URL the user is coming from.
 	 * @param object $user logged-in user's data.
-	 * @since 1.5.0
+	 * @since 1.6.0
 	 */
 	public function redirect_after_logout( $user_id ) {
 
@@ -99,6 +99,29 @@ class Utilities {
 
 				}
 			}
+
+		}
+
+	}
+
+	/**
+	 * Redirect 404 to homepage
+	 *
+	 * @since 1.7.0
+	 */
+	public function redirect_404_to_homepage() {
+
+		if ( ! is_404() || is_admin() || ( defined( 'DOING_CRON' ) && DOING_CRON ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
+
+			return;
+
+		} else {
+
+			// wp_safe_redirect( home_url(), 301 );
+
+			header( 'HTTP/1.1 301 Moved Permanently');
+			header( 'Location: ' . home_url() );
+			exit();
 
 		}
 
