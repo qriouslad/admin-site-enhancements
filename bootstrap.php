@@ -148,10 +148,17 @@ class Admin_Site_Enhancements {
 				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
 					add_filter( 'login_redirect', [ $utilities, 'redirect_for_roles_after_login' ], 10, 3 );
 				}
-
 			}
 		}
 
+		// Utilities >> Redirect After Logout
+		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
+			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
+				if ( array_key_exists( 'redirect_after_logout_for', $options ) && ! empty( $options['redirect_after_logout_for'] ) )  {
+					add_action( 'wp_logout', [ $utilities, 'redirect_after_logout' ], 5, 1 ); // load earlier than Change Login URL add_action
+				}
+			}
+		}
 		
 	}
 

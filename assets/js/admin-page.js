@@ -40,6 +40,9 @@
       $('.redirect-after-login').appendTo('.fields-utilities tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
+      $('.redirect-after-logout').appendTo('.fields-utilities tbody');
+      $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
+      $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
@@ -122,6 +125,22 @@
             $('.redirect-after-login .asenha-subfields').fadeIn();
          } else {
             $('.redirect-after-login .asenha-subfields').fadeOut();
+         }
+      });
+
+      // Redirect After Logout => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[redirect_after_logout]').checked ) {
+         $('.redirect-after-logout .asenha-subfields').show();
+      } else {
+         $('.redirect-after-logout .asenha-subfields').hide();        
+      }
+
+      // Redirect After Logout => show/hide roles checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[redirect_after_logout]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.redirect-after-logout .asenha-subfields').fadeIn();
+         } else {
+            $('.redirect-after-logout .asenha-subfields').fadeOut();
          }
       });
 
