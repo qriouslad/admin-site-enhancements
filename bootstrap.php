@@ -159,6 +159,11 @@ class Admin_Site_Enhancements {
 				}
 			}
 		}
+
+		// Utilities >> Redirect 404 to Homepage
+		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
+			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
+		}
 		
 	}
 

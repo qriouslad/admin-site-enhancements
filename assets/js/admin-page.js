@@ -43,6 +43,7 @@
       $('.redirect-after-logout').appendTo('.fields-utilities tbody');
       $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
+      $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;

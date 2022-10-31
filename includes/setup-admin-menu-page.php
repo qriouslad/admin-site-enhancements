@@ -517,6 +517,26 @@ function asenha_register_settings() {
 		}
 	}
 
+	// Redirect 404 to Homepage
+
+	$field_id = 'redirect_404_to_homepage';
+	$field_slug = 'redirect-404-to-homepage';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Redirect 404 to Homepage', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 }
 
 /**
@@ -611,6 +631,11 @@ function asenha_sanitize_options( $options ) {
 			$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
 		}
 	}
+
+	// Redirect 404 to Homepage
+	if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
+	$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );
+
 	return $options;
 
 }
