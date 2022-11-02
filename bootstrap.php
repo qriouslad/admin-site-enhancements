@@ -126,6 +126,13 @@ class Admin_Site_Enhancements {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
 		}
 
+		// Admin Interface >> View Admin as Role
+		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
+			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
+			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
+			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
+		}
+
 		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
