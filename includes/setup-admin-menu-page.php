@@ -349,6 +349,26 @@ function asenha_register_settings() {
 		}
 	}
 
+	// View Admin as Role
+
+	$field_id = 'view_admin_as_role';
+	$field_slug = 'view-admin-as-role';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'View Admin as Role', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 	// Change Login URL
 
 	$field_id = 'change_login_url';
@@ -550,6 +570,8 @@ function asenha_sanitize_options( $options ) {
 	global $wp_roles;
 	$roles = $wp_roles->get_names();
 
+	// Content Management features
+
 	// Enable Page and Post Duplication
 	if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
 	$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
@@ -582,6 +604,8 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
 	$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
 
+	// Admin Interface features
+
 	// Hide Admin Notices
 	if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
 	$options['hide_admin_notices'] = ( 'on' == $options['hide_admin_notices'] ? true : false );
@@ -597,12 +621,20 @@ function asenha_sanitize_options( $options ) {
 		}
 	}
 
+	// View Admin as Role
+	if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
+	$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
+
+	// Security features
+
 	// Change Login URL
 	if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
 	$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
 
 	if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
 	$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+
+	// Utilities features
 
 	// Redirect After Login
 	if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
@@ -673,7 +705,7 @@ function asenha_render_field_checkbox_toggle( $args ) {
 		echo '<div class="asenha-field-with-options">';
 	}
 
-	echo '<div class="asenha-field-description">' . esc_html( $field_description ) . '</div>';
+	echo '<div class="asenha-field-description">' . wp_kses_post( $field_description ) . '</div>';
 
 	// For field with additional options / sub-fields, we add wrapper for them
 	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
@@ -696,7 +728,7 @@ function asenha_render_field_checkbox_subfield( $args ) {
 	$field_option_value = ( isset( $options[$args['parent_field_id']][$args['field_id']] ) ) ? $options[$args['parent_field_id']][$args['field_id']] : false;
 
 	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
-	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . $field_label . '</label>';
+	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . wp_kses_post( $field_label ) . '</label>';
 
 }
 
@@ -721,10 +753,12 @@ function asenha_render_field_text_subfield( $args ) {
 		$placeholder = 'e.g. backend';
 	} elseif ( $field_id == 'redirect_after_login_to_slug' ) {
 		$placeholder = 'e.g. my-account';
-	}
+	} elseif ( $field_id == 'redirect_after_logout_to_slug' ) {
+		$placeholder = 'e.g. come-visit-again';
+	} else {}
 
 	echo $field_prefix . '<input type="text" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix;
-	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_label ) . '</label>';
+	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_description ) . '</label>';
 
 }
 
