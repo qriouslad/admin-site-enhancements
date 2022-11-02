@@ -5,14 +5,14 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.0.3  
-Stable tag: 1.7.0  
+Stable tag: 1.8.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Easily enhance various admin workflows and site aspects while replacing multiple plugins doing it.
+Duplicate page / post, replace media, hide login, hide admin notices, hide admin bar, login / logout / 404 redirect, and more in a single plugin.
 
 ## Description
 
@@ -33,6 +33,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 * **Hide Admin Bar**. Hide it on the front end for all or some user roles.
+* **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
 
 ### Security
 
@@ -78,34 +79,38 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 1.8.0 (2022.11.03)
+
+* **[ADDED] Admin Interface >> View Admin as Role**: View admin pages and the site (logged-in) as one of the non-administrator user roles.
+
 ### 1.7.0 (2022.10.31)
 
-* **[Added] Utilities >> Redirect 404 to Homepage**: Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
+* **[ADDED] Utilities >> Redirect 404 to Homepage**: Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
 ### 1.6.0 (2022.10.31)
 
-* **[Added] Utilities >> Redirect After Logout**: Set custom redirect URL for all or some user roles after logout.
+* **[ADDED] Utilities >> Redirect After Logout**: Set custom redirect URL for all or some user roles after logout.
 
 ### 1.5.0 (2022.10.30)
 
-* **[Added] Utilities >> Redirect After Login**: Set custom redirect URL for all or some user roles after login.
+* **[ADDED] Utilities >> Redirect After Login**: Set custom redirect URL for all or some user roles after login.
 
 ### 1.4.0 (2022.10.30)
 
-* **[Added] Security >> Change Login URL**: allow for setting a custom login URL to improve site security.
+* **[ADDED] Security >> Change Login URL**: allow for setting a custom login URL to improve site security.
 
 ### 1.3.0 (2022.10.29)
 
-* **[Added] Admin Interface >> Hide Admin Bar**: Hide it on the front end for all or some user roles.
+* **[ADDED] Admin Interface >> Hide Admin Bar**: Hide it on the front end for all or some user roles.
 
 
 ### 1.2.0 (2022.10.28)
 
-* **[Added] Admin Interface >> Hide Admin Notices**: Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
+* **[ADDED] Admin Interface >> Hide Admin Notices**: Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 
 ### 1.1.0 (2022.10.22)
 
-* **[Added] Content Management >> Enable Media Replacement**: Enable easy replacement of any type of media file with a new one while retaining the existing media ID and file name.
+* **[ADDED] Content Management >> Enable Media Replacement**: Enable easy replacement of any type of media file with a new one while retaining the existing media ID and file name.
 
 ### 1.0.0 (2022.10.17)
 
