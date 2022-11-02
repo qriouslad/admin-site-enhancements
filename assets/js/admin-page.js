@@ -31,6 +31,7 @@
       $('.hide-admin-notices').appendTo('.fields-admin-interface tbody');
       $('.hide-admin-bar').appendTo('.fields-admin-interface tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
+      $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');
