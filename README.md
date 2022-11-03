@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.0.3  
-Stable tag: 1.8.0  
+Stable tag: 1.9.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,18 +22,26 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Enable one-click duplication of pages and any post types**. Will also duplicate the taxonomies and post metas (custom fields).
 * **Enable media replacement**. Easily replace any type of media file with a new one while retaining the existing media ID and file name.
-* **Show the featured image column** in the list tables for pages and post types that support featured images.
-* **Show the excerpt column** in the list tables for pages and post types that support excerpt.
-* **Show the ID column** in the list tables for pages, all post types, all taxonomies, media, users and comments.
-* **Hide the comments column** in in the list tables for pages, post types that support comments, and alse media/attachments.
-* **Hide the post tags column** in the list table for posts.
-* **Show custom taxonomy dropdown filter(s)** on the list tables of all post types for taxonomies that are hierarchical like post categories.
+* **Enhance list tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
+  * **Show the featured image column** in the list tables for pages and post types that support featured images.
+  * **Show the excerpt column** in the list tables for pages and post types that support excerpt.
+  * **Show the ID column** in the list tables for pages, all post types, all taxonomies, media, users and comments.
+  * **Hide the comments column** in in the list tables for pages, post types that support comments, and alse media/attachments.
+  * **Hide the post tags column** in the list table for posts.
+  * **Show custom taxonomy dropdown filter(s)** on the list tables of all post types for taxonomies that are hierarchical like post categories.
 
 ### Admin Interface
 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 * **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
+* **Hide or Modify Elements**. Easily simplify or customize various admin UI elements.
+  * Admin bar: Hide Wordpress logo/menu
+  * Admin bar: Hide customize menu/link
+  * Admin bar: Hide updates counter/link
+  * Admin bar: Hide comments counter/link
+  * Admin bar: Hide new content menu
+  * Admin bar: Hide 'Howdy' text
 
 ### Security
 
@@ -78,6 +86,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 1.9.0 (2022.11.03)
+
+* **[ADDED] Admin Interface >> Hide or Modify Elements**: Easily simplify or customize various admin UI elements, starting with the admin bar.
+* **[CHANGED] Content Management >> Enhance List Tables**: this combines previously separate features related to list tables for various post types.
 
 ### 1.8.0 (2022.11.03)
 

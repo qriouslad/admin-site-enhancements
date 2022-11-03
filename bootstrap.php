@@ -61,40 +61,10 @@ class Admin_Site_Enhancements {
 		// Selectively enable enhancements based on options value
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
-		$options = get_option( 'admin_site_enhancements', array() );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
-
-		// Content Management >> Show Featured Image Column
-		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
-		}
-
-		// Content Management >> Show Excerpt Column
-		if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
-		}
-
-		// Content Management >> Show ID Column
-		if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
-		}
-
-		// Content Management >> Hide Comments Column
-		if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
-		}
-
-		// Content Management >> Hide Post Tags Column
-		if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
-		}
-
-		// Content Management >> Show Custom Taxonomy Filters
-		if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
-			add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
-		}
 
 		// Content Management >> Enable Page and Post Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
@@ -109,6 +79,41 @@ class Admin_Site_Enhancements {
 			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
 			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
+		}
+
+		// Content Management >> Enhance List Tables
+		if ( array_key_exists( 'enhance_list_tables', $options ) && $options['enhance_list_tables'] ) {
+
+			// Show Featured Image Column
+			if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
+			}
+
+			// Show Excerpt Column
+			if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
+			}
+
+			// Show ID Column
+			if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
+			}
+
+			// Hide Comments Column
+			if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
+			}
+
+			// Hide Post Tags Column
+			if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
+			}
+
+			// Show Custom Taxonomy Filters
+			if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
+				add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
+			}
+
 		}
 
 		// Instantiate object for Admin Interface features
@@ -131,6 +136,11 @@ class Admin_Site_Enhancements {
 			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
 			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
 			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
+		}
+
+		// Admin Interface >> Hide or Modify Elements
+		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
+			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
 		}
 
 		// Instantiate object for Security features
