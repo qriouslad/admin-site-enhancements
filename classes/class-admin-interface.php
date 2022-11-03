@@ -523,6 +523,32 @@ class Admin_Interface {
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_new_content_menu', 70 ); // priority needs to match default value. Use QM to reference.
 		}
 
+		// Hide 'Howdy' text
+		if ( array_key_exists( 'hide_ab_howdy', $options ) && $options['hide_ab_howdy'] ) {
+
+			// Remove the whole my account sectino and later rebuild it
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_my_account_item', 7 );
+
+			$current_user = wp_get_current_user();
+			$user_id = get_current_user_id();
+			$profile_url  = get_edit_profile_url( $user_id );
+
+			$avatar = get_avatar( $user_id, 26 ); // size 26x26 pixels
+			$display_name = $current_user->display_name;
+			$class = 'with-avatar';
+
+			$wp_admin_bar->add_menu( array(
+				'id'		=> 'my-account',
+				'parent'	=> 'top-secondary',
+				'title'		=> $display_name . $avatar,
+				'href'		=> $profile_url,
+				'meta'		=> array(
+					'class'		=> $class,
+				),
+			) );
+
+		}
+
 	}
 
 }

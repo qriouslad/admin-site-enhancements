@@ -246,6 +246,7 @@
 
 .form-table .asenha-subfields tr {
     display: block;
+    width: 100%;
 }
 
 .form-table .asenha-subfields tr.asenha-half {
