@@ -66,36 +66,6 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Content Management >> Show Featured Image Column
-		if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
-		}
-
-		// Content Management >> Show Excerpt Column
-		if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
-		}
-
-		// Content Management >> Show ID Column
-		if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
-		}
-
-		// Content Management >> Hide Comments Column
-		if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
-		}
-
-		// Content Management >> Hide Post Tags Column
-		if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
-			add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
-		}
-
-		// Content Management >> Show Custom Taxonomy Filters
-		if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
-			add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
-		}
-
 		// Content Management >> Enable Page and Post Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
 			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
@@ -109,6 +79,41 @@ class Admin_Site_Enhancements {
 			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
 			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
+		}
+
+		// Content Management >> Enhance List Tables
+		if ( array_key_exists( 'enhance_list_tables', $options ) && $options['enhance_list_tables'] ) {
+
+			// Show Featured Image Column
+			if ( array_key_exists( 'show_featured_image_column', $options ) && $options['show_featured_image_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_featured_image_column' ] );
+			}
+
+			// Show Excerpt Column
+			if ( array_key_exists( 'show_excerpt_column', $options ) && $options['show_excerpt_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_excerpt_column' ] );
+			}
+
+			// Show ID Column
+			if ( array_key_exists( 'show_id_column', $options ) && $options['show_id_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
+			}
+
+			// Hide Comments Column
+			if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
+			}
+
+			// Hide Post Tags Column
+			if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
+				add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
+			}
+
+			// Show Custom Taxonomy Filters
+			if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
+				add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
+			}
+
 		}
 
 		// Instantiate object for Admin Interface features

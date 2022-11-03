@@ -20,12 +20,13 @@
       // Place fields into the "Content Management" tab
       $('.enable-duplication').appendTo('.fields-content-management tbody');
       $('.enable-media-replacement').appendTo('.fields-content-management tbody');
-      $('.show-featured-image-column').appendTo('.fields-content-management tbody');
-      $('.show-excerpt-column').appendTo('.fields-content-management tbody');
-      $('.show-id-column').appendTo('.fields-content-management tbody');
-      $('.hide-comments-column').appendTo('.fields-content-management tbody');
-      $('.hide-post-tags-column').appendTo('.fields-content-management tbody');
-      $('.show-custom-taxonomy-filters').appendTo('.fields-content-management tbody');
+      $('.enhance-list-tables').appendTo('.fields-content-management tbody');
+      $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.show-excerpt-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.show-id-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.hide-comments-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.hide-post-tags-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.show-custom-taxonomy-filters').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
 
       // Place fields into "Admin Interface" tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface tbody');
@@ -88,6 +89,22 @@
 
       // Open tab by URL hash. Defaults to Content Management tab.
       // var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+
+      // Enhance List Tables => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[enhance_list_tables]').checked ) {
+         $('.enhance-list-tables .asenha-subfields').show();
+      } else {
+         $('.enhance-list-tables .asenha-subfields').hide();        
+      }
+
+      // Enhance List Tables => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[enhance_list_tables]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enhance-list-tables .asenha-subfields').fadeIn();
+         } else {
+            $('.enhance-list-tables .asenha-subfields').fadeOut();
+         }
+      });
 
       // Hide Admin Bar => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[hide_admin_bar]').checked ) {
