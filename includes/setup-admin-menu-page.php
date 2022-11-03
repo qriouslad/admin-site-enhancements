@@ -406,11 +406,22 @@ function asenha_register_settings() {
 		)
 	);
 
-	if ( is_array( $roles ) ) {
-		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+	$field_id = 'hide_ab_comments_menu';
+	$field_slug = 'hide-ab-comments-menu';
 
-		}
-	}
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Hide comments counter/link in the admin bar', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
 
 	// Change Login URL
 
@@ -674,6 +685,9 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['hide_default_wp_logo_menu'] ) ) $options['hide_default_wp_logo_menu'] = false;
 	$options['hide_default_wp_logo_menu'] = ( 'on' == $options['hide_default_wp_logo_menu'] ? true : false );
+
+	if ( ! isset( $options['hide_ab_comments_menu'] ) ) $options['hide_ab_comments_menu'] = false;
+	$options['hide_ab_comments_menu'] = ( 'on' == $options['hide_ab_comments_menu'] ? true : false );
 
 	// Security features
 

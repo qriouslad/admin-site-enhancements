@@ -505,7 +505,12 @@ class Admin_Interface {
 
 		// Hide WP Logo Menu
 		if ( array_key_exists( 'hide_default_wp_logo_menu', $options ) && $options['hide_default_wp_logo_menu'] ) {
-			remove_action( 'admin_bar_menu', 'wp_admin_bar_wp_menu', 10 );
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_wp_menu', 10 ); // priority needs to match default value. Use QM to reference.
+		}
+
+		// Hide Comments Counter/Link
+		if ( array_key_exists( 'hide_ab_comments_menu', $options ) && $options['hide_ab_comments_menu'] ) {
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 ); // priority needs to match default value. Use QM to reference.
 		}
 
 	}
