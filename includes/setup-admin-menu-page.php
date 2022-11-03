@@ -406,6 +406,23 @@ function asenha_register_settings() {
 		)
 	);
 
+	$field_id = 'hide_ab_updates_menu';
+	$field_slug = 'hide-ab-updates-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Hide updates counter/link in the admin bar', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 	$field_id = 'hide_ab_comments_menu';
 	$field_slug = 'hide-ab-comments-menu';
 
@@ -680,6 +697,7 @@ function asenha_sanitize_options( $options ) {
 	$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
 	// Hide or Modify Elements
+
 	if ( ! isset( $options['hide_modify_elements'] ) ) $options['hide_modify_elements'] = false;
 	$options['hide_modify_elements'] = ( 'on' == $options['hide_modify_elements'] ? true : false );
 
@@ -688,6 +706,9 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['hide_ab_comments_menu'] ) ) $options['hide_ab_comments_menu'] = false;
 	$options['hide_ab_comments_menu'] = ( 'on' == $options['hide_ab_comments_menu'] ? true : false );
+
+	if ( ! isset( $options['hide_ab_updates_menu'] ) ) $options['hide_ab_updates_menu'] = false;
+	$options['hide_ab_updates_menu'] = ( 'on' == $options['hide_ab_updates_menu'] ? true : false );
 
 	// Security features
 

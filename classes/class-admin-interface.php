@@ -508,6 +508,11 @@ class Admin_Interface {
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_wp_menu', 10 ); // priority needs to match default value. Use QM to reference.
 		}
 
+		// Hide Updates Counter/Link
+		if ( array_key_exists( 'hide_ab_updates_menu', $options ) && $options['hide_ab_updates_menu'] ) {
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_updates_menu', 50 ); // priority needs to match default value. Use QM to reference.
+		}
+
 		// Hide Comments Counter/Link
 		if ( array_key_exists( 'hide_ab_comments_menu', $options ) && $options['hide_ab_comments_menu'] ) {
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 ); // priority needs to match default value. Use QM to reference.
