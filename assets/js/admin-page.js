@@ -34,6 +34,7 @@
       $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
       $('.hide-modify-elements').appendTo('.fields-admin-interface tbody');
       $('.hide-default-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
+      $('.hide-ab-comments-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');
