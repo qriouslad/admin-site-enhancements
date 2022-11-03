@@ -440,6 +440,22 @@ function asenha_register_settings() {
 		)
 	);
 
+	$field_id = 'hide_ab_new_content_menu';
+	$field_slug = 'hide-ab-new-content-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Hide new content menu in the admin bar', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
 	// Change Login URL
 
 	$field_id = 'change_login_url';
@@ -709,6 +725,9 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['hide_ab_updates_menu'] ) ) $options['hide_ab_updates_menu'] = false;
 	$options['hide_ab_updates_menu'] = ( 'on' == $options['hide_ab_updates_menu'] ? true : false );
+
+	if ( ! isset( $options['hide_ab_new_content_menu'] ) ) $options['hide_ab_new_content_menu'] = false;
+	$options['hide_ab_new_content_menu'] = ( 'on' == $options['hide_ab_new_content_menu'] ? true : false );
 
 	// Security features
 
