@@ -369,6 +369,49 @@ function asenha_register_settings() {
 		)
 	);
 
+	// Hide or Modify Elements
+
+	$field_id = 'hide_modify_elements';
+	$field_slug = 'hide-modify-elements';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide or Modify Elements', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Easily simplify or customize various admin UI elements.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_default_wp_logo_menu';
+	$field_slug = 'hide-default-wp-logo-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Hide default WordPress logo/menu in the admin bar', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	if ( is_array( $roles ) ) {
+		foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+		}
+	}
+
 	// Change Login URL
 
 	$field_id = 'change_login_url';
@@ -625,6 +668,13 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
 	$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
+	// Hide or Modify Elements
+	if ( ! isset( $options['hide_modify_elements'] ) ) $options['hide_modify_elements'] = false;
+	$options['hide_modify_elements'] = ( 'on' == $options['hide_modify_elements'] ? true : false );
+
+	if ( ! isset( $options['hide_default_wp_logo_menu'] ) ) $options['hide_default_wp_logo_menu'] = false;
+	$options['hide_default_wp_logo_menu'] = ( 'on' == $options['hide_default_wp_logo_menu'] ? true : false );
+
 	// Security features
 
 	// Change Login URL
@@ -711,6 +761,24 @@ function asenha_render_field_checkbox_toggle( $args ) {
 	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
 		echo '<div class="asenha-subfields" style="display:none"></div></div>';
 	}
+
+}
+
+/**
+ * Render checkbox field as sub-field of a toggle/switcher checkbox
+ *
+ * @since 1.9.0
+ */
+function asenha_render_field_checkbox_plain( $args ) {
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	$field_name = $args['field_name'];
+	$field_label = $args['field_label'];
+	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : false;
+
+	echo '<input type="checkbox" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox" name="' . esc_attr( $field_name ) . '" ' . checked( $field_option_value, true, false ) . '>';
+	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . wp_kses_post( $field_label ) . '</label>';
 
 }
 

@@ -32,6 +32,8 @@
       $('.hide-admin-bar').appendTo('.fields-admin-interface tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
       $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
+      $('.hide-modify-elements').appendTo('.fields-admin-interface tbody');
+      $('.hide-default-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');
@@ -95,6 +97,22 @@
             $('.hide-admin-bar .asenha-subfields').fadeIn();
          } else {
             $('.hide-admin-bar .asenha-subfields').fadeOut();
+         }
+      });
+
+      // Hide or Modify Elements => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[hide_modify_elements]').checked ) {
+         $('.hide-modify-elements .asenha-subfields').show();
+      } else {
+         $('.hide-modify-elements .asenha-subfields').hide();        
+      }
+
+      // Hide or Modify Elements => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[hide_modify_elements]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.hide-modify-elements .asenha-subfields').fadeIn();
+         } else {
+            $('.hide-modify-elements .asenha-subfields').fadeOut();
          }
       });
 

@@ -61,7 +61,7 @@ class Admin_Site_Enhancements {
 		// Selectively enable enhancements based on options value
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
-		$options = get_option( 'admin_site_enhancements', array() );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
@@ -131,6 +131,11 @@ class Admin_Site_Enhancements {
 			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
 			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
 			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
+		}
+
+		// Admin Interface >> Hide or Modify Elements
+		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
+			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
 		}
 
 		// Instantiate object for Security features

@@ -493,4 +493,21 @@ class Admin_Interface {
 
 	}
 
+	/**
+	 * Modify admin bar menu for Admin Interface >> Hide or Modify Elements feature
+	 *
+	 * @param $wp_admin_bar object The admin bar.
+	 * @since 1.9.0
+	 */
+	public function modify_admin_bar_menu( $wp_admin_bar ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		// Hide WP Logo Menu
+		if ( array_key_exists( 'hide_default_wp_logo_menu', $options ) && $options['hide_default_wp_logo_menu'] ) {
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_wp_menu', 10 );
+		}
+
+	}
+
 }
