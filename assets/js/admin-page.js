@@ -33,7 +33,8 @@
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
       $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
       $('.hide-modify-elements').appendTo('.fields-admin-interface tbody');
-      $('.hide-default-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
+      $('.hide-ab-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
+      $('.hide-ab-customize-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-updates-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-comments-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-new-content-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
