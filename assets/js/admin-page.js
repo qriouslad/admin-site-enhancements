@@ -40,6 +40,8 @@
       $('.hide-ab-comments-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-new-content-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-howdy').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
+      $('.customize-admin-menu').appendTo('.fields-admin-interface tbody');
+      $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');
@@ -135,6 +137,25 @@
             $('.hide-modify-elements .asenha-subfields').fadeIn();
          } else {
             $('.hide-modify-elements .asenha-subfields').fadeOut();
+         }
+      });
+
+      // Customize Admin Menu => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[customize_admin_menu]').checked ) {
+         $('.customize-admin-menu .asenha-subfields').show();
+      } else {
+         $('.customize-admin-menu .asenha-subfields').hide();        
+      }
+
+      // Customize Admin Menu => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[customize_admin_menu]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.customize-admin-menu .asenha-subfields').fadeIn();
+            // Initialize sortable elements: https://api.jqueryui.com/sortable/
+            $('#custom-admin-menu').sortable();
+
+         } else {
+            $('.customize-admin-menu .asenha-subfields').fadeOut();
          }
       });
 
