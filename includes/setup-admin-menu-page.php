@@ -1001,76 +1001,167 @@ function asenha_render_field_text_subfield( $args ) {
  */
 function asenha_render_field_sortable_menu( $args ) {
 
-	global $menu;
-	global $submenu;
-
-	$i = 1;
-
 	?>
 	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on the toggle at the bottom of the admin menu.</div>
 	<ul id="custom-admin-menu" class="menu ui-sortable">
 	<?php
 
-	foreach ( $menu as $menu_key => $menu_info ) {
+	global $menu;
+	global $submenu;
 
-		if ( 'wp-menu-separator' == $menu_info[4] ) {
-			$menu_item_id = $menu_info[2];
-		} else {
-			$menu_item_id = $menu_info[5];
+	$i = 1;
+
+	// Check if there's an existing custom menu order data stored in options
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	if ( array_key_exists( 'custom_menu_order', $options ) ) {
+
+		$custom_menu = $options['custom_menu_order'];
+		$custom_menu = explode( ',', $custom_menu );
+
+		// Render sortables with data in custom menu order
+
+		foreach ( $custom_menu as $custom_menu_item ) {
+
+			foreach ( $menu as $menu_key => $menu_info ) {
+
+				if ( 'wp-menu-separator' == $menu_info[4] ) {
+					$menu_item_id = $menu_info[2];
+				} else {
+					$menu_item_id = $menu_info[5];
+				}
+
+				if ( $custom_menu_item == $menu_item_id ) {
+
+					?>
+					<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+						<div class="menu-item-bar">
+							<div class="menu-item-handle ui-sortable-handle">
+								<div class="item-title">
+									<span class="menu-item-title">
+					<?php
+
+					if ( 'wp-menu-separator' == $menu_info[4] ) {
+						$separator_name = $menu_info[2];
+						$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
+						$separator_name = str_replace( '--last', '-Last', $separator_name );
+						echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+					} else {
+						echo wp_kses_post( $menu_info[0] );
+					}
+
+					?>
+									</span>
+									<label class="menu-item-checkbox-label">
+										<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+										<span>Hide</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					<?php
+
+					$i = 1;
+
+					if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
+						?>
+						<div class="menu-item-settings wp-clearfix" style="display:none;">
+						<?php
+
+						foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+
+							$i++;
+
+							// echo $submenu_item[0];
+
+						}
+						?>
+						</div>
+						<?php
+
+					}
+					?>
+					</li>
+
+					<?php
+
+				}
+
+			}
+
 		}
 
-		?>
-		<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
-			<div class="menu-item-bar">
-				<div class="menu-item-handle ui-sortable-handle">
-					<div class="item-title">
-						<span class="menu-item-title">
-		<?php
+	} else {
 
-		if ( 'wp-menu-separator' == $menu_info[4] ) {
-			$separator_name = $menu_info[2];
-			$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
-			$separator_name = str_replace( '--last', '-Last', $separator_name );
-			echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
-		} else {
-			echo wp_kses_post( $menu_info[0] );
-		}
+		// Render sortables with existing items in the admin menu
 
-		?>
-						</span>
-						<label class="menu-item-checkbox-label">
-							<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
-							<span>Hide</span>
-						</label>
-					</div>
-				</div>
-			</div>
-		<?php
+		foreach ( $menu as $menu_key => $menu_info ) {
 
-		$i = 1;
+			if ( 'wp-menu-separator' == $menu_info[4] ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
 
-		if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
 			?>
-			<div class="menu-item-settings wp-clearfix" style="display:none;">
+			<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+				<div class="menu-item-bar">
+					<div class="menu-item-handle ui-sortable-handle">
+						<div class="item-title">
+							<span class="menu-item-title">
 			<?php
 
-			foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+			if ( 'wp-menu-separator' == $menu_info[4] ) {
+				$separator_name = $menu_info[2];
+				$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
+				$separator_name = str_replace( '--last', '-Last', $separator_name );
+				echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+			} else {
+				echo wp_kses_post( $menu_info[0] );
+			}
 
-				$i++;
+			?>
+							</span>
+							<label class="menu-item-checkbox-label">
+								<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+								<span>Hide</span>
+							</label>
+						</div>
+					</div>
+				</div>
+			<?php
 
-				// echo $submenu_item[0];
+			$i = 1;
+
+			if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
+				?>
+				<div class="menu-item-settings wp-clearfix" style="display:none;">
+				<?php
+
+				foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+
+					$i++;
+
+					// echo $submenu_item[0];
+
+				}
+				?>
+				</div>
+				<?php
 
 			}
 			?>
-			</div>
+			</li>
+
 			<?php
 
 		}
-		?>
-		</li>
 
-	<?php
+
 	}
+
+
 	?>
 	</ul>
 	<?php
