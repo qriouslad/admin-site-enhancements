@@ -298,3 +298,47 @@
 .form-table .asenha-toggle .asenha-text.with-prefix-suffix input {
     margin: 0 4px;
 }
+
+/* Sortable subfield */
+
+.form-table .asenha-toggle .asenha-sortable td {
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.subfield-description {
+    margin-bottom: 12px;
+}
+
+.custom-menu-order ul.menu {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.custom-menu-order .menu-item-bar .menu-item-handle {
+    max-width: 320px;
+    width: 320px;
+}
+
+.custom-menu-order .menu-item-handle .menu-item-checkbox {
+    display: inline-block;
+}
+
+.custom-menu-order .menu-item-handle .item-title {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0;
+}
+
+.menu-item-checkbox-label span {
+    font-weight: normal;
+}
+
+.custom-menu-order .menu-item-title span,
+.custom-menu-order .menu-item-settings .submenu-item span {
+    display: none;
+}
+
+.form-table .asenha-subfields td label.menu-item-checkbox-label {
+    top: 0;
+}

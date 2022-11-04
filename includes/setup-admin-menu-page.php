@@ -511,6 +511,44 @@ function asenha_register_settings() {
 		)
 	);
 
+	// Customize Admin Menu
+
+	$field_id = 'customize_admin_menu';
+	$field_slug = 'customize-admin-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Customize Admin Menu', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Customize the order of the admin menu items.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'custom_menu_order';
+	$field_slug = 'custom-menu-order';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_sortable_menu', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_type'			=> 'sortable-menu', // Custom argument
+			'field_description'		=> '', // Custom argument
+			'class'					=> 'asenha-sortable asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 	// Change Login URL
 
 	$field_id = 'change_login_url';
@@ -794,6 +832,13 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['hide_ab_howdy'] ) ) $options['hide_ab_howdy'] = false;
 	$options['hide_ab_howdy'] = ( 'on' == $options['hide_ab_howdy'] ? true : false );
 
+	// Customize Admin Menu
+
+	if ( ! isset( $options['customize_admin_menu'] ) ) $options['customize_admin_menu'] = false;
+	$options['customize_admin_menu'] = ( 'on' == $options['customize_admin_menu'] ? true : false );
+
+	if ( ! isset( $options['custom_menu_order'] ) ) $options['custom_menu_order'] = '';
+
 	// Security features
 
 	// Change Login URL
@@ -946,6 +991,96 @@ function asenha_render_field_text_subfield( $args ) {
 
 	echo $field_prefix . '<input type="text" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix;
 	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_description ) . '</label>';
+
+}
+
+/**
+ * Render sortable menu field
+ *
+ * @since 2.0.0
+ */
+function asenha_render_field_sortable_menu( $args ) {
+
+	global $menu;
+	global $submenu;
+
+	$i = 1;
+
+	?>
+	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on the toggle at the bottom of the admin menu.</div>
+	<ul id="custom-admin-menu" class="menu ui-sortable">
+	<?php
+
+	foreach ( $menu as $menu_key => $menu_info ) {
+
+		if ( 'wp-menu-separator' == $menu_info[4] ) {
+			$menu_item_id = $menu_info[2];
+		} else {
+			$menu_item_id = $menu_info[5];
+		}
+
+		?>
+		<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+			<div class="menu-item-bar">
+				<div class="menu-item-handle ui-sortable-handle">
+					<div class="item-title">
+						<span class="menu-item-title">
+		<?php
+
+		if ( 'wp-menu-separator' == $menu_info[4] ) {
+			$separator_name = $menu_info[2];
+			$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
+			$separator_name = str_replace( '--last', '-Last', $separator_name );
+			echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+		} else {
+			echo wp_kses_post( $menu_info[0] );
+		}
+
+		?>
+						</span>
+						<label class="menu-item-checkbox-label">
+							<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+							<span>Hide</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		<?php
+
+		$i = 1;
+
+		if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
+			?>
+			<div class="menu-item-settings wp-clearfix" style="display:none;">
+			<?php
+
+			foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+
+				$i++;
+
+				// echo $submenu_item[0];
+
+			}
+			?>
+			</div>
+			<?php
+
+		}
+		?>
+		</li>
+
+	<?php
+	}
+	?>
+	</ul>
+	<?php
+
+	$field_id = $args['field_id'];
+	$field_name = $args['field_name'];
+	$field_description = $args['field_description'];
+	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+	echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
 
 }
 

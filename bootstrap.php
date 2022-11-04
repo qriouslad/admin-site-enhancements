@@ -143,6 +143,17 @@ class Admin_Site_Enhancements {
 			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
 		}
 
+		// Admin Interface >> Customize Admin Menu
+
+		// Load jQuery UI sortables scripts regardless of whether Customize Admin Menu is enabled or not. This is needed to enable sorting upon clicking the feature toggle.
+		add_action( 'admin_enqueue_scripts', [ $admin_interface, 'enqueue_jquery_ui_sortables_scripts' ] );
+
+		if ( array_key_exists( 'customize_admin_menu', $options ) && $options['customize_admin_menu'] ) {
+			add_action( 'wp_ajax_save_custom_menu_order', [ $admin_interface, 'save_custom_menu_order' ] );
+			add_filter( 'custom_menu_order', '__return_true' );
+			add_filter( 'menu_order', [ $admin_interface, 'render_custom_menu_order' ] );
+		}
+
 		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
