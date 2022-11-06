@@ -31,6 +31,8 @@
       // Place fields into "Admin Interface" tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface tbody');
       $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
+      $('.customize-admin-menu').appendTo('.fields-admin-interface tbody');
+      $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
       $('.hide-modify-elements').appendTo('.fields-admin-interface tbody');
       $('.hide-ab-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-customize-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
@@ -40,8 +42,6 @@
       $('.hide-ab-howdy').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-admin-bar').appendTo('.fields-admin-interface tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
-      $('.customize-admin-menu').appendTo('.fields-admin-interface tbody');
-      $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');

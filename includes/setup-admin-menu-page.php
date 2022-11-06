@@ -263,7 +263,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide comments column.', // Custom argument
+			'field_label'			=> 'Remove comments column.', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -282,7 +282,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide tags column (for posts).', // Custom argument
+			'field_label'			=> 'Remove tags column (for posts).', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -359,7 +359,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'		=> 'Easily simplify or customize various admin UI elements.', // Custom argument
+			'field_description'		=> 'Remove various elements from the admin bar.', // Custom argument
 			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
@@ -377,7 +377,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide WordPress logo/menu', // Custom argument
+			'field_label'			=> 'Remove WordPress logo/menu', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -394,7 +394,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide customize menu', // Custom argument
+			'field_label'			=> 'Remove customize menu', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -411,7 +411,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide updates counter/link', // Custom argument
+			'field_label'			=> 'Remove updates counter/link', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -428,7 +428,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide comments counter/link', // Custom argument
+			'field_label'			=> 'Remove comments counter/link', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -445,7 +445,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide new content menu', // Custom argument
+			'field_label'			=> 'Remove new content menu', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -462,7 +462,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide \'Howdy\'', // Custom argument
+			'field_label'			=> 'Remove \'Howdy\'', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
