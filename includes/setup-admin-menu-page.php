@@ -30,7 +30,7 @@ function asenha_add_settings_page() {
 		<div id="asenha-header" class="asenha-header">
 			<div class="asenha-header-left">
 				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io" target="_blank">bowo.io</a></small></h1>
-				<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a>
+				<!-- <a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php // esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a> -->
 				<a href="https://wordpress.org/plugins/admin-site-enhancements/#reviews" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
 				<a href="https://wordpress.org/support/plugin/admin-site-enhancements/" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
 				<a href="https://paypal.me/qriouslad" target="_blank" class="asenha-header-action">&#9829; <?php esc_html_e( 'Donate', 'admin-site-enhancements' ); ?></a>
@@ -263,7 +263,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide comments column.', // Custom argument
+			'field_label'			=> 'Remove comments column.', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -282,7 +282,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide tags column (for posts).', // Custom argument
+			'field_label'			=> 'Remove tags column (for posts).', // Custom argument
 			'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -322,6 +322,148 @@ function asenha_register_settings() {
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 			'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
 			'class'				=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// View Admin as Role
+
+	$field_id = 'view_admin_as_role';
+	$field_slug = 'view-admin-as-role';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'View Admin as Role', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	// Hide or Modify Elements
+
+	$field_id = 'hide_modify_elements';
+	$field_slug = 'hide-modify-elements';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Clean Up Admin Bar', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Remove various elements from the admin bar.', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_wp_logo_menu';
+	$field_slug = 'hide-ab-wp-logo-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove WordPress logo/menu', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_customize_menu';
+	$field_slug = 'hide-ab-customize-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove customize menu', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_updates_menu';
+	$field_slug = 'hide-ab-updates-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove updates counter/link', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_comments_menu';
+	$field_slug = 'hide-ab-comments-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove comments counter/link', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_new_content_menu';
+	$field_slug = 'hide-ab-new-content-menu';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove new content menu', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
+	$field_id = 'hide_ab_howdy';
+	$field_slug = 'hide-ab-howdy';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'', // Field title
+		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+			'field_label'			=> 'Remove \'Howdy\'', // Custom argument
+			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
@@ -369,145 +511,41 @@ function asenha_register_settings() {
 		}
 	}
 
-	// View Admin as Role
+	// Customize Admin Menu
 
-	$field_id = 'view_admin_as_role';
-	$field_slug = 'view-admin-as-role';
+	$field_id = 'customize_admin_menu';
+	$field_slug = 'customize-admin-menu';
 
 	add_settings_field(
 		$field_id, // Field ID
-		'View Admin as Role', // Field title
+		'Admin Menu Organizer', // Field title
 		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
 		'main-section', // Section ID
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
+			'field_description'		=> 'Customize the order of the admin menu and optionally hide some items.', // Custom argument
 			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
-	// Hide or Modify Elements
-
-	$field_id = 'hide_modify_elements';
-	$field_slug = 'hide-modify-elements';
+	$field_id = 'custom_menu_order';
+	$field_slug = 'custom-menu-order';
 
 	add_settings_field(
 		$field_id, // Field ID
-		'Hide or Modify Elements', // Field title
-		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		'', // Field title
+		'asenha_render_field_sortable_menu', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
 		'main-section', // Section ID
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'		=> 'Easily simplify or customize various admin UI elements.', // Custom argument
-			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_wp_logo_menu';
-	$field_slug = 'hide-ab-wp-logo-menu';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide WordPress logo/menu in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_customize_menu';
-	$field_slug = 'hide-ab-customize-menu';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide customize menu in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_updates_menu';
-	$field_slug = 'hide-ab-updates-menu';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide updates counter/link in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_comments_menu';
-	$field_slug = 'hide-ab-comments-menu';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide comments counter/link in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_new_content_menu';
-	$field_slug = 'hide-ab-new-content-menu';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide new content menu in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
-		)
-	);
-
-	$field_id = 'hide_ab_howdy';
-	$field_slug = 'hide-ab-howdy';
-
-	add_settings_field(
-		$field_id, // Field ID
-		'', // Field title
-		'asenha_render_field_checkbox_plain', // Callback to render field with custom arguments in the array below
-		ASENHA_SLUG, // Settings page slug
-		'main-section', // Section ID
-		array(
-			'field_id'				=> $field_id, // Custom argument
-			'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-			'field_label'			=> 'Hide \'Howdy\' in the admin bar', // Custom argument
-			'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			'field_type'			=> 'sortable-menu', // Custom argument
+			'field_description'		=> '', // Custom argument
+			'class'					=> 'asenha-sortable asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
 
@@ -794,6 +832,14 @@ function asenha_sanitize_options( $options ) {
 	if ( ! isset( $options['hide_ab_howdy'] ) ) $options['hide_ab_howdy'] = false;
 	$options['hide_ab_howdy'] = ( 'on' == $options['hide_ab_howdy'] ? true : false );
 
+	// Customize Admin Menu
+
+	if ( ! isset( $options['customize_admin_menu'] ) ) $options['customize_admin_menu'] = false;
+	$options['customize_admin_menu'] = ( 'on' == $options['customize_admin_menu'] ? true : false );
+
+	if ( ! isset( $options['custom_menu_order'] ) ) $options['custom_menu_order'] = '';
+	if ( ! isset( $options['custom_menu_hidden'] ) ) $options['custom_menu_hidden'] = '';
+
 	// Security features
 
 	// Change Login URL
@@ -946,6 +992,213 @@ function asenha_render_field_text_subfield( $args ) {
 
 	echo $field_prefix . '<input type="text" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix;
 	echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_description ) . '</label>';
+
+}
+
+/**
+ * Render sortable menu field
+ *
+ * @since 2.0.0
+ */
+function asenha_render_field_sortable_menu( $args ) {
+
+	?>
+	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on "Show All" at the bottom of the admin menu.</div>
+	<ul id="custom-admin-menu" class="menu ui-sortable">
+	<?php
+
+	global $menu;
+	global $submenu;
+	$options = get_option( ASENHA_SLUG_U );
+
+	// Get hidden menu items
+	if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+		$hidden_menu = $options['custom_menu_hidden'];
+		$hidden_menu = explode( ',', $hidden_menu );
+	} else {
+		$hidden_menu = array();
+	}
+
+	$i = 1;
+
+	// Check if there's an existing custom menu order data stored in options
+
+	if ( array_key_exists( 'custom_menu_order', $options ) ) {
+
+		$custom_menu = $options['custom_menu_order'];
+		$custom_menu = explode( ',', $custom_menu );
+
+		// Render sortables with data in custom menu order
+
+		foreach ( $custom_menu as $custom_menu_item ) {
+
+			foreach ( $menu as $menu_key => $menu_info ) {
+
+				if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+					$menu_item_id = $menu_info[2];
+				} else {
+					$menu_item_id = $menu_info[5];
+				}
+
+				if ( $custom_menu_item == $menu_item_id ) {
+
+					?>
+					<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+						<div class="menu-item-bar">
+							<div class="menu-item-handle ui-sortable-handle">
+								<div class="item-title">
+									<span class="menu-item-title">
+					<?php
+
+					if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+						$separator_name = $menu_info[2];
+						$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
+						$separator_name = str_replace( '--last', '-Last', $separator_name );
+						echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+					} else {
+						echo wp_kses_post( $menu_info[0] );
+					}
+
+					?>
+									</span>
+									<label class="menu-item-checkbox-label">
+										<?php
+											if ( in_array( $custom_menu_item, $hidden_menu ) ) {
+											?>
+										<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>" checked>
+										<span>Hide</span>
+											<?php
+											} else {
+											?>
+										<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+										<span>Hide</span>
+											<?php
+											}
+										?>
+									</label>
+								</div>
+							</div>
+						</div>
+					<?php
+
+					$i = 1;
+
+					if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
+						?>
+						<div class="menu-item-settings wp-clearfix" style="display:none;">
+						<?php
+
+						foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+
+							$i++;
+
+							// echo $submenu_item[0];
+
+						}
+						?>
+						</div>
+						<?php
+
+					}
+					?>
+					</li>
+
+					<?php
+
+				}
+
+			}
+
+		}
+
+	} else {
+
+		// Render sortables with existing items in the admin menu
+
+		foreach ( $menu as $menu_key => $menu_info ) {
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
+
+			?>
+			<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+				<div class="menu-item-bar">
+					<div class="menu-item-handle ui-sortable-handle">
+						<div class="item-title">
+							<span class="menu-item-title">
+			<?php
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$separator_name = $menu_info[2];
+				$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
+				$separator_name = str_replace( '--last', '-Last', $separator_name );
+				echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+			} else {
+				echo wp_kses_post( $menu_info[0] );
+			}
+
+			?>
+							</span>
+							<label class="menu-item-checkbox-label">
+								<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+								<span>Hide</span>
+							</label>
+						</div>
+					</div>
+				</div>
+			<?php
+
+			$i = 1;
+
+			if ( array_key_exists( $menu_info[2], $submenu ) && @is_countable( $submenu[$menu_info[2]] ) && @sizeof( $submenu[$menu_info[2]] ) > 0 ) {
+				?>
+				<div class="menu-item-settings wp-clearfix" style="display:none;">
+				<?php
+
+				foreach ( $submenu[$menu_info[2]] as $submenu_item ) {
+
+					$i++;
+
+					// echo $submenu_item[0];
+
+				}
+				?>
+				</div>
+				<?php
+
+			}
+			?>
+			</li>
+
+			<?php
+
+		}
+
+
+	}
+
+
+	?>
+	</ul>
+	<?php
+
+	$field_id = $args['field_id'];
+	$field_name = $args['field_name'];
+	$field_description = $args['field_description'];
+	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+	// Hidden input field to store custom menu order (from options as is, or sortupdate) upon clicking Save Changes. 
+	echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
+
+	$field_id = 'custom_menu_hidden';
+	$field_name = ASENHA_SLUG_U . '['. $field_id .']';
+	$field_option_value = ( isset( $options[$field_id] ) ) ? $options[$field_id] : '';
+
+	// Hidden input field to store hidden menu itmes (from options as is, or 'Hide' checkbox clicks) upon clicking Save Changes.
+	echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
 
 }
 

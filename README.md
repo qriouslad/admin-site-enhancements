@@ -4,8 +4,8 @@ Contributors: qriouslad
 Donate link: https://paypal.me/qriouslad  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
-Tested up to: 6.0.3  
-Stable tag: 1.9.0  
+Tested up to: 6.1  
+Stable tag: 2.0.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,28 +20,29 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Content Management
 
-* **Enable one-click duplication of pages and any post types**. Will also duplicate the taxonomies and post metas (custom fields).
-* **Enable media replacement**. Easily replace any type of media file with a new one while retaining the existing media ID and file name.
-* **Enhance list tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
-  * **Show the featured image column** in the list tables for pages and post types that support featured images.
-  * **Show the excerpt column** in the list tables for pages and post types that support excerpt.
-  * **Show the ID column** in the list tables for pages, all post types, all taxonomies, media, users and comments.
-  * **Hide the comments column** in in the list tables for pages, post types that support comments, and alse media/attachments.
-  * **Hide the post tags column** in the list table for posts.
-  * **Show custom taxonomy dropdown filter(s)** on the list tables of all post types for taxonomies that are hierarchical like post categories.
+* **Enable Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
+* **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID and file name.
+* **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
+  * _Show the featured image column_: in the list tables for pages and post types that support featured images.
+  * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
+  * _Show the ID column_: in the list tables for pages, all post types, all taxonomies, media, users and comments.
+  * _Remove the comments column_: in in the list tables for pages, post types that support comments, and alse media/attachments.
+  * _Remove the post tags column_: in the list table for posts.
+  * _Show custom taxonomy dropdown filter(s)_: on the list tables of all post types for taxonomies that are hierarchical like post categories.
 
 ### Admin Interface
 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
-* **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
-* **Hide or Modify Elements**. Easily simplify or customize various admin UI elements.
-  * Admin bar: Hide Wordpress logo/menu
-  * Admin bar: Hide customize menu/link
-  * Admin bar: Hide updates counter/link
-  * Admin bar: Hide comments counter/link
-  * Admin bar: Hide new content menu
-  * Admin bar: Hide 'Howdy' text
+* **Admin Menu Organizer**. Customize the order of the admin menu and optionally hide some items.
+* **Clean Up Admin Bar**. Remove various elements from the admin bar.
+  * Remove WordPress logo/menu
+  * Remove customize menu/link
+  * Remove updates counter/link
+  * Remove comments counter/link
+  * Remove new content menu
+  * Remove 'Howdy' text
+* **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 
 ### Security
 
@@ -86,6 +87,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.0.0 (2022.11.06)
+
+* **[ADDED] Admin Interface >> Admin Menu Organizer**: Customize the order of the admin menu and optionally hide some items.
 
 ### 1.9.0 (2022.11.03)
 

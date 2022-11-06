@@ -556,4 +556,293 @@ class Admin_Interface {
 
 	}
 
+	/**
+	 * Enqueue scripts and styles to enable sortable, draggable, etc. like in Appearance >> Menus. This is using jQuery UI Sortable.
+	 *
+	 * @since 2.0.0
+	 */
+	public function enqueue_jquery_ui_sortables_scripts() {
+
+		// Only enqueue scripts on the plugin's settings page
+		if ( is_asenha() ) {
+
+			// Re-register and re-enqueue jQuery UI Core and plugins required for sortable, draggable and droppable when ordering menu items
+			wp_deregister_script( 'jquery-ui-core' );
+			wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.js', array( 'jquery' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-core' );
+
+			wp_deregister_script( 'jquery-ui-mouse' );
+			wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-mouse' );
+
+			wp_deregister_script( 'jquery-ui-sortable' );
+			wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-sortable' );
+
+			wp_deregister_script( 'jquery-ui-draggable' );
+			wp_register_script( 'jquery-ui-draggable', get_site_url() . '/wp-includes/js/jquery/ui/draggable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-draggable' );
+
+			wp_deregister_script( 'jquery-ui-droppable' );
+			wp_register_script( 'jquery-ui-droppable', get_site_url() . '/wp-includes/js/jquery/ui/droppable.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-droppable' );
+
+			// Script to set behaviour and actions of the sortable menu
+			wp_enqueue_script( 'asenha-custom-admin-menu', ASENHA_URL . 'assets/js/custom-admin-menu.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
+
+		}
+
+	}
+
+	/**
+	 * Save custom menu order into an option
+	 *
+	 * @since 2.0.0
+	 */
+	public function save_custom_menu_order() {
+
+		if ( isset( $_REQUEST ) && ( 'save_custom_menu_order' == $_REQUEST['action'] ) ) {
+
+			$options = get_option( ASENHA_SLUG_U );
+
+			// Empty option value first
+			// $options['custom_menu_order'] = '';
+			// update_option( ASENHA_SLUG_U, $options );
+
+			// Save new value
+			// $options = get_option( ASENHA_SLUG_U );
+			$options['custom_menu_order'] = sanitize_text_field( $_REQUEST['menu_order'] );
+			$success = update_option( ASENHA_SLUG_U, $options ); // true or false
+
+			if ( $success ) {
+
+				$data = array(
+					'status'	=> 'success',
+					'message'	=> 'Custom menu order was successfully saved.',
+				);
+
+			} else {
+
+				$data = array(
+					'status'	=> 'error',
+					'message'	=> 'Custom menu order was not saved.',
+				);
+
+			}
+
+			echo json_encode( $data );
+
+		}
+
+	}
+
+	/**
+	 * Render custom menu order
+	 *
+	 * @param $menu_order array an ordered array of menu items
+	 * @link https://developer.wordpress.org/reference/hooks/menu_order/
+	 * @since 2.0.0
+	 */
+	public function render_custom_menu_order( $menu_order ) {
+
+		global $menu;
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get current menu order. We're not using the default $menu_order which uses index.php, edit.php as array values.
+
+		$current_menu_order = array();
+
+		foreach ( $menu as $menu_key => $menu_info ) {
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
+
+			$current_menu_order[] = array( $menu_item_id, $menu_info[2] );
+
+		}
+
+		// Get custom menu order
+
+		if ( array_key_exists( 'custom_menu_order', $options ) ) {
+			$custom_menu_order = $options['custom_menu_order']; // comma separated
+		} else {
+			$custom_menu_order = '';
+		}
+
+		$custom_menu_order = explode( ",", $custom_menu_order ); // array of menu ID, e.g. menu-dashboard
+
+		// Return menu order for rendering
+
+		$rendered_menu_order = array();
+
+		foreach ( $custom_menu_order as $custom_menu_item_id ) {
+
+			foreach ( $current_menu_order as $current_menu_item_id => $current_menu_item ) {
+
+				if ( $custom_menu_item_id == $current_menu_item[0] ) {
+
+					$rendered_menu_order[] = $current_menu_item[1];
+
+				}
+
+			}
+
+		}
+
+		return $rendered_menu_order;
+
+	}
+
+	/**
+	 * Save menu items that was chosen to be hidden
+	 *
+	 * @since 2.0.0
+	 */
+	public function save_hidden_menu_items() {
+
+		if ( isset( $_REQUEST ) && ( 'save_hidden_menu_items' == $_REQUEST['action'] ) ) {
+
+			$options = get_option( ASENHA_SLUG_U );
+
+			// Empty option value first
+			// $options['custom_menu_order'] = '';
+			// update_option( ASENHA_SLUG_U, $options );
+
+			// Save new value
+			// $options = get_option( ASENHA_SLUG_U );
+			$options['custom_menu_hidden'] = sanitize_text_field( $_REQUEST['hidden_menu_items'] );
+			$success = update_option( ASENHA_SLUG_U, $options ); // true or false
+
+			if ( $success ) {
+
+				$data = array(
+					'status'	=> 'success',
+					'message'	=> 'Hidden menu items was successfully saved.',
+				);
+
+			} else {
+
+				$data = array(
+					'status'	=> 'error',
+					'message'	=> 'Hidden menu items was not saved.',
+				);
+
+			}
+
+			echo json_encode( $data );
+
+		}
+
+	}
+
+	/**
+	 * Hide menu items by adding 'hidden' class (part of WP Core's common.css)
+	 *
+	 * @since 2.0.0
+	 */
+	public function hide_menu_items() {
+
+		global $menu;
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+			$hidden_menu = explode( ',', $hidden_menu );
+		} else {
+			$hidden_menu = array();
+		}
+
+		foreach ( $menu as $menu_key => $menu_info ) {
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
+
+			if ( in_array( $menu_item_id, $hidden_menu ) ) {
+
+				$menu[$menu_key][4] = $menu_info[4] . ' hidden asenha_hidden_menu';
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add toggle to show hidden menu items
+	 *
+	 * @since 2.0.0
+	 */
+	public function add_hidden_menu_toggle() {
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+		} else {
+			$hidden_menu = '';
+		}
+
+		if ( ! empty( $hidden_menu ) ) {
+
+			add_menu_page(
+				'Show All',
+				'Show All',
+				'manage_options',
+				'asenha_show_hidden_menu',
+				function () {  return false;  },
+				"dashicons-arrow-down-alt2",
+				300.1 // position
+			);
+
+			add_menu_page(
+				'Show Less',
+				'Show Less',
+				'manage_options',
+				'asenha_hide_hidden_menu',
+				function () {  return false;  },
+				"dashicons-arrow-up-alt2",
+				300.2 // position
+			);
+		}
+
+	}
+
+	/**
+	 * Script to toggle hidden menu itesm
+	 *
+	 * @since 2.0.0
+	 */
+	public function enqueue_toggle_hidden_menu_script() {
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+		} else {
+			$hidden_menu = '';
+		}
+
+		if ( ! empty( $hidden_menu ) ) {
+
+			// Script to set behaviour and actions of the sortable menu
+			wp_enqueue_script( 'asenha-toggle-hidden-menu', ASENHA_URL . 'assets/js/toggle-hidden-menu.js', array(), ASENHA_VERSION, false );
+
+		}
+
+	}
+
 }
