@@ -518,14 +518,14 @@ function asenha_register_settings() {
 
 	add_settings_field(
 		$field_id, // Field ID
-		'Customize Admin Menu', // Field title
+		'Admin Menu Organizer', // Field title
 		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
 		ASENHA_SLUG, // Settings page slug
 		'main-section', // Section ID
 		array(
 			'field_id'				=> $field_id, // Custom argument
 			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'		=> 'Customize the order of the admin menu items.', // Custom argument
+			'field_description'		=> 'Customize the order of the admin menu and optionally hide some items.', // Custom argument
 			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 			'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 		)
@@ -838,6 +838,7 @@ function asenha_sanitize_options( $options ) {
 	$options['customize_admin_menu'] = ( 'on' == $options['customize_admin_menu'] ? true : false );
 
 	if ( ! isset( $options['custom_menu_order'] ) ) $options['custom_menu_order'] = '';
+	if ( ! isset( $options['custom_menu_hidden'] ) ) $options['custom_menu_hidden'] = '';
 
 	// Security features
 
@@ -1002,18 +1003,25 @@ function asenha_render_field_text_subfield( $args ) {
 function asenha_render_field_sortable_menu( $args ) {
 
 	?>
-	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on the toggle at the bottom of the admin menu.</div>
+	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on "Show All" at the bottom of the admin menu.</div>
 	<ul id="custom-admin-menu" class="menu ui-sortable">
 	<?php
 
 	global $menu;
 	global $submenu;
+	$options = get_option( ASENHA_SLUG_U );
+
+	// Get hidden menu items
+	if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+		$hidden_menu = $options['custom_menu_hidden'];
+		$hidden_menu = explode( ',', $hidden_menu );
+	} else {
+		$hidden_menu = array();
+	}
 
 	$i = 1;
 
 	// Check if there's an existing custom menu order data stored in options
-
-	$options = get_option( ASENHA_SLUG_U );
 
 	if ( array_key_exists( 'custom_menu_order', $options ) ) {
 
@@ -1026,7 +1034,7 @@ function asenha_render_field_sortable_menu( $args ) {
 
 			foreach ( $menu as $menu_key => $menu_info ) {
 
-				if ( 'wp-menu-separator' == $menu_info[4] ) {
+				if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 					$menu_item_id = $menu_info[2];
 				} else {
 					$menu_item_id = $menu_info[5];
@@ -1042,7 +1050,7 @@ function asenha_render_field_sortable_menu( $args ) {
 									<span class="menu-item-title">
 					<?php
 
-					if ( 'wp-menu-separator' == $menu_info[4] ) {
+					if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 						$separator_name = $menu_info[2];
 						$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
 						$separator_name = str_replace( '--last', '-Last', $separator_name );
@@ -1054,8 +1062,19 @@ function asenha_render_field_sortable_menu( $args ) {
 					?>
 									</span>
 									<label class="menu-item-checkbox-label">
+										<?php
+											if ( in_array( $custom_menu_item, $hidden_menu ) ) {
+											?>
+										<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>" checked>
+										<span>Hide</span>
+											<?php
+											} else {
+											?>
 										<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
 										<span>Hide</span>
+											<?php
+											}
+										?>
 									</label>
 								</div>
 							</div>
@@ -1098,7 +1117,7 @@ function asenha_render_field_sortable_menu( $args ) {
 
 		foreach ( $menu as $menu_key => $menu_info ) {
 
-			if ( 'wp-menu-separator' == $menu_info[4] ) {
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 				$menu_item_id = $menu_info[2];
 			} else {
 				$menu_item_id = $menu_info[5];
@@ -1112,7 +1131,7 @@ function asenha_render_field_sortable_menu( $args ) {
 							<span class="menu-item-title">
 			<?php
 
-			if ( 'wp-menu-separator' == $menu_info[4] ) {
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 				$separator_name = $menu_info[2];
 				$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
 				$separator_name = str_replace( '--last', '-Last', $separator_name );
@@ -1171,6 +1190,14 @@ function asenha_render_field_sortable_menu( $args ) {
 	$field_description = $args['field_description'];
 	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
 
+	// Hidden input field to store custom menu order (from options as is, or sortupdate) upon clicking Save Changes. 
+	echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
+
+	$field_id = 'custom_menu_hidden';
+	$field_name = ASENHA_SLUG_U . '['. $field_id .']';
+	$field_option_value = ( isset( $options[$field_id] ) ) ? $options[$field_id] : '';
+
+	// Hidden input field to store hidden menu itmes (from options as is, or 'Hide' checkbox clicks) upon clicking Save Changes.
 	echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
 
 }

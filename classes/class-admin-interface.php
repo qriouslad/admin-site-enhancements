@@ -645,15 +645,17 @@ class Admin_Interface {
 	 */
 	public function render_custom_menu_order( $menu_order ) {
 
-		// Get current menu order. We're not using the default $menu_order which uses index.php, edit.php as array values.
-
 		global $menu;
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get current menu order. We're not using the default $menu_order which uses index.php, edit.php as array values.
 
 		$current_menu_order = array();
 
 		foreach ( $menu as $menu_key => $menu_info ) {
 
-			if ( 'wp-menu-separator' == $menu_info[4] ) {
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 				$menu_item_id = $menu_info[2];
 			} else {
 				$menu_item_id = $menu_info[5];
@@ -664,8 +666,6 @@ class Admin_Interface {
 		}
 
 		// Get custom menu order
-
-		$options = get_option( ASENHA_SLUG_U );
 
 		if ( array_key_exists( 'custom_menu_order', $options ) ) {
 			$custom_menu_order = $options['custom_menu_order']; // comma separated
@@ -694,6 +694,154 @@ class Admin_Interface {
 		}
 
 		return $rendered_menu_order;
+
+	}
+
+	/**
+	 * Save menu items that was chosen to be hidden
+	 *
+	 * @since 2.0.0
+	 */
+	public function save_hidden_menu_items() {
+
+		if ( isset( $_REQUEST ) && ( 'save_hidden_menu_items' == $_REQUEST['action'] ) ) {
+
+			$options = get_option( ASENHA_SLUG_U );
+
+			// Empty option value first
+			// $options['custom_menu_order'] = '';
+			// update_option( ASENHA_SLUG_U, $options );
+
+			// Save new value
+			// $options = get_option( ASENHA_SLUG_U );
+			$options['custom_menu_hidden'] = sanitize_text_field( $_REQUEST['hidden_menu_items'] );
+			$success = update_option( ASENHA_SLUG_U, $options ); // true or false
+
+			if ( $success ) {
+
+				$data = array(
+					'status'	=> 'success',
+					'message'	=> 'Hidden menu items was successfully saved.',
+				);
+
+			} else {
+
+				$data = array(
+					'status'	=> 'error',
+					'message'	=> 'Hidden menu items was not saved.',
+				);
+
+			}
+
+			echo json_encode( $data );
+
+		}
+
+	}
+
+	/**
+	 * Hide menu items by adding 'hidden' class (part of WP Core's common.css)
+	 *
+	 * @since 2.0.0
+	 */
+	public function hide_menu_items() {
+
+		global $menu;
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+			$hidden_menu = explode( ',', $hidden_menu );
+		} else {
+			$hidden_menu = array();
+		}
+
+		foreach ( $menu as $menu_key => $menu_info ) {
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
+
+			if ( in_array( $menu_item_id, $hidden_menu ) ) {
+
+				$menu[$menu_key][4] = $menu_info[4] . ' hidden asenha_hidden_menu';
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Add toggle to show hidden menu items
+	 *
+	 * @since 2.0.0
+	 */
+	public function add_hidden_menu_toggle() {
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+		} else {
+			$hidden_menu = '';
+		}
+
+		if ( ! empty( $hidden_menu ) ) {
+
+			add_menu_page(
+				'Show All',
+				'Show All',
+				'manage_options',
+				'asenha_show_hidden_menu',
+				function () {  return false;  },
+				"dashicons-arrow-down-alt2",
+				300.1 // position
+			);
+
+			add_menu_page(
+				'Show Less',
+				'Show Less',
+				'manage_options',
+				'asenha_hide_hidden_menu',
+				function () {  return false;  },
+				"dashicons-arrow-up-alt2",
+				300.2 // position
+			);
+		}
+
+	}
+
+	/**
+	 * Script to toggle hidden menu itesm
+	 *
+	 * @since 2.0.0
+	 */
+	public function enqueue_toggle_hidden_menu_script() {
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get hidden menu items
+
+		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
+			$hidden_menu = $options['custom_menu_hidden'];
+		} else {
+			$hidden_menu = '';
+		}
+
+		if ( ! empty( $hidden_menu ) ) {
+
+			// Script to set behaviour and actions of the sortable menu
+			wp_enqueue_script( 'asenha-toggle-hidden-menu', ASENHA_URL . 'assets/js/toggle-hidden-menu.js', array(), ASENHA_VERSION, false );
+
+		}
 
 	}
 
