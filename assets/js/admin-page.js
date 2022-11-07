@@ -46,6 +46,7 @@
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security tbody');
       $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
+      $('.hide-author-slug').appendTo('.fields-security tbody');
 
       // Place fields into "Utilities" tab
       $('.redirect-after-login').appendTo('.fields-utilities tbody');

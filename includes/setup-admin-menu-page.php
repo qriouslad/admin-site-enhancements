@@ -589,6 +589,26 @@ function asenha_register_settings() {
 		)
 	);
 
+	// Hide Author Slug
+
+	$field_id = 'hide_author_slug';
+	$field_slug = 'hide-author-slug';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Hide Author Slug', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Default is ' . get_site_url() . '/author/[username]/', // Custom argument
+			'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 	// Redirect After Login
 
 	$field_id = 'redirect_after_login';
@@ -848,6 +868,10 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
 	$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+	
+	// Hide Author Slug
+	if ( ! isset( $options['hide_author_slug'] ) ) $options['hide_author_slug'] = false;
+	$options['hide_author_slug'] = ( 'on' == $options['hide_author_slug'] ? true : false );
 
 	// Utilities features
 

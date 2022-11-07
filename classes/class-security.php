@@ -69,4 +69,72 @@ class Security {
 
 	}
 
+	/**
+	 * replace user slug in wp-json users to encrypted value
+     * used by rest_prepare_user filter
+	 */
+	function alter_json_users($response, $user, $request) {
+		$data = $response->get_data();
+        $data['slug'] = $this->encrypt($data['id']);
+        $response->set_data($data);
+
+		return $response;
+	}
+
+	/**
+	 * replace author name in author link to encrypted value
+     * used by author_link filter
+	 * 
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 */
+	function alter_author_link( $link, $author_id, $author_nicename ) {
+		return str_replace ( '/' . $author_nicename, '/' . $this->encrypt( $author_id ), $link );
+	}
+
+	/**
+	 * if a author name is queried we have to decrypt it
+     * used by pre_get_posts action
+	 * 
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 */
+	function alter_author_query( $query ) {
+		if ( $query->is_author() && $query->query_vars['author_name'] != '' ) {
+		  if ( ctype_xdigit( $query->query_vars['author_name'] ) ) {
+			$user = get_user_by( 'id', $this->decrypt( $query->query_vars['author_name'] ) );
+			if ( $user ) {
+			  $query->set( 'author_name', $user->user_nicename );
+			} else {
+			  $query->is_404 = true;
+			  $query->is_author = false;
+			  $query->is_archive = false;
+			}
+		  } else {
+			$query->is_404 = true;
+			$query->is_author = false;
+			$query->is_archive = false;
+		  }
+		}
+		
+		return;
+	}
+
+	/**
+	 * helper function to encrypt author name
+	 * 
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 */
+	private function encrypt( $id ) {
+      return bin2hex( openssl_encrypt( base_convert( $id, 10, 36 ), 'DES-EDE3', md5( $_SERVER['SERVER_ADDR'] . ASENHA_URL ), OPENSSL_RAW_DATA ) );
+	}
+
+	
+	/**
+	 * helper function to decrypt author name
+	 * 
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 */
+	private function decrypt( $encid ) {
+      return base_convert( openssl_decrypt( pack('H*', $encid), 'DES-EDE3', md5( $_SERVER['SERVER_ADDR'] . ASENHA_URL ), OPENSSL_RAW_DATA ), 36, 10 );
+	}
+
 }
