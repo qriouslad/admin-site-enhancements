@@ -167,7 +167,7 @@ function asenha_register_settings() {
 		array(
 			'field_id'			=> $field_id, // Custom argument
 			'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-			'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID and file name.', // Custom argument
+			'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.', // Custom argument
 			'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 		)
 	);
@@ -589,6 +589,26 @@ function asenha_register_settings() {
 		)
 	);
 
+	// Obfuscate Author Slugs
+
+	$field_id = 'obfuscate_author_slugs';
+	$field_slug = 'obfuscate-author-slugs';
+
+	add_settings_field(
+		$field_id, // Field ID
+		'Obfuscate Author Slugs', // Field title
+		'asenha_render_field_checkbox_toggle', // Callback to render field with custom arguments in the array below
+		ASENHA_SLUG, // Settings page slug
+		'main-section', // Section ID
+		array(
+			'field_id'				=> $field_id, // Custom argument
+			'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+			'field_description'		=> 'Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. <em>sitename.com/author/username1/</em> into <em>sitename.com/author/a6r5b8ytu9gp34bv/</em>, and output 404 errors for the original URLs. Also obfuscates in /wp-json/wp/v2/users/ REST API endpoint.', // Custom argument
+			'field_options_wrapper'	=> false, // Custom argument. Add container for additional options
+			'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
+		)
+	);
+
 	// Redirect After Login
 
 	$field_id = 'redirect_after_login';
@@ -848,6 +868,10 @@ function asenha_sanitize_options( $options ) {
 
 	if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
 	$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+	
+	// Obfuscate Author Slugs
+	if ( ! isset( $options['obfuscate_author_slugs'] ) ) $options['obfuscate_author_slugs'] = false;
+	$options['obfuscate_author_slugs'] = ( 'on' == $options['obfuscate_author_slugs'] ? true : false );
 
 	// Utilities features
 

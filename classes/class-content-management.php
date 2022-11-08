@@ -545,7 +545,7 @@ class Content_Management {
 				<div class="inside">
 				<button type="button" id="asenha-media-replace" class="button-secondary button-large asenha-media-replace-button">Select New Media File</button>
 				<input type="hidden" id="new-attachment-id" name="new-attachment-id" />
-				<div class="asenha-media-replace-notes">The current file will be replaced with the uploaded and/or selected file while retaining the current ID and file name.</div>
+				<div class="asenha-media-replace-notes">The current file will be replaced with the uploaded and/or selected file while retaining the current ID, publish date and file name. Thus, no existing links will break.</div>
 				</div>
 			</div>
 		';
