@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1  
-Stable tag: 2.0.0  
+Stable tag: 2.1.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 ### Content Management
 
 * **Enable Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
-* **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID and file name.
+* **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
   * _Show the featured image column_: in the list tables for pages and post types that support featured images.
   * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
@@ -47,6 +47,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 ### Security
 
 * **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend 
+* **Obfuscate Author Slugs**. Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. _sitename.com/author/username1/_ into _sitename.com/author/a6r5b8ytu9gp34bv/_, and output 404 errors for the original URLs. Also obfuscates in _/wp-json/wp/v2/users/_ REST API endpoint.
 
 ### Utilities
 
@@ -87,6 +88,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.1.0 (2022.11.08)
+
+* **[ADDED] Security >> Obfuscate Author Slugs**: Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. _sitename.com/author/username1/_ into _sitename.com/author/a6r5b8ytu9gp34bv/_, and output 404 errors for the original URLs. Also obfuscates in _/wp-json/wp/v2/users/_ REST API endpoint. Props to [pull request](https://github.com/qriouslad/admin-site-enhancements/pull/1) from [Wahyu Arief @wahyuief](https://github.com/wahyuief) and [functions](https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/tags/4.0.2/inc/class-smart-user-slug-hider.php) from [Smart User Slug Hider
+](https://wordpress.org/plugins/smart-user-slug-hider/).
 
 ### 2.0.0 (2022.11.06)
 
