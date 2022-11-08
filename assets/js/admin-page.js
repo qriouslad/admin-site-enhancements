@@ -65,6 +65,7 @@
       $('.change-login-url').appendTo('.fields-security tbody');
       $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
       $('.obfuscate-author-slugs').appendTo('.fields-security tbody');
+      $('.disable-xmlrpc').appendTo('.fields-security tbody');
 
       // Place fields into "Utilities" tab
       $('.redirect-after-login').appendTo('.fields-utilities tbody');
@@ -76,7 +77,6 @@
       $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
 
       // Place fields into the "Disable Components" tab
-      $('.disable-xmlrpc').appendTo('.fields-disable-components tbody');
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
@@ -108,11 +108,11 @@
          // window.location.hash = 'utilities';
       });
 
-      $('#tab-disable-components + label').click( function() {
-         $('.fields-disable-components').show();
-         $('.asenha-fields:not(.fields-disable-components)').hide();
+      // $('#tab-disable-components + label').click( function() {
+         // $('.fields-disable-components').show();
+         // $('.asenha-fields:not(.fields-disable-components)').hide();
          // window.location.hash = 'utilities';
-      });
+      // });
 
       // Open Content Management tab on document ready
       $('#tab-content-management + label').trigger('click');

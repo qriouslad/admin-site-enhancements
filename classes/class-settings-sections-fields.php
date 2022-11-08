@@ -547,6 +547,27 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Disable XML-RPC
+
+		$field_id = 'disable_xmlrpc';
+		$field_slug = 'disable-xmlrpc';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable XML-RPC', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Protect your site from brute force, DOS and DDOS attacks via <a href="https://kinsta.com/blog/xmlrpc-php/#what-is-xmlrpcphp" target="_blank">XML-RPC</a>. Also disables trackbacks and pingbacks. ', // Custom argument
+				'field_options_wrapper'	=> false, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// ===== UTILITIES ======
 
 		// Redirect After Login
@@ -703,27 +724,6 @@ class Settings_Sections_Fields {
 		);
 
 		// ===== DISABLE COMPONENTS =====
-
-		// Disable XML-RPC
-
-		$field_id = 'disable_xmlrpc';
-		$field_slug = 'disable-xmlrpc';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Disable XML-RPC', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Disables the XML-RPC, trackbacks and pingbacks. Protects from brute-force attacks, DOS and DDOS attacks via XML-RPC.', // Custom argument
-				'field_options_wrapper'	=> false, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
 
 	}
 
