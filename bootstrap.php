@@ -207,6 +207,15 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
 		}
+
+		// Instantiate object for Disable Components features
+		$disable_components = new ASENHA\Classes\Disable_Components;
+
+		// Disable Components >> Disable XML-RPC
+		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+			add_filter( 'wp_xmlrpc_server_class', [ $disable_components, 'maybe_disable_xmlrpc' ] );
+		}
 		
 	}
 

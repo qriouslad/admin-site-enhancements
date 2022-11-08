@@ -75,6 +75,9 @@
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
 
+      // Place fields into the "Disable Components" tab
+      $('.disable-xmlrpc').appendTo('.fields-disable-components tbody');
+
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
       // $('.form-table')[formTableCount-1].remove();
@@ -102,6 +105,12 @@
       $('#tab-utilities + label').click( function() {
          $('.fields-utilities').show();
          $('.asenha-fields:not(.fields-utilities)').hide();
+         // window.location.hash = 'utilities';
+      });
+
+      $('#tab-disable-components + label').click( function() {
+         $('.fields-disable-components').show();
+         $('.asenha-fields:not(.fields-disable-components)').hide();
          // window.location.hash = 'utilities';
       });
 

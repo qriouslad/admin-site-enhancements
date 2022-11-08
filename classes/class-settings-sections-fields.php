@@ -47,12 +47,12 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// Register fields for "Content Management" section
-
 		// Call WordPress globals required for the fields
 
 		global $wp_roles;
 		$roles = $wp_roles->get_names();
+
+		// ===== CONTENT MANAGEMENT =====
 
 		// Enable Page and Post Duplication
 
@@ -229,6 +229,8 @@ class Settings_Sections_Fields {
 				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
+
+		// ===== ADMIN INTERFACE =====
 
 		// Hide Admin Notices
 
@@ -481,6 +483,8 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// ===== SECURITY =====
+
 		// Change Login URL
 
 		$field_id = 'change_login_url';
@@ -542,6 +546,8 @@ class Settings_Sections_Fields {
 				'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
+
+		// ===== UTILITIES ======
 
 		// Redirect After Login
 
@@ -693,6 +699,29 @@ class Settings_Sections_Fields {
 				'field_description'		=> 'Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// ===== DISABLE COMPONENTS =====
+
+		// Disable XML-RPC
+
+		$field_id = 'disable_xmlrpc';
+		$field_slug = 'disable-xmlrpc';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable XML-RPC', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Disables the XML-RPC, trackbacks and pingbacks. Protects from brute-force attacks, DOS and DDOS attacks via XML-RPC.', // Custom argument
+				'field_options_wrapper'	=> false, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 

@@ -157,6 +157,10 @@ class Settings_Sanitization {
 		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
 		$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );
 
+		// Disable XML-RPC
+		if ( ! isset( $options['disable_xmlrpc'] ) ) $options['disable_xmlrpc'] = false;
+		$options['disable_xmlrpc'] = ( 'on' == $options['disable_xmlrpc'] ? true : false );
+
 		return $options;
 
 	}
