@@ -70,71 +70,104 @@ class Security {
 	}
 
 	/**
-	 * replace user slug in wp-json users to encrypted value
-     * used by rest_prepare_user filter
-	 */
-	function alter_json_users($response, $user, $request) {
-		$data = $response->get_data();
-        $data['slug'] = $this->encrypt($data['id']);
-        $response->set_data($data);
-
-		return $response;
-	}
-
-	/**
-	 * replace author name in author link to encrypted value
-     * used by author_link filter
+	 * If an author name is queried, decrypt it. Used by pre_get_posts action.
 	 * 
-	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
-	 */
-	function alter_author_link( $link, $author_id, $author_nicename ) {
-		return str_replace ( '/' . $author_nicename, '/' . $this->encrypt( $author_id ), $link );
-	}
-
-	/**
-	 * if a author name is queried we have to decrypt it
-     * used by pre_get_posts action
-	 * 
-	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/tags/4.0.2/inc/class-smart-user-slug-hider.php
+	 * @since 2.1.0
 	 */
 	function alter_author_query( $query ) {
+
+		// Check if it's a query for author data, and that 'author_name' is not empty
 		if ( $query->is_author() && $query->query_vars['author_name'] != '' ) {
-		  if ( ctype_xdigit( $query->query_vars['author_name'] ) ) {
+
+			// Check for character(s) representing a hexadecimal digit
+			if ( ctype_xdigit( $query->query_vars['author_name'] ) ) {
+
+			// Get user by the decrypted user ID
 			$user = get_user_by( 'id', $this->decrypt( $query->query_vars['author_name'] ) );
-			if ( $user ) {
-			  $query->set( 'author_name', $user->user_nicename );
+
+				if ( $user ) {
+
+					$query->set( 'author_name', $user->user_nicename );
+
+				} else {
+
+					// No user found
+					$query->is_404 = true;
+					$query->is_author = false;
+					$query->is_archive = false;
+
+				}
+
 			} else {
-			  $query->is_404 = true;
-			  $query->is_author = false;
-			  $query->is_archive = false;
+
+				// No hexadecimal digit detected in URL, i.e. someone is trying to access URL with original author slug
+				$query->is_404 = true;
+				$query->is_author = false;
+				$query->is_archive = false;
+
 			}
-		  } else {
-			$query->is_404 = true;
-			$query->is_author = false;
-			$query->is_archive = false;
-		  }
+
 		}
 		
 		return;
 	}
 
 	/**
-	 * helper function to encrypt author name
+	 * Replace author slug in author link to encrypted value. Used by author_link filter.
+	 * 
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/tags/4.0.2/inc/class-smart-user-slug-hider.php
+	 * @since 2.1.0
+	 */
+	function alter_author_link( $link, $user_id, $author_slug ) {
+
+		$encrypted_author_slug = $this->encrypt( $user_id );
+
+		return str_replace ( '/' . $author_slug, '/' . $encrypted_author_slug, $link );
+
+	}
+
+	/**
+	 * Replace author slug in REST API /users/ endpoint to encrypted value. Used by rest_prepare_user filter.
+	 *
+	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/tags/4.0.2/inc/class-smart-user-slug-hider.php
+	 * @since 2.1.0
+	 */
+	function alter_json_users($response, $user, $request) {
+
+		$data = $response->get_data();
+        $data['slug'] = $this->encrypt($data['id']);
+        $response->set_data($data);
+
+		return $response;
+
+	}
+
+	/**
+	 * Helper function to return an encrypted user ID, which will then be used to replace the author slug.
 	 * 
 	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 * @since 2.1.0
 	 */
-	private function encrypt( $id ) {
-      return bin2hex( openssl_encrypt( base_convert( $id, 10, 36 ), 'DES-EDE3', md5( $_SERVER['SERVER_ADDR'] . ASENHA_URL ), OPENSSL_RAW_DATA ) );
+	private function encrypt( $user_id ) {
+
+		// Returns encrypted encrypted author slug from user ID, e.g. encrypt user ID 3 to author slug 4e3062d8c8626a14
+		return bin2hex( openssl_encrypt( base_convert( $user_id, 10, 36 ), 'DES-EDE3', md5( sanitize_text_field( $_SERVER['SERVER_ADDR'] ) . ASENHA_URL ), OPENSSL_RAW_DATA ) );
+
 	}
 
 	
 	/**
-	 * helper function to decrypt author name
+	 * Helper function to decrypt an (encrypted) author slug and returns the user ID
 	 * 
 	 * @link https://plugins.trac.wordpress.org/browser/smart-user-slug-hider/trunk/inc/class-smart-user-slug-hider.php
+	 * @since 2.1.0
 	 */
-	private function decrypt( $encid ) {
-      return base_convert( openssl_decrypt( pack('H*', $encid), 'DES-EDE3', md5( $_SERVER['SERVER_ADDR'] . ASENHA_URL ), OPENSSL_RAW_DATA ), 36, 10 );
+	private function decrypt( $encrypted_author_slug ) {
+
+		// Returns user ID, e.g. decrypts author slug 4e3062d8c8626a14 into user ID 3
+		return base_convert( openssl_decrypt( pack('H*', $encrypted_author_slug), 'DES-EDE3', md5( sanitize_text_field( $_SERVER['SERVER_ADDR'] ) . ASENHA_URL ), OPENSSL_RAW_DATA ), 36, 10 );
+
 	}
 
 }

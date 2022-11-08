@@ -171,8 +171,8 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Security >> Hide Author Slug
-		if ( array_key_exists( 'hide_author_slug', $options ) && $options['hide_author_slug'] ) {
+		// Security >> Obfuscate Author Slugs
+		if ( array_key_exists( 'obfuscate_author_slugs', $options ) && $options['obfuscate_author_slugs'] ) {
 			add_action( 'pre_get_posts', [ $security, 'alter_author_query' ], 10 );
 			add_filter( 'author_link', [ $security, 'alter_author_link' ], 10, 3 );
 			add_filter( 'rest_prepare_user', [ $security, 'alter_json_users' ], 10, 3 );
