@@ -27,14 +27,30 @@ function render_checkbox_toggle( $args ) {
 
 	// For field with additional options / sub-fields, we add a wrapper to enclose field descriptions
 	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
-		echo '<div class="asenha-field-with-options">';
+		// For when the options / sub-fields occupy lengthy vertical space, we add show all / less toggler
+		if ( array_key_exists( 'field_options_moreless', $args ) && $args['field_options_moreless'] ) {
+			echo '<div class="asenha-field-with-options field-show-more">';
+			echo '<a id="' . $args['field_slug'] . '-show-moreless" class="show-more-less show-more" href="#">Expand &#9660;</a>';
+			echo '<div class="asenha-field-options-wrapper wrapper-show-more">';
+		} else {
+			echo '<div class="asenha-field-with-options">';
+			echo '<div class="asenha-field-options-wrapper">';
+		}
+
 	}
 
 	echo '<div class="asenha-field-description">' . wp_kses_post( $field_description ) . '</div>';
 
 	// For field with additional options / sub-fields, we add wrapper for them
 	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
-		echo '<div class="asenha-subfields" style="display:none"></div></div>';
+		echo '<div class="asenha-subfields" style="display:none"></div>';
+	}
+
+
+	// For field with additional options / sub-fields, we add a wrapper to enclose field descriptions
+	if ( array_key_exists( 'field_options_wrapper', $args ) && $args['field_options_wrapper'] ) {
+		echo '</div>';
+		echo '</div>';
 	}
 
 }

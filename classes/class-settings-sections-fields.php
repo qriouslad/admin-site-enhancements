@@ -67,6 +67,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'			=> $field_id, // Custom argument
+				'field_slug'		=> $field_slug, // Custom argument
 				'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'	=> 'Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.', // Custom argument
 				'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
@@ -86,6 +87,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'			=> $field_id, // Custom argument
+				'field_slug'		=> $field_slug, // Custom argument
 				'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'	=> 'Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.', // Custom argument
 				'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
@@ -105,9 +107,11 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Improve the usefulness of listing pages of various post types by adding / removing columns and elements.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -239,6 +243,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'			=> $field_id, // Custom argument
+				'field_slug'		=> $field_slug, // Custom argument
 				'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
 				'class'				=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
@@ -258,6 +263,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
@@ -278,9 +284,11 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Remove various elements from the admin bar.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -400,9 +408,11 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Hide admin bar on the front end for all or some user roles.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -443,11 +453,13 @@ class Settings_Sections_Fields {
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
 			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Customize the order of the admin menu and optionally hide some items.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Customize the order of the admin menu and optionally hide some items.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 
@@ -482,6 +494,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
@@ -522,6 +535,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. <em>sitename.com/author/username1/</em> into <em>sitename.com/author/a6r5b8ytu9gp34bv/</em>, and output 404 errors for the original URLs. Also obfuscates in /wp-json/wp/v2/users/ REST API endpoint.', // Custom argument
 				'field_options_wrapper'	=> false, // Custom argument. Add container for additional options
@@ -542,9 +556,11 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -606,9 +622,11 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -670,6 +688,7 @@ class Settings_Sections_Fields {
 			'main-section', // Section ID
 			array(
 				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'		=> 'Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options

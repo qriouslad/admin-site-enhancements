@@ -4,7 +4,9 @@
    $(document).ready( function() {
 
       // Initialize sortable elements: https://api.jqueryui.com/sortable/
-      $('#custom-admin-menu').sortable();
+      $('#custom-admin-menu').sortable({
+         placeholder: 'sortable-placeholder'
+      });
 
       // Save custom order into a comma-separated string, triggerred after each drag and drop of menu item
       // https://api.jqueryui.com/sortable/#event-update
