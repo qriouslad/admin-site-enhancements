@@ -38,16 +38,20 @@ class Admin_Site_Enhancements {
 	 */
 	private function __construct() {
 
-		// Setup admin menu, admin page, admin scripts, plugin action links, etc.
+		// Setup admin menu, admin page, settings, settings sections, sections fields, admin scripts, plugin action links, etc.
 	
 		// Register admin menu and add the settings page.
 		add_action( 'admin_menu', 'asenha_register_admin_menu' );
 
 		// Register plugin settings
-		add_action( 'admin_init', 'asenha_register_settings' );
+
+		// Instantiate object for registration of settings section and fields
+		$settings = new ASENHA\Classes\Settings_Sections_Fields;
+
+		add_action( 'admin_init', [ $settings, 'register_sections_fields' ] );
 
 		// Suppress all notices on the plugin's main page. Then add notification for successful settings update.
-		add_action( 'admin_notices', 'asenha_notices', 5 );
+		add_action( 'admin_notices', 'asenha_suppress_notices', 5 );
 
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );

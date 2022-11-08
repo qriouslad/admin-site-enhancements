@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Admin and Site Enhancements
  * Plugin URI:        https://wordpress.org/plugins/admin-site-enhancements/
- * Description:       Easily enable enhancements and features that you usually do with multiple plugins.
+ * Description:       Easily enable enhancements and features that usually require multiple plugins.
  * Version:           2.1.0
  * Author:            Bowo
  * Author URI:        https://bowo.io
@@ -98,8 +98,8 @@ register_activation_hook( __FILE__, 'asenha_on_activation');
 // Register code that runs on plugin deactivation
 register_deactivation_hook( __FILE__, 'asenha_on_deactivation' );
 
-// Set up admin menu and page
-require_once ASENHA_PATH . 'includes/setup-admin-menu-page.php';
+// Functions for setting up admin menu, admin page, the settings sections and fields and other fondational stuff
+require_once ASENHA_PATH . 'settings.php';
 
 // Bootstrap all the functionalities of this plugin
 require_once ASENHA_PATH . 'bootstrap.php';
