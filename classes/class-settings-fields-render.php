@@ -129,7 +129,7 @@ function render_text_subfield( $args ) {
 function render_sortable_menu( $args ) {
 
 	?>
-	<div class="subfield-description">Drag and drop menu items to the desired position. Click on the checkbox to hide it on page load. Hidden menu items can be shown by clicking on "Show All" at the bottom of the admin menu.</div>
+	<div class="subfield-description">Drag and drop menu items to the desired position and optionally hide them until "Show All" at the bottom of the admin menu is clicked.</div>
 	<ul id="custom-admin-menu" class="menu ui-sortable">
 	<?php
 
