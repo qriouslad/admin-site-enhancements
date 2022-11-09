@@ -126,6 +126,10 @@
     color: #3c434a;
 }
 
+.asenha-field-with-options {
+    width: 100%;
+}
+
 /* WP Core UI overrides */
 
 .wp-core-ui.tools_page_admin-site-enhancements .notice {
@@ -248,7 +252,7 @@
 }
 
 .asenha-field-with-options.field-show-more.is-enabled .asenha-field-options-wrapper.wrapper-show-more {
-    height: 120px;
+    height: 80px;
     overflow: hidden;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -285,12 +289,23 @@
     font-weight: 500;
     cursor: pointer;
     z-index: 3;
+    transition: .25s;
 }
 
 .is-enabled .show-more-less:active,
 .is-enabled .show-more-less:hover,
 .is-enabled .show-more-less:focus {
     outline: none;
+    box-shadow: none;
+}
+
+.is-enabled .show-more-less.show-more,
+.is-enabled .show-more-less:not(.show-more):hover {
+    color: #2271b1;
+}
+
+.is-enabled .show-more-less:not(.show-more) {
+    color: #ddd;
 }
 
 .asenha-field-with-options.field-show-more.is-enabled .asenha-field-options-wrapper.wrapper-show-more:before {
@@ -371,6 +386,10 @@
     margin: 0 4px;
 }
 
+.asenha-subfield-textarea {
+    width: 100%;
+}
+
 /* Sortable subfield */
 
 .form-table .asenha-toggle .asenha-sortable td {
@@ -423,4 +442,15 @@
 
 .form-table .asenha-subfields td label.menu-item-checkbox-label {
     top: 0;
+}
+
+/* CodeMirror*/
+
+.custom-admin-css .asenha-subfield-textarea {
+    background: #fcfcfc;
+}
+
+.custom-admin-css .CodeMirror {
+    border: 1px solid #ddd;
+    background: #fcfcfc;
 }

@@ -75,12 +75,24 @@
       $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
+      $('.enable-custom-admin-css').appendTo('.fields-utilities tbody');
+      $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
 
       // Place fields into the "Disable Components" tab
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
       // $('.form-table')[formTableCount-1].remove();
+
+      // Enable Custom Admin CSS => Initialize CodeMirror
+      var adminCssTextarea = document.getElementById("admin_site_enhancements[custom_admin_css]");
+      var adminCssEditor = CodeMirror.fromTextArea(adminCssTextarea, {
+         mode: "css",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+
+      adminCssEditor.setSize("100%",600);
 
       // Show and hide corresponding fields on tab clicks
 
@@ -106,6 +118,7 @@
          $('.fields-utilities').show();
          $('.asenha-fields:not(.fields-utilities)').hide();
          // window.location.hash = 'utilities';
+         adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
       });
 
       // $('#tab-disable-components + label').click( function() {
@@ -254,6 +267,27 @@
          } else {
             $('.redirect-after-logout .asenha-subfields').hide();
             $('.redirect-after-logout .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Custom Admin CSS => show/hide CSS textarea on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_custom_admin_css]').checked ) {
+         $('.enable-custom-admin-css .asenha-subfields').show();
+         $('.asenha-toggle.enable-custom-admin-css td .asenha-field-with-options').addClass('is-enabled');
+         adminCssEditor.refresh();
+      } else {
+         $('.enable-custom-admin-css .asenha-subfields').hide();        
+      }
+
+      // Enable Custom Admin CSS => show/hide CSS textarea on toggle click
+      document.getElementById('admin_site_enhancements[enable_custom_admin_css]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-custom-admin-css .asenha-subfields').fadeIn();
+            $('.enable-custom-admin-css .asenha-field-with-options').toggleClass('is-enabled');
+            adminCssEditor.refresh();
+         } else {
+            $('.enable-custom-admin-css .asenha-subfields').hide();
+            $('.enable-custom-admin-css .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

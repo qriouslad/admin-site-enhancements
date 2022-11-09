@@ -122,6 +122,27 @@ function render_text_subfield( $args ) {
 }
 
 /**
+ * Render textarea field as sub-field of a toggle/switcher checkbox
+ *
+ * @since 2.3.0
+ */
+function render_textarea_subfield( $args ) {
+
+	$options = get_option( ASENHA_SLUG_U );
+
+	$field_id = $args['field_id'];
+	$field_slug = $args['field_slug'];
+	$field_name = $args['field_name'];
+	$field_type = $args['field_type'];
+	$field_prefix = $args['field_prefix'];
+	$field_suffix = $args['field_suffix'];
+	$field_description = $args['field_description'];
+	$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+	echo '<textarea rows="30" class="asenha-subfield-textarea" id="' . esc_attr( $field_name ) . '" name="' . esc_attr( $field_name ) . '">' . esc_textarea( $field_option_value ) . '</textarea>';
+}
+
+/**
  * Render sortable menu field
  *
  * @since 2.0.0
