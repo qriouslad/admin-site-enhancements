@@ -723,6 +723,49 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Custom Admin CSS
+
+		$field_id = 'enable_custom_admin_css';
+		$field_slug = 'enable-custom-admin-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Custom Admin CSS', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Add custom CSS on all admin pages for all user roles.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'custom_admin_css';
+		$field_slug = 'custom-admin-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// ===== DISABLE COMPONENTS =====
 
 	}

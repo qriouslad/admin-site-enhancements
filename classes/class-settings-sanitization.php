@@ -161,6 +161,13 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_xmlrpc'] ) ) $options['disable_xmlrpc'] = false;
 		$options['disable_xmlrpc'] = ( 'on' == $options['disable_xmlrpc'] ? true : false );
 
+		// Enable Custom Admin CSS
+		if ( ! isset( $options['enable_custom_admin_css'] ) ) $options['enable_custom_admin_css'] = false;
+		$options['enable_custom_admin_css'] = ( 'on' == $options['enable_custom_admin_css'] ? true : false );
+
+		if ( ! isset( $options['custom_admin_css'] ) ) $options['custom_admin_css'] = '';
+		$options['custom_admin_css'] = ( ! empty( $options['custom_admin_css'] ) ) ? $options['custom_admin_css'] : '';
+
 		return $options;
 
 	}
