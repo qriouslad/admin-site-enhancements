@@ -38,16 +38,20 @@ class Admin_Site_Enhancements {
 	 */
 	private function __construct() {
 
-		// Setup admin menu, admin page, admin scripts, plugin action links, etc.
+		// Setup admin menu, admin page, settings, settings sections, sections fields, admin scripts, plugin action links, etc.
 	
 		// Register admin menu and add the settings page.
 		add_action( 'admin_menu', 'asenha_register_admin_menu' );
 
 		// Register plugin settings
-		add_action( 'admin_init', 'asenha_register_settings' );
+
+		// Instantiate object for registration of settings section and fields
+		$settings = new ASENHA\Classes\Settings_Sections_Fields;
+
+		add_action( 'admin_init', [ $settings, 'register_sections_fields' ] );
 
 		// Suppress all notices on the plugin's main page. Then add notification for successful settings update.
-		add_action( 'admin_notices', 'asenha_notices', 5 );
+		add_action( 'admin_notices', 'asenha_suppress_notices', 5 );
 
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
@@ -202,6 +206,15 @@ class Admin_Site_Enhancements {
 		// Utilities >> Redirect 404 to Homepage
 		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
+		}
+
+		// Instantiate object for Disable Components features
+		$disable_components = new ASENHA\Classes\Disable_Components;
+
+		// Disable Components >> Disable XML-RPC
+		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+			add_filter( 'wp_xmlrpc_server_class', [ $disable_components, 'maybe_disable_xmlrpc' ] );
 		}
 		
 	}

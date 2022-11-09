@@ -236,6 +236,78 @@
     background: #ffffff;
 }
 
+/* Show all / less toggler | Modified from https://codepen.io/symonsays/pen/rzgEgY */
+
+.asenha-field-with-options.field-show-more.is-enabled {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.asenha-field-with-options.field-show-more.is-enabled .asenha-field-options-wrapper.wrapper-show-more {
+    height: 120px;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.asenha-field-with-options.field-show-more.is-enabled .opened.asenha-field-options-wrapper.wrapper-show-more {
+    height: auto;
+    overflow:visible;
+}
+
+.asenha-field-with-options.field-show-more.is-enabled .opened.asenha-field-options-wrapper.wrapper-show-more:before {
+    /* bottom: -80px; */
+    display: none;
+}
+
+.show-more-less {
+    display: none;
+}
+
+.is-enabled .show-more-less {
+    display: block;
+    background: none;
+    text-decoration: none;
+    border: 0;
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    margin: auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.is-enabled .show-more-less:active,
+.is-enabled .show-more-less:hover,
+.is-enabled .show-more-less:focus {
+    outline: none;
+}
+
+.asenha-field-with-options.field-show-more.is-enabled .asenha-field-options-wrapper.wrapper-show-more:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    font-size: 12px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.7) 50%,rgba(255,255,255,1) 100%);
+}
+
 /* Sub Fields */
 
 .form-table .asenha-subfields {
@@ -313,6 +385,7 @@
 .custom-menu-order ul.menu {
     margin-top: 0;
     padding-top: 0;
+    overflow: auto;
 }
 
 .custom-menu-order .menu-item-bar .menu-item-handle {
@@ -337,6 +410,15 @@
 .custom-menu-order .menu-item-title span,
 .custom-menu-order .menu-item-settings .submenu-item span {
     display: none;
+}
+
+.sortable-placeholder {
+    width: 350px;
+    max-width: 350px;
+    height: 42px;
+    min-height: 42px;
+    max-height: 42px;
+    border: 1px dotted #ccc;
 }
 
 .form-table .asenha-subfields td label.menu-item-checkbox-label {
