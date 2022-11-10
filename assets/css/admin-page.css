@@ -446,11 +446,13 @@
 
 /* CodeMirror*/
 
-.custom-admin-css .asenha-subfield-textarea {
+.custom-admin-css .asenha-subfield-textarea,
+.custom-frontend-css .asenha-subfield-textarea {
     background: #fcfcfc;
 }
 
-.custom-admin-css .CodeMirror {
+.custom-admin-css .CodeMirror,
+.custom-frontend-css .CodeMirror {
     border: 1px solid #ddd;
     background: #fcfcfc;
 }
