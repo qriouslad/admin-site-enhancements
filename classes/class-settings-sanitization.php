@@ -168,6 +168,13 @@ class Settings_Sanitization {
 		if ( ! isset( $options['custom_admin_css'] ) ) $options['custom_admin_css'] = '';
 		$options['custom_admin_css'] = ( ! empty( $options['custom_admin_css'] ) ) ? $options['custom_admin_css'] : '';
 
+		// Enable Custom Frontend CSS
+		if ( ! isset( $options['enable_custom_frontend_css'] ) ) $options['enable_custom_frontend_css'] = false;
+		$options['enable_custom_frontend_css'] = ( 'on' == $options['enable_custom_frontend_css'] ? true : false );
+
+		if ( ! isset( $options['custom_frontend_css'] ) ) $options['custom_frontend_css'] = '';
+		$options['custom_frontend_css'] = ( ! empty( $options['custom_frontend_css'] ) ) ? $options['custom_frontend_css'] : '';
+
 		return $options;
 
 	}

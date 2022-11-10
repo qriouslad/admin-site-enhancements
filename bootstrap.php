@@ -208,13 +208,17 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
 		}
 
-		// Utilities >> Enable Custom Admin CSS
+		// Utilities >> Enable Custom Admin / Frontend CSS
 
 		// Load CodeMirror whether this feature is enabled or not. This is needed to enable syntax highlighter upon clicking the feature toggle.
 		add_action( 'admin_enqueue_scripts', [ $utilities, 'enable_codemirror' ] );
 
 		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
 			add_filter( 'admin_enqueue_scripts', [ $utilities, 'custom_admin_css' ] );
+		}
+
+		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
+			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
 		}
 
 		// Instantiate object for Disable Components features

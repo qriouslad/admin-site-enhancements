@@ -68,6 +68,10 @@
       $('.disable-xmlrpc').appendTo('.fields-security tbody');
 
       // Place fields into "Utilities" tab
+      $('.enable-custom-admin-css').appendTo('.fields-utilities tbody');
+      $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
+      $('.enable-custom-frontend-css').appendTo('.fields-utilities tbody');
+      $('.custom-frontend-css').appendTo('.fields-utilities .enable-custom-frontend-css .asenha-subfields');
       $('.redirect-after-login').appendTo('.fields-utilities tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
@@ -75,8 +79,6 @@
       $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
-      $('.enable-custom-admin-css').appendTo('.fields-utilities tbody');
-      $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
 
       // Place fields into the "Disable Components" tab
 
@@ -93,6 +95,16 @@
       });
 
       adminCssEditor.setSize("100%",600);
+
+      // Enable Custom Frontend CSS => Initialize CodeMirror
+      var frontendCssTextarea = document.getElementById("admin_site_enhancements[custom_frontend_css]");
+      var frontendCssEditor = CodeMirror.fromTextArea(frontendCssTextarea, {
+         mode: "css",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+
+      frontendCssEditor.setSize("100%",600);
 
       // Show and hide corresponding fields on tab clicks
 
@@ -119,6 +131,7 @@
          $('.asenha-fields:not(.fields-utilities)').hide();
          // window.location.hash = 'utilities';
          adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
+         frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
       });
 
       // $('#tab-disable-components + label').click( function() {
@@ -291,6 +304,26 @@
          }
       });
 
+      // Enable Custom Frontend CSS => show/hide CSS textarea on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_custom_admin_css]').checked ) {
+         $('.enable-custom-frontend-css .asenha-subfields').show();
+         $('.asenha-toggle.enable-custom-frontend-css td .asenha-field-with-options').addClass('is-enabled');
+         frontendCssEditor.refresh();
+      } else {
+         $('.enable-custom-frontend-css .asenha-subfields').hide();        
+      }
+
+      // Enable Custom Frontend CSS => show/hide CSS textarea on toggle click
+      document.getElementById('admin_site_enhancements[enable_custom_admin_css]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-custom-frontend-css .asenha-subfields').fadeIn();
+            $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
+            frontendCssEditor.refresh();
+         } else {
+            $('.enable-custom-frontend-css .asenha-subfields').hide();
+            $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
    });
 
 })( jQuery );

@@ -168,4 +168,21 @@ class Utilities {
 
 	}
 
+	/**
+	 * Enqueue custom frontend CSS
+	 *
+	 * @since 2.3.0
+	 */
+	public function custom_frontend_css() {
+
+		$options = get_option( ASENHA_SLUG_U );
+		$custom_frontend_css = $options['custom_frontend_css'];
+
+		?>
+		<style type="text/css">
+			<?php echo wp_kses_post( $custom_frontend_css ); ?>
+		</style>
+		<?php
+
+	}
 }
