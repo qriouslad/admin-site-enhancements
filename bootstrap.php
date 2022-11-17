@@ -56,6 +56,15 @@ class Admin_Site_Enhancements {
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
 
+		// Instantiate object for common methods
+		$common_methods = new ASENHA\Classes\Common_Methods;
+
+		// Load CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
+		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_codemirror_assets' ] );
+
+		// Load DataTables. In use, e.g. for Security >> Limit Login Attempts
+		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_datatables_assets' ] );
+
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
@@ -66,6 +75,8 @@ class Admin_Site_Enhancements {
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( ASENHA_SLUG_U, array() );
+
+		// ===== CONTENT MANAGEMENT =====
 
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
@@ -120,6 +131,8 @@ class Admin_Site_Enhancements {
 
 		}
 
+		// ===== ADMIN INTERFACE =====
+
 		// Instantiate object for Admin Interface features
 		$admin_interface = new ASENHA\Classes\Admin_Interface;
 
@@ -162,17 +175,30 @@ class Admin_Site_Enhancements {
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'enqueue_toggle_hidden_menu_script' ] );
 		}
 
+		// ===== SECURITY =====
+
 		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
 		// Security >> Change Login URL
 		if ( array_key_exists( 'change_login_url', $options ) && $options['change_login_url'] ) {
 			if ( array_key_exists( 'custom_login_slug', $options ) && ! empty( $options['custom_login_slug'] ) )  {
-				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
 				add_action( 'init', [ $security, 'redirect_on_custom_login_url' ] );
-				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url' ] );
-				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url' ] );
+				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
+				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url_on_login_fail' ] );
+				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url_on_logout_success' ] );
+				add_action( 'wp_login', [ $security, 'redirect_to_dashboard' ], 10, 2 );
 			}
+		}
+
+		// Security >> Limit Login Attempts
+		if ( array_key_exists( 'limit_login_attempts', $options ) && $options['limit_login_attempts'] ) {
+			add_filter( 'authenticate', [ $security, 'maybe_allow_login' ], 999, 3 ); // Very low priority so it is processed last
+			add_action( 'login_enqueue_scripts', [ $security, 'maybe_hide_login_form' ] );
+			add_action( 'wp_login_failed', [ $security, 'log_failed_login' ], 5 ); // Higher priority than one in Change Login URL
+			add_action( 'wp_login_errors', [ $security, 'login_error_handler' ], 999, 2 );
+			add_filter( 'login_message', [ $security, 'add_failed_login_message' ] );
+			add_action( 'wp_login', [ $security, 'clear_failed_login_log' ] );
 		}
 
 		// Security >> Obfuscate Author Slugs
@@ -182,6 +208,8 @@ class Admin_Site_Enhancements {
 			add_filter( 'rest_prepare_user', [ $security, 'alter_json_users' ], 10, 3 );
 		}
 
+		// ===== UTILITIES ======
+
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
 
@@ -189,7 +217,7 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
 			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
 				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
-					add_filter( 'login_redirect', [ $utilities, 'redirect_for_roles_after_login' ], 10, 3 );
+					add_filter( 'wp_login', [ $utilities, 'redirect_for_roles_after_login' ], 5, 2 );
 				}
 			}
 		}
@@ -210,9 +238,6 @@ class Admin_Site_Enhancements {
 
 		// Utilities >> Enable Custom Admin / Frontend CSS
 
-		// Load CodeMirror whether this feature is enabled or not. This is needed to enable syntax highlighter upon clicking the feature toggle.
-		add_action( 'admin_enqueue_scripts', [ $utilities, 'enable_codemirror' ] );
-
 		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
 			add_filter( 'admin_enqueue_scripts', [ $utilities, 'custom_admin_css' ] );
 		}
@@ -220,6 +245,8 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
 			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
 		}
+
+		// ===== DISABLE COMPONENTS ======
 
 		// Instantiate object for Disable Components features
 		$disable_components = new ASENHA\Classes\Disable_Components;

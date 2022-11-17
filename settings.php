@@ -201,7 +201,7 @@ function asenha_admin_scripts( $hook_suffix ) {
 
 function asenha_plugin_action_links( $links ) {
 
-	$settings_link = '<a href="tools.php?page=' . ASENHA_SLUG . '">Access now</a>';
+	$settings_link = '<a href="tools.php?page=' . ASENHA_SLUG . '">Configure now</a>';
 
 	array_unshift($links, $settings_link); 
 

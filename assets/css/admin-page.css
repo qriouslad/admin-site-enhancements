@@ -106,12 +106,12 @@
     border-bottom: 1px solid #eee;
 }
 
-.form-table .asenha-toggle th {
+.form-table .asenha-toggle th:not(.datatable-th) {
     padding: 20px 10px 16px 20px;
     line-height: 1.4;
 }
 
-.form-table .asenha-toggle td {
+.form-table .asenha-toggle td:not(.datatable-td) {
     padding: 18px 20px 16px 10px;
     line-height: 1.4;
 }
@@ -146,7 +146,7 @@
 
 /* Toggle Styles -- https://codepen.io/deanelliott/pen/GRJjGqK */
 
-.form-table .asenha-toggle td {
+.form-table .asenha-toggle td:not(.datatable-td) {
     display: flex;
     align-items: flex-start;
 }
@@ -331,7 +331,7 @@
     margin-top: 12px;
 }
 
-.form-table .asenha-subfields tr {
+.form-table .asenha-subfields tr:not(.datatable-tr) {
     display: block;
     width: 100%;
 }
@@ -340,15 +340,15 @@
     width: 50%;
 }
 
-.form-table .asenha-subfields .asenha-hide-th th {
+.form-table .asenha-subfields .asenha-hide-th th:not(.datatable-th) {
     display: none;
 }
 
-.form-table .asenha-subfields td {
+.form-table .asenha-subfields td:not(.datatable-td) {
     padding: 0;
 }
 
-.form-table .asenha-subfields td label {
+.form-table .asenha-subfields td:not(.datatable-td) label {
     position: relative;
     top: -2px;
 }
@@ -366,7 +366,7 @@
     justify-content: flex-start;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix th {
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix th:not(.datatable-th) {
     display: flex;
     height: 30px;
     line-height: 30px;
@@ -377,22 +377,42 @@
     color: #3c434a;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix td {
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix.no-margin th:not(.datatable-th) {
+    margin-right: 0;
+}
+
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix td:not(.datatable-td) {
     display: flex;
     align-items: center;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix input {
-    margin: 0 4px;
+.form-table .custom-login-slug td:not(.datatable-td) {
+    margin-bottom: 0;
 }
 
 .asenha-subfield-textarea {
     width: 100%;
 }
 
+.asenha-subfield-text.with-prefix.with-suffix {
+    margin: 0 4px;
+}
+
+.asenha-subfield-text.with-prefix {
+    margin: 0 0 0 4px;
+}
+
+.asenha-subfield-text.with-suffix {
+    margin: 0 4px 0 0;
+}
+
+.with-prefix-suffix.narrow .asenha-subfield-text {
+    width: 40px;
+}
+
 /* Sortable subfield */
 
-.form-table .asenha-toggle .asenha-sortable td {
+.form-table .asenha-toggle .asenha-sortable td:not(.datatable-td) {
     flex-wrap: wrap;
     flex-direction: column;
 }
@@ -440,7 +460,7 @@
     border: 1px dotted #ccc;
 }
 
-.form-table .asenha-subfields td label.menu-item-checkbox-label {
+.form-table .asenha-subfields td:not(.datatable-td) label.menu-item-checkbox-label {
     top: 0;
 }
 
@@ -455,4 +475,29 @@
 .custom-frontend-css .CodeMirror {
     border: 1px solid #ddd;
     background: #fcfcfc;
+}
+
+/* DataTable */
+
+.form-table .asenha-toggle .datatable > td {
+    flex-direction: column;
+}
+
+.datatable .dataTables_wrapper {
+    background: #f5f5f5;
+    margin-top: 8px;
+    padding: 12px 10px;
+}
+
+.datatable .dataTables_wrapper .dataTables_length select,
+.datatable .dataTables_wrapper .dataTables_filter input {
+    background-color: #fff;
+}
+
+.datatable .dataTables_wrapper .dataTables_length select {
+    min-width: 52px;
+}
+
+.datatable table.dataTable thead th {
+    font-weight: 500 ;
 }
