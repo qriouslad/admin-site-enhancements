@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1  
-Stable tag: 2.4.0  
+Stable tag: 2.5.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,7 +46,8 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Security
 
-* **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend 
+* **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend
+* **Limit Login Attempts**. Prevent brute force attacks by limiting the number of failed login attempts allowed per IP address.
 * **Obfuscate Author Slugs**. Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. _sitename.com/author/username1/_ into _sitename.com/author/a6r5b8ytu9gp34bv/_, and output 404 errors for the original URLs. Also obfuscates in _/wp-json/wp/v2/users/_ REST API endpoint.
 * **Disable XML-RPC**. Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks and pingbacks.
 
@@ -91,6 +92,15 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.5.0 (2022.11.18)
+
+* **[ADDED] Security >> Limit Login Attempts**: Prevent brute force attacks by limiting the number of failed login attempts allowed per IP address.
+* **[CHANGED] Security >> Custom Login URL** feature has been made compatible with Limit Login Attempts feature.
+* **[CHANGED] Security >> Change Login URL** now works with the interim login modal window, the one that pops up when user is logged out in the background.
+* **[CHANGED] Security >> Change Login URL** adds another process to ensure user is redirected to the dashboard after successful login. It was redirecting to the /not_found/ (404) page in rare occasions as [reported by @vdrover](https://wordpress.org/support/topic/change-login-url-redirects-to-not-found/).
+* **[CHANGED] Utilities >> Redirect After Login** will correctly override default login redirection by Change Login URL.
+* **[CHANGED] Improve code comments throughout**.
 
 ### 2.4.0 (2022.11.10)
 
