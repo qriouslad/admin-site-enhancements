@@ -127,29 +127,6 @@ class Utilities {
 	}
 
 	/**
-	 * Re-enqueue CodeMirror syntax highlighter from WordPress core
-	 *
-	 * @since 2.3.0
-	 */
-	public function enable_codemirror() {
-
-		// Only enqueue scripts on the plugin's settings page
-		if ( is_asenha() ) {
-
-			// CodeMirror JS
-			wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );			
-
-			// CodeMirror CSS
-			wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
-
-			// CSS mode for CodeMirror
-			wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );			
-
-		}
-
-	}
-
-	/**
 	 * Enqueue custom admin CSS
 	 *
 	 * @since 2.3.0

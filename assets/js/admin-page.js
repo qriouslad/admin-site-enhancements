@@ -35,10 +35,15 @@
 
       });
 
+      // Initialize data tables
+      var table = $("#login-attempts-log").DataTable({
+         pageLength: 10
+      });
+
       // Place fields into the "Content Management" tab
-      $('.enable-duplication').appendTo('.fields-content-management tbody');
-      $('.enable-media-replacement').appendTo('.fields-content-management tbody');
-      $('.enhance-list-tables').appendTo('.fields-content-management tbody');
+      $('.enable-duplication').appendTo('.fields-content-management > table > tbody');
+      $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
+      $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-excerpt-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-id-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
@@ -47,38 +52,42 @@
       $('.show-custom-taxonomy-filters').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
 
       // Place fields into "Admin Interface" tab
-      $('.hide-admin-notices').appendTo('.fields-admin-interface tbody');
-      $('.view-admin-as-role').appendTo('.fields-admin-interface tbody');
-      $('.customize-admin-menu').appendTo('.fields-admin-interface tbody');
+      $('.hide-admin-notices').appendTo('.fields-admin-interface > table > tbody');
+      $('.view-admin-as-role').appendTo('.fields-admin-interface > table > tbody');
+      $('.customize-admin-menu').appendTo('.fields-admin-interface > table > tbody');
       $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
-      $('.hide-modify-elements').appendTo('.fields-admin-interface tbody');
+      $('.hide-modify-elements').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-ab-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-customize-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-updates-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-comments-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-new-content-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-howdy').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
-      $('.hide-admin-bar').appendTo('.fields-admin-interface tbody');
+      $('.hide-admin-bar').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
       // Place fields into "Security" tab
-      $('.change-login-url').appendTo('.fields-security tbody');
+      $('.change-login-url').appendTo('.fields-security > table > tbody');
       $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
-      $('.obfuscate-author-slugs').appendTo('.fields-security tbody');
-      $('.disable-xmlrpc').appendTo('.fields-security tbody');
+      $('.limit-login-attempts').appendTo('.fields-security > table > tbody');
+      $('.login-fails-allowed').appendTo('.fields-security .limit-login-attempts .asenha-subfields');
+      $('.login-lockout-maxcount').appendTo('.fields-security .limit-login-attempts .asenha-subfields');
+      $('.login-attempts-log-table').appendTo('.fields-security .limit-login-attempts .asenha-subfields');
+      $('.obfuscate-author-slugs').appendTo('.fields-security > table > tbody');
+      $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Utilities" tab
-      $('.enable-custom-admin-css').appendTo('.fields-utilities tbody');
+      $('.enable-custom-admin-css').appendTo('.fields-utilities > table > tbody');
       $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
-      $('.enable-custom-frontend-css').appendTo('.fields-utilities tbody');
+      $('.enable-custom-frontend-css').appendTo('.fields-utilities > table > tbody');
       $('.custom-frontend-css').appendTo('.fields-utilities .enable-custom-frontend-css .asenha-subfields');
-      $('.redirect-after-login').appendTo('.fields-utilities tbody');
+      $('.redirect-after-login').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
-      $('.redirect-after-logout').appendTo('.fields-utilities tbody');
+      $('.redirect-after-logout').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
-      $('.redirect-404-to-homepage').appendTo('.fields-utilities tbody');
+      $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
 
       // Place fields into the "Disable Components" tab
 
@@ -245,6 +254,24 @@
          }
       });
 
+      // Limit Login Attempts => show/hide custom slug input on document ready
+      if ( document.getElementById('admin_site_enhancements[limit_login_attempts]').checked ) {
+         $('.limit-login-attempts .asenha-subfields').show();
+         $('.asenha-toggle.limit-login-attempts td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.limit-login-attempts .asenha-subfields').hide();        
+      }
+
+      // Limit Login Attempts => show/hide custom slug input on toggle click
+      document.getElementById('admin_site_enhancements[limit_login_attempts]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.limit-login-attempts .asenha-subfields').fadeIn();
+            $('.limit-login-attempts .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.limit-login-attempts .asenha-subfields').hide();
+            $('.limit-login-attempts .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
       // Redirect After Login => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[redirect_after_login]').checked ) {
          $('.redirect-after-login .asenha-subfields').show();

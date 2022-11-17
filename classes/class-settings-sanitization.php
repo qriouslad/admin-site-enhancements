@@ -20,7 +20,7 @@ class Settings_Sanitization {
 		global $wp_roles;
 		$roles = $wp_roles->get_names();
 
-		// Content Management features
+		// ===== CONTENT MANAGEMENT =====
 
 		// Enable Page and Post Duplication
 		if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
@@ -58,7 +58,7 @@ class Settings_Sanitization {
 		if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
 		$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
 
-		// Admin Interface features
+		// ===== ADMIN INTERFACE =====
 
 		// Hide Admin Notices
 		if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
@@ -110,7 +110,7 @@ class Settings_Sanitization {
 		if ( ! isset( $options['custom_menu_order'] ) ) $options['custom_menu_order'] = '';
 		if ( ! isset( $options['custom_menu_hidden'] ) ) $options['custom_menu_hidden'] = '';
 
-		// Security features
+		// ===== SECURITY =====
 
 		// Change Login URL
 		if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
@@ -118,12 +118,25 @@ class Settings_Sanitization {
 
 		if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
 		$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+
+		// Limit Login Attempts
+		if ( ! isset( $options['limit_login_attempts'] ) ) $options['limit_login_attempts'] = false;
+		$options['limit_login_attempts'] = ( 'on' == $options['limit_login_attempts'] ? true : false );
+
+		if ( ! isset( $options['login_fails_allowed'] ) ) $options['login_fails_allowed'] = 3;
+		$options['login_fails_allowed'] = ( ! empty( $options['login_fails_allowed'] ) ) ? sanitize_text_field( $options['login_fails_allowed'] ) : 3;
+
+		if ( ! isset( $options['login_lockout_maxcount'] ) ) $options['login_lockout_maxcount'] = 3;
+		$options['login_lockout_maxcount'] = ( ! empty( $options['login_lockout_maxcount'] ) ) ? sanitize_text_field( $options['login_lockout_maxcount'] ) : 3;
+
+		if ( ! isset( $options['login_attempts_log_table'] ) ) $options['login_attempts_log_table'] = '';
+		$options['login_attempts_log_table'] = '';
 		
 		// Obfuscate Author Slugs
 		if ( ! isset( $options['obfuscate_author_slugs'] ) ) $options['obfuscate_author_slugs'] = false;
 		$options['obfuscate_author_slugs'] = ( 'on' == $options['obfuscate_author_slugs'] ? true : false );
 
-		// Utilities features
+		// ===== UTILITIES ======
 
 		// Redirect After Login
 		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
@@ -174,6 +187,8 @@ class Settings_Sanitization {
 
 		if ( ! isset( $options['custom_frontend_css'] ) ) $options['custom_frontend_css'] = '';
 		$options['custom_frontend_css'] = ( ! empty( $options['custom_frontend_css'] ) ) ? $options['custom_frontend_css'] : '';
+
+		// ===== DISABLE COMPONENTS ======
 
 		return $options;
 

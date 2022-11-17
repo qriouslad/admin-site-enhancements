@@ -79,7 +79,7 @@ function asenha_autoloader( $class_name ) {
  */
 function asenha_on_activation() {
 	$activation = new ASENHA\Classes\Activation;
-    $activation->activate();
+    $activation->create_failed_logins_log_table();
 }
 
 /**
@@ -89,7 +89,7 @@ function asenha_on_activation() {
  */
 function asenha_on_deactivation() {
     $deactivation = new ASENHA\Classes\Deactivation;
-    $deactivation->deactivate();
+    $deactivation->delete_failed_logins_log_table();
 }
 
 // Register code that runs on plugin activation

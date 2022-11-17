@@ -49,7 +49,7 @@ class Settings_Sections_Fields {
 
 		// Call WordPress globals required for the fields
 
-		global $wp_roles;
+		global $wp_roles, $wpdb;
 		$roles = $wp_roles->get_names();
 
 		// ===== CONTENT MANAGEMENT =====
@@ -523,6 +523,89 @@ class Settings_Sections_Fields {
 				'field_suffix'			=> '/', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-text with-prefix-suffix security ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Limit Login Attempts
+
+		$field_id = 'limit_login_attempts';
+		$field_slug = 'limit-login-attempts';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Limit Login Attempts', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Prevent brute force attacks by limiting the number of failed login attempts allowed per IP address.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'login_fails_allowed';
+		$field_slug = 'login-fails-allowed';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> 'failed login attempts allowed before 15 minutes lockout', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix narrow no-margin security ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'login_lockout_maxcount';
+		$field_slug = 'login-lockout-maxcount';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> 'lockout(s) will block further login attempts for 24 hours', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix narrow no-margin security ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'login_attempts_log_table';
+		$field_slug = 'login-attempts-log-table';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_datatable' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'datatable', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text datatable asenha-hide-th security ' . $field_slug, // Custom class for the <tr> element
+				'table_title'			=> 'Failed Login Attempts Log',
+				'table_name'			=> $wpdb->prefix . 'asenha_failed_logins',
 			)
 		);
 
