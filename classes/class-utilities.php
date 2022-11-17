@@ -17,7 +17,7 @@ class Utilities {
 	 * @param object $user logged-in user's data.
 	 * @since 1.5.0
 	 */
-	public function redirect_for_roles_after_login( $redirect_to_url, $origin_url, $user ) {
+	public function redirect_for_roles_after_login( $username, $user ) {
 
 		$options = get_option( ASENHA_SLUG_U );
 		$redirect_after_login_to_slug = $options['redirect_after_login_to_slug'];
@@ -45,14 +45,13 @@ class Utilities {
 			foreach ( $current_user_roles as $role ) {
 				if ( in_array( $role, $roles_for_custom_redirect ) ) {
 					
-					$redirect_to_url = home_url( $redirect_after_login_to_slug . '/' );
+					wp_safe_redirect( home_url( $redirect_after_login_to_slug . '/' ) );
+					exit();
 
 				}
 			}
 
 		}
-
-		return $redirect_to_url;
 
 	}
 

@@ -189,7 +189,7 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
 			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
 				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
-					add_filter( 'login_redirect', [ $utilities, 'redirect_for_roles_after_login' ], 10, 3 );
+					add_filter( 'wp_login', [ $utilities, 'redirect_for_roles_after_login' ], 5, 2 );
 				}
 			}
 		}
