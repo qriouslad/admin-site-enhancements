@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1  
-Stable tag: 2.5.0  
+Stable tag: 2.6.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Enable Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
 * **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
+* **Enable SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
   * _Show the featured image column_: in the list tables for pages and post types that support featured images.
   * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
@@ -92,6 +93,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.6.0 (2022.11.19)
+
+* **[ADDED] Content Management >> Enable SVG Upload**: Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
 
 ### 2.5.0 (2022.11.18)
 
