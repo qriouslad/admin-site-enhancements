@@ -30,6 +30,17 @@ class Settings_Sanitization {
 		if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;
 		$options['enable_media_replacement'] = ( 'on' == $options['enable_media_replacement'] ? true : false );
 
+		// Enable SVG Upload
+		if ( ! isset( $options['enable_svg_upload'] ) ) $options['enable_svg_upload'] = false;
+		$options['enable_svg_upload'] = ( 'on' == $options['enable_svg_upload'] ? true : false );
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+				if ( ! isset( $options['enable_svg_upload_for'][$role_slug] ) ) $options['enable_svg_upload_for'][$role_slug] = false;
+				$options['enable_svg_upload_for'][$role_slug] = ( 'on' == $options['enable_svg_upload_for'][$role_slug] ? true : false );
+			}
+		}
+		
 		// Enhance List Tables
 		if ( ! isset( $options['enhance_list_tables'] ) ) $options['enhance_list_tables'] = false;
 		$options['enhance_list_tables'] = ( 'on' == $options['enhance_list_tables'] ? true : false );

@@ -43,6 +43,8 @@
       // Place fields into the "Content Management" tab
       $('.enable-duplication').appendTo('.fields-content-management > table > tbody');
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
+      $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
+      $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
       $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-excerpt-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
@@ -154,6 +156,26 @@
 
       // Open tab by URL hash. Defaults to Content Management tab.
       // var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+
+      // Enable SVG Upload => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_svg_upload]').checked ) {
+         $('.enable-svg-upload .asenha-subfields').show();
+         $('.asenha-toggle.enable-svg-upload td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-svg-upload .asenha-subfields').hide();        
+      }
+
+      // Enable SVG Upload => show/hide roles checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[enable_svg_upload]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-svg-upload .asenha-subfields').fadeIn();
+            $('.enable-svg-upload .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-svg-upload .asenha-subfields').hide();
+            $('.enable-svg-upload .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
 
       // Enhance List Tables => show/hide subfields on document ready
       if ( document.getElementById('admin_site_enhancements[enhance_list_tables]').checked ) {

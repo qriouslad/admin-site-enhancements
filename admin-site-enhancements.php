@@ -101,5 +101,8 @@ register_deactivation_hook( __FILE__, 'asenha_on_deactivation' );
 // Functions for setting up admin menu, admin page, the settings sections and fields and other fondational stuff
 require_once ASENHA_PATH . 'settings.php';
 
+// Load vendor libraries
+require_once ASENHA_PATH . 'vendor/autoload.php';
+
 // Bootstrap all the functionalities of this plugin
 require_once ASENHA_PATH . 'bootstrap.php';

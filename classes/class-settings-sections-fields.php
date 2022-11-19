@@ -94,6 +94,52 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Enable SVG Upload
+
+		$field_id = 'enable_svg_upload';
+		$field_slug = 'enable-svg-upload';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable SVG Upload', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_svg_upload_for';
+		$field_slug = 'enable-svg-upload-for';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+				add_settings_field(
+					$field_id . '_' . $role_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $role_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+						'field_label'			=> $role_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half admin-interface ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					)
+				);
+
+			}
+		}
+
 		// Enhance List Tables
 
 		$field_id = 'enhance_list_tables';

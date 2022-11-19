@@ -96,6 +96,36 @@ class Admin_Site_Enhancements {
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
 
+		// Content Management >> Enable SVG Upload
+		if ( array_key_exists( 'enable_svg_upload', $options ) && $options['enable_svg_upload'] && array_key_exists( 'enable_svg_upload_for', $options ) && isset( $options['enable_svg_upload_for'] ) ) {
+
+			global $roles_svg_upload_enabled;
+
+			$enable_svg_upload = $options['enable_svg_upload'];
+			$for_roles = $options['enable_svg_upload_for'];
+
+			// User has role(s). Do further checks.
+			if ( isset( $for_roles ) && ( count( $for_roles ) > 0 ) ) {
+
+				// Assemble single-dimensional array of roles for which SVG upload would be enabled
+				$roles_svg_upload_enabled = array();
+				foreach( $for_roles as $role_slug => $svg_upload_enabled ) {
+					if ( $svg_upload_enabled ) {
+						$roles_svg_upload_enabled[] = $role_slug;
+					}
+				}
+
+			}
+
+			add_filter( 'upload_mimes', [ $content_management, 'add_svg_mime' ] );
+			add_filter( 'wp_check_filetype_and_ext', [ $content_management, 'confirm_file_type_is_svg' ], 10, 4 );
+			add_filter( 'wp_handle_upload_prefilter', [ $content_management, 'sanitize_and_maybe_allow_svg_upload' ] );
+			add_filter( 'wp_generate_attachment_metadata', [ $content_management, 'generate_svg_metadata' ], 10, 3 );
+			add_action( 'wp_ajax_svg_get_attachment_url', [ $content_management, 'get_svg_attachment_url' ] );
+			add_filter( 'wp_prepare_attachment_for_js', [ $content_management, 'get_svg_url_in_media_library' ] );
+		}
+
+
 		// Content Management >> Enhance List Tables
 		if ( array_key_exists( 'enhance_list_tables', $options ) && $options['enhance_list_tables'] ) {
 

@@ -15,3 +15,10 @@
 	height: auto;
 	border: 1px solid #e5e5e5;
 }
+
+/* Content Management >> Enable SVG Upload */
+
+table.media .column-title .media-icon img[src*='.svg'] {
+	width: 100%;
+	height: auto;
+}
