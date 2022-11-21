@@ -483,6 +483,14 @@
     flex-direction: column;
 }
 
+.form-table td.dataTables_empty {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 8px 10px !important;
+    background-color: #fff;
+}
+
 .datatable .dataTables_wrapper {
     background: #f5f5f5;
     margin-top: 8px;
