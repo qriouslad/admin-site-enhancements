@@ -56,22 +56,13 @@ class Admin_Site_Enhancements {
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
 
-		// Instantiate object for common methods
-		$common_methods = new ASENHA\Classes\Common_Methods;
-
-		// Load CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
-		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_codemirror_assets' ] );
-
-		// Load DataTables. In use, e.g. for Security >> Limit Login Attempts
-		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_datatables_assets' ] );
-
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
 		// Update footer text
 		add_filter( 'admin_footer_text', 'asenha_footer_text' );
 
-		// Selectively enable enhancements based on options value
+		// ===== Activate features based on settings ===== 
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( ASENHA_SLUG_U, array() );

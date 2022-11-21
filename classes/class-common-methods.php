@@ -10,46 +10,7 @@ namespace ASENHA\Classes;
 class Common_Methods {
 
 	/**
-	 * Re-enqueue CodeMirror syntax highlighter from WordPress core
-	 *
-	 * @since 2.3.0
-	 */
-	public function enqueue_codemirror_assets() {
-
-		// Only enqueue scripts on the plugin's settings page
-		if ( is_asenha() ) {
-
-			// CodeMirror JS
-			wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );			
-
-			// CodeMirror CSS
-			wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
-
-			// CSS mode for CodeMirror
-			wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );			
-
-		}
-
-	}
-
-	/**
-	 * Re-enqueue CodeMirror syntax highlighter from WordPress core
-	 *
-	 * @since 2.3.0
-	 */
-	public function enqueue_datatables_assets() {
-
-		// Only enqueue scripts on the plugin's settings page
-		if ( is_asenha() ) {
-
-			wp_enqueue_style( 'asenha-datatables', ASENHA_URL . 'assets/css/datatables/datatables.min.css', array(), ASENHA_VERSION );
-			wp_enqueue_script( 'asenha-datatables', ASENHA_URL . 'assets/js/datatables/datatables.min.js', array( 'jquery' ), ASENHA_VERSION, false );
-
-		}
-
-	}
-	/**
-	 * Get IP of the current visitor/user
+	 * Get IP of the current visitor/user. In use by at least the Limit Login Attempts feature.
 	 *
 	 * @since 2.5.0
 	 */
@@ -78,7 +39,7 @@ class Common_Methods {
 	}
 
 	/**
-	 * Convert number of seconds into hours, minutes, seconds
+	 * Convert number of seconds into hours, minutes, seconds. In use by at least the Limit Login Attempts feature.
 	 *
 	 * @since 2.5.0
 	 */
