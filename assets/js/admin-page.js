@@ -128,24 +128,28 @@
          $('.fields-content-management').show();
          $('.asenha-fields:not(.fields-content-management)').hide();
          window.location.hash = 'content-management';
+         Cookies.set('asenha_tab', 'content-management', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-admin-interface + label').click( function() {
          $('.fields-admin-interface').show();
          $('.asenha-fields:not(.fields-admin-interface)').hide();
          window.location.hash = 'admin-interface';
+         Cookies.set('asenha_tab', 'admin-interface', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-security + label').click( function() {
          $('.fields-security').show();
          $('.asenha-fields:not(.fields-security)').hide();
          window.location.hash = 'security';
+         Cookies.set('asenha_tab', 'security', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-utilities + label').click( function() {
          $('.fields-utilities').show();
          $('.asenha-fields:not(.fields-utilities)').hide();
          window.location.hash = 'utilities';
+         Cookies.set('asenha_tab', 'utilities', { expires: 1 }); // expires in 1 day
          adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
          frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
       });
@@ -153,7 +157,8 @@
       // $('#tab-disable-components + label').click( function() {
          // $('.fields-disable-components').show();
          // $('.asenha-fields:not(.fields-disable-components)').hide();
-         // window.location.hash = 'utilities';
+         // window.location.hash = 'disable-components';
+         // Cookies.set('asenha_tab', 'disable-components', { expires: 1 }); // expires in 1 day
       // });
 
       // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty
