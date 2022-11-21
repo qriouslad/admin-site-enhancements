@@ -217,7 +217,6 @@ class Admin_Site_Enhancements {
 				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
 				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url_on_login_fail' ] );
 				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url_on_logout_success' ] );
-				add_action( 'wp_login', [ $security, 'redirect_to_dashboard' ], 10, 2 );
 			}
 		}
 
