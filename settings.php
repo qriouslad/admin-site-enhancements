@@ -156,8 +156,19 @@ function asenha_admin_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
 		wp_enqueue_script( 'asenha-jsticky', ASENHA_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'asenha-js-cookie', ASENHA_URL . 'assets/js/js.cookie.min.js', array(), ASENHA_VERSION, false );		
-		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox' ), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie' ), ASENHA_VERSION, false );
+
+		// CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
+		wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );			
+		wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true ); // CSS mode
+
+		// DataTables. In use, e.g. for Security >> Limit Login Attempts
+		wp_enqueue_style( 'asenha-datatables', ASENHA_URL . 'assets/css/datatables/datatables.min.css', array(), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-datatables', ASENHA_URL . 'assets/js/datatables/datatables.min.js', array( 'jquery' ), ASENHA_VERSION, false );
+
+		// Main style and script for the admin page
+		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox', 'asenha-codemirror', 'asenha-datatables' ), ASENHA_VERSION );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie', 'asenha-codemirror-css-mode', 'asenha-datatables' ), ASENHA_VERSION, false );
 	}
 
 	// Enqueue on all wp-admin
