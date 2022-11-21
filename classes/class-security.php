@@ -107,18 +107,6 @@ class Security {
 	}
 
 	/**
-	 * Make sure user is redirected to dashboard /wp-admin/ when login is successful
-	 *
-	 * @since 2.5.0
-	 */
-	public function redirect_to_dashboard( $username, $user ) {
-
-		wp_safe_redirect( get_admin_url() );
-		exit();
-
-	}
-
-	/**
 	 * Maybe allow login if not locked out. Should return WP_Error object if not allowed to login.
 	 *
 	 * @since 2.5.0
