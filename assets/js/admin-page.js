@@ -14,6 +14,11 @@
       // Clicking on header save button triggers click of the hidden form submit button
       $('.asenha-save-button').click( function(e) {
          e.preventDefault();
+
+         // Get current tab's URL hash and save it in cookie
+         var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+         Cookies.set('asenha_tab', hash, { expires: 1 }); // expires in 1 day
+
          $('input[type="submit"]').click();
       });
 
@@ -122,25 +127,25 @@
       $('#tab-content-management + label').click( function() {
          $('.fields-content-management').show();
          $('.asenha-fields:not(.fields-content-management)').hide();
-         // window.location.hash = 'content-management';
+         window.location.hash = 'content-management';
       });
 
       $('#tab-admin-interface + label').click( function() {
          $('.fields-admin-interface').show();
          $('.asenha-fields:not(.fields-admin-interface)').hide();
-         // window.location.hash = 'admin-interface';
+         window.location.hash = 'admin-interface';
       });
 
       $('#tab-security + label').click( function() {
          $('.fields-security').show();
          $('.asenha-fields:not(.fields-security)').hide();
-         // window.location.hash = 'security';
+         window.location.hash = 'security';
       });
 
       $('#tab-utilities + label').click( function() {
          $('.fields-utilities').show();
          $('.asenha-fields:not(.fields-utilities)').hide();
-         // window.location.hash = 'utilities';
+         window.location.hash = 'utilities';
          adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
          frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
       });
@@ -151,11 +156,14 @@
          // window.location.hash = 'utilities';
       // });
 
-      // Open Content Management tab on document ready
-      $('#tab-content-management + label').trigger('click');
+      // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty
+      var asenhaTabHash = Cookies.get('asenha_tab');
 
-      // Open tab by URL hash. Defaults to Content Management tab.
-      // var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+      if (typeof asenhaTabHash === 'undefined') {
+         $('#tab-content-management + label').trigger('click');         
+      } else {
+         $('#tab-' + asenhaTabHash + ' + label').trigger('click');         
+      }
 
       // Enable SVG Upload => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[enable_svg_upload]').checked ) {
