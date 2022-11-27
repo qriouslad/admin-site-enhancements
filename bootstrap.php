@@ -228,6 +228,12 @@ class Admin_Site_Enhancements {
 			add_filter( 'rest_prepare_user', [ $security, 'alter_json_users' ], 10, 3 );
 		}
 
+		// Security >> Disable XML-RPC
+		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+			add_filter( 'wp_xmlrpc_server_class', [ $security, 'maybe_disable_xmlrpc' ] );
+		}
+
 		// ===== UTILITIES ======
 
 		// Instantiate object for Utilities features
@@ -270,12 +276,6 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Disable Components features
 		$disable_components = new ASENHA\Classes\Disable_Components;
-
-		// Security >> Disable XML-RPC
-		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
-			add_filter( 'xmlrpc_enabled', '__return_false' );
-			add_filter( 'wp_xmlrpc_server_class', [ $disable_components, 'maybe_disable_xmlrpc' ] );
-		}
 
 		// Disable Components >> Disable Comments
 		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
