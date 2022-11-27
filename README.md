@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1  
-Stable tag: 2.6.0  
+Stable tag: 2.7.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,10 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
   * Remove 'Howdy' text
 * **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 
+### Disable Components
+
+* **Disable Comments**. Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
+
 ### Security
 
 * **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend
@@ -81,10 +85,12 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
    ![Content Management](.wordpress-org/screenshot-1.png)
 2. Admin Interface
    ![Admin Interface](.wordpress-org/screenshot-2.png)
-3. Security
-   ![Security](.wordpress-org/screenshot-3.png)
-4. Utilities
-   ![Utilities](.wordpress-org/screenshot-4.png)
+3. Disable Components
+   ![Disable Components](.wordpress-org/screenshot-3.png)
+4. Security
+   ![Security](.wordpress-org/screenshot-4.png)
+5. Utilities
+   ![Utilities](.wordpress-org/screenshot-5.png)
 
 ## Frequently Asked Questions
 
@@ -93,6 +99,13 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.7.0 (2022.11.27)
+
+* **[ADDED] Disable Components >> Disable Comments**: Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
+* **[CHANGED] Security >> Limit Login Attempts**: Improved styling of empty datatable, i.e. when there is no failed login attempts logged.
+* **[CHANGED] Settings tab position** is now saved to browser cookie, so it persists upon saving changes or revisiting it from elsewhere in wp-admin.
+* **[CHANGED] Some code refactoring** to make logical separation and categorization of features clearer. CodeMirror and DataTables assets loading are also moved
 
 ### 2.6.0 (2022.11.19)
 
