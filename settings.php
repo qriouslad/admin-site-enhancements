@@ -138,6 +138,25 @@ function asenha_suppress_notices() {
 }
 
 /**
+ * Suppress all generic notices on the plugin settings page
+ *
+ * @since 2.7.0
+ */
+function asenha_suppress_generic_notices() {
+
+	global $plugin_page;
+
+	// Suppress all notices
+
+	if ( ASENHA_SLUG === $plugin_page ) {
+
+		remove_all_actions( 'all_admin_notices' );
+
+	}
+
+}
+
+/**
  * Enqueue admin scripts
  *
  * @since 1.0.0
