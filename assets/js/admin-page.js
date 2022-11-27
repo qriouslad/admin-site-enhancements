@@ -14,6 +14,11 @@
       // Clicking on header save button triggers click of the hidden form submit button
       $('.asenha-save-button').click( function(e) {
          e.preventDefault();
+
+         // Get current tab's URL hash and save it in cookie
+         var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+         Cookies.set('asenha_tab', hash, { expires: 1 }); // expires in 1 day
+
          $('input[type="submit"]').click();
       });
 
@@ -68,6 +73,10 @@
       $('.hide-admin-bar').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
+      // Place fields into the "Disable Components" tab
+      $('.disable-comments').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-comments-for').appendTo('.fields-disable-components .disable-comments .asenha-subfields');
+
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security > table > tbody');
       $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
@@ -90,8 +99,6 @@
       $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
-
-      // Place fields into the "Disable Components" tab
 
       // Remove empty .form-table that originally holds the fields
       const formTableCount = $('.form-table').length;
@@ -122,40 +129,48 @@
       $('#tab-content-management + label').click( function() {
          $('.fields-content-management').show();
          $('.asenha-fields:not(.fields-content-management)').hide();
-         // window.location.hash = 'content-management';
+         window.location.hash = 'content-management';
+         Cookies.set('asenha_tab', 'content-management', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-admin-interface + label').click( function() {
          $('.fields-admin-interface').show();
          $('.asenha-fields:not(.fields-admin-interface)').hide();
-         // window.location.hash = 'admin-interface';
+         window.location.hash = 'admin-interface';
+         Cookies.set('asenha_tab', 'admin-interface', { expires: 1 }); // expires in 1 day
+      });
+
+      $('#tab-disable-components + label').click( function() {
+         $('.fields-disable-components').show();
+         $('.asenha-fields:not(.fields-disable-components)').hide();
+         window.location.hash = 'disable-components';
+         Cookies.set('asenha_tab', 'disable-components', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-security + label').click( function() {
          $('.fields-security').show();
          $('.asenha-fields:not(.fields-security)').hide();
-         // window.location.hash = 'security';
+         window.location.hash = 'security';
+         Cookies.set('asenha_tab', 'security', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-utilities + label').click( function() {
          $('.fields-utilities').show();
          $('.asenha-fields:not(.fields-utilities)').hide();
-         // window.location.hash = 'utilities';
+         window.location.hash = 'utilities';
+         Cookies.set('asenha_tab', 'utilities', { expires: 1 }); // expires in 1 day
          adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
          frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
       });
 
-      // $('#tab-disable-components + label').click( function() {
-         // $('.fields-disable-components').show();
-         // $('.asenha-fields:not(.fields-disable-components)').hide();
-         // window.location.hash = 'utilities';
-      // });
+      // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty
+      var asenhaTabHash = Cookies.get('asenha_tab');
 
-      // Open Content Management tab on document ready
-      $('#tab-content-management + label').trigger('click');
-
-      // Open tab by URL hash. Defaults to Content Management tab.
-      // var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
+      if (typeof asenhaTabHash === 'undefined') {
+         $('#tab-content-management + label').trigger('click');         
+      } else {
+         $('#tab-' + asenhaTabHash + ' + label').trigger('click');         
+      }
 
       // Enable SVG Upload => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[enable_svg_upload]').checked ) {
@@ -254,6 +269,25 @@
          } else {
             $('.customize-admin-menu .asenha-subfields').hide();
             $('.customize-admin-menu .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Disable Comments => show/hide post type checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[disable_comments]').checked ) {
+         $('.disable-comments .asenha-subfields').show();
+         $('.asenha-toggle.disable-comments td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.disable-comments .asenha-subfields').hide();        
+      }
+
+      // Disable Comments => show/hide post type checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[disable_comments]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.disable-comments .asenha-subfields').fadeIn();
+            $('.disable-comments .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.disable-comments .asenha-subfields').hide();
+            $('.disable-comments .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 
@@ -373,6 +407,7 @@
             $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
+
    });
 
 })( jQuery );

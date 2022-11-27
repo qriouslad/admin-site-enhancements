@@ -52,18 +52,10 @@ class Admin_Site_Enhancements {
 
 		// Suppress all notices on the plugin's main page. Then add notification for successful settings update.
 		add_action( 'admin_notices', 'asenha_suppress_notices', 5 );
+		add_action( 'all_admin_notices', 'asenha_suppress_generic_notices', 5 );
 
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
-
-		// Instantiate object for common methods
-		$common_methods = new ASENHA\Classes\Common_Methods;
-
-		// Load CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
-		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_codemirror_assets' ] );
-
-		// Load DataTables. In use, e.g. for Security >> Limit Login Attempts
-		add_action( 'admin_enqueue_scripts', [ $common_methods, 'enqueue_datatables_assets' ] );
 
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
@@ -71,7 +63,7 @@ class Admin_Site_Enhancements {
 		// Update footer text
 		add_filter( 'admin_footer_text', 'asenha_footer_text' );
 
-		// Selectively enable enhancements based on options value
+		// ===== Activate features based on settings ===== 
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( ASENHA_SLUG_U, array() );
@@ -217,7 +209,6 @@ class Admin_Site_Enhancements {
 				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
 				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url_on_login_fail' ] );
 				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url_on_logout_success' ] );
-				add_action( 'wp_login', [ $security, 'redirect_to_dashboard' ], 10, 2 );
 			}
 		}
 
@@ -236,6 +227,12 @@ class Admin_Site_Enhancements {
 			add_action( 'pre_get_posts', [ $security, 'alter_author_query' ], 10 );
 			add_filter( 'author_link', [ $security, 'alter_author_link' ], 10, 3 );
 			add_filter( 'rest_prepare_user', [ $security, 'alter_json_users' ], 10, 3 );
+		}
+
+		// Security >> Disable XML-RPC
+		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+			add_filter( 'wp_xmlrpc_server_class', [ $security, 'maybe_disable_xmlrpc' ] );
 		}
 
 		// ===== UTILITIES ======
@@ -281,10 +278,13 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Disable Components features
 		$disable_components = new ASENHA\Classes\Disable_Components;
 
-		// Disable Components >> Disable XML-RPC
-		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
-			add_filter( 'xmlrpc_enabled', '__return_false' );
-			add_filter( 'wp_xmlrpc_server_class', [ $disable_components, 'maybe_disable_xmlrpc' ] );
+		// Disable Components >> Disable Comments
+		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
+			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
+				add_action( 'wp_loaded', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init' and 'admin_init' hooks
+				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
+				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
+			}
 		}
 		
 	}

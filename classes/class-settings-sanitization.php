@@ -17,7 +17,7 @@ class Settings_Sanitization {
 	function sanitize_for_options( $options ) {
 
 		// Call WordPress globals required for validating the fields	
-		global $wp_roles;
+		global $wp_roles, $asenha_public_post_types;
 		$roles = $wp_roles->get_names();
 
 		// ===== CONTENT MANAGEMENT =====
@@ -200,6 +200,17 @@ class Settings_Sanitization {
 		$options['custom_frontend_css'] = ( ! empty( $options['custom_frontend_css'] ) ) ? $options['custom_frontend_css'] : '';
 
 		// ===== DISABLE COMPONENTS ======
+
+		// Disable Comments
+		if ( ! isset( $options['disable_comments'] ) ) $options['disable_comments'] = false;
+		$options['disable_comments'] = ( 'on' == $options['disable_comments'] ? true : false );
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( ! isset( $options['disable_comments_for'][$post_type_slug] ) ) $options['disable_comments_for'][$post_type_slug] = false;
+				$options['disable_comments_for'][$post_type_slug] = ( 'on' == $options['disable_comments_for'][$post_type_slug] ? true : false );
+			}
+		}
 
 		return $options;
 

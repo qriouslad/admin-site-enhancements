@@ -107,18 +107,6 @@ class Security {
 	}
 
 	/**
-	 * Make sure user is redirected to dashboard /wp-admin/ when login is successful
-	 *
-	 * @since 2.5.0
-	 */
-	public function redirect_to_dashboard( $username, $user ) {
-
-		wp_safe_redirect( get_admin_url() );
-		exit();
-
-	}
-
-	/**
 	 * Maybe allow login if not locked out. Should return WP_Error object if not allowed to login.
 	 *
 	 * @since 2.5.0
@@ -650,6 +638,18 @@ class Security {
 
 		// Returns user ID, e.g. decrypts author slug 4e3062d8c8626a14 into user ID 3
 		return base_convert( openssl_decrypt( pack('H*', $encrypted_author_slug), 'DES-EDE3', md5( sanitize_text_field( $_SERVER['SERVER_ADDR'] ) . ASENHA_URL ), OPENSSL_RAW_DATA ), 36, 10 );
+
+	}
+
+	/**
+	 * Disable the XML-RPC component
+	 *
+	 * @since 2.2.0
+	 */
+	public function maybe_disable_xmlrpc( $data ) {
+
+		http_response_code(403);
+		exit('You don\'t have permission to access this file.');
 
 	}
 
