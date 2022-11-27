@@ -49,8 +49,17 @@ class Settings_Sections_Fields {
 
 		// Call WordPress globals required for the fields
 
-		global $wp_roles, $wpdb;
+		global $wp_roles, $wpdb, $asenha_public_post_types;
+
 		$roles = $wp_roles->get_names();
+
+		// Get array of slugs and plural labels for public post types, e.g. array( 'post' => 'Posts', 'page' => 'Pages' )
+		$asenha_public_post_types = array();
+		$public_post_type_names = get_post_types( array( 'public' => true ), 'names' );
+		foreach( $public_post_type_names as $post_type_name ) {
+			$post_type_object = get_post_type_object( $post_type_name );
+			$asenha_public_post_types[$post_type_name] = $post_type_object->label;
+		}
 
 		// ===== CONTENT MANAGEMENT =====
 
@@ -529,6 +538,52 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// ===== DISABLE COMPONENTS =====
+
+		// Disable Comments
+
+		$field_id = 'disable_comments';
+		$field_slug = 'disable-comments';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable Comments', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_comments_for';
+		$field_slug = 'disable-comments-for';
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				add_settings_field(
+					$field_id . '_' . $post_type_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $post_type_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+						'field_label'			=> $post_type_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+					)
+				);
+			}
+		}
+
 		// ===== SECURITY =====
 
 		// Change Login URL
@@ -937,8 +992,6 @@ class Settings_Sections_Fields {
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
-
-		// ===== DISABLE COMPONENTS =====
 
 	}
 
