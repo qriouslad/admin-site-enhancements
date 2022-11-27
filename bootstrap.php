@@ -271,10 +271,19 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Disable Components features
 		$disable_components = new ASENHA\Classes\Disable_Components;
 
-		// Disable Components >> Disable XML-RPC
+		// Security >> Disable XML-RPC
 		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
 			add_filter( 'xmlrpc_enabled', '__return_false' );
 			add_filter( 'wp_xmlrpc_server_class', [ $disable_components, 'maybe_disable_xmlrpc' ] );
+		}
+
+		// Disable Components >> Disable Comments
+		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
+			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
+				add_action( 'wp_loaded', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init' and 'admin_init' hooks
+				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
+				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
+			}
 		}
 		
 	}

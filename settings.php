@@ -47,9 +47,9 @@ function asenha_add_settings_page() {
 					<div class="asenha-tab-buttons">
 					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
 					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
+					    <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components">Disable Components</label>
 					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
 					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities">Utilities</label>
-					    <!-- <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components">Disable Components</label> -->
 					</div>
 					<div class="asenha-tab-contents">
 					    <section class="asenha-fields fields-content-management"> 
@@ -58,6 +58,11 @@ function asenha_add_settings_page() {
 					    	</table>
 					    </section>
 					    <section class="asenha-fields fields-admin-interface"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-disable-components"> 
 					    	<table class="form-table" role="presentation">
 					    		<tbody></tbody>
 					    	</table>
@@ -72,11 +77,6 @@ function asenha_add_settings_page() {
 					    		<tbody></tbody>
 					    	</table>
 					    </section>
-					    <!-- <section class="asenha-fields fields-disable-components"> 
-					    	<table class="form-table" role="presentation">
-					    		<tbody></tbody>
-					    	</table>
-					    </section> -->
 					</div>
 				</div>
 				<div style="display:none;"><!-- Hide to prevent flash of fields appearing at the bottom of the page -->
