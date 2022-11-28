@@ -4,7 +4,7 @@ Contributors: qriouslad
 Donate link: https://paypal.me/qriouslad  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
-Tested up to: 6.1  
+Tested up to: 6.1.1  
 Stable tag: 2.7.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
@@ -47,6 +47,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Disable Components
 
+* **Disable Gutenberg**. Disable the Gutenberg block editor for some or all applicable post types. Optionally disable frontend block styles / CSS files for the selected post types.
 * **Disable Comments**. Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
 
 ### Security
@@ -78,6 +79,7 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 * [Debug Log Manager](https://wordpress.org/plugins/debug-log-manager/): Log PHP, database and JavaScript errors via WP_DEBUG with one click. Conveniently create, view, filter and clear the debug.log file.
 * [Variable Inspector](https://wordpress.org/plugins/variable-inspector/): Inspect PHP variables on a central dashboard in wp-admin for convenient debugging.
 * [Code Explorer](https://wordpress.org/plugins/code-explorer/): Fast directory explorer and file/code viewer with syntax highlighting.
+* [Flexible Scroll Top](https://wordpress.org/plugins/flexible-scroll-top/) and [Floating Share Buttons](https://wordpress.org/plugins/floating-share-button/) is a lightweight combo with minimalist UI.
 
 ## Screenshots
 
@@ -99,6 +101,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.8.0 (2022.11.28)
+
+* **[ADDED] Disable Components >> Disable Gutenberg**: Disable the Gutenberg block editor for some or all applicable post types. Optionally disable frontend block styles / CSS files for the selected post types.
 
 ### 2.7.0 (2022.11.27)
 

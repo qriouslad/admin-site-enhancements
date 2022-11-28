@@ -74,6 +74,9 @@
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
       // Place fields into the "Disable Components" tab
+      $('.disable-gutenberg').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-gutenberg-for').appendTo('.fields-disable-components .disable-gutenberg .asenha-subfields');
+      $('.disable-gutenberg-frontend-styles').appendTo('.fields-disable-components .disable-gutenberg .asenha-subfields');
       $('.disable-comments').appendTo('.fields-disable-components > table > tbody');
       $('.disable-comments-for').appendTo('.fields-disable-components .disable-comments .asenha-subfields');
 
@@ -269,6 +272,25 @@
          } else {
             $('.customize-admin-menu .asenha-subfields').hide();
             $('.customize-admin-menu .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Disable Gutenberg => show/hide post type checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[disable_gutenberg]').checked ) {
+         $('.disable-gutenberg .asenha-subfields').show();
+         $('.asenha-toggle.disable-gutenberg td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.disable-gutenberg .asenha-subfields').hide();        
+      }
+
+      // Disable Gutenberg => show/hide post type checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[disable_gutenberg]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.disable-gutenberg .asenha-subfields').fadeIn();
+            $('.disable-gutenberg .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.disable-gutenberg .asenha-subfields').hide();
+            $('.disable-gutenberg .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 
