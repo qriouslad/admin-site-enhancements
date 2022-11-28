@@ -649,7 +649,7 @@ class Settings_Sections_Fields {
 						'parent_field_id'		=> $field_id, // Custom argument
 						'field_id'				=> $post_type_slug, // Custom argument
 						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
-						'field_label'			=> $post_type_label, // Custom argument
+						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
 						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
 					)
 				);
