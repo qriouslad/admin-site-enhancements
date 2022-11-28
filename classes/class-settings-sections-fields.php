@@ -49,7 +49,7 @@ class Settings_Sections_Fields {
 
 		// Call WordPress globals required for the fields
 
-		global $wp_roles, $wpdb, $asenha_public_post_types;
+		global $wp_roles, $wpdb, $asenha_public_post_types, $asenha_gutenberg_post_types;
 
 		$roles = $wp_roles->get_names();
 
@@ -59,6 +59,17 @@ class Settings_Sections_Fields {
 		foreach( $public_post_type_names as $post_type_name ) {
 			$post_type_object = get_post_type_object( $post_type_name );
 			$asenha_public_post_types[$post_type_name] = $post_type_object->label;
+		}
+
+		// Get array of slugs and plural labels for post types that can be edited with the Gutenberg block editor, e.g. array( 'post' => 'Posts', 'page' => 'Pages' )
+		$asenha_gutenberg_post_types = array();
+		$gutenberg_not_applicable_types = array( 'attachment', 'revision', 'nav_menu_item', 'custom_css', 'customize_changeset', 'oembed_cache', 'user_request', 'wp_block' );
+		$all_post_types = get_post_types( array(), 'objects' );
+		foreach ( $all_post_types as $post_type_slug => $post_type_info ) {
+			$asenha_gutenberg_post_types[$post_type_slug] = $post_type_info->label;
+			if ( in_array( $post_type_slug, $gutenberg_not_applicable_types ) ) {
+				unset( $asenha_gutenberg_post_types[$post_type_slug] );
+			}
 		}
 
 		// ===== CONTENT MANAGEMENT =====
@@ -540,6 +551,67 @@ class Settings_Sections_Fields {
 
 		// ===== DISABLE COMPONENTS =====
 
+		// Disable Gutenberg
+
+		$field_id = 'disable_gutenberg';
+		$field_slug = 'disable-gutenberg';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable Gutenberg', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Disable the Gutenberg block editor for some or all applicable post types.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_gutenberg_for';
+		$field_slug = 'disable-gutenberg-for';
+
+		if ( is_array( $asenha_gutenberg_post_types ) ) {
+			foreach ( $asenha_gutenberg_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				add_settings_field(
+					$field_id . '_' . $post_type_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $post_type_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+					)
+				);
+			}
+		}
+
+		$field_id = 'disable_gutenberg_frontend_styles';
+		$field_slug = 'disable-gutenberg-frontend-styles';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Also disable frontend block styles / CSS files for the selected post types.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th asenha-th-border-top disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Disable Comments
 
 		$field_id = 'disable_comments';
@@ -578,7 +650,7 @@ class Settings_Sections_Fields {
 						'field_id'				=> $post_type_slug, // Custom argument
 						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
 						'field_label'			=> $post_type_label, // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
 					)
 				);
 			}

@@ -197,6 +197,30 @@ class Admin_Site_Enhancements {
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'enqueue_toggle_hidden_menu_script' ] );
 		}
 
+		// ===== DISABLE COMPONENTS ======
+
+		// Instantiate object for Disable Components features
+		$disable_components = new ASENHA\Classes\Disable_Components;
+
+		// Disable Components >> Disable Gutenberg
+		if ( array_key_exists( 'disable_gutenberg', $options ) && $options['disable_gutenberg'] ) {
+			if ( array_key_exists( 'disable_gutenberg_for', $options ) && ! empty( $options['disable_gutenberg_for'] ) )  {
+				add_action( 'admin_init', [ $disable_components, 'disable_gutenberg_for_post_types_admin' ] );
+				if ( array_key_exists( 'disable_gutenberg_frontend_styles', $options ) && $options['disable_gutenberg_frontend_styles'] ) {
+					add_action( 'wp_enqueue_scripts', [ $disable_components, 'disable_gutenberg_for_post_types_frontend' ], 100 );
+				}
+			}
+		}
+
+		// Disable Components >> Disable Comments
+		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
+			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
+				add_action( 'wp_loaded', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init' and 'admin_init' hooks
+				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
+				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
+			}
+		}
+
 		// ===== SECURITY =====
 
 		// Instantiate object for Security features
@@ -271,20 +295,6 @@ class Admin_Site_Enhancements {
 
 		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
 			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
-		}
-
-		// ===== DISABLE COMPONENTS ======
-
-		// Instantiate object for Disable Components features
-		$disable_components = new ASENHA\Classes\Disable_Components;
-
-		// Disable Components >> Disable Comments
-		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
-			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
-				add_action( 'wp_loaded', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init' and 'admin_init' hooks
-				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
-				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
-			}
 		}
 		
 	}

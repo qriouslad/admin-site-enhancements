@@ -340,8 +340,13 @@
     width: 50%;
 }
 
-.form-table .asenha-subfields .asenha-hide-th th:not(.datatable-th) {
+.form-table .asenha-subfields tr.asenha-hide-th th:not(.datatable-th) {
     display: none;
+}
+
+.form-table .asenha-subfields tr.asenha-th-border-top {
+    padding-top: 12px;
+    border-top: 1px solid #eee;
 }
 
 .form-table .asenha-subfields td:not(.datatable-td) {
@@ -408,6 +413,10 @@
 
 .with-prefix-suffix.narrow .asenha-subfield-text {
     width: 40px;
+}
+
+.form-table .asenha-subfields td:not(.datatable-td) label .faded {
+    color: #bbb;
 }
 
 /* Sortable subfield */
