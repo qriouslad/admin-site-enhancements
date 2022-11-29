@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 2.8.2  
+Stable tag: 2.8.3  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 2.8.3 (2022.11.29)
+
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Fix for missing Show All toggle in certain scenarios.
 
 ### 2.8.2 (2022.11.29)
 
