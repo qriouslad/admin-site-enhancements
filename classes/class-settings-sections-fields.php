@@ -524,7 +524,7 @@ class Settings_Sections_Fields {
 				'field_id'					=> $field_id, // Custom argument
 				'field_slug'				=> $field_slug, // Custom argument
 				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Customize the order of the admin menu and optionally hide some items.', // Custom argument
+				'field_description'			=> 'Customize the order of the admin menu and optionally change menu item title or hide some items.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'						=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element

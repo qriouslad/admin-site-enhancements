@@ -557,44 +557,6 @@ class Admin_Interface {
 	}
 
 	/**
-	 * Enqueue scripts and styles to enable sortable, draggable, etc. like in Appearance >> Menus. This is using jQuery UI Sortable.
-	 *
-	 * @since 2.0.0
-	 */
-	public function enqueue_jquery_ui_sortables_scripts() {
-
-		// Only enqueue scripts on the plugin's settings page
-		if ( is_asenha() ) {
-
-			// Re-register and re-enqueue jQuery UI Core and plugins required for sortable, draggable and droppable when ordering menu items
-			wp_deregister_script( 'jquery-ui-core' );
-			wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.js', array( 'jquery' ), ASENHA_VERSION, false );
-			wp_enqueue_script( 'jquery-ui-core' );
-
-			wp_deregister_script( 'jquery-ui-mouse' );
-			wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
-			wp_enqueue_script( 'jquery-ui-mouse' );
-
-			wp_deregister_script( 'jquery-ui-sortable' );
-			wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
-			wp_enqueue_script( 'jquery-ui-sortable' );
-
-			wp_deregister_script( 'jquery-ui-draggable' );
-			wp_register_script( 'jquery-ui-draggable', get_site_url() . '/wp-includes/js/jquery/ui/draggable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
-			wp_enqueue_script( 'jquery-ui-draggable' );
-
-			wp_deregister_script( 'jquery-ui-droppable' );
-			wp_register_script( 'jquery-ui-droppable', get_site_url() . '/wp-includes/js/jquery/ui/droppable.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
-			wp_enqueue_script( 'jquery-ui-droppable' );
-
-			// Script to set behaviour and actions of the sortable menu
-			wp_enqueue_script( 'asenha-custom-admin-menu', ASENHA_URL . 'assets/js/custom-admin-menu.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
-
-		}
-
-	}
-
-	/**
 	 * Save custom menu order into an option
 	 *
 	 * @since 2.0.0
@@ -737,6 +699,61 @@ class Admin_Interface {
 
 		}
 
+	}
+
+	/**
+	 * Apply custom menu item titles
+	 *
+	 * @since 2.9.0
+	 */
+	public function apply_custom_menu_item_titles() {
+
+		global $menu;
+
+		$options = get_option( ASENHA_SLUG_U );
+
+		// Get custom menu item titles
+		if ( array_key_exists( 'custom_menu_titles', $options ) ) {
+			$custom_menu_titles = $options['custom_menu_titles'];
+			$custom_menu_titles = explode( ',', $custom_menu_titles );
+		} else {
+			$custom_menu_titles = array();
+		}	
+
+		$i = 1;
+
+		foreach ( $menu as $menu_key => $menu_info ) {
+
+			do_action( 'inspect', [ 'menu_key_' . $i, $menu_key ] );
+			do_action( 'inspect', [ 'menu_info_' . $i, $menu_info ] );
+
+			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
+				$menu_item_id = $menu_info[2];
+			} else {
+				$menu_item_id = $menu_info[5];
+			}
+
+			// Get defaul/custom menu item title
+			foreach ( $custom_menu_titles as $custom_menu_title ) {
+
+				// At this point, $custom_menu_title value looks like toplevel_page_snippets__Code Snippets
+
+				$custom_menu_title = explode( '__', $custom_menu_title );
+
+				if ( $custom_menu_title[0] == $menu_item_id ) {
+					$menu_item_title = $custom_menu_title[1]; // e.g. Code Snippets
+					break; // stop foreach loop so $menu_item_title is not overwritten in the next iteration
+				} else {
+					$menu_item_title = $menu_info[0];
+				}
+
+			}
+
+			$menu[$menu_key][0] = $menu_item_title;
+
+			$i++;
+
+		}
 	}
 
 	/**

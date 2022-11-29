@@ -439,6 +439,7 @@
 .custom-menu-order .menu-item-bar .menu-item-handle {
     max-width: 320px;
     width: 320px;
+    min-height: 30px;
 }
 
 .custom-menu-order .menu-item-handle .menu-item-checkbox {
@@ -448,7 +449,19 @@
 .custom-menu-order .menu-item-handle .item-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-right: 0;
+    line-height: 30px;
+}
+
+.custom-menu-order .menu-item-handle .item-title .menu-item-title a {
+    color: #666;
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.custom-menu-order .menu-item-handle .item-title .menu-item-title a:hover {
+    color: inherit;
 }
 
 .menu-item-checkbox-label span {
@@ -457,13 +470,13 @@
 
 .custom-menu-order .menu-item-title span,
 .custom-menu-order .menu-item-settings .submenu-item span {
-    display: none;
+    /* display: none; */
 }
 
 .sortable-placeholder {
     width: 350px;
     max-width: 350px;
-    height: 42px;
+    height: 52px;
     min-height: 42px;
     max-height: 42px;
     border: 1px dotted #ccc;

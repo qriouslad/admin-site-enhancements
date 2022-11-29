@@ -174,7 +174,32 @@ function asenha_admin_scripts( $hook_suffix ) {
 		wp_enqueue_style( 'asenha-jbox', ASENHA_URL . 'assets/css/jBox.all.min.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-jbox', ASENHA_URL . 'assets/js/jBox.all.min.js', array(), ASENHA_VERSION, false );
 		wp_enqueue_script( 'asenha-jsticky', ASENHA_URL . 'assets/js/jquery.jsticky.mod.min.js', array( 'jquery' ), ASENHA_VERSION, false );
-		wp_enqueue_script( 'asenha-js-cookie', ASENHA_URL . 'assets/js/js.cookie.min.js', array(), ASENHA_VERSION, false );		
+		wp_enqueue_script( 'asenha-js-cookie', ASENHA_URL . 'assets/js/js.cookie.min.js', array(), ASENHA_VERSION, false );
+
+		// jQuery UI Sortables. In use, e.g. for Admin Interface >> Admin Menu Organizer	
+		// Re-register and re-enqueue jQuery UI Core and plugins required for sortable, draggable and droppable when ordering menu items
+		wp_deregister_script( 'jquery-ui-core' );
+		wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.js', array( 'jquery' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'jquery-ui-core' );
+
+		wp_deregister_script( 'jquery-ui-mouse' );
+		wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'jquery-ui-mouse' );
+
+		wp_deregister_script( 'jquery-ui-sortable' );
+		wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+
+		wp_deregister_script( 'jquery-ui-draggable' );
+		wp_register_script( 'jquery-ui-draggable', get_site_url() . '/wp-includes/js/jquery/ui/draggable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'jquery-ui-draggable' );
+
+		wp_deregister_script( 'jquery-ui-droppable' );
+		wp_register_script( 'jquery-ui-droppable', get_site_url() . '/wp-includes/js/jquery/ui/droppable.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'jquery-ui-droppable' );
+
+		// Script to set behaviour and actions of the sortable menu
+		wp_enqueue_script( 'asenha-custom-admin-menu', ASENHA_URL . 'assets/js/custom-admin-menu.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
 
 		// CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
 		wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
@@ -187,7 +212,7 @@ function asenha_admin_scripts( $hook_suffix ) {
 
 		// Main style and script for the admin page
 		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox', 'asenha-codemirror', 'asenha-datatables' ), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie', 'asenha-codemirror-css-mode', 'asenha-datatables' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie', 'asenha-codemirror-css-mode', 'asenha-datatables', 'asenha-custom-admin-menu' ), ASENHA_VERSION, false );
 	}
 
 	// Enqueue on all wp-admin
