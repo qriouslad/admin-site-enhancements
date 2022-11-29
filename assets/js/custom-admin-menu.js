@@ -3,19 +3,30 @@
 
    $(document).ready( function() {
 
+      // ----- Menu Ordering -----
+
       // Initialize sortable elements: https://api.jqueryui.com/sortable/
       $('#custom-admin-menu').sortable({
          placeholder: 'sortable-placeholder'
       });
 
+      // Get the default/current menu order
+      let menuOrder = $('#custom-admin-menu').sortable("toArray").toString();
+      console.log( menuOrder );
+
+      // Set hidden input value for saving in options
+      document.getElementById('admin_site_enhancements[custom_menu_order]').value = menuOrder;
+
       // Save custom order into a comma-separated string, triggerred after each drag and drop of menu item
       // https://api.jqueryui.com/sortable/#event-update
       // https://api.jqueryui.com/sortable/#method-toArray
       $('#custom-admin-menu').on( 'sortupdate', function( event, ui) {
+
+         // Get the updated menu order
          let menuOrder = $('#custom-admin-menu').sortable("toArray").toString();
          // console.log( menuOrder );
 
-         // Set hidden input value
+         // Set hidden input value for saving in options
          document.getElementById('admin_site_enhancements[custom_menu_order]').value = menuOrder;
 
          // jQuery.ajax({
@@ -45,73 +56,74 @@
       //    };
       // })();
 
-      // If Customize Admin Menu is enabled, save IDs of menu items that will be hidden
-      if ( document.getElementById('admin_site_enhancements[customize_admin_menu]').checked ) {
+      // If Customize Admin Menu is enabled
+      // if ( document.getElementById('admin_site_enhancements[customize_admin_menu]').checked ) {
+      // }
 
-         // Prepare constant to store IDs of menu items that will be hidden
-         if ( document.getElementById('admin_site_enhancements[custom_menu_hidden]').value ) {
+      // ----- Menu Item Hiding -----
 
-            var hiddenMenuItems = document.getElementById('admin_site_enhancements[custom_menu_hidden]').value.split(","); // array
+      // Prepare constant to store IDs of menu items that will be hidden
+      if ( document.getElementById('admin_site_enhancements[custom_menu_hidden]').value ) {
 
-         } else {
+         var hiddenMenuItems = document.getElementById('admin_site_enhancements[custom_menu_hidden]').value.split(","); // array
 
-            var hiddenMenuItems = []; // array
+      } else {
 
-         }
+         var hiddenMenuItems = []; // array
 
-         console.log(hiddenMenuItems);
+      }
 
-         // Detect which menu items are being checked. Ref: https://stackoverflow.com/a/3871602
-         Array.from(document.getElementsByClassName('menu-item-checkbox')).forEach(function(item,index,array) {
- 
-            item.addEventListener('click', event => {
+      // console.log(hiddenMenuItems);
 
-               if (event.target.checked) {
+      // Detect which menu items are being checked. Ref: https://stackoverflow.com/a/3871602
+      Array.from(document.getElementsByClassName('menu-item-checkbox')).forEach(function(item,index,array) {
 
-                  // Add ID of menu item to array
-                  // alert(event.target.dataset.menuItemId + ' will be hidden');
-                  hiddenMenuItems.push(event.target.dataset.menuItemId);
+         item.addEventListener('click', event => {
 
-               } else {
+            if (event.target.checked) {
 
-                  // Remove ID of menu item from array
-                  // alert(event.target.dataset.menuItemId + ' will not be hidden');
-                  const start = hiddenMenuItems.indexOf(event.target.dataset.menuItemId);
-                  const deleteCount = 1;
-                  hiddenMenuItems.splice(start, deleteCount);
+               // Add ID of menu item to array
+               // alert(event.target.dataset.menuItemId + ' will be hidden');
+               hiddenMenuItems.push(event.target.dataset.menuItemId);
 
-               }
+            } else {
 
-               console.log(hiddenMenuItems.toString());
+               // Remove ID of menu item from array
+               // alert(event.target.dataset.menuItemId + ' will not be hidden');
+               const start = hiddenMenuItems.indexOf(event.target.dataset.menuItemId);
+               const deleteCount = 1;
+               hiddenMenuItems.splice(start, deleteCount);
 
-               // Set hidden input value
-               document.getElementById('admin_site_enhancements[custom_menu_hidden]').value = hiddenMenuItems;
+            }
 
-               // delay(function() {
+            console.log(hiddenMenuItems.toString());
 
-               //    jQuery.ajax({
-               //       url: ajaxurl,
-               //       data: {
-               //          'action': 'save_hidden_menu_items',
-               //          'hidden_menu_items': hiddenMenuItems.toString()
-               //       },
-               //       success:function(data) {
-               //          var data = data.slice(0,-1); // remove strange trailing zero in string returned by AJAX call
-               //          var dataObj = JSON.parse(data);
-               //          console.log(dataObj.message );
-               //       },
-               //       error:function(errorThrown) {
-               //          console.log(errorThrown);
-               //       }
-               //    });
+            // Set hidden input value
+            document.getElementById('admin_site_enhancements[custom_menu_hidden]').value = hiddenMenuItems;
 
-               // }, 3000);
+            // delay(function() {
 
-            });
+            //    jQuery.ajax({
+            //       url: ajaxurl,
+            //       data: {
+            //          'action': 'save_hidden_menu_items',
+            //          'hidden_menu_items': hiddenMenuItems.toString()
+            //       },
+            //       success:function(data) {
+            //          var data = data.slice(0,-1); // remove strange trailing zero in string returned by AJAX call
+            //          var dataObj = JSON.parse(data);
+            //          console.log(dataObj.message );
+            //       },
+            //       error:function(errorThrown) {
+            //          console.log(errorThrown);
+            //       }
+            //    });
+
+            // }, 3000);
 
          });
 
-      }
+      });
 
    });
 
