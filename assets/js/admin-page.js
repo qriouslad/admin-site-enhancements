@@ -13,13 +13,16 @@
 
       // Clicking on header save button triggers click of the hidden form submit button
       $('.asenha-save-button').click( function(e) {
+
          e.preventDefault();
 
          // Get current tab's URL hash and save it in cookie
          var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
          Cookies.set('asenha_tab', hash, { expires: 1 }); // expires in 1 day
 
+         // Submit the settings form
          $('input[type="submit"]').click();
+
       });
 
       // Show all / less toggler for field options | Modified from https://codepen.io/symonsays/pen/rzgEgY

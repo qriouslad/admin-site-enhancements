@@ -166,13 +166,24 @@ class Settings_Fields_Render {
 	function render_sortable_menu( $args ) {
 
 		?>
-		<div class="subfield-description">Drag and drop menu items to the desired position and optionally hide them until "Show All" at the bottom of the admin menu is clicked.</div>
+		<div class="subfield-description">Drag and drop menu items to the desired position. Optionally change item titles or hide  some items until "Show All" at the bottom of the admin menu is clicked.</div>
 		<ul id="custom-admin-menu" class="menu ui-sortable">
 		<?php
 
 		global $menu;
 		global $submenu;
 		$options = get_option( ASENHA_SLUG_U );
+
+		// Set menu items to be excluded from title renaming. These are from WordPress core.
+		$renaming_not_allowed = array( 'menu-dashboard', 'menu-pages', 'menu-posts', 'menu-media', 'menu-comments', 'menu-appearance', 'menu-plugins', 'menu-users', 'menu-tools', 'menu-settings' );
+
+		// Get custom menu item titles
+		if ( array_key_exists( 'custom_menu_titles', $options ) ) {
+			$custom_menu_titles = $options['custom_menu_titles'];
+			$custom_menu_titles = explode( ',', $custom_menu_titles );
+		} else {
+			$custom_menu_titles = array();
+		}	
 
 		// Get hidden menu items
 		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
@@ -206,7 +217,7 @@ class Settings_Fields_Render {
 					if ( $custom_menu_item == $menu_item_id ) {
 
 						?>
-						<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+						<li id="<?php echo esc_attr( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
 							<div class="menu-item-bar">
 								<div class="menu-item-handle ui-sortable-handle">
 									<div class="item-title">
@@ -219,7 +230,30 @@ class Settings_Fields_Render {
 							$separator_name = str_replace( '--last', '-Last', $separator_name );
 							echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
 						} else {
-							echo wp_kses_post( $menu_info[0] );
+							if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
+								echo wp_kses_post( $menu_info[0] );
+							} else {
+
+								// Get defaul/custom menu item title
+								foreach ( $custom_menu_titles as $custom_menu_title ) {
+
+									// At this point, $custom_menu_title value looks like toplevel_page_snippets__Code Snippets
+
+									$custom_menu_title = explode( '__', $custom_menu_title );
+
+									if ( $custom_menu_title[0] == $menu_item_id ) {
+										$menu_item_title = $custom_menu_title[1]; // e.g. Code Snippets
+										break; // stop foreach loop so $menu_item_title is not overwritten in the next iteration
+									} else {
+										$menu_item_title = $menu_info[0];
+									}
+
+								}
+
+								?>
+								<input type="text" value="<?php echo esc_attr( $menu_item_title ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+								<?php
+							}
 						}
 
 						?>
@@ -287,7 +321,7 @@ class Settings_Fields_Render {
 				}
 
 				?>
-				<li id="<?php echo wp_kses_post( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
+				<li id="<?php echo esc_attr( $menu_item_id ); ?>" class="menu-item menu-item-depth-0">
 					<div class="menu-item-bar">
 						<div class="menu-item-handle ui-sortable-handle">
 							<div class="item-title">
@@ -300,7 +334,13 @@ class Settings_Fields_Render {
 					$separator_name = str_replace( '--last', '-Last', $separator_name );
 					echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
 				} else {
-					echo wp_kses_post( $menu_info[0] );
+					if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
+						echo wp_kses_post( $menu_info[0] );
+					} else {
+						?>
+						<input type="text" value="<?php echo esc_attr( $menu_info[0] ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+						<?php
+					}
 				}
 
 				?>
@@ -354,6 +394,13 @@ class Settings_Fields_Render {
 		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
 
 		// Hidden input field to store custom menu order (from options as is, or sortupdate) upon clicking Save Changes. 
+		echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
+
+		$field_id = 'custom_menu_titles';
+		$field_name = ASENHA_SLUG_U . '['. $field_id .']';
+		$field_option_value = ( isset( $options[$field_id] ) ) ? $options[$field_id] : '';
+
+		// Hidden input field to store custom menu titles (from options as is, or custom values entered on each non-WP-default menu items.
 		echo '<input type="hidden" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-text" name="' . esc_attr( $field_name ) . '" value="' . esc_attr( $field_option_value ) . '">';
 
 		$field_id = 'custom_menu_hidden';

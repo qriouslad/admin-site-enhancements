@@ -60,6 +60,34 @@
       // if ( document.getElementById('admin_site_enhancements[customize_admin_menu]').checked ) {
       // }
 
+      // Clicking on header save button
+      $('.asenha-save-button').click( function(e) {
+
+         e.preventDefault();
+
+         // Prepare variable to store ID-Title pairs of menu items
+         var customMenuTitles = []; // empty array
+
+         // Initialize other variables
+         var menuItemId = '';
+         var customTitle = '';
+
+         // Save default/custom title values. Ref: https://stackoverflow.com/a/3871602
+         Array.from(document.getElementsByClassName('menu-item-custom-title')).forEach(function(item,index,array) {
+
+            menuItemId = item.dataset.menuItemId;
+            customTitle = item.value;
+            customMenuTitles.push(menuItemId + '__' + customTitle);            
+
+         });
+
+         // console.log(customMenuTitles.toString());
+
+         // Set hidden input value
+         document.getElementById('admin_site_enhancements[custom_menu_titles]').value = customMenuTitles;
+
+      });
+
       // ----- Menu Item Hiding -----
 
       // Prepare constant to store IDs of menu items that will be hidden
@@ -96,7 +124,7 @@
 
             }
 
-            console.log(hiddenMenuItems.toString());
+            // console.log(hiddenMenuItems.toString());
 
             // Set hidden input value
             document.getElementById('admin_site_enhancements[custom_menu_hidden]').value = hiddenMenuItems;
