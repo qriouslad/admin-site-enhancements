@@ -820,7 +820,7 @@ class Admin_Interface {
 				'asenha_show_hidden_menu',
 				function () {  return false;  },
 				"dashicons-arrow-down-alt2",
-				300.1 // position
+				300 // position
 			);
 
 			add_menu_page(
@@ -830,7 +830,7 @@ class Admin_Interface {
 				'asenha_hide_hidden_menu',
 				function () {  return false;  },
 				"dashicons-arrow-up-alt2",
-				300.2 // position
+				301 // position
 			);
 		}
 
