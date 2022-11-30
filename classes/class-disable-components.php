@@ -1,6 +1,6 @@
 <?php
 
-namespace ASENHA\CLasses;
+namespace ASENHA\Classes;
 use WP_Error;
 
 /**
@@ -28,6 +28,8 @@ class Disable_Components {
 				remove_meta_box( 'commentstatusdiv', $post_type_slug, 'side' );
 				remove_meta_box( 'commentsdiv', $post_type_slug, 'normal' );
 				remove_meta_box( 'commentsdiv', $post_type_slug, 'side' );
+				remove_meta_box( 'trackbacksdiv', $post_type_slug, 'normal' );
+				remove_meta_box( 'trackbacksdiv', $post_type_slug, 'side' );
 			}
 		}
 
