@@ -154,6 +154,10 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_rest_api'] ) ) $options['disable_rest_api'] = false;
 		$options['disable_rest_api'] = ( 'on' == $options['disable_rest_api'] ? true : false );
 
+		// Disable Feeds
+		if ( ! isset( $options['disable_feeds'] ) ) $options['disable_feeds'] = false;
+		$options['disable_feeds'] = ( 'on' == $options['disable_feeds'] ? true : false );
+
 		// ===== SECURITY =====
 
 		// Change Login URL

@@ -83,6 +83,7 @@
       $('.disable-comments').appendTo('.fields-disable-components > table > tbody');
       $('.disable-comments-for').appendTo('.fields-disable-components .disable-comments .asenha-subfields');
       $('.disable-rest-api').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-feeds').appendTo('.fields-disable-components > table > tbody');
 
       // Place fields into "Security" tab
       $('.change-login-url').appendTo('.fields-security > table > tbody');
