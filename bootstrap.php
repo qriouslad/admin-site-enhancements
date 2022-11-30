@@ -219,6 +219,23 @@ class Admin_Site_Enhancements {
 			}
 		}
 
+		// Disable Components >> Disable REST API
+		if ( array_key_exists( 'disable_rest_api', $options ) && $options['disable_rest_api'] ) {
+			if ( version_compare( get_bloginfo('version'), '4.7', '>=' ) ) {
+				add_filter( 'rest_authentication_errors', [ $disable_components, 'disable_rest_api' ] );
+			} else {
+				// REST API 1.x
+				add_filter( 'json_enabled', '__return_false' );
+				add_filter( 'json_jsonp_enabled', '__return_false' );
+				// REST API 2.x
+				add_filter( 'rest_enabled', '__return_false' );
+				add_filter( 'rest_jsonp_enabled', '__return_false' );
+			}
+			remove_action('wp_head', 'rest_output_link_wp_head', 10 ); // Disable REST API links in HTML <head>
+			remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 ); // Disable REST API link in HTTP headers
+			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' ); // Remove REST API URL from the WP RSD endpoint.
+		}
+
 		// ===== SECURITY =====
 
 		// Instantiate object for Security features

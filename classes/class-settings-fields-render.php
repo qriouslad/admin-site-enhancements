@@ -16,7 +16,7 @@ class Settings_Fields_Render {
 	 */
 	function render_checkbox_toggle( $args ) {
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_name = $args['field_name'];
 		$field_description = $args['field_description'];
@@ -62,7 +62,7 @@ class Settings_Fields_Render {
 	 */
 	function render_checkbox_plain( $args ) {
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_name = $args['field_name'];
 		$field_label = $args['field_label'];
@@ -80,7 +80,7 @@ class Settings_Fields_Render {
 	 */
 	function render_checkbox_subfield( $args ) {
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_name = $args['field_name'];
 		$field_label = $args['field_label'];
@@ -98,7 +98,7 @@ class Settings_Fields_Render {
 	 */
 	function render_text_subfield( $args ) {
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_id = $args['field_id'];
 		$field_name = $args['field_name'];
@@ -144,7 +144,7 @@ class Settings_Fields_Render {
 	 */
 	function render_textarea_subfield( $args ) {
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_id = $args['field_id'];
 		$field_slug = $args['field_slug'];
@@ -172,7 +172,7 @@ class Settings_Fields_Render {
 
 		global $menu;
 		global $submenu;
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		// Set menu items to be excluded from title renaming. These are from WordPress core.
 		$renaming_not_allowed = array( 'menu-dashboard', 'menu-pages', 'menu-posts', 'menu-media', 'menu-comments', 'menu-appearance', 'menu-plugins', 'menu-users', 'menu-tools', 'menu-settings' );
@@ -228,7 +228,7 @@ class Settings_Fields_Render {
 							$separator_name = $menu_info[2];
 							$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
 							$separator_name = str_replace( '--last', '-Last', $separator_name );
-							echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+							echo '~~ ' . esc_html( $separator_name ) . ' ~~';
 						} else {
 							if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
 								echo wp_kses_post( $menu_info[0] );
@@ -251,7 +251,7 @@ class Settings_Fields_Render {
 								}
 
 								?>
-								<input type="text" value="<?php echo esc_attr( $menu_item_title ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+								<input type="text" value="<?php echo wp_kses_post( $menu_item_title ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
 								<?php
 							}
 						}
@@ -262,12 +262,12 @@ class Settings_Fields_Render {
 											<?php
 												if ( in_array( $custom_menu_item, $hidden_menu ) ) {
 												?>
-											<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>" checked>
+											<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>" checked>
 											<span>Hide</span>
 												<?php
 												} else {
 												?>
-											<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+											<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
 											<span>Hide</span>
 												<?php
 												}
@@ -332,13 +332,13 @@ class Settings_Fields_Render {
 					$separator_name = $menu_info[2];
 					$separator_name = str_replace( 'separator', 'Separator-', $separator_name );
 					$separator_name = str_replace( '--last', '-Last', $separator_name );
-					echo '~~ ' . wp_kses_post( $separator_name ) . ' ~~';
+					echo '~~ ' . esc_html( $separator_name ) . ' ~~';
 				} else {
 					if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
 						echo wp_kses_post( $menu_info[0] );
 					} else {
 						?>
-						<input type="text" value="<?php echo esc_attr( $menu_info[0] ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+						<input type="text" value="<?php echo wp_kses_post( $menu_info[0] ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
 						<?php
 					}
 				}
@@ -346,7 +346,7 @@ class Settings_Fields_Render {
 				?>
 								</span>
 								<label class="menu-item-checkbox-label">
-									<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo wp_kses_post( $menu_item_id ); ?>">
+									<input type="checkbox" class="menu-item-checkbox" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
 									<span>Hide</span>
 								</label>
 							</div>
@@ -421,7 +421,7 @@ class Settings_Fields_Render {
 
 		global $wpdb;
 
-		$options = get_option( ASENHA_SLUG_U );
+		$options = get_option( ASENHA_SLUG_U, array() );
 
 		$field_id = $args['field_id'];
 		$field_slug = $args['field_slug'];

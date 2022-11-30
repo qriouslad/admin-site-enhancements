@@ -1,6 +1,7 @@
 <?php
 
 namespace ASENHA\CLasses;
+use WP_Error;
 
 /**
  * Class related to the Disable Components feature
@@ -238,6 +239,23 @@ class Disable_Components {
 			wp_dequeue_style( 'classic-theme-styles' ); // classic theme
 
 		}
+
+	}
+
+	/**
+	 * Disable REST API for non-authenticated users. This is for WP v4.7 or later.
+	 *
+	 * @since 2.9.0
+	 */
+	public function disable_rest_api() {
+
+		return new WP_Error( 
+			'rest_api_authentication_required', 
+			'The REST API has been restricted to authenticated users.', 
+			array( 
+				'status' => rest_authorization_required_code() 
+			) 
+		);
 
 	}
 

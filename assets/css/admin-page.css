@@ -437,6 +437,7 @@
 }
 
 .custom-menu-order .menu-item-bar .menu-item-handle {
+    padding: 7px 15px;
     max-width: 320px;
     width: 320px;
     min-height: 30px;
@@ -464,6 +465,18 @@
     color: inherit;
 }
 
+.menu-item-title input[type="text"] {
+    border: 1px solid #dcdcde;
+    margin-left: -9px;
+    font-size: 13px;
+}
+
+.menu-item-title input[type="text"]:focus {
+    border: 1px solid #999;
+    box-shadow: none;
+    outline: none;
+}
+
 .menu-item-checkbox-label span {
     font-weight: normal;
 }
@@ -476,7 +489,7 @@
 .sortable-placeholder {
     width: 350px;
     max-width: 350px;
-    height: 52px;
+    height: 46px;
     min-height: 42px;
     max-height: 42px;
     border: 1px dotted #ccc;

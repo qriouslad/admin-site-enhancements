@@ -12,7 +12,7 @@
 
       // Get the default/current menu order
       let menuOrder = $('#custom-admin-menu').sortable("toArray").toString();
-      console.log( menuOrder );
+      // console.log( menuOrder );
 
       // Set hidden input value for saving in options
       document.getElementById('admin_site_enhancements[custom_menu_order]').value = menuOrder;
