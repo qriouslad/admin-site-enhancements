@@ -236,6 +236,16 @@ class Admin_Site_Enhancements {
 			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' ); // Remove REST API URL from the WP RSD endpoint.
 		}
 
+		// Disable Components >> Disable Feeds
+		if ( array_key_exists( 'disable_feeds', $options ) && $options['disable_feeds'] ) {
+			remove_action( 'wp_head', 'feed_links', 2 ); // Remove feed links in <head>
+			remove_action( 'wp_head', 'feed_links_extra', 3 ); // Remove feed links in <head>
+			remove_action( 'do_feed_rdf', 'do_feed_rdf', 10, 0 );
+			remove_action( 'do_feed_rss', 'do_feed_rss', 10, 0 );
+			remove_action( 'do_feed_rss2', 'do_feed_rss2', 10, 1 );
+			remove_action( 'do_feed_atom', 'do_feed_atom', 10, 1 );
+		}
+
 		// ===== SECURITY =====
 
 		// Instantiate object for Security features

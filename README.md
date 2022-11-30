@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 2.9.0  
+Stable tag: 3.0.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,7 +49,8 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Disable Gutenberg**. Disable the Gutenberg block editor for some or all applicable post types. Optionally disable frontend block styles / CSS files for the selected post types.
 * **Disable Comments**. Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
-* **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from \<head\>, HTTP headers and WP RSD endpoint.
+* **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
+* **Disable Feeds**. Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
 
 ### Security
 
@@ -102,6 +103,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.0.0 (2022.11.30)
+
+* **[ADDED] Disable Components >> Disable Feeds**: Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
+
 
 ### 2.9.0 (2022.11.30)
 
