@@ -669,7 +669,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Disable REST API access for non-authenticated users and remove URL traces from <head>, HTTP headers and WP RSD endpoint.', // Custom argument
+				'field_description'		=> 'Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
