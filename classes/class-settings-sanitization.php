@@ -150,6 +150,10 @@ class Settings_Sanitization {
 			}
 		}
 
+		// Disable REST API
+		if ( ! isset( $options['disable_rest_api'] ) ) $options['disable_rest_api'] = false;
+		$options['disable_rest_api'] = ( 'on' == $options['disable_rest_api'] ? true : false );
+
 		// ===== SECURITY =====
 
 		// Change Login URL

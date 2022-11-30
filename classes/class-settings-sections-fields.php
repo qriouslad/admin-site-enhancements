@@ -18,8 +18,6 @@ class Settings_Sections_Fields {
 	 */
 	function register_sections_fields() {
 		
-		// Add "Content Management" section
-
 		add_settings_section(
 			'main-section', // Section ID
 			'', // Section title. Can be blank.
@@ -655,6 +653,28 @@ class Settings_Sections_Fields {
 				);
 			}
 		}
+
+		// Disable REST API
+
+		$field_id = 'disable_rest_api';
+		$field_slug = 'disable-rest-api';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable REST API', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Disable REST API access for non-authenticated users and remove URL traces from <head>, HTTP headers and WP RSD endpoint.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
 
 		// ===== SECURITY =====
 
