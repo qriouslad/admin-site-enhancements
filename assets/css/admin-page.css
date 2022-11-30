@@ -486,6 +486,11 @@
     /* display: none; */
 }
 
+.custom-menu-order .menu-item-title span.awaiting-mod,
+.custom-menu-order .menu-item-title span.update-plugins {
+    display: none;
+}
+
 .sortable-placeholder {
     width: 350px;
     max-width: 350px;
