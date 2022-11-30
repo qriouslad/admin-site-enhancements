@@ -189,9 +189,9 @@ class Admin_Site_Enhancements {
 			// add_action( 'wp_ajax_save_hidden_menu_items', [ $admin_interface, 'save_hidden_menu_items' ] );
 			add_filter( 'custom_menu_order', '__return_true' );
 			add_filter( 'menu_order', [ $admin_interface, 'render_custom_menu_order' ] );
-			add_action( 'admin_menu', [ $admin_interface, 'apply_custom_menu_item_titles' ], 888 );
-			add_action( 'admin_menu', [ $admin_interface, 'hide_menu_items' ], 999 );
-			add_action( 'admin_menu', [ $admin_interface, 'add_hidden_menu_toggle' ] );
+			add_action( 'admin_menu', [ $admin_interface, 'apply_custom_menu_item_titles' ], 70 );
+			add_action( 'admin_menu', [ $admin_interface, 'hide_menu_items' ], 80 );
+			add_action( 'admin_menu', [ $admin_interface, 'add_hidden_menu_toggle' ], 90 );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'enqueue_toggle_hidden_menu_script' ] );
 		}
 
@@ -213,7 +213,7 @@ class Admin_Site_Enhancements {
 		// Disable Components >> Disable Comments
 		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
 			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
-				add_action( 'wp_loaded', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init' and 'admin_init' hooks
+				add_action( 'do_meta_boxes', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init', 'admin_init', 'wp_loaded' hooks
 				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
 				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
 			}
