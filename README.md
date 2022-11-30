@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.0.0  
+Stable tag: 3.0.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.0.1 (2022.12.01)
+
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Make sure newer menu items added by newly installed plugins or activated theme are showing up towards the end of the admin menu and the menu item sortables. Comments and updates counters are now hidden. Sortables for menu separators have been faded out to make actual menu items stand out more.
+* **[CHANGED] Disable Components >> Disable Comments**: Ensure trackbacks metabox is also hidden on edit screens of post types where commenting is disabled.
 
 ### 3.0.0 (2022.11.30)
 
