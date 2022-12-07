@@ -206,9 +206,9 @@ class Settings_Fields_Render {
 
 			// Render sortables with data in custom menu order
 
-			foreach ( $menu as $menu_key => $menu_info ) {
+			foreach ( $custom_menu as $custom_menu_item ) {
 
-				foreach ( $custom_menu as $custom_menu_item ) {
+				foreach ( $menu as $menu_key => $menu_info ) {
 
 					if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 						$menu_item_id = $menu_info[2];
