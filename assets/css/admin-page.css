@@ -28,6 +28,10 @@
     min-width: 240px;
 }
 
+.asenha-header .notice {
+    display: none;
+}
+
 .asenha-body {
     background-color: #fff;
     border-right: 1px solid #ccd0d4;
