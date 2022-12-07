@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.0.2  
+Stable tag: 3.0.3  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.0.3 (2022.12.07)
+
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Make sure menu item sortables reflect custom menu order saved in options, especially when this feature is re-enabled. Remove all HTMl tags and content inside them from menu item titles in the sortables.
 
 ### 3.0.2 (2022.12.07)
 
