@@ -172,6 +172,7 @@ class Settings_Fields_Render {
 
 		global $menu;
 		global $submenu;
+		$common_methods = new Common_Methods;
 		$options = get_option( ASENHA_SLUG_U, array() );
 
 		// Set menu items to be excluded from title renaming. These are from WordPress core.
@@ -233,7 +234,8 @@ class Settings_Fields_Render {
 							echo '~~ ' . esc_html( $separator_name ) . ' ~~';
 						} else {
 							if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
-								echo wp_kses_post( $menu_info[0] );
+								// echo wp_kses_post( $menu_info[0] );
+								echo wp_kses_post( $common_methods->strip_html_tags_and_content( $menu_info[0] ) );
 							} else {
 
 								// Get defaul/custom menu item title
@@ -244,10 +246,10 @@ class Settings_Fields_Render {
 									$custom_menu_title = explode( '__', $custom_menu_title );
 
 									if ( $custom_menu_title[0] == $menu_item_id ) {
-										$menu_item_title = $custom_menu_title[1]; // e.g. Code Snippets
+										$menu_item_title = $common_methods->strip_html_tags_and_content( $custom_menu_title[1] ); // e.g. Code Snippets
 										break; // stop foreach loop so $menu_item_title is not overwritten in the next iteration
 									} else {
-										$menu_item_title = $menu_info[0];
+										$menu_item_title = $common_methods->strip_html_tags_and_content( $menu_info[0] );
 									}
 
 								}
@@ -399,10 +401,10 @@ class Settings_Fields_Render {
 					echo '~~ ' . esc_html( $separator_name ) . ' ~~';
 				} else {
 					if ( in_array( $menu_item_id, $renaming_not_allowed ) ) {
-						echo wp_kses_post( $menu_info[0] );
+							echo wp_kses_post( $common_methods->strip_html_tags_and_content( $menu_info[0] ) );
 					} else {
 						?>
-						<input type="text" value="<?php echo wp_kses_post( $menu_info[0] ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
+						<input type="text" value="<?php echo wp_kses_post( $common_methods->strip_html_tags_and_content( $menu_info[0] ) ); ?>" class="menu-item-custom-title" data-menu-item-id="<?php echo esc_attr( $menu_item_id ); ?>">
 						<?php
 					}
 				}
