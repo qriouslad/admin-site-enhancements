@@ -189,9 +189,9 @@ class Admin_Site_Enhancements {
 			// add_action( 'wp_ajax_save_hidden_menu_items', [ $admin_interface, 'save_hidden_menu_items' ] );
 			add_filter( 'custom_menu_order', '__return_true' );
 			add_filter( 'menu_order', [ $admin_interface, 'render_custom_menu_order' ] );
-			add_action( 'admin_menu', [ $admin_interface, 'apply_custom_menu_item_titles' ], 70 );
-			add_action( 'admin_menu', [ $admin_interface, 'hide_menu_items' ], 80 );
-			add_action( 'admin_menu', [ $admin_interface, 'add_hidden_menu_toggle' ], 90 );
+			add_action( 'admin_menu', [ $admin_interface, 'apply_custom_menu_item_titles' ], 1000 );
+			add_action( 'admin_menu', [ $admin_interface, 'hide_menu_items' ], 1001 );
+			add_action( 'admin_menu', [ $admin_interface, 'add_hidden_menu_toggle' ], 1002 );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'enqueue_toggle_hidden_menu_script' ] );
 		}
 

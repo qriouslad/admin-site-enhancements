@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.0.3  
+Stable tag: 3.0.4  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.0.4 (2022.12.07)
+
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Substantially lower priorities of actions that handles rendering of custom menu order, custom menu title and hiding of menu items. This is so that menu items added late by active plugins and theme are handled properly.
 
 ### 3.0.3 (2022.12.07)
 
