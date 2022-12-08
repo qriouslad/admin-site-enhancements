@@ -628,13 +628,7 @@ class Admin_Interface {
 		}
 
 		// Get custom menu order
-
-		if ( array_key_exists( 'custom_menu_order', $options ) ) {
-			$custom_menu_order = $options['custom_menu_order']; // comma separated
-		} else {
-			$custom_menu_order = '';
-		}
-
+		$custom_menu_order = $options['custom_menu_order']; // comma separated
 		$custom_menu_order = explode( ",", $custom_menu_order ); // array of menu ID, e.g. menu-dashboard
 
 		// Return menu order for rendering
@@ -731,19 +725,10 @@ class Admin_Interface {
 		$options = get_option( ASENHA_SLUG_U );
 
 		// Get custom menu item titles
-		if ( array_key_exists( 'custom_menu_titles', $options ) ) {
-			$custom_menu_titles = $options['custom_menu_titles'];
-			$custom_menu_titles = explode( ',', $custom_menu_titles );
-		} else {
-			$custom_menu_titles = array();
-		}	
-
-		$i = 1;
+		$custom_menu_titles = $options['custom_menu_titles'];
+		$custom_menu_titles = explode( ',', $custom_menu_titles );
 
 		foreach ( $menu as $menu_key => $menu_info ) {
-
-			// do_action( 'inspect', [ 'menu_key_' . $i, $menu_key ] );
-			// do_action( 'inspect', [ 'menu_info_' . $i, $menu_info ] );
 
 			if ( false !== strpos( $menu_info[4], 'wp-menu-separator' ) ) {
 				$menu_item_id = $menu_info[2];
@@ -769,8 +754,6 @@ class Admin_Interface {
 
 			$menu[$menu_key][0] = $menu_item_title;
 
-			$i++;
-
 		}
 	}
 
@@ -786,13 +769,8 @@ class Admin_Interface {
 		$options = get_option( ASENHA_SLUG_U );
 
 		// Get hidden menu items
-
-		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
-			$hidden_menu = $options['custom_menu_hidden'];
-			$hidden_menu = explode( ',', $hidden_menu );
-		} else {
-			$hidden_menu = array();
-		}
+		$hidden_menu = $options['custom_menu_hidden'];
+		$hidden_menu = explode( ',', $hidden_menu );
 
 		foreach ( $menu as $menu_key => $menu_info ) {
 
@@ -822,12 +800,7 @@ class Admin_Interface {
 		$options = get_option( ASENHA_SLUG_U );
 
 		// Get hidden menu items
-
-		if ( array_key_exists( 'custom_menu_hidden', $options ) ) {
-			$hidden_menu = $options['custom_menu_hidden'];
-		} else {
-			$hidden_menu = '';
-		}
+		$hidden_menu = $options['custom_menu_hidden'];
 
 		if ( ! empty( $hidden_menu ) ) {
 

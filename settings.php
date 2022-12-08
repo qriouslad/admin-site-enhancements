@@ -179,23 +179,23 @@ function asenha_admin_scripts( $hook_suffix ) {
 		// jQuery UI Sortables. In use, e.g. for Admin Interface >> Admin Menu Organizer	
 		// Re-register and re-enqueue jQuery UI Core and plugins required for sortable, draggable and droppable when ordering menu items
 		wp_deregister_script( 'jquery-ui-core' );
-		wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.js', array( 'jquery' ), ASENHA_VERSION, false );
+		wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.min.js', array( 'jquery' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-core' );
 
 		wp_deregister_script( 'jquery-ui-mouse' );
-		wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
+		wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.min.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-mouse' );
 
 		wp_deregister_script( 'jquery-ui-sortable' );
-		wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+		wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.min.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
 		wp_deregister_script( 'jquery-ui-draggable' );
-		wp_register_script( 'jquery-ui-draggable', get_site_url() . '/wp-includes/js/jquery/ui/draggable.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
+		wp_register_script( 'jquery-ui-draggable', get_site_url() . '/wp-includes/js/jquery/ui/draggable.min.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-draggable' );
 
 		wp_deregister_script( 'jquery-ui-droppable' );
-		wp_register_script( 'jquery-ui-droppable', get_site_url() . '/wp-includes/js/jquery/ui/droppable.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
+		wp_register_script( 'jquery-ui-droppable', get_site_url() . '/wp-includes/js/jquery/ui/droppable.min.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-droppable' );
 
 		// Script to set behaviour and actions of the sortable menu
