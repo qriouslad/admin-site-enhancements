@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.0.5  
+Stable tag: 3.0.6  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -104,9 +104,13 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 3.0.6 (2022.12.08)
+
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Enqueue jQuery UI widget.min.js for WP version less than 5.6.0. This ensures the feature works for those WP versions.
+
 ### 3.0.5 (2022.12.08)
 
-* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Load the minified version of jQuery UI scripts, as older versions of WP do not have the unminified version.
+* **[CHANGED] Admin Interface >> Admin Menu Organizer**: Enqueue the minified version of jQuery UI scripts, as older versions of WP do not have the unminified version.
 
 ### 3.0.4 (2022.12.07)
 

@@ -163,6 +163,8 @@ function asenha_suppress_generic_notices() {
  */
 function asenha_admin_scripts( $hook_suffix ) {
 
+	global $wp_version;
+
 	$current_screen = get_current_screen();
 
 	// Get all WP Enhancements options, default to empty array in case it's not been created yet
@@ -182,9 +184,23 @@ function asenha_admin_scripts( $hook_suffix ) {
 		wp_register_script( 'jquery-ui-core', get_site_url() . '/wp-includes/js/jquery/ui/core.min.js', array( 'jquery' ), ASENHA_VERSION, false );
 		wp_enqueue_script( 'jquery-ui-core' );
 
-		wp_deregister_script( 'jquery-ui-mouse' );
-		wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.min.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
-		wp_enqueue_script( 'jquery-ui-mouse' );
+		if ( version_compare( $wp_version, '5.6.0', '>=' ) ) {
+
+			wp_deregister_script( 'jquery-ui-mouse' );
+			wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.min.js', array( 'jquery-ui-core' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-mouse' );
+
+		} else {
+
+			wp_deregister_script( 'jquery-ui-widget' );
+			wp_register_script( 'jquery-ui-widget', get_site_url() . '/wp-includes/js/jquery/ui/widget.min.js', array( 'jquery' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-widget' );
+
+			wp_deregister_script( 'jquery-ui-mouse' );
+			wp_register_script( 'jquery-ui-mouse', get_site_url() . '/wp-includes/js/jquery/ui/mouse.min.js', array( 'jquery-ui-core', 'jquery-ui-widget' ), ASENHA_VERSION, false );
+			wp_enqueue_script( 'jquery-ui-mouse' );
+
+		}
 
 		wp_deregister_script( 'jquery-ui-sortable' );
 		wp_register_script( 'jquery-ui-sortable', get_site_url() . '/wp-includes/js/jquery/ui/sortable.min.js', array( 'jquery-ui-mouse' ), ASENHA_VERSION, false );
