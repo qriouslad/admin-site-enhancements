@@ -158,6 +158,27 @@ class Settings_Sections_Fields {
 			}
 		}
 
+		// Enable Auto-Publishing of Posts with Missed Schedules
+
+		$field_id = 'enable_missed_schedule_posts_auto_publish';
+		$field_slug = 'enable-missed-schedule-posts-auto-publish';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Auto-Publishing of Posts with Missed Schedule', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'			=> $field_id, // Custom argument
+				'field_slug'		=> $field_slug, // Custom argument
+				'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'	=> 'Trigger publishing of scheduled posts of all types marked with "missed schedule", anytime the site is visited.', // Custom argument
+				'class'				=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+
 		// Enhance List Tables
 
 		$field_id = 'enhance_list_tables';

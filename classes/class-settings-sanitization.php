@@ -40,6 +40,10 @@ class Settings_Sanitization {
 				$options['enable_svg_upload_for'][$role_slug] = ( 'on' == $options['enable_svg_upload_for'][$role_slug] ? true : false );
 			}
 		}
+
+		// Enable Auto-Publishing of Posts with Missed Schedules
+		if ( ! isset( $options['enable_missed_schedule_posts_auto_publish'] ) ) $options['enable_missed_schedule_posts_auto_publish'] = false;
+		$options['enable_missed_schedule_posts_auto_publish'] = ( 'on' == $options['enable_missed_schedule_posts_auto_publish'] ? true : false );
 		
 		// Enhance List Tables
 		if ( ! isset( $options['enhance_list_tables'] ) ) $options['enhance_list_tables'] = false;

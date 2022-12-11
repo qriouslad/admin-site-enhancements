@@ -117,6 +117,11 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_prepare_attachment_for_js', [ $content_management, 'get_svg_url_in_media_library' ] );
 		}
 
+		// Content Management >> Enable Auto-Publishing of Posts with Missed Schedules
+		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
+			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
+			add_action( 'admin_head', [ $content_management, 'publish_missed_schedule_posts' ] );
+		}
 
 		// Content Management >> Enhance List Tables
 		if ( array_key_exists( 'enhance_list_tables', $options ) && $options['enhance_list_tables'] ) {

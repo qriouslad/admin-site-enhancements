@@ -53,6 +53,7 @@
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
+      $('.enable-missed-schedule-posts-auto-publish').appendTo('.fields-content-management > table > tbody');
       $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-excerpt-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
