@@ -219,9 +219,12 @@ function asenha_admin_scripts( $hook_suffix ) {
 
 		// CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS / ads.txt / app-ads.txt
 		wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );			
-		wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true ); // CSS mode
-		wp_enqueue_script( 'asenha-codemirror-markdown-mode', ASENHA_URL . 'assets/js/codemirror/markdown.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true ); // Markdown mode
+		wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );
+		wp_enqueue_script( 'asenha-codemirror-htmlmixed-mode', ASENHA_URL . 'assets/js/codemirror/htmlmixed.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );
+		wp_enqueue_script( 'asenha-codemirror-xml-mode', ASENHA_URL . 'assets/js/codemirror/xml.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );
+		wp_enqueue_script( 'asenha-codemirror-javascript-mode', ASENHA_URL . 'assets/js/codemirror/javascript.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );
+		wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );
+		wp_enqueue_script( 'asenha-codemirror-markdown-mode', ASENHA_URL . 'assets/js/codemirror/markdown.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true );
 
 		// DataTables. In use, e.g. for Security >> Limit Login Attempts
 		wp_enqueue_style( 'asenha-datatables', ASENHA_URL . 'assets/css/datatables/datatables.min.css', array(), ASENHA_VERSION );
@@ -229,7 +232,7 @@ function asenha_admin_scripts( $hook_suffix ) {
 
 		// Main style and script for the admin page
 		wp_enqueue_style( 'asenha-admin-page', ASENHA_URL . 'assets/css/admin-page.css', array( 'asenha-jbox', 'asenha-codemirror', 'asenha-datatables' ), ASENHA_VERSION );
-		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie', 'asenha-codemirror-css-mode', 'asenha-datatables', 'asenha-custom-admin-menu' ), ASENHA_VERSION, false );
+		wp_enqueue_script( 'asenha-admin-page', ASENHA_URL . 'assets/js/admin-page.js', array( 'asenha-jsticky', 'asenha-jbox', 'asenha-js-cookie', 'asenha-codemirror-htmlmixed-mode', 'asenha-codemirror-xml-mode', 'asenha-codemirror-javascript-mode', 'asenha-codemirror-css-mode', 'asenha-codemirror-markdown-mode', 'asenha-datatables', 'asenha-custom-admin-menu' ), ASENHA_VERSION, false );
 	}
 
 	// Enqueue on all wp-admin

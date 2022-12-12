@@ -362,6 +362,12 @@
     top: -2px;
 }
 
+.asenha-subfields .vspacer {
+    display: block;
+    width: 100%;
+    height: 8px;
+}
+
 /* Text input subfield */
 
 .form-table .change-login-url .asenha-subfields,
@@ -369,12 +375,14 @@
     margin-top: 8px;
 }
 
-.form-table .asenha-subfields tr.asenha-text.with-prefix-suffix {
+.form-table .asenha-subfields tr.asenha-text.with-prefix-suffix,
+.form-table .asenha-subfields tr.asenha-number.with-prefix-suffix {
     display: flex;
     justify-content: flex-start;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix th:not(.datatable-th) {
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix th:not(.datatable-th),
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix th:not(.datatable-th) {
     display: flex;
     height: 30px;
     line-height: 30px;
@@ -385,11 +393,13 @@
     color: #3c434a;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix.no-margin th:not(.datatable-th) {
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix.no-margin th:not(.datatable-th),
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix.no-margin th:not(.datatable-th) {
     margin-right: 0;
 }
 
-.form-table .asenha-toggle .asenha-text.with-prefix-suffix td:not(.datatable-td) {
+.form-table .asenha-toggle .asenha-text.with-prefix-suffix td:not(.datatable-td),
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix td:not(.datatable-td) {
     display: flex;
     align-items: center;
 }
@@ -400,7 +410,8 @@
 
 /* Text area input subfield */
 
-.asenha-subfield-textarea-wrapper {
+.asenha-subfield-textarea-wrapper,
+.asenha-subfield-number-wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -410,24 +421,35 @@
     width: 100%;
 }
 
+.asenha-subfield-textarea-intro {
+    margin-bottom: 8px;
+}
+
 .asenha-subfield-textarea-description {
     margin-top: 8px;
 }
 
-.asenha-subfield-text.with-prefix.with-suffix {
+.asenha-subfield-text.with-prefix.with-suffix,
+.asenha-subfield-number.with-prefix.with-suffix {
     margin: 0 4px;
 }
 
-.asenha-subfield-text.with-prefix {
+.asenha-subfield-text.with-prefix,
+.asenha-subfield-number.with-prefix {
     margin: 0 0 0 4px;
 }
 
-.asenha-subfield-text.with-suffix {
+.asenha-subfield-text.with-suffix,
+.asenha-subfield-number.with-suffix {
     margin: 0 4px 0 0;
 }
 
-.with-prefix-suffix.narrow .asenha-subfield-text {
+.narrow .asenha-subfield-text {
     width: 40px;
+}
+
+.narrow .asenha-subfield-number {
+    width: 72px;
 }
 
 .form-table .asenha-subfields td:not(.datatable-td) label .faded {
