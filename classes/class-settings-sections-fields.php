@@ -1143,7 +1143,7 @@ class Settings_Sections_Fields {
 				'field_id'					=> $field_id, // Custom argument
 				'field_slug'				=> $field_slug, // Custom argument
 				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Easily manage and validate your <a href="/ads.txt" target="_blank">ads.txt</a> content.', // Custom argument
+				'field_description'			=> 'Easily edit and validate your <a href="/ads.txt" target="_blank">ads.txt</a> content.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
@@ -1186,7 +1186,7 @@ class Settings_Sections_Fields {
 				'field_id'					=> $field_id, // Custom argument
 				'field_slug'				=> $field_slug, // Custom argument
 				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Easily manage and validate your <a href="/app-ads.txt" target="_blank">app-ads.txt</a> content.', // Custom argument
+				'field_description'			=> 'Easily edit and validate your <a href="/app-ads.txt" target="_blank">app-ads.txt</a> content.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
