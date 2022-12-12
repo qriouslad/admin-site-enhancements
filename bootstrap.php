@@ -335,7 +335,7 @@ class Admin_Site_Enhancements {
 
 		// Create and Edit ads.txt
 		
-		if ( array_key_exists( 'manage_ads_txt', $options ) && $options['manage_ads_txt'] ) {
+		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {
 			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
 		}
 

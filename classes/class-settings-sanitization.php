@@ -240,16 +240,12 @@ class Settings_Sanitization {
 		if ( ! isset( $options['custom_frontend_css'] ) ) $options['custom_frontend_css'] = '';
 		$options['custom_frontend_css'] = ( ! empty( $options['custom_frontend_css'] ) ) ? $options['custom_frontend_css'] : '';
 
-		// Manage ads.txt
-		if ( ! isset( $options['manage_ads_txt'] ) ) $options['manage_ads_txt'] = false;
-		$options['manage_ads_txt'] = ( 'on' == $options['manage_ads_txt'] ? true : false );
+		// Manage ads.txt and app-ads.txt
+		if ( ! isset( $options['manage_ads_appads_txt'] ) ) $options['manage_ads_appads_txt'] = false;
+		$options['manage_ads_appads_txt'] = ( 'on' == $options['manage_ads_appads_txt'] ? true : false );
 
 		if ( ! isset( $options['ads_txt_content'] ) ) $options['ads_txt_content'] = '';
 		$options['ads_txt_content'] = ( ! empty( $options['ads_txt_content'] ) ) ? $options['ads_txt_content'] : '';
-
-		// Manage app-ads.txt
-		if ( ! isset( $options['manage_app_ads_txt'] ) ) $options['manage_app_ads_txt'] = false;
-		$options['manage_app_ads_txt'] = ( 'on' == $options['manage_app_ads_txt'] ? true : false );
 
 		if ( ! isset( $options['app_ads_txt_content'] ) ) $options['app_ads_txt_content'] = '';
 		$options['app_ads_txt_content'] = ( ! empty( $options['app_ads_txt_content'] ) ) ? $options['app_ads_txt_content'] : '';
