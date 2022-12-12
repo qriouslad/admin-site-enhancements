@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.2.0  
+Stable tag: 3.3.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -64,7 +64,8 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Enable Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
 * **Enable Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
-* **Manage ads.txt and app-ads.txt**. Easily edit and validate your ads.txt and app-ads.txt content.
+* **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily edit and validate your ads.txt and app-ads.txt content.
+* **Manage ads.txt and app-ads.txt**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
 * **Redirect After Login / Logout**. Set custom redirect URL for all or some user roles after login / logout.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
@@ -105,6 +106,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.3.0 (2022.12.12)
+
+* **[ADDED] Utilities >> Manage ads.txt and app-ads.txt**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
+* **[ADDED] Utilities >> Manage ads.txt and app-ads.txt** is now a single settings field.
 
 ### 3.2.0 (2022.12.12)
 
