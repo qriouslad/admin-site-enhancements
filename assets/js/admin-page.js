@@ -101,6 +101,13 @@
       $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
       $('.enable-custom-frontend-css').appendTo('.fields-utilities > table > tbody');
       $('.custom-frontend-css').appendTo('.fields-utilities .enable-custom-frontend-css .asenha-subfields');
+      $('.insert-head-body-footer-code').appendTo('.fields-utilities > table > tbody');
+      $('.head-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
+      $('.head-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
+      $('.body-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
+      $('.body-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
+      $('.footer-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
+      $('.footer-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
       $('.manage-ads-txt').appendTo('.fields-utilities > table > tbody');
       $('.ads-txt-content').appendTo('.fields-utilities .manage-ads-txt .asenha-subfields');
       $('.manage-app-ads-txt').appendTo('.fields-utilities > table > tbody');
@@ -157,6 +164,31 @@
 
       appAdsTxtEditor.setSize("100%",600);
 
+      // Insert <head>, <body> and <footer> code => Initialize CodeMirror
+      var headCodeTextarea = document.getElementById("admin_site_enhancements[head_code]");
+      var headCodeEditor = CodeMirror.fromTextArea(headCodeTextarea, {
+         mode: "htmlmixed",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+      headCodeEditor.setSize("100%",300);
+
+      var bodyCodeTextarea = document.getElementById("admin_site_enhancements[body_code]");
+      var bodyCodeEditor = CodeMirror.fromTextArea(bodyCodeTextarea, {
+         mode: "htmlmixed",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+      bodyCodeEditor.setSize("100%",300);
+
+      var footerCodeTextarea = document.getElementById("admin_site_enhancements[footer_code]");
+      var footerCodeEditor = CodeMirror.fromTextArea(footerCodeTextarea, {
+         mode: "htmlmixed",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+      footerCodeEditor.setSize("100%",300);
+
       // Show and hide corresponding fields on tab clicks
 
       $('#tab-content-management + label').click( function() {
@@ -196,6 +228,9 @@
          frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
          adsTxtEditor.refresh(); // Manage ads.txt >> CodeMirror
          appAdsTxtEditor.refresh(); // Manage app-ads.txt >> CodeMirror
+         headCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+         bodyCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+         footerCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
       });
 
       // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty
@@ -501,6 +536,31 @@
          } else {
             $('.manage-app-ads-txt .asenha-subfields').hide();
             $('.manage-app-ads-txt .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Insert <head>, <body> and <footer> code => show/hide CSS textarea on document ready
+      if ( document.getElementById('admin_site_enhancements[insert_head_body_footer_code]').checked ) {
+         $('.insert-head-body-footer-code .asenha-subfields').show();
+         $('.asenha-toggle.insert-head-body-footer-code td .asenha-field-with-options').addClass('is-enabled');
+         headCodeEditor.refresh();
+         bodyCodeEditor.refresh();
+         footerCodeEditor.refresh();
+      } else {
+         $('.manage-app-ads-txt .asenha-subfields').hide();        
+      }
+
+      // Insert <head>, <body> and <footer> code => show/hide CSS textarea on toggle click
+      document.getElementById('admin_site_enhancements[insert_head_body_footer_code]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.insert-head-body-footer-code .asenha-subfields').fadeIn();
+            $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
+            headCodeEditor.refresh();
+            bodyCodeEditor.refresh();
+            footerCodeEditor.refresh();
+         } else {
+            $('.insert-head-body-footer-code .asenha-subfields').hide();
+            $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

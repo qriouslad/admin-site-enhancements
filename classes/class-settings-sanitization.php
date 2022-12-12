@@ -254,6 +254,28 @@ class Settings_Sanitization {
 		if ( ! isset( $options['app_ads_txt_content'] ) ) $options['app_ads_txt_content'] = '';
 		$options['app_ads_txt_content'] = ( ! empty( $options['app_ads_txt_content'] ) ) ? $options['app_ads_txt_content'] : '';
 
+		// Insert <head>, <body> and <footer> code
+		if ( ! isset( $options['insert_head_body_footer_code'] ) ) $options['insert_head_body_footer_code'] = false;
+		$options['insert_head_body_footer_code'] = ( 'on' == $options['insert_head_body_footer_code'] ? true : false );
+
+		if ( ! isset( $options['head_code_priority'] ) ) $options['head_code_priority'] = '';
+		$options['head_code_priority'] = ( isset( $options['head_code_priority'] ) ) ? $options['head_code_priority'] : 10;
+
+		if ( ! isset( $options['head_code'] ) ) $options['head_code'] = '';
+		$options['head_code'] = ( ! empty( $options['head_code'] ) ) ? $options['head_code'] : '';
+
+		if ( ! isset( $options['body_code_priority'] ) ) $options['body_code_priority'] = '';
+		$options['body_code_priority'] = ( isset( $options['body_code_priority'] ) ) ? $options['body_code_priority'] : 10;
+
+		if ( ! isset( $options['body_code'] ) ) $options['body_code'] = '';
+		$options['body_code'] = ( ! empty( $options['body_code'] ) ) ? $options['body_code'] : '';
+
+		if ( ! isset( $options['footer_code_priority'] ) ) $options['footer_code_priority'] = '';
+		$options['footer_code_priority'] = ( isset( $options['footer_code_priority'] ) ) ? $options['footer_code_priority'] : 10;
+
+		if ( ! isset( $options['footer_code'] ) ) $options['footer_code'] = '';
+		$options['footer_code'] = ( ! empty( $options['footer_code'] ) ) ? $options['footer_code'] : '';
+
 		return $options;
 
 	}

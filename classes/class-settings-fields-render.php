@@ -138,6 +138,56 @@ class Settings_Fields_Render {
 	}
 
 	/**
+	 * Render number field as sub-field of a toggle/switcher checkbox
+	 *
+	 * @since 1.4.0
+	 */
+	function render_number_subfield( $args ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		$field_id = $args['field_id'];
+		$field_name = $args['field_name'];
+		$field_type = $args['field_type'];
+		$field_prefix = $args['field_prefix'];
+		$field_suffix = $args['field_suffix'];
+		$field_intro = $args['field_intro'];
+		$field_description = $args['field_description'];
+		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+		if ( ! empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix with-suffix';
+		} elseif ( ! empty( $field_prefix ) && empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix';
+		} elseif ( empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-suffix';
+		} else {
+			$field_classname = '';		
+		}
+
+		if ( ( $field_id == 'head_code_priority' ) || ( $field_id == 'body_code_priority' ) || ( $field_id == 'footer_code_priority' ) ) {
+			$placeholder = '10';
+		} else {
+			$placeholder = '';
+		}
+
+		echo '<div class="asenha-subfield-number-wrapper">';
+
+		if ( ! empty( $field_intro ) ) {
+			echo '<div class="asenha-subfield-number-intro">' . wp_kses_post( $field_intro ) . '</div>';
+		}
+
+		echo '<div>' . $field_prefix . '<input type="number" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-number' . esc_attr( $field_classname ) . '" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $field_option_value ) . '">' . $field_suffix . '</div>';
+
+		if ( ! empty( $field_description ) ) {
+			echo '<div class="asenha-subfield-number-description">' . wp_kses_post( $field_description ) . '</div>';
+		}
+
+		echo '</div>';
+
+	}
+
+	/**
 	 * Render textarea field as sub-field of a toggle/switcher checkbox
 	 *
 	 * @since 2.3.0
@@ -150,19 +200,21 @@ class Settings_Fields_Render {
 		$field_slug = $args['field_slug'];
 		$field_name = $args['field_name'];
 		$field_type = $args['field_type'];
-		$field_prefix = $args['field_prefix'];
-		$field_suffix = $args['field_suffix'];
+		$field_intro = $args['field_intro'];
 		$field_description = $args['field_description'];
 		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
 
 		echo '<div class="asenha-subfield-textarea-wrapper">';
 
+		if ( ! empty( $field_intro ) ) {
+			echo '<div class="asenha-subfield-textarea-intro">' . wp_kses_post( $field_intro ) . '</div>';
+		}
+
+
 		echo '<textarea rows="30" class="asenha-subfield-textarea" id="' . esc_attr( $field_name ) . '" name="' . esc_attr( $field_name ) . '">' . esc_textarea( $field_option_value ) . '</textarea>';
 
 		if ( ! empty( $field_description ) ) {
-
 			echo '<div class="asenha-subfield-textarea-description">' . wp_kses_post( $field_description ) . '</div>';
-
 		}
 
 		echo '</div>';

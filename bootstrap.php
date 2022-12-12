@@ -339,6 +339,33 @@ class Admin_Site_Enhancements {
 			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
 		}
 
+		// Insert <head>, <body> and <footer> code
+		
+		if ( array_key_exists( 'insert_head_body_footer_code', $options ) && $options['insert_head_body_footer_code'] ) {
+
+			if ( isset( $options['head_code_priority'] ) ) {
+				add_action( 'wp_head', [ $utilities, 'insert_head_code' ], $options['head_code_priority'] );
+			} else {
+				add_action( 'wp_head', [ $utilities, 'insert_head_code' ], 10 );
+			}
+
+			if ( function_exists( 'wp_body_open' ) && version_compare( get_bloginfo( 'version' ), '5.2', '>=' ) ) {
+
+				if ( isset( $options['body_code_priority'] ) ) {
+					add_action( 'wp_body_open', [ $utilities, 'insert_body_code' ], $options['body_code_priority'] );
+				} else {
+					add_action( 'wp_body_open', [ $utilities, 'insert_body_code' ], 10 );
+				}
+			}
+
+			if ( isset( $options['footer_code_priority'] ) ) {
+				add_action( 'wp_footer', [ $utilities, 'insert_footer_code' ], $options['footer_code_priority'] );
+			} else {
+				add_action( 'wp_footer', [ $utilities, 'insert_footer_code' ], 10 );
+			}
+
+		}
+
 	}
 
 }
