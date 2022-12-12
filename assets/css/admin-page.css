@@ -369,7 +369,6 @@
     margin-top: 8px;
 }
 
-
 .form-table .asenha-subfields tr.asenha-text.with-prefix-suffix {
     display: flex;
     justify-content: flex-start;
@@ -399,8 +398,20 @@
     margin-bottom: 0;
 }
 
+/* Text area input subfield */
+
+.asenha-subfield-textarea-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .asenha-subfield-textarea {
     width: 100%;
+}
+
+.asenha-subfield-textarea-description {
+    margin-top: 8px;
 }
 
 .asenha-subfield-text.with-prefix.with-suffix {
@@ -517,13 +528,11 @@
 
 /* CodeMirror*/
 
-.custom-admin-css .asenha-subfield-textarea,
-.custom-frontend-css .asenha-subfield-textarea {
+.syntax-highlighted .asenha-subfield-textarea {
     background: #fcfcfc;
 }
 
-.custom-admin-css .CodeMirror,
-.custom-frontend-css .CodeMirror {
+.syntax-highlighted .CodeMirror {
     border: 1px solid #ddd;
     background: #fcfcfc;
 }

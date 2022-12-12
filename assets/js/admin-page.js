@@ -101,6 +101,10 @@
       $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
       $('.enable-custom-frontend-css').appendTo('.fields-utilities > table > tbody');
       $('.custom-frontend-css').appendTo('.fields-utilities .enable-custom-frontend-css .asenha-subfields');
+      $('.manage-ads-txt').appendTo('.fields-utilities > table > tbody');
+      $('.ads-txt-content').appendTo('.fields-utilities .manage-ads-txt .asenha-subfields');
+      $('.manage-app-ads-txt').appendTo('.fields-utilities > table > tbody');
+      $('.app-ads-txt-content').appendTo('.fields-utilities .manage-app-ads-txt .asenha-subfields');
       $('.redirect-after-login').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
@@ -132,6 +136,26 @@
       });
 
       frontendCssEditor.setSize("100%",600);
+
+      // Manage ads.txt => Initialize CodeMirror
+      var adsTxtTextarea = document.getElementById("admin_site_enhancements[ads_txt_content]");
+      var adsTxtEditor = CodeMirror.fromTextArea(adsTxtTextarea, {
+         mode: "markdown",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+
+      adsTxtEditor.setSize("100%",600);
+
+      // Manage app-ads.txt => Initialize CodeMirror
+      var appAdsTxtTextarea = document.getElementById("admin_site_enhancements[app_ads_txt_content]");
+      var appAdsTxtEditor = CodeMirror.fromTextArea(appAdsTxtTextarea, {
+         mode: "markdown",
+         lineNumbers: true,
+         lineWrapping: true
+      });
+
+      appAdsTxtEditor.setSize("100%",600);
 
       // Show and hide corresponding fields on tab clicks
 
@@ -170,6 +194,8 @@
          Cookies.set('asenha_tab', 'utilities', { expires: 1 }); // expires in 1 day
          adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
          frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
+         adsTxtEditor.refresh(); // Manage ads.txt >> CodeMirror
+         appAdsTxtEditor.refresh(); // Manage app-ads.txt >> CodeMirror
       });
 
       // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty
@@ -416,7 +442,7 @@
       });
 
       // Enable Custom Frontend CSS => show/hide CSS textarea on document ready
-      if ( document.getElementById('admin_site_enhancements[enable_custom_admin_css]').checked ) {
+      if ( document.getElementById('admin_site_enhancements[enable_custom_frontend_css]').checked ) {
          $('.enable-custom-frontend-css .asenha-subfields').show();
          $('.asenha-toggle.enable-custom-frontend-css td .asenha-field-with-options').addClass('is-enabled');
          frontendCssEditor.refresh();
@@ -425,7 +451,7 @@
       }
 
       // Enable Custom Frontend CSS => show/hide CSS textarea on toggle click
-      document.getElementById('admin_site_enhancements[enable_custom_admin_css]').addEventListener('click', event => {
+      document.getElementById('admin_site_enhancements[enable_custom_frontend_css]').addEventListener('click', event => {
          if (event.target.checked) {
             $('.enable-custom-frontend-css .asenha-subfields').fadeIn();
             $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
@@ -433,6 +459,48 @@
          } else {
             $('.enable-custom-frontend-css .asenha-subfields').hide();
             $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Create and Edit ads.txt => show/hide CSS textarea on document ready
+      if ( document.getElementById('admin_site_enhancements[manage_ads_txt]').checked ) {
+         $('.manage-ads-txt .asenha-subfields').show();
+         $('.asenha-toggle.manage-ads-txt td .asenha-field-with-options').addClass('is-enabled');
+         adsTxtEditor.refresh();
+      } else {
+         $('.manage-ads-txt .asenha-subfields').hide();        
+      }
+
+      // Create and Edit ads.txt => show/hide CSS textarea on toggle click
+      document.getElementById('admin_site_enhancements[manage_ads_txt]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.manage-ads-txt .asenha-subfields').fadeIn();
+            $('.manage-ads-txt .asenha-field-with-options').toggleClass('is-enabled');
+            adsTxtEditor.refresh();
+         } else {
+            $('.manage-ads-txt .asenha-subfields').hide();
+            $('.manage-ads-txt .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Create and Edit app-ads.txt => show/hide CSS textarea on document ready
+      if ( document.getElementById('admin_site_enhancements[manage_app_ads_txt]').checked ) {
+         $('.manage-app-ads-txt .asenha-subfields').show();
+         $('.asenha-toggle.manage-app-ads-txt td .asenha-field-with-options').addClass('is-enabled');
+         appAdsTxtEditor.refresh();
+      } else {
+         $('.manage-app-ads-txt .asenha-subfields').hide();        
+      }
+
+      // Create and Edit app-ads.txt => show/hide CSS textarea on toggle click
+      document.getElementById('admin_site_enhancements[manage_app_ads_txt]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.manage-app-ads-txt .asenha-subfields').fadeIn();
+            $('.manage-app-ads-txt .asenha-field-with-options').toggleClass('is-enabled');
+            appAdsTxtEditor.refresh();
+         } else {
+            $('.manage-app-ads-txt .asenha-subfields').hide();
+            $('.manage-app-ads-txt .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

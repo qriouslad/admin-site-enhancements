@@ -155,7 +155,18 @@ class Settings_Fields_Render {
 		$field_description = $args['field_description'];
 		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
 
+		echo '<div class="asenha-subfield-textarea-wrapper">';
+
 		echo '<textarea rows="30" class="asenha-subfield-textarea" id="' . esc_attr( $field_name ) . '" name="' . esc_attr( $field_name ) . '">' . esc_textarea( $field_option_value ) . '</textarea>';
+
+		if ( ! empty( $field_description ) ) {
+
+			echo '<div class="asenha-subfield-textarea-description">' . wp_kses_post( $field_description ) . '</div>';
+
+		}
+
+		echo '</div>';
+
 	}
 
 	/**

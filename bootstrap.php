@@ -309,7 +309,7 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Utilities >> Redirect After Logout
+		// Redirect After Logout
 		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
 			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
 				if ( array_key_exists( 'redirect_after_logout_for', $options ) && ! empty( $options['redirect_after_logout_for'] ) )  {
@@ -318,12 +318,12 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Utilities >> Redirect 404 to Homepage
+		// Redirect 404 to Homepage
 		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
 		}
 
-		// Utilities >> Enable Custom Admin / Frontend CSS
+		// Enable Custom Admin / Frontend CSS
 
 		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
 			add_filter( 'admin_enqueue_scripts', [ $utilities, 'custom_admin_css' ] );
@@ -332,7 +332,13 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
 			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
 		}
+
+		// Create and Edit ads.txt
 		
+		if ( array_key_exists( 'manage_ads_txt', $options ) && $options['manage_ads_txt'] ) {
+			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
+		}
+
 	}
 
 }
