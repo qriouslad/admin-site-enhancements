@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.1.0  
+Stable tag: 3.2.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -64,6 +64,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Enable Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
 * **Enable Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
+* **Manage ads.txt and app-ads.txt**. Easily edit and validate your ads.txt and app-ads.txt content.
 * **Redirect After Login / Logout**. Set custom redirect URL for all or some user roles after login / logout.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
@@ -104,6 +105,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.2.0 (2022.12.12)
+
+* **[ADDED] Utilities >> Manage ads.txt and app-ads.txt**: Easily edit and validate your ads.txt and app-ads.txt content. Please backup existing ads.txt and app-ads.txt content and remove those files before copying the original content into the ads.txt and app-ads.txt manager in the Utilities tab. If no ads.txt / app-ads.txt files exist in the root directory of your WordPress installation, you can immediately add content for both files.
 
 ### 3.1.0 (2022.12.11)
 
