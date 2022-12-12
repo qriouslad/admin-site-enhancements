@@ -217,10 +217,11 @@ function asenha_admin_scripts( $hook_suffix ) {
 		// Script to set behaviour and actions of the sortable menu
 		wp_enqueue_script( 'asenha-custom-admin-menu', ASENHA_URL . 'assets/js/custom-admin-menu.js', array( 'jquery-ui-draggable' ), ASENHA_VERSION, false );
 
-		// CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS
+		// CodeMirror. In use, e.g. for Utilities >> Enable Custom Admin / Frontend CSS / ads.txt / app-ads.txt
 		wp_enqueue_style( 'asenha-codemirror', ASENHA_URL . 'assets/css/codemirror/codemirror.min.css', array(), ASENHA_VERSION );
 		wp_enqueue_script( 'asenha-codemirror', ASENHA_URL . 'assets/js/codemirror/codemirror.min.js', array(), ASENHA_VERSION, true );			
 		wp_enqueue_script( 'asenha-codemirror-css-mode', ASENHA_URL . 'assets/js/codemirror/css.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true ); // CSS mode
+		wp_enqueue_script( 'asenha-codemirror-markdown-mode', ASENHA_URL . 'assets/js/codemirror/markdown.js', array( 'asenha-codemirror' ), ASENHA_VERSION, true ); // Markdown mode
 
 		// DataTables. In use, e.g. for Security >> Limit Login Attempts
 		wp_enqueue_style( 'asenha-datatables', ASENHA_URL . 'assets/css/datatables/datatables.min.css', array(), ASENHA_VERSION );
