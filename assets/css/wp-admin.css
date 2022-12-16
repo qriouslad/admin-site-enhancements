@@ -1,4 +1,9 @@
-/* Hide media replacement section on media dialog/frame */
+/* Content Management >> Media Replace >> Hide media replacement section on media dialog/frame */
 .media-sidebar .compat-item .compat-field-asenha-media-replace {
 	display: none;
+}
+
+/* Utilities >> Enable Login Logout */
+.accordion-section #login-logout-links-checklist.categorychecklist {
+	margin: -13px 0 13px 0;
 }

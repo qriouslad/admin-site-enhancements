@@ -111,6 +111,7 @@
       $('.manage-ads-appads-txt').appendTo('.fields-utilities > table > tbody');
       $('.ads-txt-content').appendTo('.fields-utilities .manage-ads-appads-txt .asenha-subfields');
       $('.app-ads-txt-content').appendTo('.fields-utilities .manage-ads-appads-txt .asenha-subfields');
+      $('.enable-login-logout-menu').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
