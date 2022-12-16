@@ -190,6 +190,10 @@ class Settings_Sanitization {
 
 		// ===== UTILITIES ======
 
+		// Enable Login Logout Menu
+		if ( ! isset( $options['enable_login_logout_menu'] ) ) $options['enable_login_logout_menu'] = false;
+		$options['enable_login_logout_menu'] = ( 'on' == $options['enable_login_logout_menu'] ? true : false );
+
 		// Redirect After Login
 		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
 		$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );

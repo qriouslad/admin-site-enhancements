@@ -300,7 +300,16 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
 
+		// Utilities >> Enable Login Logout
+
+		if ( array_key_exists( 'enable_login_logout_menu', $options ) && $options['enable_login_logout_menu'] ) {
+			add_action( 'admin_head-nav-menus.php', [ $utilities, 'add_login_logout_metabox' ] );
+			add_filter( 'wp_setup_nav_menu_item', [ $utilities, 'set_login_logout_menu_item_dynamic_url' ] );
+			add_filter( 'wp_nav_menu_objects', [ $utilities, 'maybe_remove_login_or_logout_menu_item' ] );
+		}
+
 		// Utilities >> Redirect After Login
+
 		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
 			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
 				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
@@ -309,7 +318,8 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Redirect After Logout
+		// Utilities >> Redirect After Logout
+
 		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
 			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
 				if ( array_key_exists( 'redirect_after_logout_for', $options ) && ! empty( $options['redirect_after_logout_for'] ) )  {
@@ -318,12 +328,13 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Redirect 404 to Homepage
+		// Utilities >> Redirect 404 to Homepage
+
 		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
 		}
 
-		// Enable Custom Admin / Frontend CSS
+		// Utilities >> Enable Custom Admin / Frontend CSS
 
 		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
 			add_filter( 'admin_enqueue_scripts', [ $utilities, 'custom_admin_css' ] );
@@ -333,13 +344,13 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
 		}
 
-		// Create and Edit ads.txt
+		// Utilities >> Create and Edit ads.txt
 		
 		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {
 			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
 		}
 
-		// Insert <head>, <body> and <footer> code
+		// Utilities >> Insert <head>, <body> and <footer> code
 		
 		if ( array_key_exists( 'insert_head_body_footer_code', $options ) && $options['insert_head_body_footer_code'] ) {
 

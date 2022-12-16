@@ -889,6 +889,28 @@ class Settings_Sections_Fields {
 
 		// ===== UTILITIES ======
 
+		// Enable Log In/Out Menu
+
+		$field_id = 'enable_login_logout_menu';
+		$field_slug = 'enable-login-logout-menu';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Log In/Out Menu', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Enable log in, log out and dynamic log in/out menu item for addition to any menu.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Redirect After Login
 
 		$field_id = 'redirect_after_login';
