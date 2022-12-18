@@ -1210,6 +1210,48 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Manage robots.txt
+
+		$field_id = 'manage_robots_txt';
+		$field_slug = 'manage-robots-txt';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Manage robots.txt', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Easily edit and validate your <a href="/robots.txt" target="_blank">robots.txt</a> content.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'robots_txt_content';
+		$field_slug = 'robots-txt-content';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'ads.txt' ) ) . '" target="_blank">ryte.com</a> | <a href="https://www.adstxtvalidator.com/ads_txt/' . esc_attr( str_replace( '.', '-', $_SERVER['SERVER_NAME'] ) ) . '" target="_blank">serp.tools</a><div class="vspacer"></div>', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Insert <head>, <body> and <footer> code
 
 		$field_id = 'insert_head_body_footer_code';

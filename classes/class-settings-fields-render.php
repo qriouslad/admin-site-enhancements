@@ -202,7 +202,15 @@ class Settings_Fields_Render {
 		$field_type = $args['field_type'];
 		$field_intro = $args['field_intro'];
 		$field_description = $args['field_description'];
-		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+		// Always load textarea content from robots.txt URL
+		if ( 'robots_txt_content' == $field_id ) {
+			$robots_txt_content = wp_remote_get( get_site_url() . '/robots.txt' );
+			$robots_txt_content = esc_textarea( trim( wp_remote_retrieve_body( $robots_txt_content ) ) );
+			$field_option_value = $robots_txt_content;
+		} else {
+			$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+		}
 
 		echo '<div class="asenha-subfield-textarea-wrapper">';
 
