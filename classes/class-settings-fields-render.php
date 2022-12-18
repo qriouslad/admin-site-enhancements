@@ -205,9 +205,19 @@ class Settings_Fields_Render {
 
 		// Always load textarea content from robots.txt URL
 		if ( 'robots_txt_content' == $field_id ) {
-			$robots_txt_content = wp_remote_get( get_site_url() . '/robots.txt' );
-			$robots_txt_content = esc_textarea( trim( wp_remote_retrieve_body( $robots_txt_content ) ) );
-			$field_option_value = $robots_txt_content;
+
+			if ( array_key_exists( 'manage_robots_txt', $options ) && ! $options['manage_robots_txt'] ) {
+				if ( array_key_exists( 'robots_txt_content', $options ) && $options['robots_txt_content'] ) {
+					$field_option_value = $options['robots_txt_content'];
+				}
+			}
+
+			if ( array_key_exists( 'manage_robots_txt', $options ) && $options['manage_robots_txt'] ) {
+				$robots_txt_content = wp_remote_get( get_site_url() . '/robots.txt' );
+				$robots_txt_content = esc_textarea( trim( wp_remote_retrieve_body( $robots_txt_content ) ) );
+				$field_option_value = $robots_txt_content;
+			} 
+
 		} else {
 			$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
 		}
