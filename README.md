@@ -66,6 +66,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Enable Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
 * **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily edit and validate your ads.txt and app-ads.txt content.
 * **Manage ads.txt and app-ads.txt**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
+* **Manage robots.txt**. Easily edit and validate your robots.txt content.
 * **Enable Log In/Out Menu**. Enable log in, log out and dynamic log in/out menu item for addition to any menu.
 * **Redirect After Login / Logout**. Set custom redirect URL for all or some user roles after login / logout.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
@@ -107,6 +108,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.5.0 (2022.12.19)
+
+* **[ADDED] Utilities >> Manage robots.txt**. Easily edit and validate your robots.txt content.
 
 ### 3.4.0 (2022.12.16)
 
