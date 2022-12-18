@@ -545,7 +545,7 @@
          if (event.target.checked) {
             $('.manage-robots-txt .asenha-subfields').fadeIn();
             $('.manage-robots-txt .asenha-field-with-options').toggleClass('is-enabled');
-            adsTxtEditor.refresh();
+            robotsTxtEditor.refresh();
          } else {
             $('.manage-robots-txt .asenha-subfields').hide();
             $('.manage-robots-txt .asenha-field-with-options').toggleClass('is-enabled');
