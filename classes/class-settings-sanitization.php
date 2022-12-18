@@ -254,6 +254,13 @@ class Settings_Sanitization {
 		if ( ! isset( $options['app_ads_txt_content'] ) ) $options['app_ads_txt_content'] = '';
 		$options['app_ads_txt_content'] = ( ! empty( $options['app_ads_txt_content'] ) ) ? $options['app_ads_txt_content'] : '';
 
+		// Manage robots.txt
+		if ( ! isset( $options['manage_robots_txt'] ) ) $options['manage_robots_txt'] = false;
+		$options['manage_robots_txt'] = ( 'on' == $options['manage_robots_txt'] ? true : false );
+
+		if ( ! isset( $options['robots_txt_content'] ) ) $options['robots_txt_content'] = '';
+		$options['robots_txt_content'] = ( ! empty( $options['robots_txt_content'] ) ) ? $options['robots_txt_content'] : '';
+
 		// Insert <head>, <body> and <footer> code
 		if ( ! isset( $options['insert_head_body_footer_code'] ) ) $options['insert_head_body_footer_code'] = false;
 		$options['insert_head_body_footer_code'] = ( 'on' == $options['insert_head_body_footer_code'] ? true : false );

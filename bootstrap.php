@@ -344,10 +344,16 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
 		}
 
-		// Utilities >> Create and Edit ads.txt
+		// Utilities >> Manage ads.txt and app-ads.txt
 		
 		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {
 			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
+		}
+
+		// Utilities >> Manage robots.txt
+		
+		if ( array_key_exists( 'manage_robots_txt', $options ) && $options['manage_robots_txt'] ) {
+			add_filter( 'robots_txt', [ $utilities, 'maybe_show_custom_robots_txt_content' ], 10, 2 );
 		}
 
 		// Utilities >> Insert <head>, <body> and <footer> code

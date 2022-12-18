@@ -362,6 +362,25 @@ class Utilities {
 	}
 
 	/**
+	 * Maybe show custom robots.txt content
+	 *
+	 * @since 3.5.0
+	 */
+	public function maybe_show_custom_robots_txt_content( $output, $public ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		if ( array_key_exists( 'robots_txt_content', $options ) && ! empty( $options['robots_txt_content'] ) ) {
+
+			$output = wp_strip_all_tags( $options['robots_txt_content'] );
+
+		}
+
+		return $output;
+
+	}
+
+	/**
 	 * Insert code before </head> tag
 	 *
 	 * @since 3.3.0
