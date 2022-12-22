@@ -78,6 +78,15 @@
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
       // Place fields into "Log In | Log Out" tab
+      $('.change-login-url').appendTo('.fields-login-logout > table > tbody');
+      $('.custom-login-slug').appendTo('.fields-login-logout .change-login-url .asenha-subfields');
+      $('.enable-login-logout-menu').appendTo('.fields-login-logout > table > tbody');
+      $('.redirect-after-login').appendTo('.fields-login-logout > table > tbody');
+      $('.redirect-after-login-to-slug').appendTo('.fields-login-logout .redirect-after-login .asenha-subfields');
+      $('.redirect-after-login-for').appendTo('.fields-login-logout .redirect-after-login .asenha-subfields');
+      $('.redirect-after-logout').appendTo('.fields-login-logout > table > tbody');
+      $('.redirect-after-logout-to-slug').appendTo('.fields-login-logout .redirect-after-logout .asenha-subfields');
+      $('.redirect-after-logout-for').appendTo('.fields-login-logout .redirect-after-logout .asenha-subfields');
 
       // Place fields into "Custom Code" tab
       $('.enable-custom-admin-css').appendTo('.fields-custom-code > table > tbody');
@@ -107,8 +116,6 @@
       $('.disable-feeds').appendTo('.fields-disable-components > table > tbody');
 
       // Place fields into "Security" tab
-      $('.change-login-url').appendTo('.fields-security > table > tbody');
-      $('.custom-login-slug').appendTo('.fields-security .change-login-url .asenha-subfields');
       $('.limit-login-attempts').appendTo('.fields-security > table > tbody');
       $('.login-fails-allowed').appendTo('.fields-security .limit-login-attempts .asenha-subfields');
       $('.login-lockout-maxcount').appendTo('.fields-security .limit-login-attempts .asenha-subfields');
@@ -117,13 +124,6 @@
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Utilities" tab
-      $('.enable-login-logout-menu').appendTo('.fields-utilities > table > tbody');
-      $('.redirect-after-login').appendTo('.fields-utilities > table > tbody');
-      $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
-      $('.redirect-after-login-for').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
-      $('.redirect-after-logout').appendTo('.fields-utilities > table > tbody');
-      $('.redirect-after-logout-to-slug').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
-      $('.redirect-after-logout-for').appendTo('.fields-utilities .redirect-after-logout .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
 
       // Remove empty .form-table that originally holds the fields
@@ -220,11 +220,11 @@
          Cookies.set('asenha_tab', 'admin-interface', { expires: 1 }); // expires in 1 day
       });
 
-      $('#tab-log-in-log-out + label').click( function() {
-         $('.fields-log-in-log-out').show();
-         $('.asenha-fields:not(.fields-log-in-log-out)').hide();
-         window.location.hash = 'log-in-log-out';
-         Cookies.set('asenha_tab', 'log-in-log-out', { expires: 1 }); // expires in 1 day
+      $('#tab-login-logout + label').click( function() {
+         $('.fields-login-logout').show();
+         $('.asenha-fields:not(.fields-login-logout)').hide();
+         window.location.hash = 'login-logout';
+         Cookies.set('asenha_tab', 'login-logout', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-custom-code + label').click( function() {

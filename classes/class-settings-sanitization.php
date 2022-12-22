@@ -135,6 +135,44 @@ class Settings_Sanitization {
 		// LOG IN | LOG OUT
 		// =================================================================
 
+		// Change Login URL
+		if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
+		$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
+
+		if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
+		$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+
+		// Enable Login Logout Menu
+		if ( ! isset( $options['enable_login_logout_menu'] ) ) $options['enable_login_logout_menu'] = false;
+		$options['enable_login_logout_menu'] = ( 'on' == $options['enable_login_logout_menu'] ? true : false );
+
+		// Redirect After Login
+		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
+		$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );
+
+		if ( ! isset( $options['redirect_after_login_to_slug'] ) ) $options['redirect_after_login_to_slug'] = '';
+		$options['redirect_after_login_to_slug'] = ( ! empty( $options['redirect_after_login_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_login_to_slug'] ) : '';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+				if ( ! isset( $options['redirect_after_login_for'][$role_slug] ) ) $options['redirect_after_login_for'][$role_slug] = false;
+				$options['redirect_after_login_for'][$role_slug] = ( 'on' == $options['redirect_after_login_for'][$role_slug] ? true : false );
+			}
+		}
+
+		// Redirect After Logout
+		if ( ! isset( $options['redirect_after_logout'] ) ) $options['redirect_after_logout'] = false;
+		$options['redirect_after_logout'] = ( 'on' == $options['redirect_after_logout'] ? true : false );
+
+		if ( ! isset( $options['redirect_after_logout_to_slug'] ) ) $options['redirect_after_logout_to_slug'] = '';
+		$options['redirect_after_logout_to_slug'] = ( ! empty( $options['redirect_after_logout_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_logout_to_slug'] ) : '';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+				if ( ! isset( $options['redirect_after_logout_for'][$role_slug] ) ) $options['redirect_after_logout_for'][$role_slug] = false;
+				$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
+			}
+		}
 
 		// =================================================================
 		// CUSTOM CODE
@@ -234,13 +272,6 @@ class Settings_Sanitization {
 		// SECURITY
 		// =================================================================
 
-		// Change Login URL
-		if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
-		$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
-
-		if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
-		$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
-
 		// Limit Login Attempts
 		if ( ! isset( $options['limit_login_attempts'] ) ) $options['limit_login_attempts'] = false;
 		$options['limit_login_attempts'] = ( 'on' == $options['limit_login_attempts'] ? true : false );
@@ -265,38 +296,6 @@ class Settings_Sanitization {
 		// =================================================================
 		// UTILITIES
 		// =================================================================
-
-		// Enable Login Logout Menu
-		if ( ! isset( $options['enable_login_logout_menu'] ) ) $options['enable_login_logout_menu'] = false;
-		$options['enable_login_logout_menu'] = ( 'on' == $options['enable_login_logout_menu'] ? true : false );
-
-		// Redirect After Login
-		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
-		$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );
-
-		if ( ! isset( $options['redirect_after_login_to_slug'] ) ) $options['redirect_after_login_to_slug'] = '';
-		$options['redirect_after_login_to_slug'] = ( ! empty( $options['redirect_after_login_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_login_to_slug'] ) : '';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-				if ( ! isset( $options['redirect_after_login_for'][$role_slug] ) ) $options['redirect_after_login_for'][$role_slug] = false;
-				$options['redirect_after_login_for'][$role_slug] = ( 'on' == $options['redirect_after_login_for'][$role_slug] ? true : false );
-			}
-		}
-
-		// Redirect After Logout
-		if ( ! isset( $options['redirect_after_logout'] ) ) $options['redirect_after_logout'] = false;
-		$options['redirect_after_logout'] = ( 'on' == $options['redirect_after_logout'] ? true : false );
-
-		if ( ! isset( $options['redirect_after_logout_to_slug'] ) ) $options['redirect_after_logout_to_slug'] = '';
-		$options['redirect_after_logout_to_slug'] = ( ! empty( $options['redirect_after_logout_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_logout_to_slug'] ) : '';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-				if ( ! isset( $options['redirect_after_logout_for'][$role_slug] ) ) $options['redirect_after_logout_for'][$role_slug] = false;
-				$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
-			}
-		}
 
 		// Redirect 404 to Homepage
 		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;

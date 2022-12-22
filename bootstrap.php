@@ -215,7 +215,45 @@ class Admin_Site_Enhancements {
 		// =================================================================
 
 		// Instantiate object for Log In Log Out features
-		// $login_logout = new ASENHA\Classes\Login_Logout;
+		$login_logout = new ASENHA\Classes\Login_Logout;
+
+		// Change Login URL
+		if ( array_key_exists( 'change_login_url', $options ) && $options['change_login_url'] ) {
+			if ( array_key_exists( 'custom_login_slug', $options ) && ! empty( $options['custom_login_slug'] ) )  {
+				add_action( 'init', [ $login_logout, 'redirect_on_custom_login_url' ] );
+				add_action( 'login_head', [ $login_logout, 'redirect_on_default_login_urls' ] );
+				add_action( 'wp_login_failed', [ $login_logout, 'redirect_to_custom_login_url_on_login_fail' ] );
+				add_action( 'wp_logout', [ $login_logout, 'redirect_to_custom_login_url_on_logout_success' ] );
+			}
+		}
+
+		// Utilities >> Enable Login Logout Menu
+
+		if ( array_key_exists( 'enable_login_logout_menu', $options ) && $options['enable_login_logout_menu'] ) {
+			add_action( 'admin_head-nav-menus.php', [ $login_logout, 'add_login_logout_metabox' ] );
+			add_filter( 'wp_setup_nav_menu_item', [ $login_logout, 'set_login_logout_menu_item_dynamic_url' ] );
+			add_filter( 'wp_nav_menu_objects', [ $login_logout, 'maybe_remove_login_or_logout_menu_item' ] );
+		}
+
+		// Redirect After Login
+
+		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
+			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
+				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
+					add_filter( 'wp_login', [ $login_logout, 'redirect_for_roles_after_login' ], 5, 2 );
+				}
+			}
+		}
+
+		// Redirect After Logout
+
+		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
+			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
+				if ( array_key_exists( 'redirect_after_logout_for', $options ) && ! empty( $options['redirect_after_logout_for'] ) )  {
+					add_action( 'wp_logout', [ $login_logout, 'redirect_after_logout' ], 5, 1 ); // load earlier than Change Login URL add_action
+				}
+			}
+		}
 
 		// =================================================================
 		// CUSTOM CODE
@@ -333,16 +371,6 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
-		// Change Login URL
-		if ( array_key_exists( 'change_login_url', $options ) && $options['change_login_url'] ) {
-			if ( array_key_exists( 'custom_login_slug', $options ) && ! empty( $options['custom_login_slug'] ) )  {
-				add_action( 'init', [ $security, 'redirect_on_custom_login_url' ] );
-				add_action( 'login_head', [ $security, 'redirect_on_default_login_urls' ] );
-				add_action( 'wp_login_failed', [ $security, 'redirect_to_custom_login_url_on_login_fail' ] );
-				add_action( 'wp_logout', [ $security, 'redirect_to_custom_login_url_on_logout_success' ] );
-			}
-		}
-
 		// Limit Login Attempts
 		if ( array_key_exists( 'limit_login_attempts', $options ) && $options['limit_login_attempts'] ) {
 			add_filter( 'authenticate', [ $security, 'maybe_allow_login' ], 999, 3 ); // Very low priority so it is processed last
@@ -372,34 +400,6 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
-
-		// Utilities >> Enable Login Logout
-
-		if ( array_key_exists( 'enable_login_logout_menu', $options ) && $options['enable_login_logout_menu'] ) {
-			add_action( 'admin_head-nav-menus.php', [ $utilities, 'add_login_logout_metabox' ] );
-			add_filter( 'wp_setup_nav_menu_item', [ $utilities, 'set_login_logout_menu_item_dynamic_url' ] );
-			add_filter( 'wp_nav_menu_objects', [ $utilities, 'maybe_remove_login_or_logout_menu_item' ] );
-		}
-
-		// Redirect After Login
-
-		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
-			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
-				if ( array_key_exists( 'redirect_after_login_for', $options ) && ! empty( $options['redirect_after_login_for'] ) )  {
-					add_filter( 'wp_login', [ $utilities, 'redirect_for_roles_after_login' ], 5, 2 );
-				}
-			}
-		}
-
-		// Redirect After Logout
-
-		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
-			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
-				if ( array_key_exists( 'redirect_after_logout_for', $options ) && ! empty( $options['redirect_after_logout_for'] ) )  {
-					add_action( 'wp_logout', [ $utilities, 'redirect_after_logout' ], 5, 1 ); // load earlier than Change Login URL add_action
-				}
-			}
-		}
 
 		// Redirect 404 to Homepage
 

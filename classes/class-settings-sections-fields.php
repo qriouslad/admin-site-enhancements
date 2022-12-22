@@ -576,6 +576,201 @@ class Settings_Sections_Fields {
 		// LOG IN | LOG OUT
 		// =================================================================
 
+		// Change Login URL
+
+		$field_id = 'change_login_url';
+		$field_slug = 'change-login-url';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Change Login URL', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'custom_login_slug';
+		$field_slug = 'custom-login-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'New URL:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Enable Log In/Out Menu
+
+		$field_id = 'enable_login_logout_menu';
+		$field_slug = 'enable-login-logout-menu';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Log In/Out Menu', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Enable log in, log out and dynamic log in/out menu item for addition to any menu.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Redirect After Login
+
+		$field_id = 'redirect_after_login';
+		$field_slug = 'redirect-after-login';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect After Login', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_login_to_slug';
+		$field_slug = 'redirect-after-login-to-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect to:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/ for:', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_login_for';
+		$field_slug = 'redirect-after-login-for';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+				add_settings_field(
+					$field_id . '_' . $role_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $role_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+						'field_label'			=> $role_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half login-logout ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					)
+				);
+
+			}
+		}
+
+		// Redirect After Logout
+
+		$field_id = 'redirect_after_logout';
+		$field_slug = 'redirect-after-logout';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect After Logout', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_logout_to_slug';
+		$field_slug = 'redirect-after-logout-to-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect to:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/ for:', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_logout_for';
+		$field_slug = 'redirect-after-logout-for';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+				add_settings_field(
+					$field_id . '_' . $role_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $role_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+						'field_label'			=> $role_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half login-logout ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					)
+				);
+
+			}
+		}
+
 		// =================================================================
 		// CUSTOM CODE
 		// =================================================================
@@ -1070,47 +1265,6 @@ class Settings_Sections_Fields {
 		// SECURITY
 		// =================================================================
 
-		// Change Login URL
-
-		$field_id = 'change_login_url';
-		$field_slug = 'change-login-url';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Change Login URL', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'custom_login_slug';
-		$field_slug = 'custom-login-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'New URL:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix security ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
 		// Limit Login Attempts
 
 		$field_id = 'limit_login_attempts';
@@ -1239,160 +1393,6 @@ class Settings_Sections_Fields {
 		// =================================================================
 		// UTILITIES
 		// =================================================================
-
-		// Enable Log In/Out Menu
-
-		$field_id = 'enable_login_logout_menu';
-		$field_slug = 'enable-login-logout-menu';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Log In/Out Menu', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Enable log in, log out and dynamic log in/out menu item for addition to any menu.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Redirect After Login
-
-		$field_id = 'redirect_after_login';
-		$field_slug = 'redirect-after-login';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect After Login', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_login_to_slug';
-		$field_slug = 'redirect-after-login-to-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect to:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/ for:', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_login_for';
-		$field_slug = 'redirect-after-login-for';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-
-				add_settings_field(
-					$field_id . '_' . $role_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $role_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
-						'field_label'			=> $role_label, // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
-					)
-				);
-
-			}
-		}
-
-		// Redirect After Logout
-
-		$field_id = 'redirect_after_logout';
-		$field_slug = 'redirect-after-logout';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect After Logout', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_logout_to_slug';
-		$field_slug = 'redirect-after-logout-to-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect to:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/ for:', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_logout_for';
-		$field_slug = 'redirect-after-logout-for';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-
-				add_settings_field(
-					$field_id . '_' . $role_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $role_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
-						'field_label'			=> $role_label, // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
-					)
-				);
-
-			}
-		}
 
 		// Redirect 404 to Homepage
 
