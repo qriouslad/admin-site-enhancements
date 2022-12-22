@@ -47,6 +47,8 @@ function asenha_add_settings_page() {
 					<div class="asenha-tab-buttons">
 					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
 					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
+					    <input id="tab-login-logout" type="radio" name="tabs"><label for="tab-login-logout">Log In | Log Out</label>
+					    <input id="tab-custom-code" type="radio" name="tabs"><label for="tab-custom-code">Custom Code</label>
 					    <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components">Disable Components</label>
 					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
 					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities">Utilities</label>
@@ -58,6 +60,16 @@ function asenha_add_settings_page() {
 					    	</table>
 					    </section>
 					    <section class="asenha-fields fields-admin-interface"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-login-logout"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-custom-code"> 
 					    	<table class="form-table" role="presentation">
 					    		<tbody></tbody>
 					    	</table>

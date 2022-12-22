@@ -70,7 +70,9 @@ class Settings_Sections_Fields {
 			}
 		}
 
-		// ===== CONTENT MANAGEMENT =====
+		// =================================================================
+		// CONTENT MANAGEMENT
+		// =================================================================
 
 		// Enable Page and Post Duplication
 
@@ -315,7 +317,9 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// ===== ADMIN INTERFACE =====
+		// =================================================================
+		// ADMIN INTERFACE
+		// =================================================================
 
 		// Hide Admin Notices
 
@@ -568,7 +572,567 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// ===== DISABLE COMPONENTS =====
+		// =================================================================
+		// LOG IN | LOG OUT
+		// =================================================================
+
+		// Change Login URL
+
+		$field_id = 'change_login_url';
+		$field_slug = 'change-login-url';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Change Login URL', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'custom_login_slug';
+		$field_slug = 'custom-login-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'New URL:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Enable Log In/Out Menu
+
+		$field_id = 'enable_login_logout_menu';
+		$field_slug = 'enable-login-logout-menu';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Log In/Out Menu', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Enable log in, log out and dynamic log in/out menu item for addition to any menu.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Enable Last Login Column
+
+		$field_id = 'enable_last_login_column';
+		$field_slug = 'enable-last-login-column';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Last Login Column', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Log when users on the site last logged in and display the date and time in the users list table.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Redirect After Login
+
+		$field_id = 'redirect_after_login';
+		$field_slug = 'redirect-after-login';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect After Login', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_login_to_slug';
+		$field_slug = 'redirect-after-login-to-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect to:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/ for:', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_login_for';
+		$field_slug = 'redirect-after-login-for';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+				add_settings_field(
+					$field_id . '_' . $role_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $role_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+						'field_label'			=> $role_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half login-logout ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					)
+				);
+
+			}
+		}
+
+		// Redirect After Logout
+
+		$field_id = 'redirect_after_logout';
+		$field_slug = 'redirect-after-logout';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect After Logout', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_logout_to_slug';
+		$field_slug = 'redirect-after-logout-to-slug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Redirect to:', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> get_site_url() . '/', // Custom argument
+				'field_suffix'			=> '/ for:', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'redirect_after_logout_for';
+		$field_slug = 'redirect-after-logout-for';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+
+				add_settings_field(
+					$field_id . '_' . $role_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $role_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
+						'field_label'			=> $role_label, // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half login-logout ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
+					)
+				);
+
+			}
+		}
+
+		// =================================================================
+		// CUSTOM CODE
+		// =================================================================
+
+		// Enable Custom Admin CSS
+
+		$field_id = 'enable_custom_admin_css';
+		$field_slug = 'enable-custom-admin-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Custom Admin CSS', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Add custom CSS on all admin pages for all user roles.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'custom_admin_css';
+		$field_slug = 'custom-admin-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Enable Custom Frontend CSS
+
+		$field_id = 'enable_custom_frontend_css';
+		$field_slug = 'enable-custom-frontend-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Custom Frontend CSS', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Add custom CSS on all frontend pages for all user roles.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'custom_frontend_css';
+		$field_slug = 'custom-frontend-css';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Manage ads.txt and app-ads.txt
+
+		$field_id = 'manage_ads_appads_txt';
+		$field_slug = 'manage-ads-appads-txt';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Manage ads.txt and app-ads.txt', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Easily edit and validate your <a href="/ads.txt" target="_blank">ads.txt</a> and <a href="/app-ads.txt" target="_blank">app-ads.txt</a> content.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'ads_txt_content';
+		$field_slug = 'ads-txt-content';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '<strong>Your ads.txt content:</strong>', // Custom argument
+				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'ads.txt' ) ) . '" target="_blank">adstxt.guru</a> | <a href="https://www.adstxtvalidator.com/ads_txt/' . esc_attr( str_replace( '.', '-', $_SERVER['SERVER_NAME'] ) ) . '" target="_blank">adstxtvalidator.com</a><div class="vspacer"></div>', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'app_ads_txt_content';
+		$field_slug = 'app-ads-txt-content';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '<strong>Your app-ads.txt content:</strong>', // Custom argument
+				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'app-ads.txt' ) ) . '" target="_blank">adstxt.guru</a>', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Manage robots.txt
+
+		$field_id = 'manage_robots_txt';
+		$field_slug = 'manage-robots-txt';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Manage robots.txt', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Easily edit and validate your <a href="/robots.txt" target="_blank">robots.txt</a> content.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'robots_txt_content';
+		$field_slug = 'robots-txt-content';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'Validate with: <a href="https://en.ryte.com/free-tools/robots-txt/?refresh=1&url=' . urlencode( get_site_url( null, 'robots.txt' ) ) . '&useragent=Googlebot&submit=Evaluate" target="_blank">ryte.com</a> | <a href="https://serp.tools/tools/robots-txt" target="_blank">serp.tools</a><div class="vspacer"></div>', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Insert <head>, <body> and <footer> code
+
+		$field_id = 'insert_head_body_footer_code';
+		$field_slug = 'insert-head-body-footer-code';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'head_code_priority';
+		$field_slug = 'head-code-priority';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '<strong>Code to insert before &lt;/head&gt; with the priority of</strong>', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'Default is 10. Larger number insert code closer to &lt;/head&gt;', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'head_code';
+		$field_slug = 'head-code';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'body_code_priority';
+		$field_slug = 'body-code-priority';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '<strong>Code to insert after &lt;body&gt; with the priority of</strong>', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'Default is 10. Smaller number insert code closer to &lt;body&gt;', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'body_code';
+		$field_slug = 'body-code';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'footer_code_priority';
+		$field_slug = 'footer-code-priority';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '<strong>Code to insert in footer section before &lt;/body&gt;: with the priority of</strong>', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'Default is 10. Larger number insert code closer to &lt;/body&gt;', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'footer_code';
+		$field_slug = 'footer-code';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// =================================================================
+		// DISABLE COMPONENTS
+		// =================================================================
 
 		// Disable Gutenberg
 
@@ -719,48 +1283,9 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// ===== SECURITY =====
-
-		// Change Login URL
-
-		$field_id = 'change_login_url';
-		$field_slug = 'change-login-url';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Change Login URL', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Default is ' . get_site_url() . '/wp-admin/', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle security ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'custom_login_slug';
-		$field_slug = 'custom-login-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'New URL:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix security ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
+		// =================================================================
+		// SECURITY
+		// =================================================================
 
 		// Limit Login Attempts
 
@@ -887,161 +1412,9 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// ===== UTILITIES ======
-
-		// Enable Log In/Out Menu
-
-		$field_id = 'enable_login_logout_menu';
-		$field_slug = 'enable-login-logout-menu';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Log In/Out Menu', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Enable log in, log out and dynamic log in/out menu item for addition to any menu.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Redirect After Login
-
-		$field_id = 'redirect_after_login';
-		$field_slug = 'redirect-after-login';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect After Login', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Set custom redirect URL for all or some user roles after login.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_login_to_slug';
-		$field_slug = 'redirect-after-login-to-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect to:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/ for:', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_login_for';
-		$field_slug = 'redirect-after-login-for';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-
-				add_settings_field(
-					$field_id . '_' . $role_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $role_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
-						'field_label'			=> $role_label, // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
-					)
-				);
-
-			}
-		}
-
-		// Redirect After Logout
-
-		$field_id = 'redirect_after_logout';
-		$field_slug = 'redirect-after-logout';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect After Logout', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Set custom redirect URL for all or some user roles after logout.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_logout_to_slug';
-		$field_slug = 'redirect-after-logout-to-slug';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Redirect to:', // Field title
-			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> get_site_url() . '/', // Custom argument
-				'field_suffix'			=> '/ for:', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'redirect_after_logout_for';
-		$field_slug = 'redirect-after-logout-for';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-
-				add_settings_field(
-					$field_id . '_' . $role_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $role_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $role_slug . ']', // Custom argument
-						'field_label'			=> $role_label, // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half utilities ' . $field_slug . ' ' . $role_slug, // Custom class for the <tr> element
-					)
-				);
-
-			}
-		}
+		// =================================================================
+		// UTILITIES
+		// =================================================================
 
 		// Redirect 404 to Homepage
 
@@ -1064,338 +1437,6 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// Enable Custom Admin CSS
-
-		$field_id = 'enable_custom_admin_css';
-		$field_slug = 'enable-custom-admin-css';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Custom Admin CSS', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Add custom CSS on all admin pages for all user roles.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'custom_admin_css';
-		$field_slug = 'custom-admin-css';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Enable Custom Frontend CSS
-
-		$field_id = 'enable_custom_frontend_css';
-		$field_slug = 'enable-custom-frontend-css';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Custom Frontend CSS', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Add custom CSS on all frontend pages for all user roles.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'custom_frontend_css';
-		$field_slug = 'custom-frontend-css';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Manage ads.txt and app-ads.txt
-
-		$field_id = 'manage_ads_appads_txt';
-		$field_slug = 'manage-ads-appads-txt';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Manage ads.txt and app-ads.txt', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Easily edit and validate your <a href="/ads.txt" target="_blank">ads.txt</a> and <a href="/app-ads.txt" target="_blank">app-ads.txt</a> content.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'ads_txt_content';
-		$field_slug = 'ads-txt-content';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '<strong>Your ads.txt content:</strong>', // Custom argument
-				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'ads.txt' ) ) . '" target="_blank">adstxt.guru</a> | <a href="https://www.adstxtvalidator.com/ads_txt/' . esc_attr( str_replace( '.', '-', $_SERVER['SERVER_NAME'] ) ) . '" target="_blank">adstxtvalidator.com</a><div class="vspacer"></div>', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'app_ads_txt_content';
-		$field_slug = 'app-ads-txt-content';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '<strong>Your app-ads.txt content:</strong>', // Custom argument
-				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'app-ads.txt' ) ) . '" target="_blank">adstxt.guru</a>', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Manage robots.txt
-
-		$field_id = 'manage_robots_txt';
-		$field_slug = 'manage-robots-txt';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Manage robots.txt', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Easily edit and validate your <a href="/robots.txt" target="_blank">robots.txt</a> content.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'robots_txt_content';
-		$field_slug = 'robots-txt-content';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> 'Validate with: <a href="https://en.ryte.com/free-tools/robots-txt/?refresh=1&url=' . urlencode( get_site_url( null, 'robots.txt' ) ) . '&useragent=Googlebot&submit=Evaluate" target="_blank">ryte.com</a> | <a href="https://serp.tools/tools/robots-txt" target="_blank">serp.tools</a><div class="vspacer"></div>', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Insert <head>, <body> and <footer> code
-
-		$field_id = 'insert_head_body_footer_code';
-		$field_slug = 'insert-head-body-footer-code';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options.
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'head_code_priority';
-		$field_slug = 'head-code-priority';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> '<strong>Code to insert before &lt;/head&gt; with the priority of</strong>', // Custom argument
-				'field_suffix'			=> '', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> 'Default is 10. Larger number insert code closer to &lt;/head&gt;', // Custom argument
-				'class'					=> 'asenha-number asenha-hide-th narrow utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'head_code';
-		$field_slug = 'head-code';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'body_code_priority';
-		$field_slug = 'body-code-priority';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> '<strong>Code to insert after &lt;body&gt; with the priority of</strong>', // Custom argument
-				'field_suffix'			=> '', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> 'Default is 10. Smaller number insert code closer to &lt;body&gt;', // Custom argument
-				'class'					=> 'asenha-number asenha-hide-th narrow utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'body_code';
-		$field_slug = 'body-code';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'footer_code_priority';
-		$field_slug = 'footer-code-priority';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> '<strong>Code to insert in footer section before &lt;/body&gt;: with the priority of</strong>', // Custom argument
-				'field_suffix'			=> '', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> 'Default is 10. Larger number insert code closer to &lt;/body&gt;', // Custom argument
-				'class'					=> 'asenha-number asenha-hide-th narrow utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'footer_code';
-		$field_slug = 'footer-code';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'textarea', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted utilities ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
 	}
 
 }
