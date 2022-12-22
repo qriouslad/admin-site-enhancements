@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.4.0  
+Stable tag: 3.6.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -119,6 +119,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.6.1 (2022.12.22)
+
+* **[CHANGED] Custom Code >> Manage robots.txt**. Fixed an issue where code editor was not rendered properly upon clicking the Custom Code tab.
 
 ### 3.6.0 (2022.12.22)
 
