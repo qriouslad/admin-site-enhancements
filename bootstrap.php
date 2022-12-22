@@ -68,19 +68,21 @@ class Admin_Site_Enhancements {
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
 		$options = get_option( ASENHA_SLUG_U, array() );
 
-		// ===== CONTENT MANAGEMENT =====
+		// =================================================================
+		// CONTENT MANAGEMENT
+		// =================================================================
 
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Content Management >> Enable Page and Post Duplication
+		// Enable Page and Post Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
 			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
 			add_filter( 'page_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 			add_filter( 'post_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 		}
 
-		// Content Management >> Enable Media Replacement
+		// Enable Media Replacement
 		if ( array_key_exists( 'enable_media_replacement', $options ) && $options['enable_media_replacement'] ) {
 			add_filter( 'media_row_actions', [ $content_management, 'modify_media_list_table_edit_link' ], 10, 2 );
 			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
@@ -88,7 +90,7 @@ class Admin_Site_Enhancements {
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
 
-		// Content Management >> Enable SVG Upload
+		// Enable SVG Upload
 		if ( array_key_exists( 'enable_svg_upload', $options ) && $options['enable_svg_upload'] && array_key_exists( 'enable_svg_upload_for', $options ) && isset( $options['enable_svg_upload_for'] ) ) {
 
 			global $roles_svg_upload_enabled;
@@ -117,13 +119,13 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_prepare_attachment_for_js', [ $content_management, 'get_svg_url_in_media_library' ] );
 		}
 
-		// Content Management >> Enable Auto-Publishing of Posts with Missed Schedules
+		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
 			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
 			add_action( 'admin_head', [ $content_management, 'publish_missed_schedule_posts' ] );
 		}
 
-		// Content Management >> Enhance List Tables
+		// Enhance List Tables
 		if ( array_key_exists( 'enhance_list_tables', $options ) && $options['enhance_list_tables'] ) {
 
 			// Show Featured Image Column
@@ -158,36 +160,38 @@ class Admin_Site_Enhancements {
 
 		}
 
-		// ===== ADMIN INTERFACE =====
+		// =================================================================
+		// ADMIN INTERFACE
+		// =================================================================
 
 		// Instantiate object for Admin Interface features
 		$admin_interface = new ASENHA\Classes\Admin_Interface;
 
-		// Admin Interface >> Hide Admin Notices
+		// Hide Admin Notices
 		if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
 			add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
 			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
 
-		// Admin Interface >> Hide Admin Bar
+		// Hide Admin Bar
 		if ( array_key_exists( 'hide_admin_bar', $options ) && $options['hide_admin_bar'] && array_key_exists( 'hide_admin_bar_for', $options ) && isset( $options['hide_admin_bar_for'] ) ) {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
 		}
 
-		// Admin Interface >> View Admin as Role
+		// View Admin as Role
 		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
 			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
 			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
 			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
 		}
 
-		// Admin Interface >> Hide or Modify Elements
+		// Hide or Modify Elements
 		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
 			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
 		}
 
-		// Admin Interface >> Customize Admin Menu
+		// Customize Admin Menu
 
 		if ( array_key_exists( 'customize_admin_menu', $options ) && $options['customize_admin_menu'] ) {
 			// add_action( 'wp_ajax_save_custom_menu_order', [ $admin_interface, 'save_custom_menu_order' ] );
@@ -206,12 +210,77 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// ===== DISABLE COMPONENTS ======
+		// =================================================================
+		// LOG IN | LOG OUT
+		// =================================================================
+
+		// Instantiate object for Log In Log Out features
+		// $login_logout = new ASENHA\Classes\Login_Logout;
+
+		// =================================================================
+		// CUSTOM CODE
+		// =================================================================
+
+		// Instantiate object for Custom Code features
+		$custom_code = new ASENHA\Classes\Custom_Code;
+
+		// Enable Custom Admin / Frontend CSS
+
+		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
+			add_filter( 'admin_enqueue_scripts', [ $custom_code, 'custom_admin_css' ] );
+		}
+
+		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
+			add_filter( 'wp_enqueue_scripts', [ $custom_code, 'custom_frontend_css' ] );
+		}
+
+		// Manage ads.txt and app-ads.txt
+		
+		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {
+			add_action( 'init', [ $custom_code, 'show_ads_appads_txt_content' ] );
+		}
+
+		// Manage robots.txt
+		
+		if ( array_key_exists( 'manage_robots_txt', $options ) && $options['manage_robots_txt'] ) {
+			add_filter( 'robots_txt', [ $custom_code, 'maybe_show_custom_robots_txt_content' ], 10, 2 );
+		}
+
+		// Insert <head>, <body> and <footer> code
+		
+		if ( array_key_exists( 'insert_head_body_footer_code', $options ) && $options['insert_head_body_footer_code'] ) {
+
+			if ( isset( $options['head_code_priority'] ) ) {
+				add_action( 'wp_head', [ $custom_code, 'insert_head_code' ], $options['head_code_priority'] );
+			} else {
+				add_action( 'wp_head', [ $custom_code, 'insert_head_code' ], 10 );
+			}
+
+			if ( function_exists( 'wp_body_open' ) && version_compare( get_bloginfo( 'version' ), '5.2', '>=' ) ) {
+
+				if ( isset( $options['body_code_priority'] ) ) {
+					add_action( 'wp_body_open', [ $custom_code, 'insert_body_code' ], $options['body_code_priority'] );
+				} else {
+					add_action( 'wp_body_open', [ $custom_code, 'insert_body_code' ], 10 );
+				}
+			}
+
+			if ( isset( $options['footer_code_priority'] ) ) {
+				add_action( 'wp_footer', [ $custom_code, 'insert_footer_code' ], $options['footer_code_priority'] );
+			} else {
+				add_action( 'wp_footer', [ $custom_code, 'insert_footer_code' ], 10 );
+			}
+
+		}
+
+		// =================================================================
+		// DISABLE COMPONENTS
+		// =================================================================
 
 		// Instantiate object for Disable Components features
 		$disable_components = new ASENHA\Classes\Disable_Components;
 
-		// Disable Components >> Disable Gutenberg
+		// Disable Gutenberg
 		if ( array_key_exists( 'disable_gutenberg', $options ) && $options['disable_gutenberg'] ) {
 			if ( array_key_exists( 'disable_gutenberg_for', $options ) && ! empty( $options['disable_gutenberg_for'] ) )  {
 				add_action( 'admin_init', [ $disable_components, 'disable_gutenberg_for_post_types_admin' ] );
@@ -221,7 +290,7 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Disable Components >> Disable Comments
+		// Disable Comments
 		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
 			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
 				add_action( 'do_meta_boxes', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init', 'admin_init', 'wp_loaded' hooks
@@ -230,7 +299,7 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Disable Components >> Disable REST API
+		// Disable REST API
 		if ( array_key_exists( 'disable_rest_api', $options ) && $options['disable_rest_api'] ) {
 			if ( version_compare( get_bloginfo('version'), '4.7', '>=' ) ) {
 				add_filter( 'rest_authentication_errors', [ $disable_components, 'disable_rest_api' ] );
@@ -247,7 +316,7 @@ class Admin_Site_Enhancements {
 			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' ); // Remove REST API URL from the WP RSD endpoint.
 		}
 
-		// Disable Components >> Disable Feeds
+		// Disable Feeds
 		if ( array_key_exists( 'disable_feeds', $options ) && $options['disable_feeds'] ) {
 			remove_action( 'wp_head', 'feed_links', 2 ); // Remove feed links in <head>
 			remove_action( 'wp_head', 'feed_links_extra', 3 ); // Remove feed links in <head>
@@ -257,12 +326,14 @@ class Admin_Site_Enhancements {
 			remove_action( 'do_feed_atom', 'do_feed_atom', 10, 1 );
 		}
 
-		// ===== SECURITY =====
+		// =================================================================
+		// SECURITY
+		// =================================================================
 
 		// Instantiate object for Security features
 		$security = new ASENHA\Classes\Security;
 
-		// Security >> Change Login URL
+		// Change Login URL
 		if ( array_key_exists( 'change_login_url', $options ) && $options['change_login_url'] ) {
 			if ( array_key_exists( 'custom_login_slug', $options ) && ! empty( $options['custom_login_slug'] ) )  {
 				add_action( 'init', [ $security, 'redirect_on_custom_login_url' ] );
@@ -272,7 +343,7 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Security >> Limit Login Attempts
+		// Limit Login Attempts
 		if ( array_key_exists( 'limit_login_attempts', $options ) && $options['limit_login_attempts'] ) {
 			add_filter( 'authenticate', [ $security, 'maybe_allow_login' ], 999, 3 ); // Very low priority so it is processed last
 			add_action( 'login_enqueue_scripts', [ $security, 'maybe_hide_login_form' ] );
@@ -282,20 +353,22 @@ class Admin_Site_Enhancements {
 			add_action( 'wp_login', [ $security, 'clear_failed_login_log' ] );
 		}
 
-		// Security >> Obfuscate Author Slugs
+		// Obfuscate Author Slugs
 		if ( array_key_exists( 'obfuscate_author_slugs', $options ) && $options['obfuscate_author_slugs'] ) {
 			add_action( 'pre_get_posts', [ $security, 'alter_author_query' ], 10 );
 			add_filter( 'author_link', [ $security, 'alter_author_link' ], 10, 3 );
 			add_filter( 'rest_prepare_user', [ $security, 'alter_json_users' ], 10, 3 );
 		}
 
-		// Security >> Disable XML-RPC
+		// Disable XML-RPC
 		if ( array_key_exists( 'disable_xmlrpc', $options ) && $options['disable_xmlrpc'] ) {
 			add_filter( 'xmlrpc_enabled', '__return_false' );
 			add_filter( 'wp_xmlrpc_server_class', [ $security, 'maybe_disable_xmlrpc' ] );
 		}
 
-		// ===== UTILITIES ======
+		// =================================================================
+		// UTILITIES
+		// =================================================================
 
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
@@ -308,7 +381,7 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_nav_menu_objects', [ $utilities, 'maybe_remove_login_or_logout_menu_item' ] );
 		}
 
-		// Utilities >> Redirect After Login
+		// Redirect After Login
 
 		if ( array_key_exists( 'redirect_after_login', $options ) && $options['redirect_after_login'] ) {
 			if ( array_key_exists( 'redirect_after_login_to_slug', $options ) && ! empty( $options['redirect_after_login_to_slug'] ) )  {
@@ -318,7 +391,7 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Utilities >> Redirect After Logout
+		// Redirect After Logout
 
 		if ( array_key_exists( 'redirect_after_logout', $options ) && $options['redirect_after_logout'] ) {
 			if ( array_key_exists( 'redirect_after_logout_to_slug', $options ) && ! empty( $options['redirect_after_logout_to_slug'] ) )  {
@@ -328,59 +401,10 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Utilities >> Redirect 404 to Homepage
+		// Redirect 404 to Homepage
 
 		if ( array_key_exists( 'redirect_404_to_homepage', $options ) && $options['redirect_404_to_homepage'] ) {
 			add_filter( 'wp', [ $utilities, 'redirect_404_to_homepage' ] );
-		}
-
-		// Utilities >> Enable Custom Admin / Frontend CSS
-
-		if ( array_key_exists( 'enable_custom_admin_css', $options ) && $options['enable_custom_admin_css'] ) {
-			add_filter( 'admin_enqueue_scripts', [ $utilities, 'custom_admin_css' ] );
-		}
-
-		if ( array_key_exists( 'enable_custom_frontend_css', $options ) && $options['enable_custom_frontend_css'] ) {
-			add_filter( 'wp_enqueue_scripts', [ $utilities, 'custom_frontend_css' ] );
-		}
-
-		// Utilities >> Manage ads.txt and app-ads.txt
-		
-		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {
-			add_action( 'init', [ $utilities, 'show_ads_appads_txt_content' ] );
-		}
-
-		// Utilities >> Manage robots.txt
-		
-		if ( array_key_exists( 'manage_robots_txt', $options ) && $options['manage_robots_txt'] ) {
-			add_filter( 'robots_txt', [ $utilities, 'maybe_show_custom_robots_txt_content' ], 10, 2 );
-		}
-
-		// Utilities >> Insert <head>, <body> and <footer> code
-		
-		if ( array_key_exists( 'insert_head_body_footer_code', $options ) && $options['insert_head_body_footer_code'] ) {
-
-			if ( isset( $options['head_code_priority'] ) ) {
-				add_action( 'wp_head', [ $utilities, 'insert_head_code' ], $options['head_code_priority'] );
-			} else {
-				add_action( 'wp_head', [ $utilities, 'insert_head_code' ], 10 );
-			}
-
-			if ( function_exists( 'wp_body_open' ) && version_compare( get_bloginfo( 'version' ), '5.2', '>=' ) ) {
-
-				if ( isset( $options['body_code_priority'] ) ) {
-					add_action( 'wp_body_open', [ $utilities, 'insert_body_code' ], $options['body_code_priority'] );
-				} else {
-					add_action( 'wp_body_open', [ $utilities, 'insert_body_code' ], 10 );
-				}
-			}
-
-			if ( isset( $options['footer_code_priority'] ) ) {
-				add_action( 'wp_footer', [ $utilities, 'insert_footer_code' ], $options['footer_code_priority'] );
-			} else {
-				add_action( 'wp_footer', [ $utilities, 'insert_footer_code' ], 10 );
-			}
-
 		}
 
 	}

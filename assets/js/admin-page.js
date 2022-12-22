@@ -77,6 +77,26 @@
       $('.hide-admin-bar').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
+      // Place fields into "Log In | Log Out" tab
+
+      // Place fields into "Custom Code" tab
+      $('.enable-custom-admin-css').appendTo('.fields-custom-code > table > tbody');
+      $('.custom-admin-css').appendTo('.fields-custom-code .enable-custom-admin-css .asenha-subfields');
+      $('.enable-custom-frontend-css').appendTo('.fields-custom-code > table > tbody');
+      $('.custom-frontend-css').appendTo('.fields-custom-code .enable-custom-frontend-css .asenha-subfields');
+      $('.insert-head-body-footer-code').appendTo('.fields-custom-code > table > tbody');
+      $('.head-code-priority').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.head-code').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.body-code-priority').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.body-code').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.footer-code-priority').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.footer-code').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.manage-ads-appads-txt').appendTo('.fields-custom-code > table > tbody');
+      $('.ads-txt-content').appendTo('.fields-custom-code .manage-ads-appads-txt .asenha-subfields');
+      $('.app-ads-txt-content').appendTo('.fields-custom-code .manage-ads-appads-txt .asenha-subfields');
+      $('.manage-robots-txt').appendTo('.fields-custom-code > table > tbody');
+      $('.robots-txt-content').appendTo('.fields-custom-code .manage-robots-txt .asenha-subfields');
+
       // Place fields into the "Disable Components" tab
       $('.disable-gutenberg').appendTo('.fields-disable-components > table > tbody');
       $('.disable-gutenberg-for').appendTo('.fields-disable-components .disable-gutenberg .asenha-subfields');
@@ -97,22 +117,6 @@
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Utilities" tab
-      $('.enable-custom-admin-css').appendTo('.fields-utilities > table > tbody');
-      $('.custom-admin-css').appendTo('.fields-utilities .enable-custom-admin-css .asenha-subfields');
-      $('.enable-custom-frontend-css').appendTo('.fields-utilities > table > tbody');
-      $('.custom-frontend-css').appendTo('.fields-utilities .enable-custom-frontend-css .asenha-subfields');
-      $('.insert-head-body-footer-code').appendTo('.fields-utilities > table > tbody');
-      $('.head-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.head-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.body-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.body-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.footer-code-priority').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.footer-code').appendTo('.fields-utilities .insert-head-body-footer-code .asenha-subfields');
-      $('.manage-ads-appads-txt').appendTo('.fields-utilities > table > tbody');
-      $('.ads-txt-content').appendTo('.fields-utilities .manage-ads-appads-txt .asenha-subfields');
-      $('.app-ads-txt-content').appendTo('.fields-utilities .manage-ads-appads-txt .asenha-subfields');
-      $('.manage-robots-txt').appendTo('.fields-utilities > table > tbody');
-      $('.robots-txt-content').appendTo('.fields-utilities .manage-robots-txt .asenha-subfields');
       $('.enable-login-logout-menu').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login').appendTo('.fields-utilities > table > tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-utilities .redirect-after-login .asenha-subfields');
@@ -216,6 +220,27 @@
          Cookies.set('asenha_tab', 'admin-interface', { expires: 1 }); // expires in 1 day
       });
 
+      $('#tab-log-in-log-out + label').click( function() {
+         $('.fields-log-in-log-out').show();
+         $('.asenha-fields:not(.fields-log-in-log-out)').hide();
+         window.location.hash = 'log-in-log-out';
+         Cookies.set('asenha_tab', 'log-in-log-out', { expires: 1 }); // expires in 1 day
+      });
+
+      $('#tab-custom-code + label').click( function() {
+         $('.fields-custom-code').show();
+         $('.asenha-fields:not(.fields-custom-code)').hide();
+         window.location.hash = 'custom-code';
+         Cookies.set('asenha_tab', 'custom-code', { expires: 1 }); // expires in 1 day
+         adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
+         frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
+         adsTxtEditor.refresh(); // Manage ads.txt >> CodeMirror
+         appAdsTxtEditor.refresh(); // Manage app-ads.txt >> CodeMirror
+         headCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+         bodyCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+         footerCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+      });
+
       $('#tab-disable-components + label').click( function() {
          $('.fields-disable-components').show();
          $('.asenha-fields:not(.fields-disable-components)').hide();
@@ -235,13 +260,6 @@
          $('.asenha-fields:not(.fields-utilities)').hide();
          window.location.hash = 'utilities';
          Cookies.set('asenha_tab', 'utilities', { expires: 1 }); // expires in 1 day
-         adminCssEditor.refresh(); // Custom Admin CSS >> CodeMirror
-         frontendCssEditor.refresh(); // Custom Fronend CSS >> CodeMirror
-         adsTxtEditor.refresh(); // Manage ads.txt >> CodeMirror
-         appAdsTxtEditor.refresh(); // Manage app-ads.txt >> CodeMirror
-         headCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
-         bodyCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
-         footerCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
       });
 
       // Open tab set in 'asenha_tab' cookie set on saving changes. Defaults to content-management tab when cookie is empty

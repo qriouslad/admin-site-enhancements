@@ -20,7 +20,9 @@ class Settings_Sanitization {
 		global $wp_roles, $asenha_public_post_types, $asenha_gutenberg_post_types;
 		$roles = $wp_roles->get_names();
 
-		// ===== CONTENT MANAGEMENT =====
+		// =================================================================
+		// CONTENT MANAGEMENT
+		// =================================================================
 
 		// Enable Page and Post Duplication
 		if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
@@ -73,7 +75,9 @@ class Settings_Sanitization {
 		if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
 		$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
 
-		// ===== ADMIN INTERFACE =====
+		// =================================================================
+		// ADMIN INTERFACE
+		// =================================================================
 
 		// Hide Admin Notices
 		if ( ! isset( $options['hide_admin_notices'] ) ) $options['hide_admin_notices'] = false;
@@ -127,108 +131,14 @@ class Settings_Sanitization {
 		if ( ! isset( $options['custom_menu_titles'] ) ) $options['custom_menu_titles'] = ''; 
 		if ( ! isset( $options['custom_menu_hidden'] ) ) $options['custom_menu_hidden'] = '';
 
-		// ===== DISABLE COMPONENTS ======
+		// =================================================================
+		// LOG IN | LOG OUT
+		// =================================================================
 
-		// Disable Gutenberg
-		if ( ! isset( $options['disable_gutenberg'] ) ) $options['disable_gutenberg'] = false;
-		$options['disable_gutenberg'] = ( 'on' == $options['disable_gutenberg'] ? true : false );
 
-		if ( is_array( $asenha_gutenberg_post_types ) ) {
-			foreach ( $asenha_gutenberg_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
-				if ( ! isset( $options['disable_gutenberg_for'][$post_type_slug] ) ) $options['disable_gutenberg_for'][$post_type_slug] = false;
-				$options['disable_gutenberg_for'][$post_type_slug] = ( 'on' == $options['disable_gutenberg_for'][$post_type_slug] ? true : false );
-			}
-		}
-
-		if ( ! isset( $options['disable_gutenberg_frontend_styles'] ) ) $options['disable_gutenberg_frontend_styles'] = false;
-		$options['disable_gutenberg_frontend_styles'] = ( 'on' == $options['disable_gutenberg_frontend_styles'] ? true : false );
-
-		// Disable Comments
-		if ( ! isset( $options['disable_comments'] ) ) $options['disable_comments'] = false;
-		$options['disable_comments'] = ( 'on' == $options['disable_comments'] ? true : false );
-
-		if ( is_array( $asenha_public_post_types ) ) {
-			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
-				if ( ! isset( $options['disable_comments_for'][$post_type_slug] ) ) $options['disable_comments_for'][$post_type_slug] = false;
-				$options['disable_comments_for'][$post_type_slug] = ( 'on' == $options['disable_comments_for'][$post_type_slug] ? true : false );
-			}
-		}
-
-		// Disable REST API
-		if ( ! isset( $options['disable_rest_api'] ) ) $options['disable_rest_api'] = false;
-		$options['disable_rest_api'] = ( 'on' == $options['disable_rest_api'] ? true : false );
-
-		// Disable Feeds
-		if ( ! isset( $options['disable_feeds'] ) ) $options['disable_feeds'] = false;
-		$options['disable_feeds'] = ( 'on' == $options['disable_feeds'] ? true : false );
-
-		// ===== SECURITY =====
-
-		// Change Login URL
-		if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
-		$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
-
-		if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
-		$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
-
-		// Limit Login Attempts
-		if ( ! isset( $options['limit_login_attempts'] ) ) $options['limit_login_attempts'] = false;
-		$options['limit_login_attempts'] = ( 'on' == $options['limit_login_attempts'] ? true : false );
-
-		if ( ! isset( $options['login_fails_allowed'] ) ) $options['login_fails_allowed'] = 3;
-		$options['login_fails_allowed'] = ( ! empty( $options['login_fails_allowed'] ) ) ? sanitize_text_field( $options['login_fails_allowed'] ) : 3;
-
-		if ( ! isset( $options['login_lockout_maxcount'] ) ) $options['login_lockout_maxcount'] = 3;
-		$options['login_lockout_maxcount'] = ( ! empty( $options['login_lockout_maxcount'] ) ) ? sanitize_text_field( $options['login_lockout_maxcount'] ) : 3;
-
-		if ( ! isset( $options['login_attempts_log_table'] ) ) $options['login_attempts_log_table'] = '';
-		$options['login_attempts_log_table'] = '';
-		
-		// Obfuscate Author Slugs
-		if ( ! isset( $options['obfuscate_author_slugs'] ) ) $options['obfuscate_author_slugs'] = false;
-		$options['obfuscate_author_slugs'] = ( 'on' == $options['obfuscate_author_slugs'] ? true : false );
-
-		// ===== UTILITIES ======
-
-		// Enable Login Logout Menu
-		if ( ! isset( $options['enable_login_logout_menu'] ) ) $options['enable_login_logout_menu'] = false;
-		$options['enable_login_logout_menu'] = ( 'on' == $options['enable_login_logout_menu'] ? true : false );
-
-		// Redirect After Login
-		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
-		$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );
-
-		if ( ! isset( $options['redirect_after_login_to_slug'] ) ) $options['redirect_after_login_to_slug'] = '';
-		$options['redirect_after_login_to_slug'] = ( ! empty( $options['redirect_after_login_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_login_to_slug'] ) : '';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-				if ( ! isset( $options['redirect_after_login_for'][$role_slug] ) ) $options['redirect_after_login_for'][$role_slug] = false;
-				$options['redirect_after_login_for'][$role_slug] = ( 'on' == $options['redirect_after_login_for'][$role_slug] ? true : false );
-			}
-		}
-
-		// Redirect After Logout
-		if ( ! isset( $options['redirect_after_logout'] ) ) $options['redirect_after_logout'] = false;
-		$options['redirect_after_logout'] = ( 'on' == $options['redirect_after_logout'] ? true : false );
-
-		if ( ! isset( $options['redirect_after_logout_to_slug'] ) ) $options['redirect_after_logout_to_slug'] = '';
-		$options['redirect_after_logout_to_slug'] = ( ! empty( $options['redirect_after_logout_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_logout_to_slug'] ) : '';
-
-		if ( is_array( $roles ) ) {
-			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
-				if ( ! isset( $options['redirect_after_logout_for'][$role_slug] ) ) $options['redirect_after_logout_for'][$role_slug] = false;
-				$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
-			}
-		}
-
-		// Redirect 404 to Homepage
-		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
-		$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );
-
-		// Disable XML-RPC
-		if ( ! isset( $options['disable_xmlrpc'] ) ) $options['disable_xmlrpc'] = false;
-		$options['disable_xmlrpc'] = ( 'on' == $options['disable_xmlrpc'] ? true : false );
+		// =================================================================
+		// CUSTOM CODE
+		// =================================================================
 
 		// Enable Custom Admin CSS
 		if ( ! isset( $options['enable_custom_admin_css'] ) ) $options['enable_custom_admin_css'] = false;
@@ -282,6 +192,115 @@ class Settings_Sanitization {
 
 		if ( ! isset( $options['footer_code'] ) ) $options['footer_code'] = '';
 		$options['footer_code'] = ( ! empty( $options['footer_code'] ) ) ? $options['footer_code'] : '';
+
+		// =================================================================
+		// DISABLE COMPONENTS
+		// =================================================================
+
+		// Disable Gutenberg
+		if ( ! isset( $options['disable_gutenberg'] ) ) $options['disable_gutenberg'] = false;
+		$options['disable_gutenberg'] = ( 'on' == $options['disable_gutenberg'] ? true : false );
+
+		if ( is_array( $asenha_gutenberg_post_types ) ) {
+			foreach ( $asenha_gutenberg_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
+				if ( ! isset( $options['disable_gutenberg_for'][$post_type_slug] ) ) $options['disable_gutenberg_for'][$post_type_slug] = false;
+				$options['disable_gutenberg_for'][$post_type_slug] = ( 'on' == $options['disable_gutenberg_for'][$post_type_slug] ? true : false );
+			}
+		}
+
+		if ( ! isset( $options['disable_gutenberg_frontend_styles'] ) ) $options['disable_gutenberg_frontend_styles'] = false;
+		$options['disable_gutenberg_frontend_styles'] = ( 'on' == $options['disable_gutenberg_frontend_styles'] ? true : false );
+
+		// Disable Comments
+		if ( ! isset( $options['disable_comments'] ) ) $options['disable_comments'] = false;
+		$options['disable_comments'] = ( 'on' == $options['disable_comments'] ? true : false );
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( ! isset( $options['disable_comments_for'][$post_type_slug] ) ) $options['disable_comments_for'][$post_type_slug] = false;
+				$options['disable_comments_for'][$post_type_slug] = ( 'on' == $options['disable_comments_for'][$post_type_slug] ? true : false );
+			}
+		}
+
+		// Disable REST API
+		if ( ! isset( $options['disable_rest_api'] ) ) $options['disable_rest_api'] = false;
+		$options['disable_rest_api'] = ( 'on' == $options['disable_rest_api'] ? true : false );
+
+		// Disable Feeds
+		if ( ! isset( $options['disable_feeds'] ) ) $options['disable_feeds'] = false;
+		$options['disable_feeds'] = ( 'on' == $options['disable_feeds'] ? true : false );
+
+		// =================================================================
+		// SECURITY
+		// =================================================================
+
+		// Change Login URL
+		if ( ! isset( $options['change_login_url'] ) ) $options['change_login_url'] = false;
+		$options['change_login_url'] = ( 'on' == $options['change_login_url'] ? true : false );
+
+		if ( ! isset( $options['custom_login_slug'] ) ) $options['custom_login_slug'] = 'backend';
+		$options['custom_login_slug'] = ( ! empty( $options['custom_login_slug'] ) ) ? sanitize_text_field( $options['custom_login_slug'] ) : 'backend';
+
+		// Limit Login Attempts
+		if ( ! isset( $options['limit_login_attempts'] ) ) $options['limit_login_attempts'] = false;
+		$options['limit_login_attempts'] = ( 'on' == $options['limit_login_attempts'] ? true : false );
+
+		if ( ! isset( $options['login_fails_allowed'] ) ) $options['login_fails_allowed'] = 3;
+		$options['login_fails_allowed'] = ( ! empty( $options['login_fails_allowed'] ) ) ? sanitize_text_field( $options['login_fails_allowed'] ) : 3;
+
+		if ( ! isset( $options['login_lockout_maxcount'] ) ) $options['login_lockout_maxcount'] = 3;
+		$options['login_lockout_maxcount'] = ( ! empty( $options['login_lockout_maxcount'] ) ) ? sanitize_text_field( $options['login_lockout_maxcount'] ) : 3;
+
+		if ( ! isset( $options['login_attempts_log_table'] ) ) $options['login_attempts_log_table'] = '';
+		$options['login_attempts_log_table'] = '';
+		
+		// Obfuscate Author Slugs
+		if ( ! isset( $options['obfuscate_author_slugs'] ) ) $options['obfuscate_author_slugs'] = false;
+		$options['obfuscate_author_slugs'] = ( 'on' == $options['obfuscate_author_slugs'] ? true : false );
+
+		// Disable XML-RPC
+		if ( ! isset( $options['disable_xmlrpc'] ) ) $options['disable_xmlrpc'] = false;
+		$options['disable_xmlrpc'] = ( 'on' == $options['disable_xmlrpc'] ? true : false );
+
+		// =================================================================
+		// UTILITIES
+		// =================================================================
+
+		// Enable Login Logout Menu
+		if ( ! isset( $options['enable_login_logout_menu'] ) ) $options['enable_login_logout_menu'] = false;
+		$options['enable_login_logout_menu'] = ( 'on' == $options['enable_login_logout_menu'] ? true : false );
+
+		// Redirect After Login
+		if ( ! isset( $options['redirect_after_login'] ) ) $options['redirect_after_login'] = false;
+		$options['redirect_after_login'] = ( 'on' == $options['redirect_after_login'] ? true : false );
+
+		if ( ! isset( $options['redirect_after_login_to_slug'] ) ) $options['redirect_after_login_to_slug'] = '';
+		$options['redirect_after_login_to_slug'] = ( ! empty( $options['redirect_after_login_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_login_to_slug'] ) : '';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+				if ( ! isset( $options['redirect_after_login_for'][$role_slug] ) ) $options['redirect_after_login_for'][$role_slug] = false;
+				$options['redirect_after_login_for'][$role_slug] = ( 'on' == $options['redirect_after_login_for'][$role_slug] ? true : false );
+			}
+		}
+
+		// Redirect After Logout
+		if ( ! isset( $options['redirect_after_logout'] ) ) $options['redirect_after_logout'] = false;
+		$options['redirect_after_logout'] = ( 'on' == $options['redirect_after_logout'] ? true : false );
+
+		if ( ! isset( $options['redirect_after_logout_to_slug'] ) ) $options['redirect_after_logout_to_slug'] = '';
+		$options['redirect_after_logout_to_slug'] = ( ! empty( $options['redirect_after_logout_to_slug'] ) ) ? sanitize_text_field( $options['redirect_after_logout_to_slug'] ) : '';
+
+		if ( is_array( $roles ) ) {
+			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
+				if ( ! isset( $options['redirect_after_logout_for'][$role_slug] ) ) $options['redirect_after_logout_for'][$role_slug] = false;
+				$options['redirect_after_logout_for'][$role_slug] = ( 'on' == $options['redirect_after_logout_for'][$role_slug] ? true : false );
+			}
+		}
+
+		// Redirect 404 to Homepage
+		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
+		$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );
 
 		return $options;
 
