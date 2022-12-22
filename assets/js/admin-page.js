@@ -240,6 +240,7 @@
          headCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
          bodyCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
          footerCodeEditor.refresh(); // Insert <head>, <body> and <footer> code >> CodeMirror
+         robotsTxtEditor.refresh(); // Manage robots.txt >> CodeMirror
       });
 
       $('#tab-disable-components + label').click( function() {
