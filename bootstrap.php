@@ -227,12 +227,21 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Utilities >> Enable Login Logout Menu
+		// Enable Login Logout Menu
 
 		if ( array_key_exists( 'enable_login_logout_menu', $options ) && $options['enable_login_logout_menu'] ) {
 			add_action( 'admin_head-nav-menus.php', [ $login_logout, 'add_login_logout_metabox' ] );
 			add_filter( 'wp_setup_nav_menu_item', [ $login_logout, 'set_login_logout_menu_item_dynamic_url' ] );
 			add_filter( 'wp_nav_menu_objects', [ $login_logout, 'maybe_remove_login_or_logout_menu_item' ] );
+		}
+
+		// Enable Last Login Column
+
+		if ( array_key_exists( 'enable_last_login_column', $options ) && $options['enable_last_login_column'] ) {
+			add_action( 'wp_login', [ $login_logout, 'log_login_datetime' ] );
+			add_filter( 'manage_users_columns', [ $login_logout, 'add_last_login_column' ] );
+			add_filter( 'manage_users_custom_column', [ $login_logout, 'show_last_login_info' ], 10, 3 );
+			add_action( 'admin_print_styles-users.php', [ $login_logout, 'add_column_style' ] );			
 		}
 
 		// Redirect After Login

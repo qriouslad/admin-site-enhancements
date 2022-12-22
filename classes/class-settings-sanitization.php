@@ -174,6 +174,10 @@ class Settings_Sanitization {
 			}
 		}
 
+		// Enable Last Login Column
+		if ( ! isset( $options['enable_last_login_column'] ) ) $options['enable_last_login_column'] = false;
+		$options['enable_last_login_column'] = ( 'on' == $options['enable_last_login_column'] ? true : false );
+
 		// =================================================================
 		// CUSTOM CODE
 		// =================================================================

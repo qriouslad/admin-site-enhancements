@@ -81,6 +81,7 @@
       $('.change-login-url').appendTo('.fields-login-logout > table > tbody');
       $('.custom-login-slug').appendTo('.fields-login-logout .change-login-url .asenha-subfields');
       $('.enable-login-logout-menu').appendTo('.fields-login-logout > table > tbody');
+      $('.enable-last-login-column').appendTo('.fields-login-logout > table > tbody');
       $('.redirect-after-login').appendTo('.fields-login-logout > table > tbody');
       $('.redirect-after-login-to-slug').appendTo('.fields-login-logout .redirect-after-login .asenha-subfields');
       $('.redirect-after-login-for').appendTo('.fields-login-logout .redirect-after-login .asenha-subfields');

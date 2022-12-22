@@ -639,6 +639,28 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Enable Last Login Column
+
+		$field_id = 'enable_last_login_column';
+		$field_slug = 'enable-last-login-column';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Last Login Column', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Log when users on the site last logged in and display the date and time in the users list table.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle login-logout ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Redirect After Login
 
 		$field_id = 'redirect_after_login';
