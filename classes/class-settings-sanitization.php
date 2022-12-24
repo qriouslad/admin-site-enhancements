@@ -17,7 +17,7 @@ class Settings_Sanitization {
 	function sanitize_for_options( $options ) {
 
 		// Call WordPress globals required for validating the fields	
-		global $wp_roles, $asenha_public_post_types, $asenha_gutenberg_post_types;
+		global $wp_roles, $asenha_public_post_types, $asenha_gutenberg_post_types, $asenha_revisions_post_types;
 		$roles = $wp_roles->get_names();
 
 		// =================================================================
@@ -40,6 +40,20 @@ class Settings_Sanitization {
 			foreach ( $roles as $role_slug => $role_label ) { // e.g. $role_slug is administrator, $role_label is Administrator
 				if ( ! isset( $options['enable_svg_upload_for'][$role_slug] ) ) $options['enable_svg_upload_for'][$role_slug] = false;
 				$options['enable_svg_upload_for'][$role_slug] = ( 'on' == $options['enable_svg_upload_for'][$role_slug] ? true : false );
+			}
+		}
+
+		// Enable Revisions Control
+		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
+		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );
+
+		if ( ! isset( $options['revisions_max_number'] ) ) $options['revisions_max_number'] = 10;
+		$options['revisions_max_number'] = ( ! empty( $options['revisions_max_number'] ) ) ? sanitize_text_field( $options['revisions_max_number'] ) : 10;
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
+				if ( ! isset( $options['enable_revisions_control_for'][$post_type_slug] ) ) $options['enable_revisions_control_for'][$post_type_slug] = false;
+				$options['enable_revisions_control_for'][$post_type_slug] = ( 'on' == $options['enable_revisions_control_for'][$post_type_slug] ? true : false );
 			}
 		}
 

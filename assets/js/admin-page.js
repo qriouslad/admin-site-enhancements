@@ -53,6 +53,9 @@
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
+      $('.enable-revisions-control').appendTo('.fields-content-management > table > tbody');
+      $('.revisions-max-number').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
+      $('.enable-revisions-control-for').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
       $('.enable-missed-schedule-posts-auto-publish').appendTo('.fields-content-management > table > tbody');
       $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
@@ -292,6 +295,24 @@
          }
       });
 
+      // Enable Revisions Control => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_revisions_control]').checked ) {
+         $('.enable-revisions-control .asenha-subfields').show();
+         $('.asenha-toggle.enable-revisions-control td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-revisions-control .asenha-subfields').hide();        
+      }
+
+      // Enable SVG Upload => show/hide roles checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[enable_revisions_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-revisions-control .asenha-subfields').fadeIn();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-revisions-control .asenha-subfields').hide();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
 
       // Enhance List Tables => show/hide subfields on document ready
       if ( document.getElementById('admin_site_enhancements[enhance_list_tables]').checked ) {

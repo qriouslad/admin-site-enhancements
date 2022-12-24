@@ -47,7 +47,7 @@ class Settings_Sections_Fields {
 
 		// Call WordPress globals required for the fields
 
-		global $wp_roles, $wpdb, $asenha_public_post_types, $asenha_gutenberg_post_types;
+		global $wp_roles, $wpdb, $asenha_public_post_types, $asenha_gutenberg_post_types, $asenha_revisions_post_types;
 
 		$roles = $wp_roles->get_names();
 
@@ -69,6 +69,18 @@ class Settings_Sections_Fields {
 				unset( $asenha_gutenberg_post_types[$post_type_slug] );
 			}
 		}
+
+		// Get array of slugs and plural labels for post types supporting revisions, e.g. array( 'post' => 'Posts', 'page' => 'Pages' )
+		$asenha_revisions_post_types = array();
+		foreach ( get_post_types( array(), 'names' ) as $post_type_slug ) { // post type slug/name
+			if ( post_type_supports( $post_type_slug, 'revisions' ) ) {
+				$post_type_object = get_post_type_object( $post_type_slug );
+				if ( property_exists( $post_type_object, 'label' ) ) {
+					$asenha_revisions_post_types[$post_type_slug] = $post_type_object->label;
+				}
+			}
+		}
+
 
 		// =================================================================
 		// CONTENT MANAGEMENT
@@ -157,6 +169,71 @@ class Settings_Sections_Fields {
 					)
 				);
 
+			}
+		}
+
+		// Enable Revisions Control
+
+		$field_id = 'enable_revisions_control';
+		$field_slug = 'enable-revisions-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Revisions Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'revisions_max_number';
+		$field_slug = 'revisions-max-number';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Limit to', // Custom argument
+				'field_suffix'			=> 'revisions for:', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_revisions_control_for';
+		$field_slug = 'enable-revisions-control-for';
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				add_settings_field(
+					$field_id . '_' . $post_type_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $post_type_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+					)
+				);
 			}
 		}
 
