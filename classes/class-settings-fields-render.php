@@ -165,7 +165,7 @@ class Settings_Fields_Render {
 			$field_classname = '';		
 		}
 
-		if ( ( $field_id == 'head_code_priority' ) || ( $field_id == 'body_code_priority' ) || ( $field_id == 'footer_code_priority' ) ) {
+		if ( ( $field_id == 'revisions_max_number' ) || ( $field_id == 'head_code_priority' ) || ( $field_id == 'body_code_priority' ) || ( $field_id == 'footer_code_priority' ) ) {
 			$placeholder = '10';
 		} else {
 			$placeholder = '';

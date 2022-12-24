@@ -119,6 +119,11 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_prepare_attachment_for_js', [ $content_management, 'get_svg_url_in_media_library' ] );
 		}
 
+		// Enable Revisions Control
+		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
+			add_filter( 'wp_revisions_to_keep', [ $content_management, 'limit_revisions_to_max_number' ], 10, 2 );
+		}
+
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
 			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
