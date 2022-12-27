@@ -51,6 +51,7 @@ function asenha_add_settings_page() {
 					    <input id="tab-custom-code" type="radio" name="tabs"><label for="tab-custom-code">Custom Code</label>
 					    <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components">Disable Components</label>
 					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
+					    <input id="tab-optimizations" type="radio" name="tabs"><label for="tab-optimizations">Optimizations</label>
 					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities">Utilities</label>
 					</div>
 					<div class="asenha-tab-contents">
@@ -80,6 +81,11 @@ function asenha_add_settings_page() {
 					    	</table>
 					    </section>
 					    <section class="asenha-fields fields-security"> 
+					    	<table class="form-table" role="presentation">
+					    		<tbody></tbody>
+					    	</table>
+					    </section>
+					    <section class="asenha-fields fields-optimizations"> 
 					    	<table class="form-table" role="presentation">
 					    		<tbody></tbody>
 					    	</table>

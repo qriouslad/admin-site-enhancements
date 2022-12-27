@@ -127,6 +127,15 @@
       $('.obfuscate-author-slugs').appendTo('.fields-security > table > tbody');
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
+      // Place fields into "Optimizations" tab
+      $('.enable-heartbeat-control').appendTo('.fields-optimizations > table > tbody');
+      $('.heartbeat-control-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+      $('.heartbeat-interval-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+      $('.heartbeat-control-for-post-edit').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+      $('.heartbeat-interval-for-post-edit').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+      $('.heartbeat-control-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+      $('.heartbeat-interval-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
+
       // Place fields into "Utilities" tab
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
 
@@ -258,6 +267,13 @@
          $('.asenha-fields:not(.fields-security)').hide();
          window.location.hash = 'security';
          Cookies.set('asenha_tab', 'security', { expires: 1 }); // expires in 1 day
+      });
+
+      $('#tab-optimizations + label').click( function() {
+         $('.fields-optimizations').show();
+         $('.asenha-fields:not(.fields-optimizations)').hide();
+         window.location.hash = 'optimizations';
+         Cookies.set('asenha_tab', 'optimizations', { expires: 1 }); // expires in 1 day
       });
 
       $('#tab-utilities + label').click( function() {
@@ -615,6 +631,62 @@
          } else {
             $('.insert-head-body-footer-code .asenha-subfields').hide();
             $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Heartbeat Control => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_heartbeat_control]').checked ) {
+         $('.enable-heartbeat-control .asenha-subfields').show();
+         $('.asenha-toggle.enable-heartbeat-control td .asenha-field-with-options').addClass('is-enabled');
+      } else {
+         $('.enable-heartbeat-control .asenha-subfields').hide();        
+      }
+
+      // Enable Heartbeat Control => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[enable_heartbeat_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-heartbeat-control .asenha-subfields').fadeIn();
+            $('.enable-heartbeat-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-heartbeat-control .asenha-subfields').hide();
+            $('.enable-heartbeat-control .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Heartbeat Control => Check if "Modify interval" is chosen/clicked and show/hide the corresponding select field
+      if ( $('input[name="admin_site_enhancements[heartbeat_control_for_admin_pages]"]:checked').val() == 'modify' ) {
+         $('.heartbeat-interval-for-admin-pages .asenha-subfield-select-inner').show();
+      }
+      $('input[name="admin_site_enhancements[heartbeat_control_for_admin_pages]"]').click(function() {
+         var radioValue = $(this).attr('value');
+         if ( radioValue == 'modify' ) {
+            $('.heartbeat-interval-for-admin-pages .asenha-subfield-select-inner').show();
+         } else {
+            $('.heartbeat-interval-for-admin-pages .asenha-subfield-select-inner').hide();            
+         }
+      });
+
+      if ( $('input[name="admin_site_enhancements[heartbeat_control_for_post_edit]"]:checked').val() == 'modify' ) {
+         $('.heartbeat-interval-for-post-edit .asenha-subfield-select-inner').show();
+      }
+      $('input[name="admin_site_enhancements[heartbeat_control_for_post_edit]"]').click(function() {
+         var radioValue = $(this).attr('value');
+         if ( radioValue == 'modify' ) {
+            $('.heartbeat-interval-for-post-edit .asenha-subfield-select-inner').show();
+         } else {
+            $('.heartbeat-interval-for-post-edit .asenha-subfield-select-inner').hide();            
+         }
+      });
+
+      if ( $('input[name="admin_site_enhancements[heartbeat_control_for_frontend]"]:checked').val() == 'modify' ) {
+         $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').show();
+      }
+      $('input[name="admin_site_enhancements[heartbeat_control_for_frontend]"]').click(function() {
+         var radioValue = $(this).attr('value');
+         if ( radioValue == 'modify' ) {
+            $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').show();
+         } else {
+            $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').hide();            
          }
       });
 

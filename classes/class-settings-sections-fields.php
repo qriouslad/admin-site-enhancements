@@ -1490,6 +1490,196 @@ class Settings_Sections_Fields {
 		);
 
 		// =================================================================
+		// OPTIMIZATIONS
+		// =================================================================
+
+		// Enable Heartbeat Control
+
+		$field_id = 'enable_heartbeat_control';
+		$field_slug = 'enable-heartbeat-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Heartbeat Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'heartbeat_control_for_admin_pages';
+		$field_slug = 'heartbeat-control-for-admin-pages';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'On admin pages', // Field title
+			[ $render_field, 'render_radio_buttons_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				// 'field_label'			=> 'Temporary label', // Custom argument
+				'field_radios'			=> array(
+					'Keep as is'	=> 'default',
+					'Modify'		=> 'modify',
+					'Disable'		=> 'disable',
+				),
+				'field_default'			=> 'default',
+				'class'					=> 'asenha-radio-buttons optimizations ' . $field_slug, // Custom class for the <tr> element
+			),
+		);
+
+		$field_id = 'heartbeat_interval_for_admin_pages';
+		$field_slug = 'heartbeat-interval-for-admin-pages';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_select_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Set interval to once every', // Custom argument
+				'field_suffix'			=> '<span class="faded">(Default is 1 minute)</span>', // Custom argument
+				'field_select_options'	=> array(
+					'15 seconds'	=> 15,
+					'30 seconds'	=> 30,
+					'1 minute'		=> 60,
+					'2 minutes'		=> 120,
+					'3 minutes'		=> 180,
+					'5 minutes'		=> 300,
+					'10 minutes'	=> 600,
+				),
+				'field_select_default'	=> 60,
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow shift-up optimizations ' . $field_slug, // Custom class for the <tr> element
+				'display_none_on_load'	=> true,
+			)
+		);
+
+		$field_id = 'heartbeat_control_for_post_edit';
+		$field_slug = 'heartbeat-control-for-post-edit';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'On post creation and edit screens', // Field title
+			[ $render_field, 'render_radio_buttons_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				// 'field_label'			=> 'Temporary label', // Custom argument
+				'field_radios'			=> array(
+					'Keep as is'	=> 'default',
+					'Modify'		=> 'modify',
+					'Disable'		=> 'disable',
+				),
+				'field_default'			=> 'default',
+				'class'					=> 'asenha-radio-buttons optimizations top-border ' . $field_slug, // Custom class for the <tr> element
+			),
+		);
+
+		$field_id = 'heartbeat_interval_for_post_edit';
+		$field_slug = 'heartbeat-interval-for-post-edit';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_select_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Set interval to once every', // Custom argument
+				'field_suffix'			=> '<span class="faded">(Default is 15 seconds)</span>', // Custom argument
+				'field_select_options'	=> array( 
+					'15 seconds'	=> 15,
+					'30 seconds'	=> 30, 
+					'45 seconds'	=> 45, 
+					'60 seconds'	=> 60, 
+					'90 seconds'	=> 90, 
+					'120 seconds'	=> 120 
+				),
+				'field_select_default'	=> 15,
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow shift-up optimizations ' . $field_slug, // Custom class for the <tr> element
+				'display_none_on_load'	=> true,
+			)
+		);
+
+		$field_id = 'heartbeat_control_for_frontend';
+		$field_slug = 'heartbeat-control-for-frontend';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'On the frontend', // Field title
+			[ $render_field, 'render_radio_buttons_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				// 'field_label'			=> 'Temporary label', // Custom argument
+				'field_radios'			=> array(
+					'Keep as is'	=> 'default',
+					'Modify'		=> 'modify',
+					'Disable'		=> 'disable',
+				),
+				'field_default'			=> 'default',
+				'class'					=> 'asenha-radio-buttons optimizations top-border ' . $field_slug, // Custom class for the <tr> element
+			),
+		);
+
+		$field_id = 'heartbeat_interval_for_frontend';
+		$field_slug = 'heartbeat-interval-for-frontend';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_select_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Set interval to once every', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_select_options'	=> array( 
+					'15 seconds'	=> 15,
+					'30 seconds'	=> 30,
+					'1 minute'		=> 60,
+					'2 minutes'		=> 120,
+					'3 minutes'		=> 180,
+					'5 minutes'		=> 300,
+					'10 minutes'	=> 600,
+				),
+				'field_select_default'	=> 60,
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow shift-up optimizations ' . $field_slug, // Custom class for the <tr> element
+				'display_none_on_load'	=> true,
+			)
+		);
+
+		// =================================================================
 		// UTILITIES
 		// =================================================================
 
