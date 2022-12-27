@@ -409,6 +409,22 @@ class Admin_Site_Enhancements {
 		}
 
 		// =================================================================
+		// OPTIMIZATIONS
+		// =================================================================
+
+		// global $pagenow;
+		// do_action( 'inspect', [ 'pagenow', $pagenow, __FILE__, __LINE__ ] );
+
+		// Instantiate object for Optimizations features
+		$optimizations = new ASENHA\Classes\Optimizations;
+
+		if ( array_key_exists( 'enable_heartbeat_control', $options ) && $options['enable_heartbeat_control'] ) {
+			add_filter( 'heartbeat_settings', [ $optimizations, 'maybe_modify_heartbeat_frequency' ], 99, 2 );
+			add_action( 'admin_enqueue_scripts', [ $optimizations, 'maybe_disable_heartbeat' ], 99 );
+			add_action( 'wp_enqueue_scripts', [ $optimizations, 'maybe_disable_heartbeat' ], 99 );
+		}
+
+		// =================================================================
 		// UTILITIES
 		// =================================================================
 

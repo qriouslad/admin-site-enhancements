@@ -92,6 +92,33 @@ class Settings_Fields_Render {
 	}
 
 	/**
+	 * Render radio buttons field as sub-field of a toggle/switcher checkbox
+	 *
+	 * @since 1.3.0
+	 */
+	function render_radio_buttons_subfield( $args ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		$field_id = $args['field_id'];
+		$field_name = $args['field_name'];
+		// $field_label = $args['field_label'];
+		$field_radios = $args['field_radios'];
+		if ( ! empty( $args['field_default'] ) ) {
+			$default_value = $args['field_default'];
+		} else {
+			$default_value = false;
+		}
+		$field_option_value = ( isset( $options[$field_id] ) ) ? $options[$field_id] : $default_value;
+
+		foreach ( $field_radios as $radio_label => $radio_value ) {
+			echo '<input type="radio" id="' . esc_attr( $field_id . '_' . $radio_value ) . '" class="asenha-subfield-radio-button" name="' . esc_attr( $field_name ) . '" value="' . $radio_value . '" ' . checked( $radio_value, $field_option_value, false ) . '>';
+			echo '<label for="' . esc_attr( $field_id . '_' . $radio_value ) . '" class="asenha-subfield-radio-button-label">' . wp_kses_post( $radio_label ) . '</label>';
+		}
+
+	}
+
+	/**
 	 * Render text field as sub-field of a toggle/switcher checkbox
 	 *
 	 * @since 1.4.0
@@ -181,6 +208,71 @@ class Settings_Fields_Render {
 
 		if ( ! empty( $field_description ) ) {
 			echo '<div class="asenha-subfield-number-description">' . wp_kses_post( $field_description ) . '</div>';
+		}
+
+		echo '</div>';
+
+	}
+
+	/**
+	 * Render select field as sub-field of a toggle/switcher checkbox
+	 *
+	 * @since 1.4.0
+	 */
+	function render_select_subfield( $args ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		$field_id = $args['field_id'];
+		$field_name = $args['field_name'];
+		$field_type = $args['field_type'];
+		$field_prefix = $args['field_prefix'];
+		$field_suffix = $args['field_suffix'];
+		$field_select_options = $args['field_select_options'];
+		$field_select_default = $args['field_select_default'];
+		$field_intro = $args['field_intro'];
+		$field_description = $args['field_description'];
+		if ( ! empty( $args['field_select_default'] ) ) {
+			$default_value = $args['field_select_default'];
+		} else {
+			$default_value = false;
+		}
+		$field_option_value = ( isset( $options[$field_id] ) ) ? $options[$field_id] : $default_value;
+
+		if ( ! empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix with-suffix';
+		} elseif ( ! empty( $field_prefix ) && empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix';
+		} elseif ( empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-suffix';
+		} else {
+			$field_classname = '';		
+		}
+
+		if ( $args['display_none_on_load'] ) {
+			$inline_style = ' style="display:none;"';
+		} else {
+			$inline_style = '';
+		}
+
+		echo '<div class="asenha-subfield-select-wrapper">';
+
+		if ( ! empty( $field_intro ) ) {
+			echo '<div class="asenha-subfield-select-intro">' . wp_kses_post( $field_intro ) . '</div>';
+		}
+
+		echo '<div' . $inline_style . ' class="asenha-subfield-select-inner">' . $field_prefix;
+		echo '<select name="' . $field_name . '" class="asenha-subfield-select' . esc_attr( $field_classname ) . '">';
+
+		foreach ( $field_select_options as $label => $value ) {
+			echo '<option value="' . $value . '" ' . selected( $value, $field_option_value, false ) . '>' . $label . '</option>';
+		}
+
+		echo '</select>';
+		echo $field_suffix . '</div>';
+
+		if ( ! empty( $field_description ) ) {
+			echo '<div class="asenha-subfield-select-description">' . wp_kses_post( $field_description ) . '</div>';
 		}
 
 		echo '</div>';

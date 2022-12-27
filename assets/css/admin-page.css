@@ -155,6 +155,10 @@
     align-items: flex-start;
 }
 
+.form-table .asenha-toggle .asenha-radio-buttons > td:not(.datatable-td) {
+    align-items: center;
+}
+
 :root {
   --toggleHeight: 22px;
   --toggleWidth: 40px;
@@ -344,6 +348,10 @@
     width: 50%;
 }
 
+.form-table .asenha-toggle .asenha-field-with-options th:not(.datatable-th) {
+    padding: 0 0 10px 0;
+}
+
 .form-table .asenha-subfields tr.asenha-hide-th th:not(.datatable-th) {
     display: none;
 }
@@ -353,6 +361,10 @@
     border-top: 1px solid #eee;
 }
 
+.form-table .asenha-subfields th {
+    width: 100%
+}
+
 .form-table .asenha-subfields td:not(.datatable-td) {
     padding: 0;
 }
@@ -360,6 +372,10 @@
 .form-table .asenha-subfields td:not(.datatable-td) label {
     position: relative;
     top: -2px;
+}
+
+.form-table .asenha-subfields .asenha-radio-buttons td:not(.datatable-td) label {
+    margin-right: 12px;
 }
 
 .asenha-subfields .vspacer {
@@ -430,17 +446,20 @@
 }
 
 .asenha-subfield-text.with-prefix.with-suffix,
-.asenha-subfield-number.with-prefix.with-suffix {
+.asenha-subfield-number.with-prefix.with-suffix,
+.asenha-subfield-select.with-prefix.with-suffix {
     margin: 0 4px;
 }
 
 .asenha-subfield-text.with-prefix,
-.asenha-subfield-number.with-prefix {
+.asenha-subfield-number.with-prefix,
+.asenha-subfield-select.with-prefix {
     margin: 0 0 0 4px;
 }
 
 .asenha-subfield-text.with-suffix,
-.asenha-subfield-number.with-suffix {
+.asenha-subfield-number.with-suffix,
+.asenha-subfield-select.with-suffix {
     margin: 0 4px 0 0;
 }
 
@@ -456,6 +475,16 @@
     width: 54px;
 }
 
+.form-table .asenha-subfields tr:not(.datatable-tr).shift-up {
+    margin-top: -4px;
+}
+
+.form-table .asenha-subfields tr:not(.datatable-tr).top-border {
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+}
+
+.asenha-subfields .faded,
 .form-table .asenha-subfields td:not(.datatable-td) label .faded {
     color: #bbb;
 }

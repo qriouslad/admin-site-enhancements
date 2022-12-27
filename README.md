@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.7.0  
+Stable tag: 3.8.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -75,6 +75,10 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Obfuscate Author Slugs**. Obfuscate publicly exposed author page URLs that shows the user slugs / usernames, e.g. _sitename.com/author/username1/_ into _sitename.com/author/a6r5b8ytu9gp34bv/_, and output 404 errors for the original URLs. Also obfuscates in _/wp-json/wp/v2/users/_ REST API endpoint.
 * **Disable XML-RPC**. Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks and pingbacks.
 
+### Optimizations
+
+* **Enable Heartbeat Control**. Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.
+
 ### Utilities
 
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
@@ -110,8 +114,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
    ![Disable Components](.wordpress-org/screenshot-5.png)
 6. Security
    ![Security](.wordpress-org/screenshot-6.png)
-7. Utilities
-   ![Utilities](.wordpress-org/screenshot-7.png)
+7. Optimizations
+   ![Optimizations](.wordpress-org/screenshot-7.png)
+8. Utilities
+   ![Utilities](.wordpress-org/screenshot-8.png)
 
 ## Frequently Asked Questions
 
@@ -120,6 +126,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.8.0 (2022.12.27)
+
+* **[ADDED] Optimizations >> Enable Heartbeat Control**. Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.
 
 ### 3.7.0 (2022.12.25)
 

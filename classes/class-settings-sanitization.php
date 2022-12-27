@@ -312,6 +312,27 @@ class Settings_Sanitization {
 		$options['disable_xmlrpc'] = ( 'on' == $options['disable_xmlrpc'] ? true : false );
 
 		// =================================================================
+		// OPTIMIZATIONS
+		// =================================================================
+
+		// Enable Heartbeat Control
+		if ( ! isset( $options['enable_heartbeat_control'] ) ) $options['enable_heartbeat_control'] = false;
+		$options['enable_heartbeat_control'] = ( 'on' == $options['enable_heartbeat_control'] ? true : false );
+
+		if ( ! isset( $options['heartbeat_control_for_admin_pages'] ) ) $options['enable_heartbeat_control'] = 'default';
+		if ( ! isset( $options['heartbeat_control_for_post_edit'] ) ) $options['heartbeat_control_for_post_edit'] = 'default';
+		if ( ! isset( $options['heartbeat_control_for_frontend'] ) ) $options['heartbeat_control_for_frontend'] = 'default';
+
+		if ( ! isset( $options['heartbeat_interval_for_admin_pages'] ) ) $options['heartbeat_interval_for_admin_pages'] = 60;
+		$options['heartbeat_interval_for_admin_pages'] = ( ! empty( $options['heartbeat_interval_for_admin_pages'] ) ) ? sanitize_text_field( $options['heartbeat_interval_for_admin_pages'] ) : 60;
+
+		if ( ! isset( $options['heartbeat_interval_for_post_edit'] ) ) $options['heartbeat_interval_for_post_edit'] = 15;
+		$options['heartbeat_interval_for_post_edit'] = ( ! empty( $options['heartbeat_interval_for_post_edit'] ) ) ? sanitize_text_field( $options['heartbeat_interval_for_post_edit'] ) : 15;
+
+		if ( ! isset( $options['heartbeat_interval_for_frontend'] ) ) $options['heartbeat_interval_for_frontend'] = 60;
+		$options['heartbeat_interval_for_frontend'] = ( ! empty( $options['heartbeat_interval_for_frontend'] ) ) ? sanitize_text_field( $options['heartbeat_interval_for_frontend'] ) : 60;
+
+		// =================================================================
 		// UTILITIES
 		// =================================================================
 
