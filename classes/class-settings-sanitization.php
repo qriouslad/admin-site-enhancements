@@ -43,6 +43,17 @@ class Settings_Sanitization {
 			}
 		}
 
+		// Enable External Permalinks
+		if ( ! isset( $options['enable_external_permalinks'] ) ) $options['enable_external_permalinks'] = false;
+		$options['enable_external_permalinks'] = ( 'on' == $options['enable_external_permalinks'] ? true : false );
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( ! isset( $options['enable_external_permalinks_for'][$post_type_slug] ) ) $options['enable_external_permalinks_for'][$post_type_slug] = false;
+				$options['enable_external_permalinks_for'][$post_type_slug] = ( 'on' == $options['enable_external_permalinks_for'][$post_type_slug] ? true : false );
+			}
+		}
+
 		// Enable Revisions Control
 		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
 		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );

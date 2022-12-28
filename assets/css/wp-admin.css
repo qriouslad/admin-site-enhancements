@@ -7,3 +7,12 @@
 .accordion-section #login-logout-links-checklist.categorychecklist {
 	margin: -13px 0 13px 0;
 }
+
+/* Content Management >> Enable External Permalink */
+.external-permalink-input {
+	padding: 8px 0 0;
+}
+
+.external-permalink-input-description {
+	margin-top: 4px;
+}

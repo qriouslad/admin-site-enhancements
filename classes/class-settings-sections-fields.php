@@ -172,6 +172,52 @@ class Settings_Sections_Fields {
 			}
 		}
 
+		// Enable External Permalinks
+
+		$field_id = 'enable_external_permalinks';
+		$field_slug = 'enable-external-permalinks';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable External Permalinks', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using <a href="https://wordpress.org/plugins/page-links-to/" target="_blank">Page Links To</a>.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_external_permalinks_for';
+		$field_slug = 'enable-external-permalinks-for';
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( 'attachment' != $post_type_slug ) {
+					add_settings_field(
+						$field_id . '_' . $post_type_slug, // Field ID
+						'', // Field title
+						[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+						ASENHA_SLUG, // Settings page slug
+						'main-section', // Section ID
+						array(
+							'parent_field_id'		=> $field_id, // Custom argument
+							'field_id'				=> $post_type_slug, // Custom argument
+							'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+							'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+							'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+						)
+					);
+				}
+			}
+		}
+
 		// Enable Revisions Control
 
 		$field_id = 'enable_revisions_control';
