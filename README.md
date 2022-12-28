@@ -5,14 +5,14 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.8.0  
+Stable tag: 3.9.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate page / post, replace media, hide login, hide admin notices, hide admin bar, login / logout / 404 redirect, and more in a single plugin.
+Duplicate post, replace media, admin menu editor, custom css / code, disable gutenberg, heartbeat control and more in a single plugin.
 
 ## Description
 
@@ -23,6 +23,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Enable Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
 * **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
 * **Enable SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
+* **Enable External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
 * **Enable Revisions Control**. Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.
 * **Enable Auto-Publishing of Posts with Missed Schedule**. Trigger publishing of scheduled posts of all types marked with "missed schedule", anytime the site is visited.
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
@@ -58,8 +59,8 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **Enable Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
 * **Enable Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
-* **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily edit and validate your ads.txt and app-ads.txt content.
-* **Manage ads.txt and app-ads.txt**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
+* **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
+* **Manage ads.txt and app-ads.txt**. Easily edit and validate your ads.txt and app-ads.txt content.
 * **Manage robots.txt**. Easily edit and validate your robots.txt content.
 
 ### Disable Components
@@ -126,6 +127,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.9.0 (2022.12.29)
+
+* **[ADDED] Content Management >> Enable External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
 
 ### 3.8.0 (2022.12.27)
 

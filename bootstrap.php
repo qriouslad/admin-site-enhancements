@@ -57,6 +57,9 @@ class Admin_Site_Enhancements {
 		// Enqueue admin scripts and styles only on the plugin's main page
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
 
+		// Enqueue public scripts and styles
+		add_action( 'wp_enqueue_scripts', 'asenha_public_scripts' );
+
 		// Add action links in plugins page
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
@@ -117,6 +120,22 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_generate_attachment_metadata', [ $content_management, 'generate_svg_metadata' ], 10, 3 );
 			add_action( 'wp_ajax_svg_get_attachment_url', [ $content_management, 'get_svg_attachment_url' ] );
 			add_filter( 'wp_prepare_attachment_for_js', [ $content_management, 'get_svg_url_in_media_library' ] );
+		}
+
+		// Enable External Permalinks
+		if ( array_key_exists( 'enable_external_permalinks', $options ) && $options['enable_external_permalinks'] ) {
+			if ( array_key_exists( 'enable_external_permalinks_for', $options ) && ! empty( $options['enable_external_permalinks_for'] ) )  {
+				add_action( 'add_meta_boxes', [ $content_management, 'add_external_permalink_meta_box' ], 10, 2 );
+				add_action( 'save_post', [ $content_management, 'save_external_permalink' ] );
+
+				// Filter the permalink for use by get_permalink()
+				add_filter( 'page_link', [ $content_management, 'use_external_permalink_for_pages' ], 20, 2 );
+				add_filter( 'post_link', [ $content_management, 'use_external_permalink_for_posts' ], 20, 2 );
+				add_filter( 'post_type_link', [ $content_management, 'use_external_permalink_for_posts' ], 20, 2 );
+
+				// Enable redirection to external permalink when page/post is opened directly via it's WP permalink
+				add_action( 'wp', [ $content_management, 'redirect_to_external_permalink' ] );
+			}
 		}
 
 		// Enable Revisions Control

@@ -288,6 +288,32 @@ function asenha_admin_scripts( $hook_suffix ) {
 }
 
 /**
+ * Enqueue public scripts
+ *
+ * @since 3.9.0
+ */
+function asenha_public_scripts( $hook_suffix ) {
+
+	// Get all WP Enhancements options, default to empty array in case it's not been created yet
+	$options = get_option( 'admin_site_enhancements', array() );
+	if ( array_key_exists( 'enable_external_permalinks', $options ) ) {
+		$enable_external_permalinks = $options['enable_external_permalinks'];
+	} else {
+		$enable_external_permalinks = false;
+	}
+
+	wp_enqueue_script( 'asenha-public', ASENHA_URL . 'assets/js/public.js', array( 'jquery' ), ASENHA_VERSION, false  );
+	wp_localize_script( 
+		'asenha-public', 
+		'phpVars',
+		array(
+			'externalPermalinksEnabled' => $enable_external_permalinks,
+		)
+	);
+
+}
+
+/**
  * Add 'Access now' plugin action link.
  *
  * @since    1.0.0

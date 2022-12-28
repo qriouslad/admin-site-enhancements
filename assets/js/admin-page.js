@@ -53,6 +53,8 @@
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
+      $('.enable-external-permalinks').appendTo('.fields-content-management > table > tbody');
+      $('.enable-external-permalinks-for').appendTo('.fields-content-management .enable-external-permalinks .asenha-subfields');
       $('.enable-revisions-control').appendTo('.fields-content-management > table > tbody');
       $('.revisions-max-number').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
       $('.enable-revisions-control-for').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
@@ -308,6 +310,25 @@
          } else {
             $('.enable-svg-upload .asenha-subfields').hide();
             $('.enable-svg-upload .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable External Permalinks => show/hide post types checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_external_permalinks]').checked ) {
+         $('.enable-external-permalinks .asenha-subfields').show();
+         $('.asenha-toggle.enable-external-permalinks td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-external-permalinks .asenha-subfields').hide();        
+      }
+
+      // Enable External Permalinks => show/hide post types checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[enable_external_permalinks]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-external-permalinks .asenha-subfields').fadeIn();
+            $('.enable-external-permalinks .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-external-permalinks .asenha-subfields').hide();
+            $('.enable-external-permalinks .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 
