@@ -19,7 +19,6 @@ class Optimizations {
 	public function maybe_modify_heartbeat_frequency( $settings ) {
 
 		$this->get_url_path(); // defines $current_url_path
-		do_action( 'inspect', [ 'current_location_inner', $this->current_url_path, __FILE__, __LINE__ ] );
 
 		$options = get_option( ASENHA_SLUG_U, array() );
 
