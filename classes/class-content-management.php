@@ -1034,8 +1034,10 @@ class Content_Management {
 
 		$external_permalink = get_post_meta( $post->ID, '_links_to', true );
 
-		wp_redirect( $external_permalink, 302 ); // temporary redirect
-		exit;
+		if ( ! empty( $external_permalink ) ) {
+			wp_redirect( $external_permalink, 302 ); // temporary redirect
+			exit;
+		}
 
 	}
 
