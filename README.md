@@ -128,6 +128,10 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 3.9.1 (2022.12.29)
+
+* **[FIXED] Content Management >> Enable External Permalinks**. Fixed an issue where default WordPress permalink for a post loads white, empty screen when no external permalink has been set for the post.
+
 ### 3.9.0 (2022.12.29)
 
 * **[ADDED] Content Management >> Enable External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
