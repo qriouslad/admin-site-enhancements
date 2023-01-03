@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 3.9.0  
+Stable tag: 3.9.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -127,6 +127,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 3.9.2 (2023.01.03)
+
+* **[FIXED] Custom Code >> Manage robots.txt**. Fixed ["Undefined variable" issue](https://wordpress.org/support/topic/undefine-variable-field_option_value/) reported by [kwbrayton](https://profiles.wordpress.org/kwbrayton/). Also make this feature work on scenarios where an actual robots.txt file exists, not just the virtual one created by default, by WordPress. In such case, the robots.txt file will be renamed to robots_txt_backup_{timestamp}.txt when this feature is enabled. Vice versa, when the feature is disabled, the backup file will be renamed back to robots.txt, so it will be in use again as it were.
 
 ### 3.9.1 (2022.12.29)
 
