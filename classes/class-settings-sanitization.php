@@ -235,8 +235,31 @@ class Settings_Sanitization {
 		if ( ! isset( $options['manage_robots_txt'] ) ) $options['manage_robots_txt'] = false;
 		$options['manage_robots_txt'] = ( 'on' == $options['manage_robots_txt'] ? true : false );
 
-		if ( ! isset( $options['robots_txt_content'] ) ) $options['robots_txt_content'] = '';
-		$options['robots_txt_content'] = ( ! empty( $options['robots_txt_content'] ) ) ? $options['robots_txt_content'] : '';
+		if ( ! isset( $options['robots_txt_content'] ) ) { 
+			$options['robots_txt_content'] = '';
+		} else {
+			if ( ! empty( $options['robots_txt_content'] ) ) {
+				$options['robots_txt_content'] = $options['robots_txt_content'];
+				$is_robots_txt_real_file = is_file( ABSPATH . 'robots.txt' );
+				// rename real robots.txt file if it exists and Mange robots.txt is enabled
+				if ( $is_robots_txt_real_file && ( 'on' == $options['manage_robots_txt'] ) ) {
+					$robots_txt_backup_filename = 'robots_backup_' . date('Y_m_d__H_i', time()) . '.txt';
+					$extra_options = get_option( ASENHA_SLUG_U . '_extra', array() );
+					$extra_options['robots_txt_backup_file_name'] = $robots_txt_backup_filename;
+					update_option( ASENHA_SLUG_U. '_extra', $extra_options );
+					rename( ABSPATH . 'robots.txt', ABSPATH . $robots_txt_backup_filename );
+				} elseif (  'on' != $options['manage_robots_txt'] ) {
+					$extra_options = get_option( ASENHA_SLUG_U. '_extra', array() );
+					if ( array_key_exists( 'robots_txt_backup_file_name', $extra_options ) ) {
+						if ( is_file( ABSPATH . $extra_options['robots_txt_backup_file_name'] ) ) {
+							rename( ABSPATH . $extra_options['robots_txt_backup_file_name'], ABSPATH . 'robots.txt' );
+						}
+					}
+				}
+			} else {
+				$options['robots_txt_content'] = '';
+			}
+		}
 
 		// Insert <head>, <body> and <footer> code
 		if ( ! isset( $options['insert_head_body_footer_code'] ) ) $options['insert_head_body_footer_code'] = false;
