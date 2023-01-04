@@ -1406,6 +1406,28 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Disable Auto Updates
+
+		$field_id = 'disable_all_updates';
+		$field_slug = 'disable-all-updates';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable All Updates', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Completely disable core, theme and plugin updates and auto-updates. Will also prevent update checks, notices and emails.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// =================================================================
 		// SECURITY
 		// =================================================================

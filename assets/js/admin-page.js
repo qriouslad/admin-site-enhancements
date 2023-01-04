@@ -120,6 +120,7 @@
       $('.disable-comments-for').appendTo('.fields-disable-components .disable-comments .asenha-subfields');
       $('.disable-rest-api').appendTo('.fields-disable-components > table > tbody');
       $('.disable-feeds').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-all-updates').appendTo('.fields-disable-components > table > tbody');
 
       // Place fields into "Security" tab
       $('.limit-login-attempts').appendTo('.fields-security > table > tbody');

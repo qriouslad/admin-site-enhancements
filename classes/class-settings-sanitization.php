@@ -320,6 +320,10 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_feeds'] ) ) $options['disable_feeds'] = false;
 		$options['disable_feeds'] = ( 'on' == $options['disable_feeds'] ? true : false );
 
+		// Disable Auto Updates
+		if ( ! isset( $options['disable_all_updates'] ) ) $options['disable_all_updates'] = false;
+		$options['disable_all_updates'] = ( 'on' == $options['disable_all_updates'] ? true : false );
+
 		// =================================================================
 		// SECURITY
 		// =================================================================
