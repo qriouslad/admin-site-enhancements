@@ -853,9 +853,9 @@ class Content_Management {
 			$svg_url_path = str_replace( wp_upload_dir()['baseurl'] .'/' , '', $svg_url );
 			$metadata['file'] = $svg_url_path;
 
-			return $metadata;
-
 		}
+
+		return $metadata;
 
 	}
 
