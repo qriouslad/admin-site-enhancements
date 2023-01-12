@@ -1421,7 +1421,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Completely disable core, theme and plugin updates and auto-updates. Will also prevent update checks, notices and emails.', // Custom argument
+				'field_description'		=> 'Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element

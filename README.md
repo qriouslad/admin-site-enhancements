@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.0.0  
+Stable tag: 4.0.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,7 +69,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Disable Comments**. Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
 * **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
 * **Disable Feeds**. Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
-* **Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates in WordPress. Will also prevent update checks, notices and emails..
+* **Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
 
 ### Security
 
@@ -129,10 +129,13 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.0.1 (2023.01.12)
+
+* **[FIXED] Content Management >> Enable SVG Upload**: Fixed a bug where uploaded, non-SVG media files does not have metadata generated when Enable SVG Upload is enabled.
+
 ### 4.0.0 (2023.01.04)
 
-* **[ADDED] Disable Components >> Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates in WordPress. Will also prevent update checks, notices and emails..
-
+* **[ADDED] Disable Components >> Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
 
 ### 3.9.2 (2023.01.03)
 
