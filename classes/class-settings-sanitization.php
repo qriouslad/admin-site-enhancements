@@ -374,6 +374,13 @@ class Settings_Sanitization {
 		// UTILITIES
 		// =================================================================
 
+		// Enable Password Protection
+		if ( ! isset( $options['enable_password_protection'] ) ) $options['enable_password_protection'] = false;
+		$options['enable_password_protection'] = ( 'on' == $options['enable_password_protection'] ? true : false );
+
+		if ( ! isset( $options['password_protection_password'] ) ) $options['password_protection_password'] = base64_encode('secret');
+		$options['password_protection_password'] = ( ! empty( $options['password_protection_password'] ) ) ? base64_encode( $options['password_protection_password'] ) : base64_encode('secret');
+
 		// Redirect 404 to Homepage
 		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
 		$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );

@@ -480,9 +480,6 @@ class Admin_Site_Enhancements {
 		// OPTIMIZATIONS
 		// =================================================================
 
-		// global $pagenow;
-		// do_action( 'inspect', [ 'pagenow', $pagenow, __FILE__, __LINE__ ] );
-
 		// Instantiate object for Optimizations features
 		$optimizations = new ASENHA\Classes\Optimizations;
 
@@ -498,6 +495,18 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
+
+		// Enable Password Protection
+		if ( array_key_exists( 'enable_password_protection', $options ) && $options['enable_password_protection'] ) {
+			add_action( 'plugins_loaded', [ $utilities, 'show_admin_bar_icon' ] );
+			add_action( 'init', [ $utilities, 'maybe_disable_page_caching' ], 1 );
+			add_action( 'template_redirect', [ $utilities, 'maybe_show_login_form' ], 0 ); // load early
+			add_action( 'init', [ $utilities, 'maybe_process_login' ], 1 );
+			add_action( 'asenha_password_protection_error_messages', [ $utilities, 'add_login_error_messages' ] );
+			if ( function_exists( 'wp_site_icon' ) ) { // WP v4.3+
+				add_action( 'asenha_password_protection_login_head', 'wp_site_icon' );
+			}
+		}
 
 		// Redirect 404 to Homepage
 

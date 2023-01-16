@@ -165,6 +165,40 @@ class Settings_Fields_Render {
 	}
 
 	/**
+	 * Render password field as sub-field of a toggle/switcher checkbox
+	 *
+	 * @since 4.1.0
+	 */
+	function render_password_subfield( $args ) {
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+
+		$field_id = $args['field_id'];
+		$field_name = $args['field_name'];
+		$field_type = $args['field_type'];
+		$field_prefix = $args['field_prefix'];
+		$field_suffix = $args['field_suffix'];
+		$field_description = $args['field_description'];
+		$field_option_value = ( isset( $options[$args['field_id']] ) ) ? $options[$args['field_id']] : '';
+
+		if ( ! empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix with-suffix';
+		} elseif ( ! empty( $field_prefix ) && empty( $field_suffix ) ) {
+			$field_classname = ' with-prefix';
+		} elseif ( empty( $field_prefix ) && ! empty( $field_suffix ) ) {
+			$field_classname = ' with-suffix';
+		} else {
+			$field_classname = '';		
+		}
+
+		$placeholder = '';
+
+		echo $field_prefix . '<input type="password" id="' . esc_attr( $field_name ) . '" class="asenha-subfield-password' . esc_attr( $field_classname ) . '" name="' . esc_attr( $field_name ) . '" placeholder="' . esc_attr( $placeholder ) . '" size="24" autocomplete="off" value="' . base64_decode( $field_option_value ) . '">' . $field_suffix;
+		echo '<label for="' . esc_attr( $field_name ) . '" class="asenha-subfield-checkbox-label">' . esc_html( $field_description ) . '</label>';
+
+	}
+
+	/**
 	 * Render number field as sub-field of a toggle/switcher checkbox
 	 *
 	 * @since 1.4.0
