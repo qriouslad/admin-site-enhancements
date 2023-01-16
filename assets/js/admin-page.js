@@ -140,6 +140,8 @@
       $('.heartbeat-interval-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
 
       // Place fields into "Utilities" tab
+      $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
+      $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
 
       // Remove empty .form-table that originally holds the fields
@@ -709,6 +711,38 @@
             $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').show();
          } else {
             $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').hide();            
+         }
+      });
+
+      // Enable Password Protection => show/hide password input on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_password_protection]').checked ) {
+         $('.enable-password-protection .asenha-subfields').show();
+         $('.asenha-toggle.enable-password-protection td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-password-protection .asenha-subfields').hide();        
+      }
+
+      // Enable Password Protection => show/hide password input input on toggle click
+      document.getElementById('admin_site_enhancements[enable_password_protection]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-password-protection .asenha-subfields').fadeIn();
+            $('.enable-password-protection .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-password-protection .asenha-subfields').hide();
+            $('.enable-password-protection .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Password protection => Empty field value on click, so new password can be easily entered
+      var oldValue = '';
+      $('input[name="admin_site_enhancements[password_protection_password]"]').focusin(function() {
+         oldValue = $(this).val();
+         $(this).val('');
+      });
+
+      $('input[name="admin_site_enhancements[password_protection_password]"]').focusout(function() {
+         if ( $(this).val() == '' ) {
+            $(this).val(oldValue);
          }
       });
 

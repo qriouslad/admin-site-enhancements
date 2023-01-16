@@ -1751,6 +1751,47 @@ class Settings_Sections_Fields {
 		// UTILITIES
 		// =================================================================
 
+		// Enable Password Protection
+
+		$field_id = 'enable_password_protection';
+		$field_slug = 'enable-password-protection';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Password Protection', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'password_protection_password';
+		$field_slug = 'password-protection-password';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Set the password:', // Field title
+			[ $render_field, 'render_password_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '<span class="faded">(Default is \'secret\')</span>', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Redirect 404 to Homepage
 
 		$field_id = 'redirect_404_to_homepage';

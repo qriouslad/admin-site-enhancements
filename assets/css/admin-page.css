@@ -446,18 +446,21 @@
 }
 
 .asenha-subfield-text.with-prefix.with-suffix,
+.asenha-subfield-password.with-prefix.with-suffix,
 .asenha-subfield-number.with-prefix.with-suffix,
 .asenha-subfield-select.with-prefix.with-suffix {
     margin: 0 4px;
 }
 
 .asenha-subfield-text.with-prefix,
+.asenha-subfield-password.with-prefix,
 .asenha-subfield-number.with-prefix,
 .asenha-subfield-select.with-prefix {
     margin: 0 0 0 4px;
 }
 
 .asenha-subfield-text.with-suffix,
+.asenha-subfield-password.with-suffix,
 .asenha-subfield-number.with-suffix,
 .asenha-subfield-select.with-suffix {
     margin: 0 4px 0 0;
