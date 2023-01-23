@@ -131,6 +131,10 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.2.1 (2023.01.23)
+
+* **[FIXED] Admin Interface >> Disable Dashboard Widgets**. Fixed missing dashboard widgets list when first trying to activate the feature. Also fixes PHP fatal error when trying to view the dashboard when the feature is activated under such scenario. Props to [@samirhp](https://profiles.wordpress.org/samirhp/) for [reporting it](https://wordpress.org/support/topic/error-with-new-update-6/).
+
 ### 4.2.0 (2023.01.23)
 
 * **[ADDED] Admin Interface >> Disable Dashboard Widgets**. Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won't load any assets nor show up under Screen Options.
