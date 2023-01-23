@@ -512,7 +512,14 @@ class Settings_Sections_Fields {
 		$field_slug = 'disabled-dashboard-widgets';
 
 		$extra_options = get_option( 'admin_site_enhancements_extra', array() );
-		$dashboard_widgets = $extra_options['dashboard_widgets'];
+		if ( array_key_exists( 'dashboard_widgets', $extra_options ) ) {
+			$dashboard_widgets = $extra_options['dashboard_widgets'];
+		} else {
+			$admin_interface = new Admin_Interface;
+			$dashboard_widgets = $admin_interface->get_dashboard_widgets();
+			$extra_options['dashboard_widgets'] = $dashboard_widgets;
+			update_option( 'admin_site_enhancements_extra', $extra_options );
+		}
 
 		foreach ( $dashboard_widgets as $widget ) {
 			add_settings_field(
