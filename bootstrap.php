@@ -210,6 +210,11 @@ class Admin_Site_Enhancements {
 			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
 		}
 
+		// Disable Dashboard Widgets
+		if ( array_key_exists( 'disable_dashboard_widgets', $options ) && $options['disable_dashboard_widgets'] ) {
+			add_action( 'wp_dashboard_setup', [ $admin_interface, 'disable_dashboard_widgets' ], 99 );
+		}
+
 		// Hide or Modify Elements
 		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
 			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10

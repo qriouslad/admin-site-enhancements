@@ -123,6 +123,20 @@ class Settings_Sanitization {
 		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
 		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
+		// Disable Dashboard Widgets
+		if ( ! isset( $options['disable_dashboard_widgets'] ) ) $options['disable_dashboard_widgets'] = false;
+		$options['disable_dashboard_widgets'] = ( 'on' == $options['disable_dashboard_widgets'] ? true : false );
+
+		$extra_options = get_option( 'admin_site_enhancements_extra', array() );
+		$dashboard_widgets = $extra_options['dashboard_widgets'];
+
+		if ( is_array( $dashboard_widgets ) ) {
+			foreach ( $dashboard_widgets as $widget ) {
+				if ( ! isset( $options['disabled_dashboard_widgets'][$widget['id'].'__'.$widget['context'].'__'.$widget['priority']] ) ) $options['disabled_dashboard_widgets'][$widget['id'].'__'.$widget['context'].'__'.$widget['priority']] = false;
+				$options['disabled_dashboard_widgets'][$widget['id'].'__'.$widget['context'].'__'.$widget['priority']] = ( 'on' == $options['disabled_dashboard_widgets'][$widget['id'].'__'.$widget['context'].'__'.$widget['priority']] ? true : false );
+			}
+		}
+
 		// Hide or Modify Elements
 
 		if ( ! isset( $options['hide_modify_elements'] ) ) $options['hide_modify_elements'] = false;
