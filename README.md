@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.1.0  
+Stable tag: 4.2.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
 * **Admin Menu Organizer**. Customize the order of the admin menu and optionally change menu item title or hide some items.
+* **Disable Dashboard Widgets**. Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won't load any assets nor show up under Screen Options.
 * **Clean Up Admin Bar**. Remove various elements from the admin bar.
   * Remove WordPress logo/menu
   * Remove customize menu/link
@@ -129,6 +130,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.2.0 (2023.01.23)
+
+* **[ADDED] Admin Interface >> Disable Dashboard Widgets**. Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won't load any assets nor show up under Screen Options.
 
 ### 4.1.0 (2023.01.16)
 
