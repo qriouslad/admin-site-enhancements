@@ -504,6 +504,15 @@ class Admin_Interface {
 
 		$dashboard_widgets = array();
 
+		if ( ! isset( $wp_meta_boxes['dashboard'] ) ) {
+			$extra_options = get_option( 'admin_site_enhancements_extra', array() );
+			if ( ! array_key_exists( 'dashboard_widgets', $extra_options ) ) {
+				require_once ABSPATH . '/wp-admin/includes/dashboard.php';
+				set_current_screen( 'dashboard' );
+				wp_dashboard_setup();
+			}
+		}
+
 		if ( isset( $wp_meta_boxes['dashboard'] ) ) {
 			foreach( $wp_meta_boxes['dashboard'] as $context => $priority ) {
 				foreach ( $priority as $info ) {
