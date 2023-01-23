@@ -45,7 +45,9 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// Call WordPress globals required for the fields
+		// =================================================================
+		// Call WordPress globals and set new globals required for the fields
+		// =================================================================
 
 		global $wp_roles, $wpdb, $asenha_public_post_types, $asenha_gutenberg_post_types, $asenha_revisions_post_types;
 
@@ -80,7 +82,6 @@ class Settings_Sections_Fields {
 				}
 			}
 		}
-
 
 		// =================================================================
 		// CONTENT MANAGEMENT
@@ -484,6 +485,51 @@ class Settings_Sections_Fields {
 				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
+
+		// Disable Dashboard Widgets
+
+		$field_id = 'disable_dashboard_widgets';
+		$field_slug = 'disable-dashboard-widgets';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable Dashboard Widgets', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won\'t load any assets nor show up under Screen Options. ', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disabled_dashboard_widgets';
+		$field_slug = 'disabled-dashboard-widgets';
+
+		$extra_options = get_option( 'admin_site_enhancements_extra', array() );
+		$dashboard_widgets = $extra_options['dashboard_widgets'];
+
+		foreach ( $dashboard_widgets as $widget ) {
+			add_settings_field(
+				$field_id . '_' . $widget['id'], // Field ID
+				'', // Field title
+				[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+				ASENHA_SLUG, // Settings page slug
+				'main-section', // Section ID
+				array(
+					'parent_field_id'		=> $field_id, // Custom argument
+					'field_id'				=> $widget['id'] . '__' . $widget['context'] . '__' . $widget['priority'], // Custom argument
+					'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . '][' . $widget['id'] . '__' . $widget['context'] . '__' . $widget['priority'] . ']', // Custom argument
+					'field_label'			=> $widget['title'] . ' <span class="faded">(' . $widget['id'] . ')</span>', // Custom argument
+					'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug . ' ' . $widget['id'], // Custom class for the <tr> element
+				)
+			);
+		}
 
 		// Hide or Modify Elements
 

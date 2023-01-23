@@ -72,6 +72,8 @@
       $('.view-admin-as-role').appendTo('.fields-admin-interface > table > tbody');
       $('.customize-admin-menu').appendTo('.fields-admin-interface > table > tbody');
       $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
+      $('.disable-dashboard-widgets').appendTo('.fields-admin-interface > table > tbody');
+      $('.disabled-dashboard-widgets').appendTo('.fields-admin-interface .disable-dashboard-widgets .asenha-subfields');
       $('.hide-modify-elements').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-ab-wp-logo-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-customize-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
@@ -389,6 +391,25 @@
          } else {
             $('.hide-admin-bar .asenha-subfields').hide();
             $('.hide-admin-bar .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Disable Dashboard Widgets => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[disable_dashboard_widgets]').checked ) {
+         $('.disable-dashboard-widgets .asenha-subfields').show();
+         $('.asenha-toggle.disable-dashboard-widgets td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.disable-dashboard-widgets .asenha-subfields').hide();        
+      }
+
+      // Disable Dashboard Widgets => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[disable_dashboard_widgets]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.disable-dashboard-widgets .asenha-subfields').fadeIn();
+            $('.disable-dashboard-widgets .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.disable-dashboard-widgets .asenha-subfields').hide();
+            $('.disable-dashboard-widgets .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

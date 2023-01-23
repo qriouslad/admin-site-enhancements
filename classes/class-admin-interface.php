@@ -494,6 +494,73 @@ class Admin_Interface {
 	}
 
 	/**
+	 * Get dashboard widgets
+	 *
+	 * @since 4.2.0
+	 */
+	public function get_dashboard_widgets() {
+
+		global $wp_meta_boxes;
+
+		$dashboard_widgets = array();
+
+		if ( isset( $wp_meta_boxes['dashboard'] ) ) {
+			foreach( $wp_meta_boxes['dashboard'] as $context => $priority ) {
+				foreach ( $priority as $info ) {
+					$priority = key( $priority ); // we only need the array key
+					foreach( $info as $widget => $data ) {
+						$dashboard_widgets[$widget] = array(
+							'id' 		=> $widget,
+							'title' 	=> wp_strip_all_tags( preg_replace( '/ <span.*span>/im', '', $data['title'] ) ),
+							'context' 	=> $context, // 'normal' or 'side'
+							'priority' 	=> $priority, // 'core'
+					   );
+					}
+				}
+			}
+		}
+
+		$dashboard_widgets = wp_list_sort( $dashboard_widgets, 'title', 'ASC', true );
+
+		return $dashboard_widgets;
+
+	}
+
+	/**
+	 * Disable dashboard widgets
+	 *
+	 * @since 4.2.0
+	 */
+	public function disable_dashboard_widgets() {
+	
+		global $wp_meta_boxes;
+
+		// Get list of disabled widgets
+		$options = get_option( ASENHA_SLUG_U, array() );
+		$disabled_dashboard_widgets = $options['disabled_dashboard_widgets'];
+
+		// Store default widgets in extra options. This will be referenced from settings field.
+		$dashboard_widgets = $this->get_dashboard_widgets();
+		$extra_options = get_option( 'admin_site_enhancements_extra', array() );
+		$extra_options['dashboard_widgets'] = $dashboard_widgets;
+		update_option( 'admin_site_enhancements_extra', $extra_options );
+
+		// Disable widgets
+		foreach( $disabled_dashboard_widgets as $disabled_widget_id_context_priority => $is_disabled ) {
+			// e.g. dashboard_activity__normal__core => true/false
+			if ( $is_disabled ) {
+				$disabled_widget = explode('__', $disabled_widget_id_context_priority);
+				$widget_id = $disabled_widget[0];
+				$widget_context = $disabled_widget[1];
+				$widget_priority = $disabled_widget[2];
+				// remove_meta_box( $widget_id, get_current_screen()->base, $widget_context );
+				unset( $wp_meta_boxes['dashboard'][$widget_context][$widget_priority][$widget_id] );
+			}
+		}
+
+	}
+
+	/**
 	 * Modify admin bar menu for Admin Interface >> Hide or Modify Elements feature
 	 *
 	 * @param $wp_admin_bar object The admin bar.
