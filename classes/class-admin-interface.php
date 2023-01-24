@@ -514,12 +514,11 @@ class Admin_Interface {
 		}
 
 		if ( isset( $wp_meta_boxes['dashboard'] ) ) {
-			foreach( $wp_meta_boxes['dashboard'] as $context => $priority ) {
-				foreach ( $priority as $info ) {
-					$priority = key( $priority ); // we only need the array key
-					foreach( $info as $widget => $data ) {
-						$dashboard_widgets[$widget] = array(
-							'id' 		=> $widget,
+			foreach( $wp_meta_boxes['dashboard'] as $context => $priorities ) {
+				foreach ( $priorities as $priority => $widgets ) {
+					foreach( $widgets as $widget_id => $data ) {
+						$dashboard_widgets[$widget_id] = array(
+							'id' 		=> $widget_id,
 							'title' 	=> wp_strip_all_tags( preg_replace( '/ <span.*span>/im', '', $data['title'] ) ),
 							'context' 	=> $context, // 'normal' or 'side'
 							'priority' 	=> $priority, // 'core'
