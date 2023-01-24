@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.2.0  
+Stable tag: 4.2.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -130,6 +130,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.2.2 (2023.01.24)
+
+* **[FIXED] Admin Interface >> Disable Dashboard Widgets**. Fixed a fatal error issue when there's a widget with priority 'high'. Props to [@samirhp](https://profiles.wordpress.org/samirhp/) for [reporting it](https://wordpress.org/support/topic/error-with-new-update-6/).
 
 ### 4.2.1 (2023.01.23)
 
