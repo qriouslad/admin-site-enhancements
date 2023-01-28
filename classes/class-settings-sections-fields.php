@@ -94,7 +94,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Page and Post Duplication', // Field title
+			'Page and Post Duplication', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -114,7 +114,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Media Replacement', // Field title
+			'Media Replacement', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -134,7 +134,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable SVG Upload', // Field title
+			'SVG Upload', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -180,7 +180,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable External Permalinks', // Field title
+			'External Permalinks', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -226,7 +226,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Auto-Publishing of Posts with Missed Schedule', // Field title
+			'Auto-Publish Posts with Missed Schedule', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -735,7 +735,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Log In/Out Menu', // Field title
+			'Log In/Out Menu', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -757,7 +757,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Last Login Column', // Field title
+			'Last Login Column', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -915,7 +915,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Custom Admin CSS', // Field title
+			'Custom Admin CSS', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -957,7 +957,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Custom Frontend CSS', // Field title
+			'Custom Frontend CSS', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1556,7 +1556,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Revisions Control', // Field title
+			'Revisions Control', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1621,7 +1621,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Heartbeat Control', // Field title
+			'Heartbeat Control', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1811,7 +1811,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Password Protection', // Field title
+			'Password Protection', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
