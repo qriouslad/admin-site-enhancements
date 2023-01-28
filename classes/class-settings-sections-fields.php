@@ -219,71 +219,6 @@ class Settings_Sections_Fields {
 			}
 		}
 
-		// Enable Revisions Control
-
-		$field_id = 'enable_revisions_control';
-		$field_slug = 'enable-revisions-control';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Revisions Control', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'revisions_max_number';
-		$field_slug = 'revisions-max-number';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> 'Limit to', // Custom argument
-				'field_suffix'			=> 'revisions for:', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-number asenha-hide-th extra-narrow content-management ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'enable_revisions_control_for';
-		$field_slug = 'enable-revisions-control-for';
-
-		if ( is_array( $asenha_revisions_post_types ) ) {
-			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
-				add_settings_field(
-					$field_id . '_' . $post_type_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $post_type_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
-						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
-					)
-				);
-			}
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 
 		$field_id = 'enable_missed_schedule_posts_auto_publish';
@@ -1614,6 +1549,71 @@ class Settings_Sections_Fields {
 		// OPTIMIZATIONS
 		// =================================================================
 
+		// Enable Revisions Control
+
+		$field_id = 'enable_revisions_control';
+		$field_slug = 'enable-revisions-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Enable Revisions Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'revisions_max_number';
+		$field_slug = 'revisions-max-number';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Limit to', // Custom argument
+				'field_suffix'			=> 'revisions for:', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_revisions_control_for';
+		$field_slug = 'enable-revisions-control-for';
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				add_settings_field(
+					$field_id . '_' . $post_type_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $post_type_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half optimizations ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+					)
+				);
+			}
+		}
+
 		// Enable Heartbeat Control
 
 		$field_id = 'enable_heartbeat_control';
@@ -1632,7 +1632,7 @@ class Settings_Sections_Fields {
 				'field_description'			=> 'Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 

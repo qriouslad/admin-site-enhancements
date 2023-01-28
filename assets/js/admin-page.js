@@ -55,9 +55,6 @@
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
       $('.enable-external-permalinks').appendTo('.fields-content-management > table > tbody');
       $('.enable-external-permalinks-for').appendTo('.fields-content-management .enable-external-permalinks .asenha-subfields');
-      $('.enable-revisions-control').appendTo('.fields-content-management > table > tbody');
-      $('.revisions-max-number').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
-      $('.enable-revisions-control-for').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
       $('.enable-missed-schedule-posts-auto-publish').appendTo('.fields-content-management > table > tbody');
       $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
@@ -133,6 +130,9 @@
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Optimizations" tab
+      $('.enable-revisions-control').appendTo('.fields-optimizations > table > tbody');
+      $('.revisions-max-number').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
+      $('.enable-revisions-control-for').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
       $('.enable-heartbeat-control').appendTo('.fields-optimizations > table > tbody');
       $('.heartbeat-control-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
       $('.heartbeat-interval-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
@@ -336,14 +336,6 @@
             $('.enable-external-permalinks .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
-
-      // Enable Revisions Control => show/hide roles checkboxes on document ready
-      if ( document.getElementById('admin_site_enhancements[enable_revisions_control]').checked ) {
-         $('.enable-revisions-control .asenha-subfields').show();
-         $('.asenha-toggle.enable-revisions-control td .asenha-field-with-options').addClass('is-enabled');  
-      } else {
-         $('.enable-revisions-control .asenha-subfields').hide();        
-      }
 
       // Enable SVG Upload => show/hide roles checkboxes on toggle click
       document.getElementById('admin_site_enhancements[enable_revisions_control]').addEventListener('click', event => {
@@ -678,6 +670,14 @@
             $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
+
+      // Enable Revisions Control => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_revisions_control]').checked ) {
+         $('.enable-revisions-control .asenha-subfields').show();
+         $('.asenha-toggle.enable-revisions-control td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-revisions-control .asenha-subfields').hide();        
+      }
 
       // Enable Heartbeat Control => show/hide subfields on document ready
       if ( document.getElementById('admin_site_enhancements[enable_heartbeat_control]').checked ) {
