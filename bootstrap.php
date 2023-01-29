@@ -138,11 +138,6 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Enable Revisions Control
-		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
-			add_filter( 'wp_revisions_to_keep', [ $content_management, 'limit_revisions_to_max_number' ], 10, 2 );
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
 			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
@@ -487,6 +482,11 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Optimizations features
 		$optimizations = new ASENHA\Classes\Optimizations;
+
+		// Enable Revisions Control
+		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
+			add_filter( 'wp_revisions_to_keep', [ $optimizations, 'limit_revisions_to_max_number' ], 10, 2 );
+		}
 
 		if ( array_key_exists( 'enable_heartbeat_control', $options ) && $options['enable_heartbeat_control'] ) {
 			add_filter( 'heartbeat_settings', [ $optimizations, 'maybe_modify_heartbeat_frequency' ], 99, 2 );
