@@ -54,20 +54,6 @@ class Settings_Sanitization {
 			}
 		}
 
-		// Enable Revisions Control
-		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
-		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );
-
-		if ( ! isset( $options['revisions_max_number'] ) ) $options['revisions_max_number'] = 10;
-		$options['revisions_max_number'] = ( ! empty( $options['revisions_max_number'] ) ) ? sanitize_text_field( $options['revisions_max_number'] ) : 10;
-
-		if ( is_array( $asenha_revisions_post_types ) ) {
-			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
-				if ( ! isset( $options['enable_revisions_control_for'][$post_type_slug] ) ) $options['enable_revisions_control_for'][$post_type_slug] = false;
-				$options['enable_revisions_control_for'][$post_type_slug] = ( 'on' == $options['enable_revisions_control_for'][$post_type_slug] ? true : false );
-			}
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( ! isset( $options['enable_missed_schedule_posts_auto_publish'] ) ) $options['enable_missed_schedule_posts_auto_publish'] = false;
 		$options['enable_missed_schedule_posts_auto_publish'] = ( 'on' == $options['enable_missed_schedule_posts_auto_publish'] ? true : false );
@@ -376,6 +362,20 @@ class Settings_Sanitization {
 
 		if ( ! isset( $options['image_max_height'] ) ) $options['image_max_height'] = 1920;
 		$options['image_max_height'] = ( ! empty( $options['image_max_height'] ) ) ? sanitize_text_field( $options['image_max_height'] ) : 1920;
+
+		// Enable Revisions Control
+		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
+		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );
+
+		if ( ! isset( $options['revisions_max_number'] ) ) $options['revisions_max_number'] = 10;
+		$options['revisions_max_number'] = ( ! empty( $options['revisions_max_number'] ) ) ? sanitize_text_field( $options['revisions_max_number'] ) : 10;
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
+				if ( ! isset( $options['enable_revisions_control_for'][$post_type_slug] ) ) $options['enable_revisions_control_for'][$post_type_slug] = false;
+				$options['enable_revisions_control_for'][$post_type_slug] = ( 'on' == $options['enable_revisions_control_for'][$post_type_slug] ? true : false );
+			}
+		}
 
 		// Enable Heartbeat Control
 		if ( ! isset( $options['enable_heartbeat_control'] ) ) $options['enable_heartbeat_control'] = false;
