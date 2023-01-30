@@ -701,6 +701,17 @@
          $('.enable-revisions-control .asenha-subfields').hide();        
       }
 
+      // Enable Revisions Control => show/hide sub-fields on toggle click
+      document.getElementById('admin_site_enhancements[enable_revisions_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-revisions-control .asenha-subfields').fadeIn();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-revisions-control .asenha-subfields').hide();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
       // Enable Heartbeat Control => show/hide subfields on document ready
       if ( document.getElementById('admin_site_enhancements[enable_heartbeat_control]').checked ) {
          $('.enable-heartbeat-control .asenha-subfields').show();
