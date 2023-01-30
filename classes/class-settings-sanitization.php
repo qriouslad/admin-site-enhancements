@@ -105,10 +105,6 @@ class Settings_Sanitization {
 			}
 		}
 
-		// View Admin as Role
-		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
-		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
-
 		// Disable Dashboard Widgets
 		if ( ! isset( $options['disable_dashboard_widgets'] ) ) $options['disable_dashboard_widgets'] = false;
 		$options['disable_dashboard_widgets'] = ( 'on' == $options['disable_dashboard_widgets'] ? true : false );
@@ -397,6 +393,10 @@ class Settings_Sanitization {
 		// =================================================================
 		// UTILITIES
 		// =================================================================
+
+		// View Admin as Role
+		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
+		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
 		// Enable Password Protection
 		if ( ! isset( $options['enable_password_protection'] ) ) $options['enable_password_protection'] = false;

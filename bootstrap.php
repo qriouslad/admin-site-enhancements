@@ -198,13 +198,6 @@ class Admin_Site_Enhancements {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
 		}
 
-		// View Admin as Role
-		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
-			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
-			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
-			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
-		}
-
 		// Disable Dashboard Widgets
 		if ( array_key_exists( 'disable_dashboard_widgets', $options ) && $options['disable_dashboard_widgets'] ) {
 			add_action( 'wp_dashboard_setup', [ $admin_interface, 'disable_dashboard_widgets' ], 99 );
@@ -506,6 +499,13 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
+
+		// View Admin as Role
+		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
+			add_action( 'admin_bar_menu', [ $utilities, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
+			add_action( 'init', [ $utilities, 'role_switcher_to_view_admin_as' ] );
+			add_action( 'wp_die_handler', [ $utilities, 'custom_error_page_on_switch_failure' ] );
+		}
 
 		// Enable Password Protection
 		if ( array_key_exists( 'enable_password_protection', $options ) && $options['enable_password_protection'] ) {

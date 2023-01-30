@@ -66,7 +66,6 @@
 
       // Place fields into "Admin Interface" tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface > table > tbody');
-      $('.view-admin-as-role').appendTo('.fields-admin-interface > table > tbody');
       $('.customize-admin-menu').appendTo('.fields-admin-interface > table > tbody');
       $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
       $('.disable-dashboard-widgets').appendTo('.fields-admin-interface > table > tbody');
@@ -145,6 +144,7 @@
       $('.heartbeat-interval-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
 
       // Place fields into "Utilities" tab
+      $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
       $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
       $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');

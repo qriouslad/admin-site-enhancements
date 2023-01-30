@@ -400,27 +400,6 @@ class Settings_Sections_Fields {
 			)
 		);
 
-		// View Admin as Role
-
-		$field_id = 'view_admin_as_role';
-		$field_slug = 'view-admin-as-role';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'View Admin as Role', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
 		// Disable Dashboard Widgets
 
 		$field_id = 'disable_dashboard_widgets';
@@ -1867,6 +1846,27 @@ class Settings_Sections_Fields {
 		// =================================================================
 		// UTILITIES
 		// =================================================================
+
+		// View Admin as Role
+
+		$field_id = 'view_admin_as_role';
+		$field_slug = 'view-admin-as-role';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'View Admin as Role', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
 
 		// Enable Password Protection
 
