@@ -483,11 +483,17 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Optimizations features
 		$optimizations = new ASENHA\Classes\Optimizations;
 
-		// Enable Revisions Control
+		// Image Upload Control
+		if ( array_key_exists( 'image_upload_control', $options ) && $options['image_upload_control'] ) {
+			add_filter( 'wp_handle_upload', [ $optimizations, 'image_upload_handler' ] );
+		}
+
+		// Revisions Control
 		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
 			add_filter( 'wp_revisions_to_keep', [ $optimizations, 'limit_revisions_to_max_number' ], 10, 2 );
 		}
 
+		// Heartbeat Control
 		if ( array_key_exists( 'enable_heartbeat_control', $options ) && $options['enable_heartbeat_control'] ) {
 			add_filter( 'heartbeat_settings', [ $optimizations, 'maybe_modify_heartbeat_frequency' ], 99, 2 );
 			add_action( 'admin_enqueue_scripts', [ $optimizations, 'maybe_disable_heartbeat' ], 99 );

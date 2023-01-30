@@ -130,6 +130,9 @@
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Optimizations" tab
+      $('.image-upload-control').appendTo('.fields-optimizations > table > tbody');
+      $('.image-max-width').appendTo('.fields-optimizations .image-upload-control .asenha-subfields');
+      $('.image-max-height').appendTo('.fields-optimizations .image-upload-control .asenha-subfields');
       $('.enable-revisions-control').appendTo('.fields-optimizations > table > tbody');
       $('.revisions-max-number').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
       $('.enable-revisions-control-for').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
@@ -668,6 +671,25 @@
          } else {
             $('.insert-head-body-footer-code .asenha-subfields').hide();
             $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Image Upload Control => show/hide sub-fields on document ready
+      if ( document.getElementById('admin_site_enhancements[image_upload_control]').checked ) {
+         $('.image-upload-control .asenha-subfields').show();
+         $('.asenha-toggle.image-upload-control td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.image-upload-control .asenha-subfields').hide();        
+      }
+
+      // Image Upload Control => show/hide sub-fields on toggle click
+      document.getElementById('admin_site_enhancements[image_upload_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.image-upload-control .asenha-subfields').fadeIn();
+            $('.image-upload-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.image-upload-control .asenha-subfields').hide();
+            $('.image-upload-control .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

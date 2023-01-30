@@ -1549,6 +1549,70 @@ class Settings_Sections_Fields {
 		// OPTIMIZATIONS
 		// =================================================================
 
+		// Image Upload Control
+
+		$field_id = 'image_upload_control';
+		$field_slug = 'image-upload-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Image Upload Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'image_max_width';
+		$field_slug = 'image-max-width';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Max width:', // Custom argument
+				'field_suffix'			=> 'pixels. <span class="faded">(Default is 1920 pixels)</span>', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'image_max_height';
+		$field_slug = 'image-max-height';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Max height:', // Custom argument
+				'field_suffix'			=> 'pixels <span class="faded">(Default is 1920 pixels)</span>', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'To exclude an image from conversion and resizing, append \'-nr\' suffix to the file name, e.g. bird-photo-4k-nr.jpg', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Enable Revisions Control
 
 		$field_id = 'enable_revisions_control';

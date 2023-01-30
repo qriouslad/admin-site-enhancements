@@ -367,6 +367,16 @@ class Settings_Sanitization {
 		// OPTIMIZATIONS
 		// =================================================================
 
+		// Image Upload Control
+		if ( ! isset( $options['image_upload_control'] ) ) $options['image_upload_control'] = false;
+		$options['image_upload_control'] = ( 'on' == $options['image_upload_control'] ? true : false );
+
+		if ( ! isset( $options['image_max_width'] ) ) $options['image_max_width'] = 1920;
+		$options['image_max_width'] = ( ! empty( $options['image_max_width'] ) ) ? sanitize_text_field( $options['image_max_width'] ) : 1920;
+
+		if ( ! isset( $options['image_max_height'] ) ) $options['image_max_height'] = 1920;
+		$options['image_max_height'] = ( ! empty( $options['image_max_height'] ) ) ? sanitize_text_field( $options['image_max_height'] ) : 1920;
+
 		// Enable Heartbeat Control
 		if ( ! isset( $options['enable_heartbeat_control'] ) ) $options['enable_heartbeat_control'] = false;
 		$options['enable_heartbeat_control'] = ( 'on' == $options['enable_heartbeat_control'] ? true : false );
