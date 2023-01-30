@@ -94,7 +94,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Page and Post Duplication', // Field title
+			'Page and Post Duplication', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -114,7 +114,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Media Replacement', // Field title
+			'Media Replacement', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -134,7 +134,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable SVG Upload', // Field title
+			'SVG Upload', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -180,7 +180,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable External Permalinks', // Field title
+			'External Permalinks', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -219,71 +219,6 @@ class Settings_Sections_Fields {
 			}
 		}
 
-		// Enable Revisions Control
-
-		$field_id = 'enable_revisions_control';
-		$field_slug = 'enable-revisions-control';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'Enable Revisions Control', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'					=> $field_id, // Custom argument
-				'field_slug'				=> $field_slug, // Custom argument
-				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.', // Custom argument
-				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
-				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'revisions_max_number';
-		$field_slug = 'revisions-max-number';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_type'			=> 'with-prefix-suffix', // Custom argument
-				'field_prefix'			=> 'Limit to', // Custom argument
-				'field_suffix'			=> 'revisions for:', // Custom argument
-				'field_intro'			=> '', // Custom argument
-				'field_description'		=> '', // Custom argument
-				'class'					=> 'asenha-number asenha-hide-th extra-narrow content-management ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		$field_id = 'enable_revisions_control_for';
-		$field_slug = 'enable-revisions-control-for';
-
-		if ( is_array( $asenha_revisions_post_types ) ) {
-			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
-				add_settings_field(
-					$field_id . '_' . $post_type_slug, // Field ID
-					'', // Field title
-					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
-					ASENHA_SLUG, // Settings page slug
-					'main-section', // Section ID
-					array(
-						'parent_field_id'		=> $field_id, // Custom argument
-						'field_id'				=> $post_type_slug, // Custom argument
-						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
-						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
-						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
-					)
-				);
-			}
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 
 		$field_id = 'enable_missed_schedule_posts_auto_publish';
@@ -291,7 +226,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Auto-Publishing of Posts with Missed Schedule', // Field title
+			'Auto-Publish Posts with Missed Schedule', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -462,27 +397,6 @@ class Settings_Sections_Fields {
 				'field_name'		=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_description'	=> 'Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.', // Custom argument
 				'class'				=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// View Admin as Role
-
-		$field_id = 'view_admin_as_role';
-		$field_slug = 'view-admin-as-role';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'View Admin as Role', // Field title
-			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_slug'			=> $field_slug, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
-				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
-				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 
@@ -800,7 +714,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Log In/Out Menu', // Field title
+			'Log In/Out Menu', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -822,7 +736,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Last Login Column', // Field title
+			'Last Login Column', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -980,7 +894,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Custom Admin CSS', // Field title
+			'Custom Admin CSS', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1022,7 +936,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Custom Frontend CSS', // Field title
+			'Custom Frontend CSS', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1614,6 +1528,135 @@ class Settings_Sections_Fields {
 		// OPTIMIZATIONS
 		// =================================================================
 
+		// Image Upload Control
+
+		$field_id = 'image_upload_control';
+		$field_slug = 'image-upload-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Image Upload Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'image_max_width';
+		$field_slug = 'image-max-width';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Max width:', // Custom argument
+				'field_suffix'			=> 'pixels. <span class="faded">(Default is 1920 pixels)</span>', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'image_max_height';
+		$field_slug = 'image-max-height';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Max height:', // Custom argument
+				'field_suffix'			=> 'pixels <span class="faded">(Default is 1920 pixels)</span>', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> 'To exclude an image from conversion and resizing, append \'-nr\' suffix to the file name, e.g. bird-photo-4k-nr.jpg', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Enable Revisions Control
+
+		$field_id = 'enable_revisions_control';
+		$field_slug = 'enable-revisions-control';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Revisions Control', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'revisions_max_number';
+		$field_slug = 'revisions-max-number';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'with-prefix-suffix', // Custom argument
+				'field_prefix'			=> 'Limit to', // Custom argument
+				'field_suffix'			=> 'revisions for:', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-number asenha-hide-th extra-narrow optimizations ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_revisions_control_for';
+		$field_slug = 'enable-revisions-control-for';
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				add_settings_field(
+					$field_id . '_' . $post_type_slug, // Field ID
+					'', // Field title
+					[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+					ASENHA_SLUG, // Settings page slug
+					'main-section', // Section ID
+					array(
+						'parent_field_id'		=> $field_id, // Custom argument
+						'field_id'				=> $post_type_slug, // Custom argument
+						'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+						'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+						'class'					=> 'asenha-checkbox asenha-hide-th asenha-half optimizations ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+					)
+				);
+			}
+		}
+
 		// Enable Heartbeat Control
 
 		$field_id = 'enable_heartbeat_control';
@@ -1621,7 +1664,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Heartbeat Control', // Field title
+			'Heartbeat Control', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -1632,7 +1675,7 @@ class Settings_Sections_Fields {
 				'field_description'			=> 'Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
-				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+				'class'						=> 'asenha-toggle optimizations ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 
@@ -1804,6 +1847,27 @@ class Settings_Sections_Fields {
 		// UTILITIES
 		// =================================================================
 
+		// View Admin as Role
+
+		$field_id = 'view_admin_as_role';
+		$field_slug = 'view-admin-as-role';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'View Admin as Role', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'View admin pages and the site (logged-in) as one of the non-administrator user roles.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Enable Password Protection
 
 		$field_id = 'enable_password_protection';
@@ -1811,7 +1875,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Enable Password Protection', // Field title
+			'Password Protection', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID

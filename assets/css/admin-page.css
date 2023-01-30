@@ -499,8 +499,10 @@
     flex-direction: column;
 }
 
-.subfield-description {
-    margin-bottom: 12px;
+.subfield-description,
+.asenha-subfield-number-description {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .custom-menu-order ul.menu {

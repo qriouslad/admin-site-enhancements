@@ -55,9 +55,6 @@
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
       $('.enable-external-permalinks').appendTo('.fields-content-management > table > tbody');
       $('.enable-external-permalinks-for').appendTo('.fields-content-management .enable-external-permalinks .asenha-subfields');
-      $('.enable-revisions-control').appendTo('.fields-content-management > table > tbody');
-      $('.revisions-max-number').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
-      $('.enable-revisions-control-for').appendTo('.fields-content-management .enable-revisions-control .asenha-subfields');
       $('.enable-missed-schedule-posts-auto-publish').appendTo('.fields-content-management > table > tbody');
       $('.enhance-list-tables').appendTo('.fields-content-management > table > tbody');
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
@@ -69,7 +66,6 @@
 
       // Place fields into "Admin Interface" tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface > table > tbody');
-      $('.view-admin-as-role').appendTo('.fields-admin-interface > table > tbody');
       $('.customize-admin-menu').appendTo('.fields-admin-interface > table > tbody');
       $('.custom-menu-order').appendTo('.fields-admin-interface .customize-admin-menu .asenha-subfields');
       $('.disable-dashboard-widgets').appendTo('.fields-admin-interface > table > tbody');
@@ -133,6 +129,12 @@
       $('.disable-xmlrpc').appendTo('.fields-security > table > tbody');
 
       // Place fields into "Optimizations" tab
+      $('.image-upload-control').appendTo('.fields-optimizations > table > tbody');
+      $('.image-max-width').appendTo('.fields-optimizations .image-upload-control .asenha-subfields');
+      $('.image-max-height').appendTo('.fields-optimizations .image-upload-control .asenha-subfields');
+      $('.enable-revisions-control').appendTo('.fields-optimizations > table > tbody');
+      $('.revisions-max-number').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
+      $('.enable-revisions-control-for').appendTo('.fields-optimizations .enable-revisions-control .asenha-subfields');
       $('.enable-heartbeat-control').appendTo('.fields-optimizations > table > tbody');
       $('.heartbeat-control-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
       $('.heartbeat-interval-for-admin-pages').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
@@ -142,6 +144,7 @@
       $('.heartbeat-interval-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
 
       // Place fields into "Utilities" tab
+      $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
       $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
       $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
@@ -336,14 +339,6 @@
             $('.enable-external-permalinks .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
-
-      // Enable Revisions Control => show/hide roles checkboxes on document ready
-      if ( document.getElementById('admin_site_enhancements[enable_revisions_control]').checked ) {
-         $('.enable-revisions-control .asenha-subfields').show();
-         $('.asenha-toggle.enable-revisions-control td .asenha-field-with-options').addClass('is-enabled');  
-      } else {
-         $('.enable-revisions-control .asenha-subfields').hide();        
-      }
 
       // Enable SVG Upload => show/hide roles checkboxes on toggle click
       document.getElementById('admin_site_enhancements[enable_revisions_control]').addEventListener('click', event => {
@@ -676,6 +671,44 @@
          } else {
             $('.insert-head-body-footer-code .asenha-subfields').hide();
             $('.insert-head-body-footer-code .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Image Upload Control => show/hide sub-fields on document ready
+      if ( document.getElementById('admin_site_enhancements[image_upload_control]').checked ) {
+         $('.image-upload-control .asenha-subfields').show();
+         $('.asenha-toggle.image-upload-control td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.image-upload-control .asenha-subfields').hide();        
+      }
+
+      // Image Upload Control => show/hide sub-fields on toggle click
+      document.getElementById('admin_site_enhancements[image_upload_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.image-upload-control .asenha-subfields').fadeIn();
+            $('.image-upload-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.image-upload-control .asenha-subfields').hide();
+            $('.image-upload-control .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Revisions Control => show/hide roles checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_revisions_control]').checked ) {
+         $('.enable-revisions-control .asenha-subfields').show();
+         $('.asenha-toggle.enable-revisions-control td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-revisions-control .asenha-subfields').hide();        
+      }
+
+      // Enable Revisions Control => show/hide sub-fields on toggle click
+      document.getElementById('admin_site_enhancements[enable_revisions_control]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-revisions-control .asenha-subfields').fadeIn();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-revisions-control .asenha-subfields').hide();
+            $('.enable-revisions-control .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

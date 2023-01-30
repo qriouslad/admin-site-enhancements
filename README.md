@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.2.2  
+Stable tag: 4.3.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,14 +18,21 @@ Duplicate post, replace media, admin menu editor, custom css / code, disable gut
 
 Admin and Site Enhancements helps you to easily enhance various admin workflows and site aspects while replacing multiple plugins doing it. 
 
+>  "Amazing how many separate plugins this replaces!" ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
+
+> "I really love how this plugin incorporates so many small fixes or tweaks that are needed with WordPress - I can now get rid of many other plugins." ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
+
+> " This plugin allows you to install and maintain one plugin instead of a host of smaller ones. My tests were all successful and I was happy to simplify my maintenance with fewer plugins." ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
+
+>  "\[This\] is a Swiss Army Knife in terms of features that will keep your WordPress clean and optimal." ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
+
 ### Content Management
 
-* **Enable Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
-* **Enable Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
-* **Enable SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
-* **Enable External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
-* **Enable Revisions Control**. Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.
-* **Enable Auto-Publishing of Posts with Missed Schedule**. Trigger publishing of scheduled posts of all types marked with "missed schedule", anytime the site is visited.
+* **Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
+* **Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
+* **SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
+* **External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
+* **Auto-Publish Posts with Missed Schedule**. Trigger publishing of scheduled posts of all types marked with "missed schedule", anytime the site is visited.
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
   * _Show the featured image column_: in the list tables for pages and post types that support featured images.
   * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
@@ -37,7 +44,6 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 ### Admin Interface
 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
-* **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
 * **Admin Menu Organizer**. Customize the order of the admin menu and optionally change menu item title or hide some items.
 * **Disable Dashboard Widgets**. Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won't load any assets nor show up under Screen Options.
 * **Clean Up Admin Bar**. Remove various elements from the admin bar.
@@ -52,14 +58,14 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 ### Log In / Log Out
 
 * **Change Login URL**. Improve site security by using a custom login URL, e.g. www.example.com/backend
-* **Enable Log In/Out Menu**. Enable log in, log out and dynamic log in/out menu item for addition to any menu.
-* **Enable Last Login Column**. Log when users on the site last logged in and display the date and time in the users list table.
+* **Log In/Out Menu**. Enable log in, log out and dynamic log in/out menu item for addition to any menu.
+* **Last Login Column**. Log when users on the site last logged in and display the date and time in the users list table.
 * **Redirect After Login / Logout**. Set custom redirect URL for all or some user roles after login / logout.
 
 ### Custom Code
 
-* **Enable Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
-* **Enable Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
+* **Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
+* **Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
 * **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
 * **Manage ads.txt and app-ads.txt**. Easily edit and validate your ads.txt and app-ads.txt content.
 * **Manage robots.txt**. Easily edit and validate your robots.txt content.
@@ -80,11 +86,14 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Optimizations
 
-* **Enable Heartbeat Control**. Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.
+* **Image Upload Control**. Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.
+* **Revisions Control**. Prevent bloating the database by limiting the number of revisions to keep for some or all post types supporting revisions.
+* **Heartbeat Control**. Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.
 
 ### Utilities
 
-* **Enable Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.
+* **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
+* **Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
 Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
@@ -130,6 +139,13 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.3.0 (2023.01.30)
+
+* **[ADDED] Optimizations >> Image Upload Control**. Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.
+* **[CHANGED] Revisions Control** is now under the Optimizations category.
+* **[CHANGED] View Admin as Role** is now under the Utilities category.
+* **[CHANGED] Improve title of features** to be shorter and more consistent across categories.
 
 ### 4.2.2 (2023.01.24)
 

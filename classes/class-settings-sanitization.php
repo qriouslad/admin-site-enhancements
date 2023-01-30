@@ -54,20 +54,6 @@ class Settings_Sanitization {
 			}
 		}
 
-		// Enable Revisions Control
-		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
-		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );
-
-		if ( ! isset( $options['revisions_max_number'] ) ) $options['revisions_max_number'] = 10;
-		$options['revisions_max_number'] = ( ! empty( $options['revisions_max_number'] ) ) ? sanitize_text_field( $options['revisions_max_number'] ) : 10;
-
-		if ( is_array( $asenha_revisions_post_types ) ) {
-			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
-				if ( ! isset( $options['enable_revisions_control_for'][$post_type_slug] ) ) $options['enable_revisions_control_for'][$post_type_slug] = false;
-				$options['enable_revisions_control_for'][$post_type_slug] = ( 'on' == $options['enable_revisions_control_for'][$post_type_slug] ? true : false );
-			}
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( ! isset( $options['enable_missed_schedule_posts_auto_publish'] ) ) $options['enable_missed_schedule_posts_auto_publish'] = false;
 		$options['enable_missed_schedule_posts_auto_publish'] = ( 'on' == $options['enable_missed_schedule_posts_auto_publish'] ? true : false );
@@ -118,10 +104,6 @@ class Settings_Sanitization {
 				$options['hide_admin_bar_for'][$role_slug] = ( 'on' == $options['hide_admin_bar_for'][$role_slug] ? true : false );
 			}
 		}
-
-		// View Admin as Role
-		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
-		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
 		// Disable Dashboard Widgets
 		if ( ! isset( $options['disable_dashboard_widgets'] ) ) $options['disable_dashboard_widgets'] = false;
@@ -367,6 +349,30 @@ class Settings_Sanitization {
 		// OPTIMIZATIONS
 		// =================================================================
 
+		// Image Upload Control
+		if ( ! isset( $options['image_upload_control'] ) ) $options['image_upload_control'] = false;
+		$options['image_upload_control'] = ( 'on' == $options['image_upload_control'] ? true : false );
+
+		if ( ! isset( $options['image_max_width'] ) ) $options['image_max_width'] = 1920;
+		$options['image_max_width'] = ( ! empty( $options['image_max_width'] ) ) ? sanitize_text_field( $options['image_max_width'] ) : 1920;
+
+		if ( ! isset( $options['image_max_height'] ) ) $options['image_max_height'] = 1920;
+		$options['image_max_height'] = ( ! empty( $options['image_max_height'] ) ) ? sanitize_text_field( $options['image_max_height'] ) : 1920;
+
+		// Enable Revisions Control
+		if ( ! isset( $options['enable_revisions_control'] ) ) $options['enable_revisions_control'] = false;
+		$options['enable_revisions_control'] = ( 'on' == $options['enable_revisions_control'] ? true : false );
+
+		if ( ! isset( $options['revisions_max_number'] ) ) $options['revisions_max_number'] = 10;
+		$options['revisions_max_number'] = ( ! empty( $options['revisions_max_number'] ) ) ? sanitize_text_field( $options['revisions_max_number'] ) : 10;
+
+		if ( is_array( $asenha_revisions_post_types ) ) {
+			foreach ( $asenha_revisions_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, 
+				if ( ! isset( $options['enable_revisions_control_for'][$post_type_slug] ) ) $options['enable_revisions_control_for'][$post_type_slug] = false;
+				$options['enable_revisions_control_for'][$post_type_slug] = ( 'on' == $options['enable_revisions_control_for'][$post_type_slug] ? true : false );
+			}
+		}
+
 		// Enable Heartbeat Control
 		if ( ! isset( $options['enable_heartbeat_control'] ) ) $options['enable_heartbeat_control'] = false;
 		$options['enable_heartbeat_control'] = ( 'on' == $options['enable_heartbeat_control'] ? true : false );
@@ -387,6 +393,10 @@ class Settings_Sanitization {
 		// =================================================================
 		// UTILITIES
 		// =================================================================
+
+		// View Admin as Role
+		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
+		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );
 
 		// Enable Password Protection
 		if ( ! isset( $options['enable_password_protection'] ) ) $options['enable_password_protection'] = false;

@@ -138,11 +138,6 @@ class Admin_Site_Enhancements {
 			}
 		}
 
-		// Enable Revisions Control
-		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
-			add_filter( 'wp_revisions_to_keep', [ $content_management, 'limit_revisions_to_max_number' ], 10, 2 );
-		}
-
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
 			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
@@ -201,13 +196,6 @@ class Admin_Site_Enhancements {
 		// Hide Admin Bar
 		if ( array_key_exists( 'hide_admin_bar', $options ) && $options['hide_admin_bar'] && array_key_exists( 'hide_admin_bar_for', $options ) && isset( $options['hide_admin_bar_for'] ) ) {
 			add_filter( 'show_admin_bar', [ $admin_interface, 'hide_admin_bar_for_roles' ] );
-		}
-
-		// View Admin as Role
-		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
-			add_action( 'admin_bar_menu', [ $admin_interface, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
-			add_action( 'init', [ $admin_interface, 'role_switcher_to_view_admin_as' ] );
-			add_action( 'wp_die_handler', [ $admin_interface, 'custom_error_page_on_switch_failure' ] );
 		}
 
 		// Disable Dashboard Widgets
@@ -488,6 +476,17 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Optimizations features
 		$optimizations = new ASENHA\Classes\Optimizations;
 
+		// Image Upload Control
+		if ( array_key_exists( 'image_upload_control', $options ) && $options['image_upload_control'] ) {
+			add_filter( 'wp_handle_upload', [ $optimizations, 'image_upload_handler' ] );
+		}
+
+		// Revisions Control
+		if ( array_key_exists( 'enable_revisions_control', $options ) && $options['enable_revisions_control'] ) {
+			add_filter( 'wp_revisions_to_keep', [ $optimizations, 'limit_revisions_to_max_number' ], 10, 2 );
+		}
+
+		// Heartbeat Control
 		if ( array_key_exists( 'enable_heartbeat_control', $options ) && $options['enable_heartbeat_control'] ) {
 			add_filter( 'heartbeat_settings', [ $optimizations, 'maybe_modify_heartbeat_frequency' ], 99, 2 );
 			add_action( 'admin_enqueue_scripts', [ $optimizations, 'maybe_disable_heartbeat' ], 99 );
@@ -500,6 +499,13 @@ class Admin_Site_Enhancements {
 
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
+
+		// View Admin as Role
+		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
+			add_action( 'admin_bar_menu', [ $utilities, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section
+			add_action( 'init', [ $utilities, 'role_switcher_to_view_admin_as' ] );
+			add_action( 'wp_die_handler', [ $utilities, 'custom_error_page_on_switch_failure' ] );
+		}
 
 		// Enable Password Protection
 		if ( array_key_exists( 'enable_password_protection', $options ) && $options['enable_password_protection'] ) {
