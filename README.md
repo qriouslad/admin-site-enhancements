@@ -5,26 +5,26 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.3.0  
+Stable tag: 4.3.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate post, replace media, admin menu editor, custom css / code, disable gutenberg, heartbeat control and more in a single plugin.
+Duplicate post, SVG upload, image resize, hide notices, disable widgets, manage ads.txt, password protection and more in a single plugin.
 
 ## Description
 
 Admin and Site Enhancements helps you to easily enhance various admin workflows and site aspects while replacing multiple plugins doing it. 
 
->  "Amazing how many separate plugins this replaces!" ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
+> "Amazing how many separate plugins this replaces!" ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
 
 > "I really love how this plugin incorporates so many small fixes or tweaks that are needed with WordPress - I can now get rid of many other plugins." ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
-> " This plugin allows you to install and maintain one plugin instead of a host of smaller ones. My tests were all successful and I was happy to simplify my maintenance with fewer plugins." ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
+> "This plugin allows you to install and maintain one plugin instead of a host of smaller ones. My tests were all successful and I was happy to simplify my maintenance with fewer plugins." ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
 
->  "\[This\] is a Swiss Army Knife in terms of features that will keep your WordPress clean and optimal." ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
+> "\[This\] is a Swiss Army Knife in terms of features that will keep your WordPress clean and optimal." ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
 
 ### Content Management
 
@@ -139,6 +139,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.3.1 (2023.02.05)
+
+* **[CHANGED] Content Management >> Media Replace** option is no longer shown on the grid view of the media library. It will only show up on the attachment edit page which can be reached from both the list view via "Edit or Replace Media" link and the grid view media frame's "Edit more details" link.
 
 ### 4.3.0 (2023.01.30)
 
