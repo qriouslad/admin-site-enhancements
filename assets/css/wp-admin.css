@@ -9,10 +9,13 @@
 }
 
 /* Content Management >> Enable External Permalink */
-.external-permalink-input {
+/* Custom Code >> Custom Body Class */
+.external-permalink-input,
+.custom-body-class-input {
 	padding: 8px 0 0;
 }
 
-.external-permalink-input-description {
+.external-permalink-input-description,
+.custom-body-class-input-description {
 	margin-top: 4px;
 }
