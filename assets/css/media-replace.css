@@ -1,3 +1,5 @@
+/* Hide media replace field on media frame of media library grid view and add media screen */
+.upload-php .attachment-compat,
 .media-types.media-types-required-info {
 	display: none;
 }
