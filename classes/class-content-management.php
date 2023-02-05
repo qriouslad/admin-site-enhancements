@@ -528,7 +528,7 @@ class Content_Management {
 	 *
 	 * @since 1.1.0
 	 */
-	public function add_media_replacement_button( $fields ) {
+	public function add_media_replacement_button( $fields, $post ) {
 
 		// Enqueues all scripts, styles, settings, and templates necessary to use all media JS APIs.
 		// Reference: https://codex.wordpress.org/Javascript_Reference/wp.media

@@ -88,7 +88,7 @@ class Admin_Site_Enhancements {
 		// Enable Media Replacement
 		if ( array_key_exists( 'enable_media_replacement', $options ) && $options['enable_media_replacement'] ) {
 			add_filter( 'media_row_actions', [ $content_management, 'modify_media_list_table_edit_link' ], 10, 2 );
-			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ] );
+			add_filter( 'attachment_fields_to_edit', [ $content_management, 'add_media_replacement_button' ], 10, 2 );
 			add_action( 'edit_attachment', [ $content_management, 'replace_media' ] );
 			add_filter( 'post_updated_messages', [ $content_management, 'attachment_updated_custom_message' ] );
 		}
