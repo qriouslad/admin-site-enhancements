@@ -971,6 +971,52 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Custom Body Class
+
+		$field_id = 'enable_custom_body_class';
+		$field_slug = 'enable-custom-body-class';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Custom Body Class', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Add custom &lt;body&gt; class(es) on the singular view of some or all public post types. Compatible with classes already added using <a href="https://wordpress.org/plugins/wp-custom-body-class" target="_blank">Custom Body Class plugin</a>.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle custom-code ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'enable_custom_body_class_for';
+		$field_slug = 'enable-custom-body-class-for';
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( 'attachment' != $post_type_slug ) {
+					add_settings_field(
+						$field_id . '_' . $post_type_slug, // Field ID
+						'', // Field title
+						[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+						ASENHA_SLUG, // Settings page slug
+						'main-section', // Section ID
+						array(
+							'parent_field_id'		=> $field_id, // Custom argument
+							'field_id'				=> $post_type_slug, // Custom argument
+							'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+							'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
+							'class'					=> 'asenha-checkbox asenha-hide-th asenha-half custom-code ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+						)
+					);
+				}
+			}
+		}
+
 		// Manage ads.txt and app-ads.txt
 
 		$field_id = 'manage_ads_appads_txt';

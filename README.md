@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.3.1  
+Stable tag: 4.4.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -67,6 +67,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Custom Admin CSS**. Add custom CSS on all admin pages for all user roles.
 * **Custom Frontend CSS**. Add custom CSS on all frontend pages for all user roles.
 * **Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code**. Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
+* **Custom Body Class**. Add custom &lt;body&gt; class(es) on the singular view of some or all public post types. Compatible with classes already added using [Custom Body Class plugin](https://wordpress.org/plugins/wp-custom-body-class).
 * **Manage ads.txt and app-ads.txt**. Easily edit and validate your ads.txt and app-ads.txt content.
 * **Manage robots.txt**. Easily edit and validate your robots.txt content.
 
@@ -139,6 +140,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.4.0 (2023.02.05)
+
+* **[ADDED] Custom Code >> Custom Body Class**. Add custom &lt;body&gt; class(es) on the singular view of some or all public post types. Compatible with classes already added using [Custom Body Class plugin](https://wordpress.org/plugins/wp-custom-body-class).
 
 ### 4.3.1 (2023.02.05)
 

@@ -217,6 +217,17 @@ class Settings_Sanitization {
 		if ( ! isset( $options['custom_frontend_css'] ) ) $options['custom_frontend_css'] = '';
 		$options['custom_frontend_css'] = ( ! empty( $options['custom_frontend_css'] ) ) ? $options['custom_frontend_css'] : '';
 
+		// Custom Body Class
+		if ( ! isset( $options['enable_custom_body_class'] ) ) $options['enable_custom_body_class'] = false;
+		$options['enable_custom_body_class'] = ( 'on' == $options['enable_custom_body_class'] ? true : false );
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( ! isset( $options['enable_custom_body_class_for'][$post_type_slug] ) ) $options['enable_custom_body_class_for'][$post_type_slug] = false;
+				$options['enable_custom_body_class_for'][$post_type_slug] = ( 'on' == $options['enable_custom_body_class_for'][$post_type_slug] ? true : false );
+			}
+		}
+
 		// Manage ads.txt and app-ads.txt
 		if ( ! isset( $options['manage_ads_appads_txt'] ) ) $options['manage_ads_appads_txt'] = false;
 		$options['manage_ads_appads_txt'] = ( 'on' == $options['manage_ads_appads_txt'] ? true : false );

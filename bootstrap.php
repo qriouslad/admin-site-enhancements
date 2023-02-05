@@ -298,6 +298,15 @@ class Admin_Site_Enhancements {
 			add_filter( 'wp_enqueue_scripts', [ $custom_code, 'custom_frontend_css' ] );
 		}
 
+		// Custom Body Class
+		if ( array_key_exists( 'enable_custom_body_class', $options ) && $options['enable_custom_body_class'] ) {
+			if ( array_key_exists( 'enable_custom_body_class_for', $options ) && ! empty( $options['enable_custom_body_class_for'] ) )  {
+				add_action( 'add_meta_boxes', [ $custom_code, 'add_custom_body_class_meta_box' ], 10, 2 );
+				add_action( 'save_post', [ $custom_code, 'save_custom_body_class' ], 99 );
+				add_filter( 'body_class', [ $custom_code, 'append_custom_body_class'], 99 );
+			}
+		}
+
 		// Manage ads.txt and app-ads.txt
 		
 		if ( array_key_exists( 'manage_ads_appads_txt', $options ) && $options['manage_ads_appads_txt'] ) {

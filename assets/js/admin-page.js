@@ -104,6 +104,8 @@
       $('.body-code').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
       $('.footer-code-priority').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
       $('.footer-code').appendTo('.fields-custom-code .insert-head-body-footer-code .asenha-subfields');
+      $('.enable-custom-body-class').appendTo('.fields-custom-code > table > tbody');
+      $('.enable-custom-body-class-for').appendTo('.fields-custom-code .enable-custom-body-class .asenha-subfields');
       $('.manage-ads-appads-txt').appendTo('.fields-custom-code > table > tbody');
       $('.ads-txt-content').appendTo('.fields-custom-code .manage-ads-appads-txt .asenha-subfields');
       $('.app-ads-txt-content').appendTo('.fields-custom-code .manage-ads-appads-txt .asenha-subfields');
@@ -602,6 +604,25 @@
          } else {
             $('.enable-custom-frontend-css .asenha-subfields').hide();
             $('.enable-custom-frontend-css .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Enable Custom Body Class => show/hide post types checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[enable_custom_body_class]').checked ) {
+         $('.enable-custom-body-class .asenha-subfields').show();
+         $('.asenha-toggle.enable-custom-body-class td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.enable-custom-body-class .asenha-subfields').hide();        
+      }
+
+      // Enable Custom Body Class => show/hide post types checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[enable_custom_body_class]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.enable-custom-body-class .asenha-subfields').fadeIn();
+            $('.enable-custom-body-class .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.enable-custom-body-class .asenha-subfields').hide();
+            $('.enable-custom-body-class .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 
