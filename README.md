@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate post, SVG upload, image resize, hide notices, disable widgets, manage ads.txt, password protection and more in a single plugin.
+Duplicate post, image resize / optimize, replace media, admin menu editor, custom css / code, disable gutenberg and more in a single plugin.
 
 ## Description
 
