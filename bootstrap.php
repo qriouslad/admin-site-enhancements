@@ -462,6 +462,14 @@ class Admin_Site_Enhancements {
 				add_filter( 'the_generator', '', 'xhtml' );
 			}
 
+			if ( array_key_exists( 'disable_head_wlwmanifest_tag', $options ) && $options['disable_head_wlwmanifest_tag'] ) {
+				remove_action( 'wp_head', 'wlwmanifest_link' );
+			}
+
+			if ( array_key_exists( 'disable_head_rsd_tag', $options ) && $options['disable_head_rsd_tag'] ) {
+				remove_action( 'wp_head', 'rsd_link' );
+			}
+
 		}
 
 		// =================================================================

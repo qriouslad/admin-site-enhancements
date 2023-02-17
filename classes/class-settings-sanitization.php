@@ -342,6 +342,12 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_head_generator_tag'] ) ) $options['disable_head_generator_tag'] = false;
 		$options['disable_head_generator_tag'] = ( 'on' == $options['disable_head_generator_tag'] ? true : false );
 
+		if ( ! isset( $options['disable_head_wlwmanifest_tag'] ) ) $options['disable_head_wlwmanifest_tag'] = false;
+		$options['disable_head_wlwmanifest_tag'] = ( 'on' == $options['disable_head_wlwmanifest_tag'] ? true : false );
+
+		if ( ! isset( $options['disable_head_rsd_tag'] ) ) $options['disable_head_rsd_tag'] = false;
+		$options['disable_head_rsd_tag'] = ( 'on' == $options['disable_head_rsd_tag'] ? true : false );
+
 		// =================================================================
 		// SECURITY
 		// =================================================================

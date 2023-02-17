@@ -1497,6 +1497,40 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		$field_id = 'disable_head_wlwmanifest_tag';
+		$field_slug = 'disable-head-wlwmanifest-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the Windows Live Writer (WLW) manifest &lt;link&gt; tag in &lt;head&gt;. The WLW app was discontinued in 2017.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_rsd_tag';
+		$field_slug = 'disable-head-rsd-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the Really Simple Discovery (RSD) &lt;link&gt; tag in &lt;head&gt;. It\'s not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// =================================================================
 		// SECURITY
 		// =================================================================
