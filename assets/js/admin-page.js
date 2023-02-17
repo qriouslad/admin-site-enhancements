@@ -122,6 +122,8 @@
       $('.disable-rest-api').appendTo('.fields-disable-components > table > tbody');
       $('.disable-feeds').appendTo('.fields-disable-components > table > tbody');
       $('.disable-all-updates').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-smaller-components').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-head-generator-tag').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.limit-login-attempts').appendTo('.fields-security > table > tbody');
@@ -488,6 +490,25 @@
          } else {
             $('.disable-comments .asenha-subfields').hide();
             $('.disable-comments .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Disable Smaller Components => show/hide components checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[disable_smaller_components]').checked ) {
+         $('.disable-smaller-components .asenha-subfields').show();
+         $('.asenha-toggle.disable-smaller-components td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.disable-smaller-components .asenha-subfields').hide();        
+      }
+
+      // Smaller Components => show/hide post components checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[disable_smaller_components]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.disable-smaller-components .asenha-subfields').fadeIn();
+            $('.disable-smaller-components .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.disable-smaller-components .asenha-subfields').hide();
+            $('.disable-smaller-components .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

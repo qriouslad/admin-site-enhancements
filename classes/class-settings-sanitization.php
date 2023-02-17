@@ -334,6 +334,14 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_all_updates'] ) ) $options['disable_all_updates'] = false;
 		$options['disable_all_updates'] = ( 'on' == $options['disable_all_updates'] ? true : false );
 
+		// Disable Smaller Components
+
+		if ( ! isset( $options['disable_smaller_components'] ) ) $options['disable_smaller_components'] = false;
+		$options['disable_smaller_components'] = ( 'on' == $options['disable_smaller_components'] ? true : false );
+
+		if ( ! isset( $options['disable_head_generator_tag'] ) ) $options['disable_head_generator_tag'] = false;
+		$options['disable_head_generator_tag'] = ( 'on' == $options['disable_head_generator_tag'] ? true : false );
+
 		// =================================================================
 		// SECURITY
 		// =================================================================

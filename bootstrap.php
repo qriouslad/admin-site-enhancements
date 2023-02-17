@@ -453,6 +453,17 @@ class Admin_Site_Enhancements {
 
 		}
 
+		// Disable Feeds
+		if ( array_key_exists( 'disable_smaller_components', $options ) && $options['disable_smaller_components'] ) {
+
+			if ( array_key_exists( 'disable_head_generator_tag', $options ) && $options['disable_head_generator_tag'] ) {
+				remove_action( 'wp_head', 'wp_generator' );
+				add_filter( 'the_generator', '', 'html' );
+				add_filter( 'the_generator', '', 'xhtml' );
+			}
+
+		}
+
 		// =================================================================
 		// SECURITY
 		// =================================================================

@@ -1458,6 +1458,45 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Disable Smaller Components
+
+		$field_id = 'disable_smaller_components';
+		$field_slug = 'disable-smaller-components';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable Smaller Components', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Disable smaller components from running or loading. Make the site more secure and load slightly faster.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_generator_tag';
+		$field_slug = 'disable-head-generator-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the generator &lt;meta&gt; tag in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// =================================================================
 		// SECURITY
 		// =================================================================
