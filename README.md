@@ -5,14 +5,14 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.4.0  
+Stable tag: 4.5.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate post, SVG upload, image resize, hide notices, disable widgets, manage ads.txt, password protection and more in a single plugin.
+Duplicate post, image resize / optimize, replace media, admin menu editor, custom css / code, disable gutenberg and more in a single plugin.
 
 ## Description
 
@@ -53,6 +53,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
   * Remove comments counter/link
   * Remove new content menu
   * Remove 'Howdy' text
+  * Remove the Help tab and drawer
 * **Hide Admin Bar**. Hide it on the front end for all or some user roles.
 
 ### Log In / Log Out
@@ -78,6 +79,13 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 * **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
 * **Disable Feeds**. Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
 * **Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
+* **Disable Smaller Components**. Prevent smaller components from running or loading. Make the site more secure and load slightly faster.
+  * Disable the **generator &lt;meta&gt; tag** in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).
+  * Disable the **Windows Live Writer (WLW) manifest &lt;link&gt; tag** in &lt;head&gt;. The WLW app was discontinued in 2017.
+  * Disable the **Really Simple Discovery (RSD) &lt;link&gt; tag** in &lt;head&gt;. It's not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.
+  * Disable the default **WordPress shortlink &lt;link&gt; tag** in &lt;head&gt;. Ignored by search engines and has minimal practical use case. Usually, a dedicated shortlink plugin or service is preferred that allows for nice names in the short links and tracking of clicks when sharing the link on social media.
+  * Disable loading of **dashicons CSS and JS files** on the front-end for public site visitors.
+  * Disable **emoji support for pages, posts and custom post types** on the admin and frontend. The support is primarily useful for older browsers that do not have native support for it. Most modern browsers across different OSes and devices now have native support for it.
 
 ### Security
 
@@ -140,6 +148,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.5.0 (2023.02.17)
+
+* **[ADDED] Admin Interface >> Clean Up Admin Bar >> Remove the Help tab and drawer**.
+* **[ADDED] Disable Components >> Disable Smaller Components**. Prevent smaller components from running or loading. Make the site more secure and load slightly faster. This includes disabling the generator &lt;meta&gt; tag, the Windows Live Writer (WLW) manifest &lt;link&gt; tag, the Really Simple Discovery (RSD) &lt;link&gt; tag and the WordPress shortlink &lt;link&gt; tag in &lt;head&gt;, as well as disabling dashicons CSS and JS files for site visitors, and emoji support for pages, posts and custom post types.
 
 ### 4.4.0 (2023.02.05)
 

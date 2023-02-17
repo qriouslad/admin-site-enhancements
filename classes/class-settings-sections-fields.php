@@ -576,6 +576,23 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		$field_id = 'hide_help_drawer';
+		$field_slug = 'hide-help-drawer';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Remove the Help tab and drawer', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Hide Admin Bar
 
 		$field_id = 'hide_admin_bar';
@@ -1438,6 +1455,130 @@ class Settings_Sections_Fields {
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle disable-components ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Disable Smaller Components
+
+		$field_id = 'disable_smaller_components';
+		$field_slug = 'disable-smaller-components';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Disable Smaller Components', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Prevent smaller components from running or loading. Make the site more secure and load slightly faster.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_generator_tag';
+		$field_slug = 'disable-head-generator-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the <strong>generator &lt;meta&gt; tag</strong> in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_wlwmanifest_tag';
+		$field_slug = 'disable-head-wlwmanifest-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the <strong>Windows Live Writer (WLW) manifest &lt;link&gt; tag</strong> in &lt;head&gt;. The WLW app was discontinued in 2017.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_rsd_tag';
+		$field_slug = 'disable-head-rsd-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the <strong>Really Simple Discovery (RSD) &lt;link&gt; tag</strong> in &lt;head&gt;. It\'s not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_head_shortlink_tag';
+		$field_slug = 'disable-head-shortlink-tag';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable the default <strong>WordPress shortlink &lt;link&gt; tag</strong> in &lt;head&gt;. Ignored by search engines and has minimal practical use case. Usually, a dedicated shortlink plugin or service is preferred that allows for nice names in the short links and tracking of clicks when sharing the link on social media.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_frontend_dashicons';
+		$field_slug = 'disable-frontend-dashicons';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable loading of <strong>dashicons CSS and JS files</strong> on the front-end for public site visitors.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'disable_emoji_support';
+		$field_slug = 'disable-emoji-support';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable <strong>emoji support for pages, posts and custom post types</strong> on the admin and frontend. The support is primarily useful for older browsers that do not have native support for it. Most modern browsers across different OSes and devices now have native support for it.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 

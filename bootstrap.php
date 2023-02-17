@@ -206,6 +206,11 @@ class Admin_Site_Enhancements {
 		// Hide or Modify Elements
 		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
 			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
+
+			if ( array_key_exists( 'hide_help_drawer', $options ) && $options['hide_help_drawer'] ) {
+				add_action( 'admin_head', [ $admin_interface, 'hide_help_drawer' ] );
+			}
+
 		}
 
 		// Customize Admin Menu
@@ -445,6 +450,38 @@ class Admin_Site_Enhancements {
 
 			// Remove Dashboard >> Updates menu
 			add_action( 'admin_menu', [ $disable_components, 'remove_updates_menu' ] );
+
+		}
+
+		// Disable Smaller Components
+		if ( array_key_exists( 'disable_smaller_components', $options ) && $options['disable_smaller_components'] ) {
+
+			if ( array_key_exists( 'disable_head_generator_tag', $options ) && $options['disable_head_generator_tag'] ) {
+				remove_action( 'wp_head', 'wp_generator' );
+				add_filter( 'the_generator', '', 'html' );
+				add_filter( 'the_generator', '', 'xhtml' );
+			}
+
+			if ( array_key_exists( 'disable_head_wlwmanifest_tag', $options ) && $options['disable_head_wlwmanifest_tag'] ) {
+				remove_action( 'wp_head', 'wlwmanifest_link' );
+			}
+
+			if ( array_key_exists( 'disable_head_rsd_tag', $options ) && $options['disable_head_rsd_tag'] ) {
+				remove_action( 'wp_head', 'rsd_link' );
+			}
+
+			if ( array_key_exists( 'disable_head_shortlink_tag', $options ) && $options['disable_head_shortlink_tag'] ) {
+				remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+				remove_action ( 'template_redirect', 'wp_shortlink_header', 100, 0 );
+			}
+
+			if ( array_key_exists( 'disable_frontend_dashicons', $options ) && $options['disable_frontend_dashicons'] ) {
+				add_action( 'init', [ $disable_components, 'disable_dashicons_public_assets' ] );
+			}
+
+			if ( array_key_exists( 'disable_emoji_support', $options ) && $options['disable_emoji_support'] ) {
+				add_action( 'init', [ $disable_components, 'disable_emoji_support' ] );
+			}
 
 		}
 

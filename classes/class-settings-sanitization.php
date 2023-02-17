@@ -142,6 +142,9 @@ class Settings_Sanitization {
 		if ( ! isset( $options['hide_ab_howdy'] ) ) $options['hide_ab_howdy'] = false;
 		$options['hide_ab_howdy'] = ( 'on' == $options['hide_ab_howdy'] ? true : false );
 
+		if ( ! isset( $options['hide_help_drawer'] ) ) $options['hide_help_drawer'] = false;
+		$options['hide_help_drawer'] = ( 'on' == $options['hide_help_drawer'] ? true : false );
+
 		// Customize Admin Menu
 
 		if ( ! isset( $options['customize_admin_menu'] ) ) $options['customize_admin_menu'] = false;
@@ -330,6 +333,29 @@ class Settings_Sanitization {
 		// Disable Auto Updates
 		if ( ! isset( $options['disable_all_updates'] ) ) $options['disable_all_updates'] = false;
 		$options['disable_all_updates'] = ( 'on' == $options['disable_all_updates'] ? true : false );
+
+		// Disable Smaller Components
+
+		if ( ! isset( $options['disable_smaller_components'] ) ) $options['disable_smaller_components'] = false;
+		$options['disable_smaller_components'] = ( 'on' == $options['disable_smaller_components'] ? true : false );
+
+		if ( ! isset( $options['disable_head_generator_tag'] ) ) $options['disable_head_generator_tag'] = false;
+		$options['disable_head_generator_tag'] = ( 'on' == $options['disable_head_generator_tag'] ? true : false );
+
+		if ( ! isset( $options['disable_head_wlwmanifest_tag'] ) ) $options['disable_head_wlwmanifest_tag'] = false;
+		$options['disable_head_wlwmanifest_tag'] = ( 'on' == $options['disable_head_wlwmanifest_tag'] ? true : false );
+
+		if ( ! isset( $options['disable_head_rsd_tag'] ) ) $options['disable_head_rsd_tag'] = false;
+		$options['disable_head_rsd_tag'] = ( 'on' == $options['disable_head_rsd_tag'] ? true : false );
+
+		if ( ! isset( $options['disable_head_shortlink_tag'] ) ) $options['disable_head_shortlink_tag'] = false;
+		$options['disable_head_shortlink_tag'] = ( 'on' == $options['disable_head_shortlink_tag'] ? true : false );
+
+		if ( ! isset( $options['disable_frontend_dashicons'] ) ) $options['disable_frontend_dashicons'] = false;
+		$options['disable_frontend_dashicons'] = ( 'on' == $options['disable_frontend_dashicons'] ? true : false );
+
+		if ( ! isset( $options['disable_emoji_support'] ) ) $options['disable_emoji_support'] = false;
+		$options['disable_emoji_support'] = ( 'on' == $options['disable_emoji_support'] ? true : false );
 
 		// =================================================================
 		// SECURITY

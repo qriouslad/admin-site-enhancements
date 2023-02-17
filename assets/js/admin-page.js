@@ -77,6 +77,7 @@
       $('.hide-ab-comments-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-new-content-menu').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-ab-howdy').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
+      $('.hide-help-drawer').appendTo('.fields-admin-interface .hide-modify-elements .asenha-subfields');
       $('.hide-admin-bar').appendTo('.fields-admin-interface > table > tbody');
       $('.hide-admin-bar-for').appendTo('.fields-admin-interface .hide-admin-bar .asenha-subfields');
 
@@ -121,6 +122,13 @@
       $('.disable-rest-api').appendTo('.fields-disable-components > table > tbody');
       $('.disable-feeds').appendTo('.fields-disable-components > table > tbody');
       $('.disable-all-updates').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-smaller-components').appendTo('.fields-disable-components > table > tbody');
+      $('.disable-head-generator-tag').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
+      $('.disable-head-wlwmanifest-tag').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
+      $('.disable-head-rsd-tag').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
+      $('.disable-head-shortlink-tag').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
+      $('.disable-frontend-dashicons').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
+      $('.disable-emoji-support').appendTo('.fields-disable-components .disable-smaller-components .asenha-subfields');
 
       // Place fields into "Security" tab
       $('.limit-login-attempts').appendTo('.fields-security > table > tbody');
@@ -487,6 +495,25 @@
          } else {
             $('.disable-comments .asenha-subfields').hide();
             $('.disable-comments .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
+
+      // Disable Smaller Components => show/hide components checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[disable_smaller_components]').checked ) {
+         $('.disable-smaller-components .asenha-subfields').show();
+         $('.asenha-toggle.disable-smaller-components td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.disable-smaller-components .asenha-subfields').hide();        
+      }
+
+      // Smaller Components => show/hide post components checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[disable_smaller_components]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.disable-smaller-components .asenha-subfields').fadeIn();
+            $('.disable-smaller-components .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.disable-smaller-components .asenha-subfields').hide();
+            $('.disable-smaller-components .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

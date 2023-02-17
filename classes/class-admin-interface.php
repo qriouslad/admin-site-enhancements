@@ -554,4 +554,16 @@ class Admin_Interface {
 
 	}
 
+	/**
+	 * Hide the Help tab and drawer
+	 *
+	 * @since 4.5.0
+	 */
+	public function hide_help_drawer() {
+		if ( is_admin() ) {
+			$screen = get_current_screen();
+			$screen->remove_help_tabs();
+		}
+	}
+
 }
