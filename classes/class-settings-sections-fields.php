@@ -1492,7 +1492,7 @@ class Settings_Sections_Fields {
 			array(
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Disable the generator &lt;meta&gt; tag in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).', // Custom argument
+				'field_label'			=> 'Disable the <strong>generator &lt;meta&gt; tag</strong> in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -1509,7 +1509,7 @@ class Settings_Sections_Fields {
 			array(
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Disable the Windows Live Writer (WLW) manifest &lt;link&gt; tag in &lt;head&gt;. The WLW app was discontinued in 2017.', // Custom argument
+				'field_label'			=> 'Disable the <strong>Windows Live Writer (WLW) manifest &lt;link&gt; tag</strong> in &lt;head&gt;. The WLW app was discontinued in 2017.', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -1526,7 +1526,7 @@ class Settings_Sections_Fields {
 			array(
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Disable the Really Simple Discovery (RSD) &lt;link&gt; tag in &lt;head&gt;. It\'s not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.', // Custom argument
+				'field_label'			=> 'Disable the <strong>Really Simple Discovery (RSD) &lt;link&gt; tag</strong> in &lt;head&gt;. It\'s not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -1543,10 +1543,28 @@ class Settings_Sections_Fields {
 			array(
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Disable the default WordPress shortlink &lt;link&gt; tag in &lt;head&gt;. Ignored by search engines and has minimal practical use case. Usually, a dedicated shortlink plugin or service is preferred that allows for nice names in the short links and tracking of clicks when sharing the link on social media.', // Custom argument
+				'field_label'			=> 'Disable the default <strong>WordPress shortlink &lt;link&gt; tag</strong> in &lt;head&gt;. Ignored by search engines and has minimal practical use case. Usually, a dedicated shortlink plugin or service is preferred that allows for nice names in the short links and tracking of clicks when sharing the link on social media.', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
+
+		$field_id = 'disable_emoji_support';
+		$field_slug = 'disable-emoji-support';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Disable <strong>emoji support for pages, posts and custom post types</strong> on the admin and frontend. The support is primarily useful for older browsers that do not have native support for it. Most modern browsers across different OSes and devices now have native support for it.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// =================================================================
 		// SECURITY
 		// =================================================================
