@@ -453,7 +453,7 @@ class Admin_Site_Enhancements {
 
 		}
 
-		// Disable Feeds
+		// Disable Smaller Components
 		if ( array_key_exists( 'disable_smaller_components', $options ) && $options['disable_smaller_components'] ) {
 
 			if ( array_key_exists( 'disable_head_generator_tag', $options ) && $options['disable_head_generator_tag'] ) {
@@ -468,6 +468,11 @@ class Admin_Site_Enhancements {
 
 			if ( array_key_exists( 'disable_head_rsd_tag', $options ) && $options['disable_head_rsd_tag'] ) {
 				remove_action( 'wp_head', 'rsd_link' );
+			}
+
+			if ( array_key_exists( 'disable_head_shortlink_tag', $options ) && $options['disable_head_shortlink_tag'] ) {
+				remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+				remove_action ( 'template_redirect', 'wp_shortlink_header', 100, 0 );
 			}
 
 		}
