@@ -351,6 +351,9 @@ class Settings_Sanitization {
 		if ( ! isset( $options['disable_head_shortlink_tag'] ) ) $options['disable_head_shortlink_tag'] = false;
 		$options['disable_head_shortlink_tag'] = ( 'on' == $options['disable_head_shortlink_tag'] ? true : false );
 
+		if ( ! isset( $options['disable_frontend_dashicons'] ) ) $options['disable_frontend_dashicons'] = false;
+		$options['disable_frontend_dashicons'] = ( 'on' == $options['disable_frontend_dashicons'] ? true : false );
+
 		if ( ! isset( $options['disable_emoji_support'] ) ) $options['disable_emoji_support'] = false;
 		$options['disable_emoji_support'] = ( 'on' == $options['disable_emoji_support'] ? true : false );
 

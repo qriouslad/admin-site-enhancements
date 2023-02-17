@@ -475,6 +475,10 @@ class Admin_Site_Enhancements {
 				remove_action ( 'template_redirect', 'wp_shortlink_header', 100, 0 );
 			}
 
+			if ( array_key_exists( 'disable_frontend_dashicons', $options ) && $options['disable_frontend_dashicons'] ) {
+				add_action( 'init', [ $disable_components, 'disable_dashicons_public_assets' ] );
+			}
+
 			if ( array_key_exists( 'disable_emoji_support', $options ) && $options['disable_emoji_support'] ) {
 				add_action( 'init', [ $disable_components, 'disable_emoji_support' ] );
 			}

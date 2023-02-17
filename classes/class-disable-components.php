@@ -353,6 +353,18 @@ class Disable_Components {
 	}
 
 	/**
+	 * Disable loading of frontend public assets of dashicons
+	 *
+	 * @since 4.5.0
+	 */
+	public function disable_dashicons_public_assets() {
+		if ( ! is_user_logged_in() ) {
+			wp_dequeue_style( 'dashicons' );
+			wp_deregister_style( 'dashicons' );
+		}
+	}
+
+	/**
 	 * Disable emoji support
 	 *
 	 * @since 4.5.0
