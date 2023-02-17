@@ -1473,7 +1473,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Disable smaller components from running or loading. Make the site more secure and load slightly faster.', // Custom argument
+				'field_description'		=> 'Prevent smaller components from running or loading. Make the site more secure and load slightly faster.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle admin-interface ' . $field_slug, // Custom class for the <tr> element
