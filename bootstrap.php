@@ -206,6 +206,11 @@ class Admin_Site_Enhancements {
 		// Hide or Modify Elements
 		if ( array_key_exists( 'hide_modify_elements', $options ) && $options['hide_modify_elements'] ) {
 			add_filter( 'admin_bar_menu', [ $admin_interface, 'modify_admin_bar_menu' ], 5 ); // priority 5 to execute earlier than the normal 10
+
+			if ( array_key_exists( 'hide_help_drawer', $options ) && $options['hide_help_drawer'] ) {
+				add_action( 'admin_head', [ $admin_interface, 'hide_help_drawer' ] );
+			}
+
 		}
 
 		// Customize Admin Menu

@@ -142,6 +142,9 @@ class Settings_Sanitization {
 		if ( ! isset( $options['hide_ab_howdy'] ) ) $options['hide_ab_howdy'] = false;
 		$options['hide_ab_howdy'] = ( 'on' == $options['hide_ab_howdy'] ? true : false );
 
+		if ( ! isset( $options['hide_help_drawer'] ) ) $options['hide_help_drawer'] = false;
+		$options['hide_help_drawer'] = ( 'on' == $options['hide_help_drawer'] ? true : false );
+
 		// Customize Admin Menu
 
 		if ( ! isset( $options['customize_admin_menu'] ) ) $options['customize_admin_menu'] = false;

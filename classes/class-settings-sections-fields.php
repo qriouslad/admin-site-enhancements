@@ -576,6 +576,23 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		$field_id = 'hide_help_drawer';
+		$field_slug = 'hide-help-drawer';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Remove the Help tab and drawer', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th admin-interface ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Hide Admin Bar
 
 		$field_id = 'hide_admin_bar';
