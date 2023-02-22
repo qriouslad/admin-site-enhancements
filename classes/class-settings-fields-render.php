@@ -165,6 +165,19 @@ class Settings_Fields_Render {
 	}
 
 	/**
+	 * Render description field as sub-field of a toggle/switcher checkbox
+	 *
+	 * @since 4.6.0
+	 */
+	function render_description_subfield( $args ) {
+
+		$field_description = $args['field_description'];
+
+		echo '<div class="asenha-subfield-description">' . $field_description . '</div>';
+
+	}
+
+	/**
 	 * Render password field as sub-field of a toggle/switcher checkbox
 	 *
 	 * @since 4.1.0

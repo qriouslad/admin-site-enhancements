@@ -154,6 +154,16 @@
       $('.heartbeat-interval-for-frontend').appendTo('.fields-optimizations .enable-heartbeat-control .asenha-subfields');
 
       // Place fields into "Utilities" tab
+      $('.smtp-email-delivery').appendTo('.fields-utilities > table > tbody');
+      $('.smtp-host').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-port').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-security').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-username').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-password').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-default-from-name').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-default-from-email').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-default-from-description').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-debug').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
       $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
       $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');
@@ -813,6 +823,25 @@
             $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').show();
          } else {
             $('.heartbeat-interval-for-frontend .asenha-subfield-select-inner').hide();            
+         }
+      });
+
+      // SMTP Email Delivery => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[smtp_email_delivery]').checked ) {
+         $('.smtp-email-delivery .asenha-subfields').show();
+         $('.asenha-toggle.smtp-email-delivery td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.smtp-email-delivery .asenha-subfields').hide();        
+      }
+
+      // SMTP Email Delivery => show/hide subfields on toggle click
+      document.getElementById('admin_site_enhancements[smtp_email_delivery]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.smtp-email-delivery .asenha-subfields').fadeIn();
+            $('.smtp-email-delivery .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.smtp-email-delivery .asenha-subfields').hide();
+            $('.smtp-email-delivery .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 

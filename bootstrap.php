@@ -546,6 +546,11 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Utilities features
 		$utilities = new ASENHA\Classes\Utilities;
 
+		// SMTP Email Delivery
+		if ( array_key_exists( 'smtp_email_delivery', $options ) && $options['smtp_email_delivery'] ) {
+			add_action( 'phpmailer_init', [ $utilities, 'deliver_email_via_smtp' ] );
+		}
+
 		// View Admin as Role
 		if ( array_key_exists( 'view_admin_as_role', $options ) && $options['view_admin_as_role'] ) {
 			add_action( 'admin_bar_menu', [ $utilities, 'view_admin_as_admin_bar_menu' ], 8 ); // Priority 8 so it is next to username section

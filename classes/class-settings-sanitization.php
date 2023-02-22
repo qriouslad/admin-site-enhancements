@@ -431,6 +431,36 @@ class Settings_Sanitization {
 		// UTILITIES
 		// =================================================================
 
+		// SMTP Email Delivery
+		if ( ! isset( $options['smtp_email_delivery'] ) ) $options['smtp_email_delivery'] = false;
+		$options['smtp_email_delivery'] = ( 'on' == $options['smtp_email_delivery'] ? true : false );
+
+		if ( ! isset( $options['smtp_host'] ) ) $options['smtp_host'] = '';
+		$options['smtp_host'] = ( ! empty( $options['smtp_host'] ) ) ? sanitize_text_field( $options['smtp_host'] ) : '';
+
+		if ( ! isset( $options['smtp_port'] ) ) $options['smtp_port'] = '';
+		$options['smtp_port'] = ( ! empty( $options['smtp_port'] ) ) ? $options['smtp_port'] : '';
+
+		if ( ! isset( $options['smtp_security'] ) ) $options['smtp_security'] = 'none';
+		$options['smtp_security'] = ( ! empty( $options['smtp_security'] ) ) ? $options['smtp_security'] : 'none';
+
+		if ( ! isset( $options['smtp_username'] ) ) $options['smtp_username'] = '';
+		$options['smtp_username'] = ( ! empty( $options['smtp_username'] ) ) ? sanitize_text_field( $options['smtp_username'] ) : '';
+
+		if ( ! isset( $options['smtp_password'] ) ) $options['smtp_password'] = base64_encode('');
+		$options['smtp_password'] = ( ! empty( $options['smtp_password'] ) ) ? base64_encode( $options['smtp_password'] ) : base64_encode('');
+
+		if ( ! isset( $options['smtp_default_from_name'] ) ) $options['smtp_default_from_name'] = '';
+		$options['smtp_default_from_name'] = ( ! empty( $options['smtp_default_from_name'] ) ) ? sanitize_text_field( $options['smtp_default_from_name'] ) : '';
+
+		if ( ! isset( $options['smtp_default_from_email'] ) ) $options['smtp_default_from_email'] = '';
+		$options['smtp_default_from_email'] = ( ! empty( $options['smtp_default_from_email'] ) ) ? sanitize_text_field( $options['smtp_default_from_email'] ) : '';
+
+		if ( ! isset( $options['smtp_default_from_description'] ) ) $options['smtp_default_from_description'] = '';
+
+		if ( ! isset( $options['smtp_debug'] ) ) $options['smtp_debug'] = false;
+		$options['smtp_debug'] = ( 'on' == $options['smtp_debug'] ? true : false );
+
 		// View Admin as Role
 		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
 		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );

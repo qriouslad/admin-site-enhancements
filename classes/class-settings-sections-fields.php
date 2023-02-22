@@ -2034,6 +2034,204 @@ class Settings_Sections_Fields {
 		// UTILITIES
 		// =================================================================
 
+		// SMTP Email Delivery
+
+		$field_id = 'smtp_email_delivery';
+		$field_slug = 'smtp-email-delivery';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'SMTP Email Delivery', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_host';
+		$field_slug = 'smtp-host';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Host</span>', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix wide utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_port';
+		$field_slug = 'smtp-port';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Port</span>', // Field title
+			[ $render_field, 'render_number_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix narrow utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_security';
+		$field_slug = 'smtp-security';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Security</span>', // Field title
+			[ $render_field, 'render_radio_buttons_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				// 'field_label'			=> 'Temporary label', // Custom argument
+				'field_radios'			=> array(
+					'None'		=> 'none',
+					'SSL'		=> 'ssl',
+					'TLS'		=> 'tls',
+				),
+				'field_default'			=> 'default',
+				'class'					=> 'asenha-radio-buttons with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
+			),
+		);
+
+		$field_id = 'smtp_username';
+		$field_slug = 'smtp-username';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Username</span>', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix wide utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_password';
+		$field_slug = 'smtp-password';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Password</span>', // Field title
+			[ $render_field, 'render_password_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix wide utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_default_from_name';
+		$field_slug = 'smtp-default-from-name';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Default FROM name</span>', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix wide utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_default_from_email';
+		$field_slug = 'smtp-default-from-email';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'<span class="field-sublabel sublabel-wide">Default FROM email</span>', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'class'					=> 'asenha-text with-prefix-suffix wide utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_default_from_description';
+		$field_slug = 'smtp-default-from-description';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_description_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_description'		=> 'If set, the default FROM name/email overrides WordPress core defaults but can still be overridden by plugins that enables custom FROM name/email, e.g. form plugins.', // Custom argument
+				'class'					=> 'asenha-description utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'smtp_debug';
+		$field_slug = 'smtp-debug';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Enable debug mode and output the debug info into WordPress debug.log file.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th top-border utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// View Admin as Role
 
 		$field_id = 'view_admin_as_role';

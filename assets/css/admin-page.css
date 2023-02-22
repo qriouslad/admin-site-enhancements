@@ -384,6 +384,14 @@
     height: 8px;
 }
 
+.field-sublabel {
+    display: inline-block;
+}
+
+.sublabel-wide {
+    min-width: 180px;
+}
+
 /* Text input subfield */
 
 .form-table .change-login-url .asenha-subfields,
@@ -397,8 +405,15 @@
     justify-content: flex-start;
 }
 
+.form-table .asenha-subfields tr.asenha-radio-buttons.with-prefix-suffix {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+
 .form-table .asenha-toggle .asenha-text.with-prefix-suffix th:not(.datatable-th),
-.form-table .asenha-toggle .asenha-number.with-prefix-suffix th:not(.datatable-th) {
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix th:not(.datatable-th),
+.form-table .asenha-toggle .asenha-radio-buttons.with-prefix-suffix th:not(.datatable-th) {
     display: flex;
     height: 30px;
     line-height: 30px;
@@ -410,18 +425,26 @@
 }
 
 .form-table .asenha-toggle .asenha-text.with-prefix-suffix.no-margin th:not(.datatable-th),
-.form-table .asenha-toggle .asenha-number.with-prefix-suffix.no-margin th:not(.datatable-th) {
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix.no-margin th:not(.datatable-th),
+.form-table .asenha-toggle .asenha-radio-buttons.with-prefix-suffix.no-margin th:not(.datatable-th) {
     margin-right: 0;
 }
 
 .form-table .asenha-toggle .asenha-text.with-prefix-suffix td:not(.datatable-td),
-.form-table .asenha-toggle .asenha-number.with-prefix-suffix td:not(.datatable-td) {
+.form-table .asenha-toggle .asenha-number.with-prefix-suffix td:not(.datatable-td),
+.form-table .asenha-toggle .asenha-radio-buttons.with-prefix-suffix td:not(.datatable-td) {
     display: flex;
     align-items: center;
 }
 
-.form-table .custom-login-slug td:not(.datatable-td) {
+.form-table .custom-login-slug td:not(.datatable-td),
+.form-table .smtp-security td:not(.datatable-td) {
     margin-bottom: 0;
+}
+
+.form-table .smtp-security td:not(.datatable-td) {
+    position: relative;
+    top: 2px;
 }
 
 /* Text area input subfield */
@@ -464,6 +487,11 @@
 .asenha-subfield-number.with-suffix,
 .asenha-subfield-select.with-suffix {
     margin: 0 4px 0 0;
+}
+
+.wide .asenha-subfield-text,
+.wide .asenha-subfield-password {
+    width: 240px;
 }
 
 .narrow .asenha-subfield-text {
