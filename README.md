@@ -5,14 +5,14 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.5.0  
+Stable tag: 4.6.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate post, image resize / optimize, replace media, admin menu editor, custom css / code, disable gutenberg and more in a single plugin.
+Duplicate post, image resize / optimize, email via SMTP, admin menu editor, custom css / code, disable gutenberg and much more in a single plugin.
 
 ## Description
 
@@ -101,6 +101,7 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 ### Utilities
 
+* **SMTP Email Delivery**. Use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
 * **Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
@@ -148,6 +149,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.6.0 (2023.02.22)
+
+* **[ADDED] Utilities >> SMTP Email Delivery**. Use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
 
 ### 4.5.0 (2023.02.17)
 
