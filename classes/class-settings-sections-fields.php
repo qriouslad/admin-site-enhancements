@@ -2165,7 +2165,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'<span class="field-sublabel sublabel-wide">Default FROM name</span>', // Field title
+			'<span class="field-sublabel sublabel-wide">FROM name</span>', // Field title
 			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -2185,7 +2185,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'<span class="field-sublabel sublabel-wide">Default FROM email</span>', // Field title
+			'<span class="field-sublabel sublabel-wide">FROM email</span>', // Field title
 			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -2210,7 +2210,7 @@ class Settings_Sections_Fields {
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
 			array(
-				'field_description'		=> 'If set, the default FROM name/email overrides WordPress core defaults but can still be overridden by plugins that enables custom FROM name/email, e.g. form plugins.', // Custom argument
+				'field_description'		=> 'If set, the FROM name/email overrides WordPress core defaults but can still be overridden by plugins that enables custom FROM name/email, e.g. form plugins.', // Custom argument
 				'class'					=> 'asenha-description utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
