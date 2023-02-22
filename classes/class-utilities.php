@@ -630,4 +630,66 @@ class Utilities {
 
 	}
 
+	/**
+	 * Send emails using external SMTP service
+	 *
+	 * @since 4.5.0
+	 */
+	public function deliver_email_via_smtp( $phpmailer ) {
+
+		$options 					= get_option( ASENHA_SLUG_U, array() );
+		$smtp_host					= $options['smtp_host'];
+		$smtp_port 					= $options['smtp_port'];
+		$smtp_security 				= $options['smtp_security'];
+		$smtp_username 				= $options['smtp_username'];
+		$smtp_password 				= base64_decode( $options['smtp_password'] );
+		$smtp_default_from_name 	= $options['smtp_default_from_name'];
+		$smtp_default_from_email 	= $options['smtp_default_from_email'];
+		$smtp_debug 					= $options['smtp_debug'];
+
+		// Do nothing if host or password is empty
+		if ( empty( $smtp_host ) || empty( $smtp_password ) ) {
+			return;
+		}
+
+		// Send using SMTP
+		$phpmailer->isSMTP(); // phpcs:ignore
+
+		// Enanble SMTP authentication
+		$phpmailer->SMTPAuth 	= true; // phpcs:ignore
+
+		// Set some other defaults
+		// $phpmailer->CharSet 	= 'utf-8'; // phpcs:ignore
+		$phpmailer->XMailer 	= 'Admin and Site Enhancements v' . ASENHA_VERSION . ' - a WordPress plugin'; // phpcs:ignore
+
+		$phpmailer->Host 		= $smtp_host; 		// phpcs:ignore
+		$phpmailer->Port 		= $smtp_port; 		// phpcs:ignore
+		$phpmailer->SMTPSecure 	= $smtp_security; 	// phpcs:ignore
+		$phpmailer->Username 	= $smtp_username; 	// phpcs:ignore
+		$phpmailer->Password 	= $smtp_password; 	// phpcs:ignore
+
+		// Maybe override FROM email and/or name if the sender is "WordPress <wordpress@sitedomain.com>", the default from WordPress core and not yet overridden by another plugin.
+
+		$from_name = $phpmailer->FromName;
+
+		if ( ( 'WordPress' === $from_name ) && ! empty( $smtp_default_from_name ) ) {
+			$phpmailer->FromName = $smtp_default_from_name;
+		}
+
+		$from_email_beginning = substr( $phpmailer->From, 0, 0 ); // Get the first 9 characters of the current FROM email
+
+		if ( ( 'wordpress' === $from_email_beginning ) && ! empty( $smtp_default_from_email ) ) {
+			$phpmailer->From = $smtp_default_from_email;
+		}
+
+		// If debug mode is enabled, send debug info (SMTP::DEBUG_CONNECTION) to WordPress debug.log file set in wp-config.php
+		// Reference: https://github.com/PHPMailer/PHPMailer/wiki/SMTP-Debugging
+
+		if ( $smtp_debug ) {
+			$phpmailer->SMTPDebug 	= 3; 	//phpcs:ignore
+			$phpmailer->Debugoutput = 'error_log'; 				//phpcs:ignore
+		}
+
+	}
+
 }
