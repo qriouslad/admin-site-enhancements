@@ -385,14 +385,14 @@ class Utilities {
 	}
 
 	/**
-	 * Show admin bar status icon
+	 * Show Password Protection admin bar status icon
 	 *
 	 * @since 4.1.0
 	 */
-	public function show_admin_bar_icon() {
-		add_action( 'wp_before_admin_bar_render', [ $this, 'add_wp_admin_bar_item' ] );
-		add_action( 'admin_head', [ $this, 'add_wp_admin_bar_item_styles' ] );
-		add_action( 'wp_head', [ $this, 'add_wp_admin_bar_item_styles' ] );
+	public function show_password_protection_admin_bar_icon() {
+		add_action( 'wp_before_admin_bar_render', [ $this, 'add_password_protection_admin_bar_item' ] );
+		add_action( 'admin_head', [ $this, 'add_password_protection_admin_bar_item_styles' ] );
+		add_action( 'wp_head', [ $this, 'add_password_protection_admin_bar_item_styles' ] );
 	}
 
 	/**
@@ -400,7 +400,7 @@ class Utilities {
 	 *
 	 * @since 4.1.0
 	 */
-	public function add_wp_admin_bar_item() {
+	public function add_password_protection_admin_bar_item() {
 		global $wp_admin_bar;
 
 		if ( is_user_logged_in() ) {
@@ -410,7 +410,7 @@ class Utilities {
 					'title'	=> '',
 					'href'	=> admin_url( 'tools.php?page=admin-site-enhancements#utilities' ),
 					'meta'	=> array(
-						'title'	=> 'Password protection is enabled for this site.',
+						'title'	=> 'Password protection is currently enabled for this site.',
 					),
 				) );
 			}
@@ -423,7 +423,7 @@ class Utilities {
 	 *
 	 * @since 4.1.0
 	 */
-	public function add_wp_admin_bar_item_styles() {
+	public function add_password_protection_admin_bar_item_styles() {
 
 		if ( is_user_logged_in() ) {
 			if ( current_user_can( 'manage_options' ) ) {
@@ -431,7 +431,7 @@ class Utilities {
 				?>
 				<style>
 					#wp-admin-bar-password_protection { 
-						background-color: green !important;
+						background-color: #c32121 !important;
 						transition: .25s;
 					}
 					#wp-admin-bar-password_protection > .ab-item { 
@@ -444,7 +444,7 @@ class Utilities {
 						margin-right: 0px; 
 					}
 					#wp-admin-bar-password_protection:hover > .ab-item { 
-						background-color: #006600 !important; 
+						background-color: #af1d1d !important; 
 						color: #fff; 
 					}
 				</style>
@@ -746,6 +746,77 @@ class Utilities {
 				</html>
 				<?php
 				exit();
+
+			}
+		}
+
+	}
+
+	/**
+	 * Show Password Protection admin bar status icon
+	 *
+	 * @since 4.1.0
+	 */
+	public function show_maintenance_mode_admin_bar_icon() {
+		add_action( 'wp_before_admin_bar_render', [ $this, 'add_maintenance_mode_admin_bar_item' ] );
+		add_action( 'admin_head', [ $this, 'add_maintenance_mode_admin_bar_item_styles' ] );
+		add_action( 'wp_head', [ $this, 'add_maintenance_mode_admin_bar_item_styles' ] );
+	}
+
+	/**
+	 * Add WP Admin Bar item
+	 *
+	 * @since 4.1.0
+	 */
+	public function add_maintenance_mode_admin_bar_item() {
+		global $wp_admin_bar;
+
+		if ( is_user_logged_in() ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'id'	=> 'maintenance_mode',
+					'title'	=> '',
+					'href'	=> admin_url( 'tools.php?page=admin-site-enhancements#utilities' ),
+					'meta'	=> array(
+						'title'	=> 'Maintenance mode is currently enabled for this site.',
+					),
+				) );
+			}
+		}
+
+	}
+
+	/**
+	 * Add icon and CSS for admin bar item
+	 *
+	 * @since 4.1.0
+	 */
+	public function add_maintenance_mode_admin_bar_item_styles() {
+
+		if ( is_user_logged_in() ) {
+			if ( current_user_can( 'manage_options' ) ) {
+
+				?>
+				<style>
+					#wp-admin-bar-maintenance_mode { 
+						background-color: #ff800c !important;
+						transition: .25s;
+					}
+					#wp-admin-bar-maintenance_mode > .ab-item { 
+						color: #fff !important;  
+					}
+					#wp-admin-bar-maintenance_mode > .ab-item:before { 
+						content: "\f308"; 
+						top: 2px; 
+						color: #fff !important; 
+						margin-right: 0px; 
+					}
+					#wp-admin-bar-maintenance_mode:hover > .ab-item { 
+						background-color: #e5730a !important; 
+						color: #fff; 
+					}
+				</style>
+				<?php
 
 			}
 		}
