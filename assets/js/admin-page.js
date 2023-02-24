@@ -167,6 +167,11 @@
       $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
       $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
       $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');
+      $('.maintenance-mode').appendTo('.fields-utilities > table > tbody');
+      $('.maintenance-page-heading').appendTo('.fields-utilities .maintenance-mode .asenha-subfields');
+      $('.maintenance-page-description').appendTo('.fields-utilities .maintenance-mode .asenha-subfields');
+      $('.maintenance-page-background').appendTo('.fields-utilities .maintenance-mode .asenha-subfields');
+      $('.maintenance-mode-description').appendTo('.fields-utilities .maintenance-mode .asenha-subfields');
       $('.redirect-404-to-homepage').appendTo('.fields-utilities > table > tbody');
 
       // Remove empty .form-table that originally holds the fields
@@ -845,6 +850,18 @@
          }
       });
 
+      // SMTP Email Delivery => Empty field value on click, so new password can be easily entered
+      var oldSmtpPassValue = '';
+      $('input[name="admin_site_enhancements[smtp_password]"]').focusin(function() {
+         oldSmtpPassValue = $(this).val();
+         $(this).val('');
+      });
+
+      $('input[name="admin_site_enhancements[smtp_password]"]').focusout(function() {
+         if ( $(this).val() == '' ) {
+            $(this).val(oldSmtpPassValue);
+         }
+      });
       // Enable Password Protection => show/hide password input on document ready
       if ( document.getElementById('admin_site_enhancements[enable_password_protection]').checked ) {
          $('.enable-password-protection .asenha-subfields').show();
@@ -874,6 +891,25 @@
       $('input[name="admin_site_enhancements[password_protection_password]"]').focusout(function() {
          if ( $(this).val() == '' ) {
             $(this).val(oldValue);
+         }
+      });
+
+      // Maintenance Mode => show/hide subfields on document ready
+      if ( document.getElementById('admin_site_enhancements[maintenance_mode]').checked ) {
+         $('.maintenance-mode .asenha-subfields').show();
+         $('.asenha-toggle.maintenance-mode td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.maintenance-mode .asenha-subfields').hide();        
+      }
+
+      // Maintenance Mode => show/hide subfields  on toggle click
+      document.getElementById('admin_site_enhancements[maintenance_mode]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.maintenance-mode .asenha-subfields').fadeIn();
+            $('.maintenance-mode .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.maintenance-mode .asenha-subfields').hide();
+            $('.maintenance-mode .asenha-field-with-options').toggleClass('is-enabled');
          }
       });
 
