@@ -362,7 +362,12 @@
 }
 
 .form-table .asenha-subfields th {
-    width: 100%
+    width: 100%;
+    color: #3c434a;
+}
+
+.form-table .asenha-subfields .non-bold-th th {
+    font-weight: normal;
 }
 
 .form-table .asenha-subfields td:not(.datatable-td) {
@@ -487,6 +492,10 @@
 .asenha-subfield-number.with-suffix,
 .asenha-subfield-select.with-suffix {
     margin: 0 4px 0 0;
+}
+
+.full-width .asenha-subfield-text {
+    width: 100%;
 }
 
 .wide .asenha-subfield-text,
@@ -656,4 +665,13 @@
 
 .datatable table.dataTable thead th {
     font-weight: 500 ;
+}
+
+/* Description subfield */
+.asenha-warning {
+    display: block;
+    padding: 12px 16px;
+    color: #997404;
+    background: #fff3cd;
+    border: 1px solid #ffe69c;
 }

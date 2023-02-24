@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.6.0  
+Stable tag: 4.7.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,7 +103,8 @@ Admin and Site Enhancements helps you to easily enhance various admin workflows 
 
 * **SMTP Email Delivery**. Use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
-* **Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.
+* **Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access the site as usual.
+* **Maintenance Mode**. Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
 Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
@@ -149,6 +150,12 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.7.0 (2023.02.24)
+
+* **[ADDED] Utilities >> Maintenance Mode**. Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.
+* **[CHANGED] Disable Smaller Components >> Disable Dashicons CSS and JS** now excludes the login page. This ensures the login page CSS styles is correctly loaded.
+* **[CHANGED] Utilities >> SMTP Email Delivery**. Slight improvement to copy/description for improved clarity.
 
 ### 4.6.0 (2023.02.22)
 

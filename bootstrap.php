@@ -558,7 +558,7 @@ class Admin_Site_Enhancements {
 			add_action( 'wp_die_handler', [ $utilities, 'custom_error_page_on_switch_failure' ] );
 		}
 
-		// Enable Password Protection
+		// Password Protection
 		if ( array_key_exists( 'enable_password_protection', $options ) && $options['enable_password_protection'] ) {
 			add_action( 'plugins_loaded', [ $utilities, 'show_admin_bar_icon' ] );
 			add_action( 'init', [ $utilities, 'maybe_disable_page_caching' ], 1 );
@@ -568,6 +568,11 @@ class Admin_Site_Enhancements {
 			if ( function_exists( 'wp_site_icon' ) ) { // WP v4.3+
 				add_action( 'asenha_password_protection_login_head', 'wp_site_icon' );
 			}
+		}
+
+		// Maintenance Mode
+		if ( array_key_exists( 'maintenance_mode', $options ) && $options['maintenance_mode'] ) {
+			add_action( 'send_headers', [ $utilities, 'maintenance_mode_redirect' ] );
 		}
 
 		// Redirect 404 to Homepage

@@ -940,6 +940,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 30,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -982,6 +983,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 30,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1070,6 +1072,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 15,
 				'field_intro'			=> '<strong>Your ads.txt content:</strong>', // Custom argument
 				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'ads.txt' ) ) . '" target="_blank">adstxt.guru</a> | <a href="https://www.adstxtvalidator.com/ads_txt/' . esc_attr( str_replace( '.', '-', $_SERVER['SERVER_NAME'] ) ) . '" target="_blank">adstxtvalidator.com</a><div class="vspacer"></div>', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1090,6 +1093,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 15,
 				'field_intro'			=> '<strong>Your app-ads.txt content:</strong>', // Custom argument
 				'field_description'		=> 'Validate with: <a href="https://adstxt.guru/validator/url/?url=' . urlencode( get_site_url( null, 'app-ads.txt' ) ) . '" target="_blank">adstxt.guru</a>', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1132,6 +1136,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 20,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> 'Validate with: <a href="https://en.ryte.com/free-tools/robots-txt/?refresh=1&url=' . urlencode( get_site_url( null, 'robots.txt' ) ) . '&useragent=Googlebot&submit=Evaluate" target="_blank">ryte.com</a> | <a href="https://serp.tools/tools/robots-txt" target="_blank">serp.tools</a><div class="vspacer"></div>', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1195,6 +1200,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 15,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1236,6 +1242,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 15,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -1277,6 +1284,7 @@ class Settings_Sections_Fields {
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
 				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 15,
 				'field_intro'			=> '', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-textarea asenha-hide-th syntax-highlighted custom-code ' . $field_slug, // Custom class for the <tr> element
@@ -2165,7 +2173,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'<span class="field-sublabel sublabel-wide">Default FROM name</span>', // Field title
+			'<span class="field-sublabel sublabel-wide">FROM name</span>', // Field title
 			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -2185,7 +2193,7 @@ class Settings_Sections_Fields {
 
 		add_settings_field(
 			$field_id, // Field ID
-			'<span class="field-sublabel sublabel-wide">Default FROM email</span>', // Field title
+			'<span class="field-sublabel sublabel-wide">FROM email</span>', // Field title
 			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
@@ -2210,7 +2218,7 @@ class Settings_Sections_Fields {
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID
 			array(
-				'field_description'		=> 'If set, the default FROM name/email overrides WordPress core defaults but can still be overridden by plugins that enables custom FROM name/email, e.g. form plugins.', // Custom argument
+				'field_description'		=> 'If set, the FROM name/email overrides WordPress core defaults but can still be overridden by plugins that enables custom FROM name/email, e.g. form plugins.', // Custom argument
 				'class'					=> 'asenha-description utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
@@ -2268,7 +2276,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access normally.', // Custom argument
+				'field_description'		=> 'Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access the site as usual.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
 			)
@@ -2291,6 +2299,109 @@ class Settings_Sections_Fields {
 				'field_suffix'			=> '<span class="faded">(Default is \'secret\')</span>', // Custom argument
 				'field_description'		=> '', // Custom argument
 				'class'					=> 'asenha-text with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Maintenance Mode
+
+		$field_id = 'maintenance_mode';
+		$field_slug = 'maintenance-mode';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Maintenance Mode', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'maintenance_page_heading';
+		$field_slug = 'maintenance-page-heading';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Heading', // Field title
+			[ $render_field, 'render_text_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> '', // Custom argument
+				'field_prefix'			=> '', // Custom argument
+				'field_suffix'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'field_placeholder'		=> 'We\'ll be back soon.',
+				'class'					=> 'asenha-text utilities full-width ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'maintenance_page_description';
+		$field_slug = 'maintenance-page-description';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Description', // Field title
+			[ $render_field, 'render_textarea_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_type'			=> 'textarea', // Custom argument
+				'field_rows'			=> 5,
+				'field_intro'			=> '', // Custom argument
+				'field_description'		=> '', // Custom argument
+				'field_placeholder'		=> 'This site is undergoing maintenance for an extended period today. Thanks for your patience.',
+				'class'					=> 'asenha-textarea utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		$field_id = 'maintenance_page_background';
+		$field_slug = 'maintenance-page-background';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Background', // Field title
+			[ $render_field, 'render_radio_buttons_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				// 'field_label'			=> 'Temporary label', // Custom argument
+				'field_radios'			=> array(
+					'Stripes'	=> 'stripes',
+					'Curves'	=> 'curves',
+					'Lines'		=> 'lines',
+				),
+				'field_default'			=> 'default',
+				'class'					=> 'asenha-radio-buttons utilities ' . $field_slug, // Custom class for the <tr> element
+			),
+		);
+
+		$field_id = 'maintenance_mode_description';
+		$field_slug = 'maintenance-mode-description';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_description_subfield' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_description'		=> '<div class="asenha-warning"><strong>Please clear your cache</strong> after enabling or disabling maintenance mode. This ensures site visitors see either the maintenance page or the actual content of each page.</div>', // Custom argument
+				'class'					=> 'asenha-description utilities ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
 

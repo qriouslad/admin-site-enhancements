@@ -473,6 +473,21 @@ class Settings_Sanitization {
 		$options['password_protection_password'] = ( ! empty( $options['password_protection_password'] ) ) ? base64_encode( $options['password_protection_password'] ) : base64_encode('secret');
 
 		// Redirect 404 to Homepage
+		if ( ! isset( $options['maintenance_mode'] ) ) $options['maintenance_mode'] = false;
+		$options['maintenance_mode'] = ( 'on' == $options['maintenance_mode'] ? true : false );
+
+		if ( ! isset( $options['maintenance_page_heading'] ) ) $options['maintenance_page_heading'] = 'We\'ll be back soon.';
+		$options['maintenance_page_heading'] = ( ! empty( $options['maintenance_page_heading'] ) ) ? sanitize_text_field( $options['maintenance_page_heading'] ) : 'We\'ll be back soon.';
+
+		if ( ! isset( $options['maintenance_page_description'] ) ) $options['maintenance_page_description'] = 'This site is undergoing maintenance for an extended period today. Thanks for your patience.';
+		$options['maintenance_page_description'] = ( ! empty( $options['maintenance_page_description'] ) ) ? sanitize_text_field( $options['maintenance_page_description'] ) : 'This site is undergoing maintenance for an extended period today. Thanks for your patience.';
+
+		if ( ! isset( $options['maintenance_page_background'] ) ) $options['maintenance_page_background'] = 'stripes';
+		$options['maintenance_page_background'] = ( ! empty( $options['maintenance_page_background'] ) ) ? $options['maintenance_page_background'] : 'stripes';
+
+		if ( ! isset( $options['maintenance_mode_description'] ) ) $options['maintenance_mode_description'] = '';
+
+		// Redirect 404 to Homepage
 		if ( ! isset( $options['redirect_404_to_homepage'] ) ) $options['redirect_404_to_homepage'] = false;
 		$options['redirect_404_to_homepage'] = ( 'on' == $options['redirect_404_to_homepage'] ? true : false );
 

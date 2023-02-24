@@ -1,0 +1,76 @@
+/* CSS styles here are for the maintenance page set through Utilities >> Maintenance Mode */
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+  	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-color: #ffffff;
+	background-attachment: fixed;
+	background-size: cover;	
+}
+
+.page-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	/* background-image: linear-gradient(to bottom, #ffffff, #eeeeee, #dddddd, #cccccc, #bbbbbb); */
+}
+
+.message-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	font-family: "Arial", "Helvetica", sans-serif;
+	text-align: center;
+}
+
+.message-box h1 {
+	font-size: 3em;
+	font-weight: 500;
+}
+
+.message-box .description {
+	font-size: 1.25em;
+	line-height: 1.7;
+}
+
+@media screen and (max-width: 920px) {
+
+	.message-box {
+		width: 100%;
+		padding: 0 15%;
+	}
+
+	.message-box h1 {
+		font-size: 2em;
+	}							
+
+}
+
+@media screen and (max-width: 480px) {
+
+	.message-box {
+		width: 100%;
+		padding: 0 40px;
+	}
+
+	.message-box h1 {
+		font-size: 1.5em;
+	}
+
+	.message-box .description {
+		font-size: 1em;
+	}			
+
+}
