@@ -359,8 +359,12 @@ class Disable_Components {
 	 */
 	public function disable_dashicons_public_assets() {
 		if ( ! is_user_logged_in() ) {
-			wp_dequeue_style( 'dashicons' );
-			wp_deregister_style( 'dashicons' );
+			// Exclude the login page, where dashicon assets are requred to properly style the page
+			$current_url = sanitize_text_field( $_SERVER['REQUEST_URI'] );
+			if ( false !== strpos( 'wp-login.php', $current_url ) ) {
+				wp_dequeue_style( 'dashicons' );
+				wp_deregister_style( 'dashicons' );				
+			}
 		}
 	}
 
