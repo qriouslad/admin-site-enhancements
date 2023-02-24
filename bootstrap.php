@@ -560,7 +560,7 @@ class Admin_Site_Enhancements {
 
 		// Password Protection
 		if ( array_key_exists( 'enable_password_protection', $options ) && $options['enable_password_protection'] ) {
-			add_action( 'plugins_loaded', [ $utilities, 'show_admin_bar_icon' ] );
+			add_action( 'plugins_loaded', [ $utilities, 'show_password_protection_admin_bar_icon' ] );
 			add_action( 'init', [ $utilities, 'maybe_disable_page_caching' ], 1 );
 			add_action( 'template_redirect', [ $utilities, 'maybe_show_login_form' ], 0 ); // load early
 			add_action( 'init', [ $utilities, 'maybe_process_login' ], 1 );
@@ -573,6 +573,7 @@ class Admin_Site_Enhancements {
 		// Maintenance Mode
 		if ( array_key_exists( 'maintenance_mode', $options ) && $options['maintenance_mode'] ) {
 			add_action( 'send_headers', [ $utilities, 'maintenance_mode_redirect' ] );
+			add_action( 'plugins_loaded', [ $utilities, 'show_maintenance_mode_admin_bar_icon' ] );
 		}
 
 		// Redirect 404 to Homepage
