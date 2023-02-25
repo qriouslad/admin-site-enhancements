@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.7.1  
+Stable tag: 4.7.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -151,14 +151,19 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.7.2 (2023.02.25)
+
+* **[FIXED] Disable Components >> Disable Smaller Components >> Disable Emojis** now properly disables emojis in admin pages.
+
 ### 4.7.1 (2023.02.24)
+
 * **[CHANGED] Utilities >> Maintenance Mode**. When maintenance mode is enabled, an admin bar icon is shown as an indicator.
 * **[CHANGED] Utilities >> Password Protection**. Change background color of admin bar status icon from green to red, to better indicate that the site is (currently) inaccessible to the general public.
 
 ### 4.7.0 (2023.02.24)
 
 * **[ADDED] Utilities >> Maintenance Mode**. Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.
-* **[CHANGED] Disable Smaller Components >> Disable Dashicons CSS and JS** now excludes the login page. This ensures the login page CSS styles is correctly loaded.
+* **[CHANGED] Disable Components >> Disable Smaller Components >> Disable Dashicons CSS and JS** now excludes the login page. This ensures the login page CSS styles is correctly loaded.
 * **[CHANGED] Utilities >> SMTP Email Delivery**. Slight improvement to copy/description for improved clarity.
 
 ### 4.6.0 (2023.02.22)
