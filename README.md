@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.7.2  
+Stable tag: 4.7.3  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,15 +16,19 @@ Duplicate post, image resize / optimize, email via SMTP, admin menu editor, cust
 
 ## Description
 
-Admin and Site Enhancements helps you to easily enhance various admin workflows and site aspects while replacing multiple plugins doing it. 
+Admin and Site Enhancements helps you to **easily enhance** various admin workflows and site aspects while **replacing multiple plugins** doing it. 
 
-> "Amazing how many separate plugins this replaces!" ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
+### What Users Say
 
-> "I really love how this plugin incorporates so many small fixes or tweaks that are needed with WordPress - I can now get rid of many other plugins." ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
+_"Amazing **how many separate plugins** this replaces!"_ ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
 
-> "This plugin allows you to install and maintain one plugin instead of a host of smaller ones. My tests were all successful and I was happy to simplify my maintenance with fewer plugins." ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
+_"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
-> "\[This\] is a Swiss Army Knife in terms of features that will keep your WordPress clean and optimal." ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
+_"This plugin allows you to install and maintain **one plugin instead of a host of smaller ones**. My tests were all successful and I was happy to simplify my maintenance with fewer plugins."_ ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
+
+_"Normally, I tend to steer clear of “all-in-one” plugins; however, I believe that the **selection of tools** incorporated into this plugin has been astutely deliberated, given that it **nearly aligns entirely with the options I typically apply to each website**."_ ~[@cvladan](https://wordpress.org/support/topic/excellent-features-selection/)
+
+_"\[This\] is a Swiss Army Knife in terms of features that will **keep your WordPress clean and optimal**."_ ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
 
 ### Content Management
 
@@ -150,6 +154,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.7.3 (2023.03.03)
+
+* **[FIXED] Optimizations >> Image Upload Control**: "Unexpected response" error in the media uploader when uploading non-JPG files.
 
 ### 4.7.2 (2023.02.25)
 

@@ -43,30 +43,24 @@ class Optimizations {
 			filesize( $upload['file'] > 0 ) )
 		) {
 
-		}
+			// https://developer.wordpress.org/reference/classes/wp_image_editor/
+			$wp_image_editor = wp_get_image_editor( $upload['file'] );
+			$image_size = $wp_image_editor->get_size();
 
-		do_action( 'inspect', [ 'file', $upload['file'] ] );
-		do_action( 'inspect', [ 'type', $upload['type'] ] );
+			$options = get_option( ASENHA_SLUG_U, array() );
+			$max_width = $options['image_max_width'];
+			$max_height = $options['image_max_height'];
 
-		// https://developer.wordpress.org/reference/classes/wp_image_editor/
-		$wp_image_editor = wp_get_image_editor( $upload['file'] );
-		$image_size = $wp_image_editor->get_size();
+			// Check upload image's dimension and only resize if larger than the defined max dimension
+			if (
+				( isset( $image_size['width'] ) && $image_size['width'] > $max_width ) ||
+				( isset( $image_size['height'] ) && $image_size['height'] > $max_height )
+			) {
+				$wp_image_editor->resize( $max_width, $max_height, false ); // false is for no cropping
+				$wp_image_editor->set_quality( 90 ); // default is 82
+				$wp_image_editor->save( $upload['file'] );
+			}
 
-		// do_action( 'inspect', [ 'wp_image_editor', $wp_image_editor ] );
-		do_action( 'inspect', [ 'image_size', $image_size ] );
-
-		$options = get_option( ASENHA_SLUG_U, array() );
-		$max_width = $options['image_max_width'];
-		$max_height = $options['image_max_height'];
-
-		// Check upload image's dimension and only resize if larger than the defined max dimension
-		if (
-			( isset( $image_size['width'] ) && $image_size['width'] > $max_width ) ||
-			( isset( $image_size['height'] ) && $image_size['height'] > $max_height )
-		) {
-			$wp_image_editor->resize( $max_width, $max_height, false ); // false is for no cropping
-			$wp_image_editor->set_quality( 90 ); // default is 82
-			$wp_image_editor->save( $upload['file'] );
 		}
 
 		return $upload;
