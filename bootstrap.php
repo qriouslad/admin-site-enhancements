@@ -162,6 +162,16 @@ class Admin_Site_Enhancements {
 				add_action( 'admin_init', [ $content_management, 'show_id_column' ] );
 			}
 
+			// Show ID in Action Row
+			if ( array_key_exists( 'show_id_in_action_row', $options ) && $options['show_id_in_action_row'] ) {
+				add_action( 'admin_init', [ $content_management, 'show_id_in_action_row' ] );
+			}
+
+			// Show Custom Taxonomy Filters
+			if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
+				add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
+			}
+
 			// Hide Comments Column
 			if ( array_key_exists( 'hide_comments_column', $options ) && $options['hide_comments_column'] ) {
 				add_action( 'admin_init', [ $content_management, 'hide_comments_column' ] );
@@ -170,11 +180,6 @@ class Admin_Site_Enhancements {
 			// Hide Post Tags Column
 			if ( array_key_exists( 'hide_post_tags_column', $options ) && $options['hide_post_tags_column'] ) {
 				add_action( 'admin_init', [ $content_management, 'hide_post_tags_column' ] );
-			}
-
-			// Show Custom Taxonomy Filters
-			if ( array_key_exists( 'show_custom_taxonomy_filters', $options ) && $options['show_custom_taxonomy_filters'] ) {
-				add_action( 'restrict_manage_posts', [ $content_management, 'show_custom_taxonomy_filters' ] );
 			}
 
 		}
