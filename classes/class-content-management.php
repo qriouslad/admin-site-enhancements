@@ -200,8 +200,8 @@ class Content_Management {
 
 		// For comments list table
 
-		add_filter( 'manage_edit-comments_columns', [ $this, 'add_id_column' ]);	
-		add_action( 'manage_comments_custom_column', [ $this, 'add_id_echo_value' ], 10, 3 );		
+		add_filter( 'manage_edit-comments_columns', [ $this, 'add_id_column' ]);
+		add_action( 'manage_comments_custom_column', [ $this, 'add_id_echo_value' ], 10, 3 );
 
 	}
 
@@ -250,6 +250,55 @@ class Content_Management {
 		}
 
 		return $value;
+
+	}
+
+	/**
+	 * Add ID in the action row of list tables for pages, posts, custom post types, media, taxonomies, custom taxonomies, users amd comments
+	 *
+	 * @since 4.7.4
+	 */
+	public function show_id_in_action_row() {
+
+		add_filter( 'page_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'post_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'cat_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'tag_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'media_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'comment_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+		add_filter( 'user_row_actions', array( $this, 'add_id_in_action_row' ), 10, 2 );
+
+	}
+
+	/**
+	 * Output the ID in the action row
+	 *
+	 * @since 4.7.4
+	 */
+	public function add_id_in_action_row( $actions, $object ) {
+
+		if ( current_user_can( 'edit_posts' ) ) {
+
+			// For pages, posts, custom post types, media/attachments, users
+			if ( property_exists( $object, 'ID' ) ) {
+				$id = $object->ID;
+			}
+
+			// For taxonomies
+			if ( property_exists( $object, 'term_id' ) ) {
+				$id = $object->term_id;
+			}
+
+			// For comments
+			if ( property_exists( $object, 'comment_ID' ) ) {
+				$id = $object->comment_ID;
+			}
+
+			$actions['asenha-list-table-item-id'] = '<span class="asenha-list-table-item-id">ID: ' . $id . '</span>';
+
+		}
+
+		return $actions;
 
 	}
 

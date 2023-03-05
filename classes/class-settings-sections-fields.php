@@ -255,7 +255,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Improve the usefulness of listing pages of various post types by adding / removing columns and elements.', // Custom argument
+				'field_description'		=> 'Improve the usefulness of listing pages for various post types and taxonomies, media, comments and users by adding / removing columns and elements.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'					=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
@@ -319,6 +319,44 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Show ID in Action Row
+
+		$field_id = 'show_id_in_action_row';
+		$field_slug = 'show-id-in-action_row';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Show ID in action rows along with links for Edit, View, etc.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// Show Custom Taxonomy Filters
+
+		$field_id = 'show_custom_taxonomy_filters';
+		$field_slug = 'show-custom-taxonomy-filters';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'', // Field title
+			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
+				'field_label'			=> 'Show additional filter(s) for hierarchical, custom taxonomies.', // Custom argument
+				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// Hide Comments Column
 
 		$field_id = 'hide_comments_column';
@@ -353,25 +391,6 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
 				'field_label'			=> 'Remove tags column (for posts).', // Custom argument
-				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
-			)
-		);
-
-		// Show Custom Taxonomy Filters
-
-		$field_id = 'show_custom_taxonomy_filters';
-		$field_slug = 'show-custom-taxonomy-filters';
-
-		add_settings_field(
-			$field_id, // Field ID
-			'', // Field title
-			[ $render_field, 'render_checkbox_plain' ], // Callback to render field with custom arguments in the array below
-			ASENHA_SLUG, // Settings page slug
-			'main-section', // Section ID
-			array(
-				'field_id'				=> $field_id, // Custom argument
-				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Show additional filter(s) for hierarchical, custom taxonomies.', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 			)
 		);

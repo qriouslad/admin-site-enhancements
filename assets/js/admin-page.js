@@ -60,9 +60,10 @@
       $('.show-featured-image-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-excerpt-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.show-id-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.show-id-in-action_row').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
+      $('.show-custom-taxonomy-filters').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.hide-comments-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
       $('.hide-post-tags-column').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
-      $('.show-custom-taxonomy-filters').appendTo('.fields-content-management .enhance-list-tables .asenha-subfields');
 
       // Place fields into "Admin Interface" tab
       $('.hide-admin-notices').appendTo('.fields-admin-interface > table > tbody');

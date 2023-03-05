@@ -74,6 +74,14 @@ class Settings_Sanitization {
 		if ( ! isset( $options['show_id_column'] ) ) $options['show_id_column'] = false;
 		$options['show_id_column'] = ( 'on' == $options['show_id_column'] ? true : false );
 
+		// Show ID in Action Row
+		if ( ! isset( $options['show_id_in_action_row'] ) ) $options['show_id_in_action_row'] = false;
+		$options['show_id_in_action_row'] = ( 'on' == $options['show_id_in_action_row'] ? true : false );
+
+		// Show Custom Taxonomy Filters
+		if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
+		$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
+
 		// Hide Comments Column
 		if ( ! isset( $options['hide_comments_column'] ) ) $options['hide_comments_column'] = false;
 		$options['hide_comments_column'] = ( 'on' == $options['hide_comments_column'] ? true : false );
@@ -81,10 +89,6 @@ class Settings_Sanitization {
 		// Hide Post Tags Column
 		if ( ! isset( $options['hide_post_tags_column'] ) ) $options['hide_post_tags_column'] = false;
 		$options['hide_post_tags_column'] = ( 'on' == $options['hide_post_tags_column'] ? true : false );
-
-		// Show Custom Taxonomy Filters
-		if ( ! isset( $options['show_custom_taxonomy_filters'] ) ) $options['show_custom_taxonomy_filters'] = false;
-		$options['show_custom_taxonomy_filters'] = ( 'on' == $options['show_custom_taxonomy_filters'] ? true : false );
 
 		// =================================================================
 		// ADMIN INTERFACE
