@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.1.1  
-Stable tag: 4.7.3  
+Stable tag: 4.7.4  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,10 +40,10 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
   * _Show the featured image column_: in the list tables for pages and post types that support featured images.
   * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
-  * _Show the ID column_: in the list tables for pages, all post types, all taxonomies, media, users and comments.
+  * _Show the ID as a column or in the action rows_: in the list tables for pages, all post types, all taxonomies, media, users and comments.
+  * _Show custom taxonomy dropdown filter(s)_: on the list tables of all post types for taxonomies that are hierarchical like post categories.
   * _Remove the comments column_: in in the list tables for pages, post types that support comments, and alse media/attachments.
   * _Remove the post tags column_: in the list table for posts.
-  * _Show custom taxonomy dropdown filter(s)_: on the list tables of all post types for taxonomies that are hierarchical like post categories.
 
 ### Admin Interface
 
@@ -154,6 +154,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.7.4 (2023.03.05)
+
+* **[ADDED] Content Management >> Enhance List Tables**: Show ID in the action rows of the list tables for pages, all post types, all taxonomies, media, users and comments.
 
 ### 4.7.3 (2023.03.03)
 
