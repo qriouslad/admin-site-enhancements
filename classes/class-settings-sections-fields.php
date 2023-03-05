@@ -333,7 +333,7 @@ class Settings_Sections_Fields {
 			array(
 				'field_id'				=> $field_id, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '[' . $field_id . ']', // Custom argument
-				'field_label'			=> 'Show ID in action row along with links for Edit, View, etc.', // Custom argument
+				'field_label'			=> 'Show ID in action rows along with links for Edit, View, etc.', // Custom argument
 				'class'					=> 'asenha-checkbox asenha-hide-th content-management ' . $field_slug, // Custom class for the <tr> element
 			)
 		);
