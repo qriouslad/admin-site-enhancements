@@ -54,6 +54,17 @@
 			+ '#wpbody-content > .wrap > .notice-updated,'
 			+ '#wpbody-content > .wrap > .updated,'
 			+ '#wpbody-content > .wrap > .update-nag,'
+			+ '#wpbody-content > .wrap > div > .notice:not(.system-notice),'
+			+ '#wpbody-content > .wrap > div > .notice-error,'
+			+ '#wpbody-content > .wrap > div > .error,'
+			+ '#wpbody-content > .wrap > div > .notice-info,'
+			+ '#wpbody-content > .wrap > div > .notice-information,'
+			+ '#wpbody-content > .wrap > div > #message,'
+			+ '#wpbody-content > .wrap > div > .notice-warning'
+			+ '#wpbody-content > .wrap > div > .notice-success,'
+			+ '#wpbody-content > .wrap > div > .notice-updated,'
+			+ '#wpbody-content > .wrap > div > .updated,'
+			+ '#wpbody-content > .wrap > div > .update-nag,'
 			+ '#wpbody-content > .jp-connection-banner' // Jetpack
 			).detach()
 			.appendTo(noticesPanel)
