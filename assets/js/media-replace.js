@@ -3,6 +3,10 @@
 
 	$(document).ready( function() {
 
+		// Bypass browser cache by appending query parameter to preview image src
+		var imgSrcUrl = $('.wp_attachment_image .thumbnail').attr('src');
+		$('.wp_attachment_image .thumbnail').attr('src', imgSrcUrl + `?v=${new Date().getTime()}`);
+
 		// Place the Replace Media section after the side metaboxes
 		$('#media-replace-div').appendTo('#postbox-container-1');
 
