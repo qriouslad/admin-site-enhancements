@@ -54,7 +54,7 @@ class Admin_Site_Enhancements {
 		add_action( 'admin_notices', 'asenha_suppress_notices', 5 );
 		add_action( 'all_admin_notices', 'asenha_suppress_generic_notices', 5 );
 
-		// Enqueue admin scripts and styles only on the plugin's main page
+		// Enqueue admin scripts and styles
 		add_action( 'admin_enqueue_scripts', 'asenha_admin_scripts' );
 
 		// Enqueue public scripts and styles
@@ -554,6 +554,18 @@ class Admin_Site_Enhancements {
 		// SMTP Email Delivery
 		if ( array_key_exists( 'smtp_email_delivery', $options ) && $options['smtp_email_delivery'] ) {
 			add_action( 'phpmailer_init', [ $utilities, 'deliver_email_via_smtp' ] );
+		}
+
+		// Multiple User Roles
+		if ( array_key_exists( 'multiple_user_roles', $options ) && $options['multiple_user_roles'] ) {
+			// Show roles checkboxes
+			add_action( 'show_user_profile', [ $utilities, 'add_multiple_roles_ui' ] ); // for when user edits their own profile
+			add_action( 'edit_user_profile', [ $utilities, 'add_multiple_roles_ui' ] ); // for when editing other user's profile
+			add_action( 'user_new_form', [ $utilities, 'add_multiple_roles_ui' ] ); // new user creation
+			// Save roles selections
+			add_action( 'personal_options_update', [ $utilities, 'save_roles_assignment' ] ); // for when user edits their own profile
+			add_action( 'edit_user_profile_update', [ $utilities, 'save_roles_assignment' ] ); // for when editing other user's profile
+			add_action( 'user_register', [ $utilities, 'save_roles_assignment' ] ); // new user creation
 		}
 
 		// View Admin as Role

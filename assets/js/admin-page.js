@@ -165,6 +165,7 @@
       $('.smtp-default-from-email').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.smtp-default-from-description').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.smtp-debug').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.multiple-user-roles').appendTo('.fields-utilities > table > tbody');
       $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
       $('.enable-password-protection').appendTo('.fields-utilities > table > tbody');
       $('.password-protection-password').appendTo('.fields-utilities .enable-password-protection .asenha-subfields');

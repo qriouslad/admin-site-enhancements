@@ -2259,6 +2259,27 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Multiple User Roles
+
+		$field_id = 'multiple_user_roles';
+		$field_slug = 'multiple-user-roles';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Multiple User Roles', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'				=> $field_id, // Custom argument
+				'field_slug'			=> $field_slug, // Custom argument
+				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'		=> 'Enables assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.', // Custom argument
+				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
+				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
 		// View Admin as Role
 
 		$field_id = 'view_admin_as_role';

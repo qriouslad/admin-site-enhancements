@@ -285,6 +285,16 @@ function asenha_admin_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'asenha-hide-admin-notices', ASENHA_URL . 'assets/js/hide-admin-notices.js', array( 'asenha-jbox' ), ASENHA_VERSION, false );
 	}
 
+	// Utilities >> Multiple User Roles
+	if ( array_key_exists( 'multiple_user_roles', $options ) && $options['multiple_user_roles'] ) {
+		if ( 'user-edit.php' == $hook_suffix || 'user-new.php' == $hook_suffix ) {
+			// Only replace roles dropdown with checkboxes for users that can assign roles to other users, e.g. administrators
+			if ( current_user_can( 'promote_users', get_current_user_id() ) ) {
+				wp_enqueue_script( 'asenha-multiple-user-roles', ASENHA_URL . 'assets/js/multiple-user-roles.js', array( 'jquery' ), ASENHA_VERSION, false );
+			}
+		}
+	}
+
 }
 
 /**
