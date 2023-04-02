@@ -59,7 +59,7 @@ class Login_Logout {
 
 		// Custom login slug is not part of the login URL typed into the browser
 		// e.g. https://www.example.com/wp-admin/ or https://www.example.com/wp-login.php
-		if ( false === strpos( $url_input, $custom_login_slug ) ) {
+		if ( ! is_user_logged_in() && ( false !== strpos( $url_input, 'wp-login.php' ) ) && ( false === strpos( $url_input, $custom_login_slug ) ) ) {
 
 			if ( 'success' != $interim_login ) {
 
