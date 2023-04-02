@@ -2274,7 +2274,7 @@ class Settings_Sections_Fields {
 				'field_id'				=> $field_id, // Custom argument
 				'field_slug'			=> $field_slug, // Custom argument
 				'field_name'			=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'		=> 'Enables assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.', // Custom argument
+				'field_description'		=> 'Enable assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.', // Custom argument
 				'field_options_wrapper'	=> true, // Custom argument. Add container for additional options
 				'class'					=> 'asenha-toggle utilities ' . $field_slug, // Custom class for the <tr> element
 			)

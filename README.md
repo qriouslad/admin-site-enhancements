@@ -4,8 +4,8 @@ Contributors: qriouslad
 Donate link: https://paypal.me/qriouslad  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
-Tested up to: 6.1.1  
-Stable tag: 4.7.4  
+Tested up to: 6.2  
+Stable tag: 4.8.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -106,6 +106,7 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
 ### Utilities
 
 * **SMTP Email Delivery**. Use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
+* **Multiple User Roles**. Enable assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.
 * **View Admin as Role**. View admin pages and the site (logged-in) as one of the non-administrator user roles.
 * **Password Protection**. Password-protect the entire site to hide the content from public view and search engine bots / crawlers. Logged-in administrators can still access the site as usual.
 * **Maintenance Mode**. Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.
@@ -155,9 +156,14 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.8.0 (2023.04.02)
+
+* **[ADDED] Utilities >> Multiple User Roles**: Enable assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.
+
+
 ### 4.7.4 (2023.03.05)
 
-* **[ADDED] Content Management >> Enhance List Tables**: Show ID in the action rows of the list tables for pages, all post types, all taxonomies, media, users and comments.
+* **[ADDED] Content Management >> Enhance List Tables >> Show ID in Action Rows**: on the list tables for pages, all post types, all taxonomies, media, users and comments. Props to [@cvladan](https://github.com/cvladan) for the [feature suggestion](https://github.com/qriouslad/admin-site-enhancements/issues/2).
 
 ### 4.7.3 (2023.03.03)
 
