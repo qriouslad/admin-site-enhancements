@@ -465,6 +465,10 @@ class Settings_Sanitization {
 		if ( ! isset( $options['smtp_debug'] ) ) $options['smtp_debug'] = false;
 		$options['smtp_debug'] = ( 'on' == $options['smtp_debug'] ? true : false );
 
+		// Multiple User Roles
+		if ( ! isset( $options['multiple_user_roles'] ) ) $options['multiple_user_roles'] = false;
+		$options['multiple_user_roles'] = ( 'on' == $options['multiple_user_roles'] ? true : false );
+
 		// View Admin as Role
 		if ( ! isset( $options['view_admin_as_role'] ) ) $options['view_admin_as_role'] = false;
 		$options['view_admin_as_role'] = ( 'on' == $options['view_admin_as_role'] ? true : false );

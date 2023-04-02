@@ -19,3 +19,8 @@
 .custom-body-class-input-description {
 	margin-top: 4px;
 }
+
+/* Utilities >> Multiple User Roles */
+#adduser .form-field input[type="checkbox"], #createuser .form-field input[type="checkbox"] {
+	width: 1rem;
+}
