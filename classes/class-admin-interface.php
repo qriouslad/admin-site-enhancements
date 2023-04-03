@@ -352,8 +352,6 @@ class Admin_Interface {
 
 		}
 
-		// do_action( 'inspect', [ 'rendered_menu_order_1', $rendered_menu_order ] );
-
 		// Add items from current menu not already part of custom menu order, e.g. new plugin activated and adds new menu item
 
 		foreach ( $current_menu_order as $current_menu_item_id => $current_menu_item ) {
@@ -365,8 +363,6 @@ class Admin_Interface {
 			}
 
 		}
-
-		// do_action( 'inspect', [ 'rendered_menu_order_2', $rendered_menu_order ] );
 
 		return $rendered_menu_order;
 

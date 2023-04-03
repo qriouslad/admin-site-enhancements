@@ -623,6 +623,10 @@
     top: 0;
 }
 
+#custom-admin-menu .menu-item-depth-0 {
+    display: list-item !important;
+}
+
 /* CodeMirror*/
 
 .syntax-highlighted .asenha-subfield-textarea {

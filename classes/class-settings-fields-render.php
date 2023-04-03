@@ -401,8 +401,7 @@ class Settings_Fields_Render {
 		<ul id="custom-admin-menu" class="menu ui-sortable">
 		<?php
 
-		global $menu;
-		global $submenu;
+		global $menu, $submenu;
 		$common_methods = new Common_Methods;
 		$options = get_option( ASENHA_SLUG_U, array() );
 
