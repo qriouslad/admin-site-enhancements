@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.8.0  
+Stable tag: 4.8.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -155,6 +155,12 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.8.1 (2023.04.03)
+
+* **[FIXED] Admin Interface >> Hide Admin Notices**: now hides notices on some plugins' pages where an extra div exist above the notice divs.
+* **[FIXED] Log In | Log Out >> Change Login URL**: fix an issue where sometimes successful login would redirect to /not_found/ URL.
+* **[ENHANCEMENT] Content Management >> Media Replacement**: added browser cache busting via jQuery to ensure the new image is shown on the media/attachment edit page after performing replacement. Elsewhere on wp-admin and on the front end, a hard reload is still needed to flush out browser cache for the old image.
 
 ### 4.8.0 (2023.04.02)
 

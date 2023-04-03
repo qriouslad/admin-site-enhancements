@@ -193,7 +193,8 @@ class Admin_Site_Enhancements {
 
 		// Hide Admin Notices
 		if ( array_key_exists( 'hide_admin_notices', $options ) && $options['hide_admin_notices'] ) {
-			add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
+			add_action( 'admin_notices', [ $admin_interface, 'admin_notices_wrapper' ], 9 );
+			// add_action( 'all_admin_notices', [ $admin_interface, 'admin_notices_wrapper' ] );
 			add_action( 'admin_bar_menu', [ $admin_interface, 'admin_notices_menu' ] );
 			add_action( 'admin_enqueue_scripts', [ $admin_interface, 'admin_notices_menu_inline_css' ] ); // wp-admin
 		}
