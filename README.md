@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.8.1  
+Stable tag: 4.8.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,9 @@ Admin and Site Enhancements helps you to **easily enhance** various admin workfl
 
 ### What Users Say
 
-_"Amazing **how many separate plugins** this replaces!"_ ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
+_"**Full of useful features**, works without problems."_ ~[@Krzysztof Płaneta](https://wordpress.org/support/topic/full-of-useful-features-works-without-problems/)
+
+_"Amazing **how many separate plugins this replaces**!"_ ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
 
 _"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
@@ -42,7 +44,7 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
   * _Show the excerpt column_: in the list tables for pages and post types that support excerpt.
   * _Show the ID as a column or in the action rows_: in the list tables for pages, all post types, all taxonomies, media, users and comments.
   * _Show custom taxonomy dropdown filter(s)_: on the list tables of all post types for taxonomies that are hierarchical like post categories.
-  * _Remove the comments column_: in in the list tables for pages, post types that support comments, and alse media/attachments.
+  * _Remove the comments column_: in in the list tables for pages, post types that support comments, and also media/attachments.
   * _Remove the post tags column_: in the list table for posts.
 
 ### Admin Interface
@@ -83,7 +85,7 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
 * **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
 * **Disable Feeds**. Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
 * **Disable All Updates**. Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
-* **Disable Smaller Components**. Prevent smaller components from running or loading. Make the site more secure and load slightly faster.
+* **Disable Smaller Components**. Prevent smaller components from running or loading. Make the site more secure, load slightly faster and be more optimized for crawling by search engines.
   * Disable the **generator &lt;meta&gt; tag** in &lt;head&gt;, which discloses the WordPress version number. Older versions(s) might contain unpatched security loophole(s).
   * Disable the **Windows Live Writer (WLW) manifest &lt;link&gt; tag** in &lt;head&gt;. The WLW app was discontinued in 2017.
   * Disable the **Really Simple Discovery (RSD) &lt;link&gt; tag** in &lt;head&gt;. It's not needed if your site is not using pingback or remote (XML-RPC) client to manage posts.
@@ -155,6 +157,10 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.8.2 (2023.04.03)
+
+* **[FIXED] Admin Interface >> Admin Menu Organizer**: fix for some menu items missing / being hidden in the menu item sortables. Props to [@chrisplaneta](https://profiles.wordpress.org/chrisplaneta/) for [reporting](https://wordpress.org/support/topic/full-of-useful-features-works-without-problems/#post-16620272).
 
 ### 4.8.1 (2023.04.03)
 
