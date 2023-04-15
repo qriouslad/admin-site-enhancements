@@ -499,7 +499,7 @@ class Content_Management {
 
 					foreach( $meta_values as $meta_value ) {
 
-						add_post_meta( $new_post_id, $meta_key, $meta_value );
+						update_post_meta( $new_post_id, $meta_key, wp_slash( maybe_unserialize( $meta_value ) ) );
 
 					}
 

@@ -81,7 +81,6 @@
 
 .asenha-header-action {
     position: relative;
-    top: 1px;
     margin-left: 16px;
     text-decoration: none;
     transition: .25s;
@@ -94,6 +93,31 @@
 
 .asenha-header-action:hover {
     text-decoration: underline;
+}
+
+/* Button Style - Outlined */
+
+.wp-core-ui .vi-header .button-primary {
+    font-weight: 500;
+    transition: .1s;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor {
+    margin-left: 16px;
+    margin-right: 16px;
+    color: #de4c73;
+    background: transparent;
+    border-color: #de4c73;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor:hover {
+    color: #fff;
+    background: #de4c73;
+    text-decoration: none;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor:focus {
+    box-shadow: none;
 }
 
 .asenha-changes-saved {

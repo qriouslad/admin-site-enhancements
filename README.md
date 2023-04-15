@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.8.2  
+Stable tag: 4.8.3  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,11 +20,11 @@ Admin and Site Enhancements helps you to **easily enhance** various admin workfl
 
 ### What Users Say
 
-_"**Full of useful features**, works without problems."_ ~[@Krzysztof Płaneta](https://wordpress.org/support/topic/full-of-useful-features-works-without-problems/)
+_"**Full of useful features**, works without problems."_ ~[Krzysztof Płaneta](https://wordpress.org/support/topic/full-of-useful-features-works-without-problems/)
 
 _"Amazing **how many separate plugins this replaces**!"_ ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
 
-_"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[@Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
+_"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
 _"This plugin allows you to install and maintain **one plugin instead of a host of smaller ones**. My tests were all successful and I was happy to simplify my maintenance with fewer plugins."_ ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
 
@@ -157,6 +157,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 Hoping that this is useful in reducing the number of plugins we install the first time we set up a site.
 
 ## Changelog
+
+### 4.8.3 (2023.04.15)
+
+* **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating complex pages built with Oxygen builder. May also solve similar issues with other page builder. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
+* Added button linking to [my Github sponsorship](https://bowo.io/dotorg-sponsor-asenha) page. Please consider supporting the continued development and maintenance of this, and my other plugins. Thank you!
 
 ### 4.8.2 (2023.04.03)
 
