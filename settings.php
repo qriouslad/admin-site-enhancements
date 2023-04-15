@@ -29,13 +29,13 @@ function asenha_add_settings_page() {
 
 		<div id="asenha-header" class="asenha-header">
 			<div class="asenha-header-left">
-				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io" target="_blank">bowo.io</a></small></h1>
+				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io/bowoio-asenha" target="_blank">Bowo</a></small></h1>
 				<!-- <a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php // esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a> -->
-				<a href="https://wordpress.org/plugins/admin-site-enhancements/#reviews" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
-				<a href="https://wordpress.org/support/plugin/admin-site-enhancements/" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
-				<a href="https://paypal.me/qriouslad" target="_blank" class="asenha-header-action">&#9829; <?php esc_html_e( 'Donate', 'admin-site-enhancements' ); ?></a>
 			</div>
 			<div class="asenha-header-right">
+				<a href="https://bowo.io/review-asenha" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/feedback-asenha" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/sponsor-asenha" target="_blank" class="asenha-header-action button button-primary plugin-sponsor">&#9829; <?php esc_html_e( 'Sponsor', 'admin-site-enhancements' ); ?></a>
 				<a class="button button-primary asenha-save-button">Save Changes</a>
 				<div class="asenha-changes-saved" style="display:none;">Changes have been saved.</div>
 			</div>
@@ -353,6 +353,17 @@ function asenha_footer_text() {
 	}
 
 }
+
+/**
+ * Change WP version number text in footer
+ * 
+ * @since 4.8.3
+ */
+function asenha_footer_version_text()
+{
+    return 'Also by Bowo &#8594; <a href="https://bowo.io/wpn-asenha" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources';
+}
+
 
 /**
  * Check if current screen is this plugin's main page

@@ -66,6 +66,9 @@ class Admin_Site_Enhancements {
 		// Update footer text
 		add_filter( 'admin_footer_text', 'asenha_footer_text' );
 
+		// Update footer version text
+		add_filter( 'update_footer', 'asenha_footer_version_text' );
+
 		// ===== Activate features based on settings ===== 
 
 		// Get all WP Enhancements options, default to empty array in case it's not been created yet
