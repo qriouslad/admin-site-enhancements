@@ -143,9 +143,10 @@ class Admin_Interface {
 			foreach( $wp_meta_boxes['dashboard'] as $context => $priorities ) {
 				foreach ( $priorities as $priority => $widgets ) {
 					foreach( $widgets as $widget_id => $data ) {
+						$widget_title = wp_strip_all_tags( preg_replace( '/ <span.*span>/im', '', $data['title'] ) );
 						$dashboard_widgets[$widget_id] = array(
 							'id' 		=> $widget_id,
-							'title' 	=> wp_strip_all_tags( preg_replace( '/ <span.*span>/im', '', $data['title'] ) ),
+							'title' 	=> $widget_title,
 							'context' 	=> $context, // 'normal' or 'side'
 							'priority' 	=> $priority, // 'core'
 					   );
@@ -155,6 +156,8 @@ class Admin_Interface {
 		}
 
 		$dashboard_widgets = wp_list_sort( $dashboard_widgets, 'title', 'ASC', true );
+
+		do_action( 'inspect', [ 'dashboard_widgets', $dashboard_widgets ] );
 
 		return $dashboard_widgets;
 
