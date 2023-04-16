@@ -141,6 +141,11 @@ class Admin_Site_Enhancements {
 			}
 		}
 
+		// Open All External Links in New Tab
+		if ( array_key_exists( 'external_links_new_tab', $options ) && $options['external_links_new_tab'] ) {
+			add_filter( 'the_content', [ $content_management,'add_target_and_rel_atts_to_content_links'] );
+		}
+
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( array_key_exists( 'enable_missed_schedule_posts_auto_publish', $options ) && $options['enable_missed_schedule_posts_auto_publish'] ) {
 			add_action( 'wp_head', [ $content_management, 'publish_missed_schedule_posts' ] );
