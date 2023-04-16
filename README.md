@@ -5,7 +5,7 @@ Donate link: https://paypal.me/qriouslad
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.8.3  
+Stable tag: 4.9.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,20 +24,31 @@ _"**Full of useful features**, works without problems."_ ~[Krzysztof Płaneta](h
 
 _"Amazing **how many separate plugins this replaces**!"_ ~[@yudayuda](https://wordpress.org/support/topic/amazing-how-many-separate-plugins-this-replaces/)
 
+_"**This plugin is what I have been waiting for to see for years!**"_ ~[@AlexGraphicD](https://wordpress.org/support/topic/amazing-swiss-army-tool-for-wordpress/)
+
 _"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
 _"This plugin allows you to install and maintain **one plugin instead of a host of smaller ones**. My tests were all successful and I was happy to simplify my maintenance with fewer plugins."_ ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
 
+_"**It’s worth 10 stars (or more)**. This plugin eliminates the need to install many other plugins and also **makes functions.php smaller** since I have to insert fewer code snippets."_ ~[Angelika Reisiger](https://wordpress.org/support/topic/its-worth-10-stars-or-more/)
+
+_"**I was super skeptical** that this plugin could do so much without any problems, **but I was wrong... 100% recommended!**"_ ~[@scarlywebs](https://wordpress.org/support/topic/the-all-in-one-plugin-you-need-in-your-arsenal/)
+
 _"Normally, I tend to steer clear of “all-in-one” plugins; however, I believe that the **selection of tools** incorporated into this plugin has been astutely deliberated, given that it **nearly aligns entirely with the options I typically apply to each website**."_ ~[@cvladan](https://wordpress.org/support/topic/excellent-features-selection/)
 
 _"\[This\] is a Swiss Army Knife in terms of features that will **keep your WordPress clean and optimal**."_ ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
+
+_"**Incredibly powerful and well organized**. It’s a real accomplishment to put this many features into a plugin and still make it easy to navigate."_ ~[Nathan Ingram](https://wordpress.org/support/topic/holy-cow-this-is-excellent/)
+
+_"**Greatest plugin ever**."_ ~[@angelaustr](https://wordpress.org/support/topic/greatest-plugin-ever-11/)
 
 ### Content Management
 
 * **Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
 * **Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
 * **SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
-* **External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
+* **External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. The rel="noopener noreferrer nofollow" attribute will also be added for enhanced security and SEO benefits. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
+* **Open All External Links in New Tab**. Force all links to external sites to open in new browser tab via target="\_blank" attribute. The rel="noopener noreferrer nofollow" attribute will also be added for enhanced security and SEO benefits.
 * **Auto-Publish Posts with Missed Schedule**. Trigger publishing of scheduled posts of all types marked with "missed schedule", anytime the site is visited.
 * **Enhance List Tables**. Improve the usefulness of listing pages of various post types by adding / removing columns and elements.
   * _Show the featured image column_: in the list tables for pages and post types that support featured images.
@@ -130,6 +141,7 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 * [Variable Inspector](https://wordpress.org/plugins/variable-inspector/): Inspect PHP variables on a central dashboard in wp-admin for convenient debugging.
 * [Code Explorer](https://wordpress.org/plugins/code-explorer/): Fast directory explorer and file/code viewer with syntax highlighting.
 * [Flexible Scroll Top](https://wordpress.org/plugins/flexible-scroll-top/) and [Floating Share Buttons](https://wordpress.org/plugins/floating-share-button/) is a lightweight combo with minimalist UI.
+* [WordPress Newsboard](https://www.wpnewsboard.com/): The latest news, articles, podcasts and videos from 100+ WordPress-focused sources.
 
 ## Screenshots
 
@@ -158,9 +170,14 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.9.0 (2023.04.16)
+
+* **[ENHANCEMENT] Content Management >> External Permalinks**. The rel="noopener noreferrer nofollow" attribute will now be added to external permalinks for enhanced security and SEO benefits. 
+* **[ADDED] Content Management >> Open All External Links in New Tab**. Force all links to external sites to open in new browser tab via target="\_blank" attribute. The rel="noopener noreferrer nofollow" attribute will also be added for enhanced security and SEO benefits.
+
 ### 4.8.3 (2023.04.15)
 
-* **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating complex pages built with Oxygen builder. May also solve similar issues with other page builder. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
+* **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
 * Added button linking to [my Github sponsorship](https://bowo.io/dotorg-sponsor-asenha) page. Please consider supporting the continued development and maintenance of this, and my other plugins. Thank you!
 
 ### 4.8.2 (2023.04.03)

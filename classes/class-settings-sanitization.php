@@ -54,6 +54,10 @@ class Settings_Sanitization {
 			}
 		}
 
+		// Open All External Links in New Tab
+		if ( ! isset( $options['external_links_new_tab'] ) ) $options['external_links_new_tab'] = false;
+		$options['external_links_new_tab'] = ( 'on' == $options['external_links_new_tab'] ? true : false );
+
 		// Enable Auto-Publishing of Posts with Missed Schedules
 		if ( ! isset( $options['enable_missed_schedule_posts_auto_publish'] ) ) $options['enable_missed_schedule_posts_auto_publish'] = false;
 		$options['enable_missed_schedule_posts_auto_publish'] = ( 'on' == $options['enable_missed_schedule_posts_auto_publish'] ? true : false );
