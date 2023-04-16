@@ -1132,6 +1132,14 @@ class Content_Management {
 							if ( 0 === preg_match( $pattern, $tag ) ) {
 								// Replace closing > with ' rel="noopener noreferrer nofollow">'
 								$tag = substr_replace( $tag, ' rel="noopener noreferrer nofollow">', -1 );
+							} else {
+								// replace rel="noopener" with rel="noopener noreferrer nofollow"
+								if ( false !== strpos( $tag, 'noopener' ) 
+									&& false === strpos( $tag, 'noreferrer' ) 
+									&& false === strpos( $tag, 'nofollow' ) 
+									) {
+									$tag = str_replace( 'noopener', 'noopener noreferrer nofollow', $tag );
+								}
 							}
 							
 							// Replace original a href tag with one containing target and rel attributes above
