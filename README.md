@@ -1,11 +1,11 @@
 # Admin and Site Enhancements
 
 Contributors: qriouslad  
-Donate link: https://paypal.me/qriouslad  
+Donate link: https://bowo.io/dotorg-sponsor-asenha  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.9.0  
+Stable tag: 4.9.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,7 +40,12 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
 
 _"**Incredibly powerful and well organized**. It’s a real accomplishment to put this many features into a plugin and still make it easy to navigate."_ ~[Nathan Ingram](https://wordpress.org/support/topic/holy-cow-this-is-excellent/)
 
+_"**...everything is clear, fast, consistent and lightweight**."_ ~[Peter](https://wordpress.org/support/topic/amazing-job-premium-functions-in-free-plugin/)
+
 _"**Greatest plugin ever**."_ ~[@angelaustr](https://wordpress.org/support/topic/greatest-plugin-ever-11/)
+
+_"**p.s. There are bugs. This is software development after all and I'm the developer (as well as user).** [Please report](https://wordpress.org/support/plugin/admin-site-enhancements/) if you found one, and I'll try to fix the next chance I get. Thanks!"_ ~[Bowo](https://github.com/sponsors/qriouslad)
+
 
 ### Content Management
 
@@ -125,14 +130,14 @@ _"**Greatest plugin ever**."_ ~[@angelaustr](https://wordpress.org/support/topic
 * **Maintenance Mode**. Show a customizable maintenance page on the frontend while performing a brief maintenance to your site. Logged-in administrators can still view the site as usual.
 * **Redirect 404 to Homepage**. Perform 301 (permanent) redirect to the homepage for all 404 (not found) pages.
 
-Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
+Admin and Site Enhancements will include more enhancements, tweaks and useful features in future versions. Please [give feedback](https://bowo.io/feedback-asenha) on must-have plugins or code snippets you enable on sites that you manage, and the functionalities will be considered for inclusion as well.
 
 ### Give Back
 
-* [A nice review](https://wordpress.org/plugins/admin-site-enhancements/#reviews) would be great!
-* [Give feedback](https://wordpress.org/support/plugin/admin-site-enhancements/) and help improve future versions.
-* [Github repo](https://github.com/qriouslad/admin-site-enhancements) to contribute code.
-* [Donate](https://paypal.me/qriouslad) and support my work.
+* [A nice review](https://bowo.io/add-review-asenha) would be great!
+* [Give feedback](https://bowo.io/feedback-asenha) and help improve future versions.
+* [Github repo](https://bowo.io/github-asenha) to contribute code.
+* [Sponsor](https://bowo.io/dotorg-sponsor-asenha) my work.
 
 ### Check These Out Too
 
@@ -170,6 +175,11 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.9.1 (2023.04.19)
+
+* **[ENHANCEMENT] Admin Interface >> Hide Admin Notices**. LearnDash pages was showing up notices below header. This fix will now move them into the hidden, toggleable notices panel.
+* **[SPONSORSHIP]** If you have benefited from this plugin in your **personal project(s), paid work, client site(s) and or agency's workflow**, please kindly consider [sponsoring the ongoing development and maintenance](https://bowo.io/dotorg-sponsor-asenha) of this plugin (and [my other plugins](https://profiles.wordpress.org/qriouslad/#content-plugins)) from as little as USD 1 / month. Thank you!
+
 ### 4.9.0 (2023.04.16)
 
 * **[ENHANCEMENT] Content Management >> External Permalinks**. The rel="noopener noreferrer nofollow" attribute will now be added to external permalinks for enhanced security and SEO benefits. 
@@ -178,7 +188,6 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 ### 4.8.3 (2023.04.15)
 
 * **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
-* Added button linking to [my Github sponsorship](https://bowo.io/dotorg-sponsor-asenha) page. Please consider supporting the continued development and maintenance of this, and my other plugins. Thank you!
 
 ### 4.8.2 (2023.04.03)
 
