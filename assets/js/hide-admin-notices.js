@@ -65,6 +65,8 @@
 			+ '#wpbody-content > .wrap > div > .notice-updated,'
 			+ '#wpbody-content > .wrap > div > .updated,'
 			+ '#wpbody-content > .wrap > div > .update-nag,'
+			+ '#wpbody-content > .update-nag,' // LearnDash
+			+ '#wpbody-content > .notice,' // LearnDash
 			+ '#wpbody-content > .jp-connection-banner' // Jetpack
 			).detach()
 			.appendTo(noticesPanel)
