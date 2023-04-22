@@ -386,6 +386,7 @@ class Admin_Site_Enhancements {
 		if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
 			if ( array_key_exists( 'disable_comments_for', $options ) && ! empty( $options['disable_comments_for'] ) )  {
 				add_action( 'do_meta_boxes', [ $disable_components, 'disable_comments_for_post_types_edit' ] ); // also work with 'init', 'admin_init', 'wp_loaded' hooks
+				add_action( 'template_redirect', [ $disable_components, 'show_blank_comment_template' ] );
 				add_filter( 'comments_array', [ $disable_components, 'hide_existing_comments_on_frontend' ], 10, 2 ); // hide comments
 				add_filter( 'comments_open', [ $disable_components, 'close_commenting_on_frontend' ] ); // close commenting
 			}

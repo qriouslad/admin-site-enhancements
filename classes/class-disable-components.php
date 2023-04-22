@@ -72,6 +72,38 @@ class Disable_Components {
 			}
 		}
 	}
+	
+	/**
+	 * Show blank template on singular views when comment is disabled
+	 * 
+	 * @since 4.9.2
+	 */
+	public function show_blank_comment_template() {
+
+		$options = get_option( ASENHA_SLUG_U );
+		$disable_comments_for = $options['disable_comments_for'];
+		$current_post_type = get_post_type();
+
+		foreach ( $disable_comments_for as $post_type_slug => $is_commenting_disabled ) {
+			if ( ( $current_post_type === $post_type_slug ) && $is_commenting_disabled ) {
+
+				if ( is_singular() ) {
+					add_filter( 'comments_template', [ $this, 'load_blank_comment_template' ], 20 );
+				}
+
+			}
+		}
+
+	}
+	
+	/**
+	 * Load the actual blank comment template
+	 * 
+	 * @since 4.9.2
+	 */
+	public function load_blank_comment_template() {
+		return ASENHA_PATH . 'includes/blank-comment-template.php';
+	}
 
 	/**
 	 * Disable Gutenberg in wp-admin for some or all post types
