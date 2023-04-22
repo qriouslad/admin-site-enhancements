@@ -5,7 +5,7 @@ Donate link: https://bowo.io/dotorg-sponsor-asenha
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.9.1  
+Stable tag: 4.9.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,7 +44,7 @@ _"**...everything is clear, fast, consistent and lightweight**."_ ~[Peter](https
 
 _"**Greatest plugin ever**."_ ~[@angelaustr](https://wordpress.org/support/topic/greatest-plugin-ever-11/)
 
-_"**p.s. There are bugs. This is software development after all and I'm the developer (as well as user).** [Please report](https://wordpress.org/support/plugin/admin-site-enhancements/) if you found one, and I'll try to fix the next chance I get. Thanks!"_ ~[Bowo](https://github.com/sponsors/qriouslad)
+_"**p.s. There are bugs**. This is software development after all and **I'm the developer (as well as user)**. [Please report](https://wordpress.org/support/plugin/admin-site-enhancements/) if you found one, and **I'll try to fix the next chance I get**. Thanks!"_ ~[Bowo](https://bowo.io/bowoio-asenha)
 
 
 ### Content Management
@@ -175,10 +175,14 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### 4.9.2 (2023.04.22)
+
+* **[FIXED] Disable Components >> Disable Comments**: fix for certain scenarios where comment form is still shown despite commenting being disabled on the post type. Props to [@crazyserb](https://profiles.wordpress.org/crazyserb/) for [reporting it](https://wordpress.org/support/topic/disable-comments-functionality-doesnt-work-either/), providng temporary admin access, as well as screenshots to help with troubleshooting!
+* **[SPONSORSHIP]** If you have benefited from this plugin in your **personal project(s), paid work, client site(s) and or agency's workflow**, please kindly consider [sponsoring the ongoing development and maintenance](https://bowo.io/dotorg-sponsor-asenha) of this plugin (and [my other plugins](https://profiles.wordpress.org/qriouslad/#content-plugins)) from as little as USD 1 / month. Thank you!
+
 ### 4.9.1 (2023.04.19)
 
 * **[ENHANCEMENT] Admin Interface >> Hide Admin Notices**. LearnDash pages was showing up notices below header. This fix will now move them into the hidden, toggleable notices panel.
-* **[SPONSORSHIP]** If you have benefited from this plugin in your **personal project(s), paid work, client site(s) and or agency's workflow**, please kindly consider [sponsoring the ongoing development and maintenance](https://bowo.io/dotorg-sponsor-asenha) of this plugin (and [my other plugins](https://profiles.wordpress.org/qriouslad/#content-plugins)) from as little as USD 1 / month. Thank you!
 
 ### 4.9.0 (2023.04.16)
 
