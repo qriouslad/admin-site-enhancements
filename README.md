@@ -175,10 +175,17 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ## Changelog
 
+### Sponsor Admin and Site Enhancements
+
+If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider [**sponsoring from as little as USD 1**](https://bowo.io/dotorg-sponsor-asenha) (monthly or one-time). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+
+### 4.9.3 (2023.04.22)
+
+* **[FIXED] Disable Components >> Disable REST API**: fix for error when trying to save edits in Gutenberg editor when Disable REST API module is turned on. Props to [@alexgraphicd](https://profiles.wordpress.org/alexgraphicd/) for [reporting it](https://wordpress.org/support/topic/cant-save-edits-to-posts-or-pages-when-rest-api-is-disabled/).
+
 ### 4.9.2 (2023.04.22)
 
 * **[FIXED] Disable Components >> Disable Comments**: fix for certain scenarios where comment form is still shown despite commenting being disabled on the post type. Props to [@crazyserb](https://profiles.wordpress.org/crazyserb/) for [reporting it](https://wordpress.org/support/topic/disable-comments-functionality-doesnt-work-either/), providng temporary admin access, as well as screenshots to help with troubleshooting!
-* **[SPONSORSHIP]** If you have benefited from this plugin in your **personal project(s), paid work, client site(s) and or agency's workflow**, please kindly consider [sponsoring the ongoing development and maintenance](https://bowo.io/dotorg-sponsor-asenha) of this plugin (and [my other plugins](https://profiles.wordpress.org/qriouslad/#content-plugins)) from as little as USD 1 / month. Thank you!
 
 ### 4.9.1 (2023.04.19)
 
