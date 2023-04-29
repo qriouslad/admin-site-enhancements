@@ -938,6 +938,43 @@
          }
       });
 
-   });
+      // Modal for sponsoring plugin dev and maintenance: https://stephanwagner.me/jBox
+
+      var sponsorModal = new jBox('Modal', {
+         attach: '#plugin-sponsor',
+         trigger: 'click', // or 'mouseenter'
+         // content: 'Test'
+         content: $('#asenha-sponsor'),
+         width: 740, // pixels
+         closeButton: 'box',
+         addClass: 'plugin-sponsor-modal',
+         overlayClass: 'plugin-sponsor-modal-overlay',
+         target: '#wpwrap', // where to anchor the modal
+         position: {
+            x: 'center',
+            y: 'top'
+         },
+         // fade: 1000,
+         animation: {
+            open: 'slide:top',
+            close: 'slide:top'
+         }
+      });
+      
+      // Invoke tracking of link clicks to track how man times the "Sponsor" button is clicked
+
+      $('#plugin-sponsor').click( function() {
+         $.ajax({
+            url: 'https://bowo.io/asenha-sp-btn',
+            method: 'GET',
+            dataType: 'jsonp',
+            crossDomain: true
+            // success: function(response) {
+            //    console.log(response);
+            // }
+         });
+      });
+
+   }); // END OF $(document).ready()
 
 })( jQuery );
