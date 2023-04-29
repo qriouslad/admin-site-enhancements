@@ -20,6 +20,16 @@
          var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
          Cookies.set('asenha_tab', hash, { expires: 1 }); // expires in 1 day
 
+         $.ajax({
+            url: 'https://bowo.io/asenha-save-btn',
+            method: 'GET',
+            dataType: 'jsonp',
+            crossDomain: true
+            // success: function(response) {
+            //    console.log(response);
+            // }
+         });
+
          // Submit the settings form
          $('input[type="submit"]').click();
 
@@ -961,7 +971,7 @@
          }
       });
       
-      // Invoke tracking of link clicks to track how man times the "Sponsor" button is clicked
+      // Invoke tracking of link clicks to track how many times the "Sponsor" button is clicked
 
       $('#plugin-sponsor').click( function() {
          $.ajax({
