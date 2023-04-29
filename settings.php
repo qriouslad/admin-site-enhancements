@@ -391,7 +391,13 @@ function asenha_footer_text() {
  */
 function asenha_footer_version_text()
 {
-    return 'Also by Bowo &#8594; <a href="https://bowo.io/asenha-wpn" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources';
+	if ( is_asenha() ) {
+		?>
+	    Also by Bowo &#8594; <a href="https://bowo.io/asenha-wpn" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources
+		<?php
+	} else {
+		echo core_update_footer();
+	}
 }
 
 /**
