@@ -5,7 +5,7 @@ Donate link: https://bowo.io/asenha-sp-rdm
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 5.0.0  
+Stable tag: 5.0.1  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,10 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 ### Sponsor Admin and Site Enhancements
 
 If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider **sponsoring from as little as USD 1** ([monthly](https://bowo.io/asenha-sp-gth-chnlg) or [one-time](https://bowo.io/asenha-sp-ppl-chnlg)). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+
+### 5.0.1 (2023.04.29)
+
+* **[FIXED] WordPress Newsboard link in footer** showing up on all wp-admin pages. Now will only show up on the plugin's main page.
 
 ### 5.0.0 (2023.04.29)
 
