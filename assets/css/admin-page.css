@@ -385,8 +385,10 @@
     border-top: 1px solid #eee;
 }
 
+.asenha-subfields-heading,
 .form-table .asenha-subfields th {
     width: 100%;
+    font-weight: 600;
     color: #3c434a;
 }
 
@@ -541,6 +543,10 @@
 
 .form-table .asenha-subfields tr:not(.datatable-tr).shift-up {
     margin-top: -4px;
+}
+
+.form-table .asenha-subfields tr:not(.datatable-tr).shift-more-up {
+    margin-top: -12px;
 }
 
 .form-table .asenha-subfields tr:not(.datatable-tr).top-border {
@@ -702,4 +708,108 @@
     color: #997404;
     background: #fff3cd;
     border: 1px solid #ffe69c;
+}
+
+/* jBox Modals */
+
+.jBox-Modal.plugin-sponsor-modal .jBox-content {
+    max-height: calc( 100vh - 120px ) !important;
+    margin-top: 40px;
+    padding: 20px 40px;
+}
+.cta-modal-content .sponsorship-content {
+}
+.cta-modal-content h2 {
+    font-size: 1.875em;
+    line-height: 1.2;
+}
+.cta-modal-content h3 {
+    font-size: 1.5em;
+    line-height: 1.4;
+}
+.cta-modal-content p {
+    text-align: left;
+    font-size: 1.25em;
+    line-height: 1.7;
+}
+/* Sponsorship Modal */
+
+.jBox-Modal.plugin-sponsor-modal .jBox-content {
+}
+.cta-modal-content.sponsorship .sponsorship-content {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;    
+}
+.cta-modal-content.sponsorship .sponsorship-header {
+    text-align: center;
+}
+.cta-modal-content.sponsorship .sponsorship-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -20px;
+}
+.cta-modal-content.sponsorship .sponsorship-image img {
+    width: 50%;    
+}
+.cta-modal-content.sponsorship .sponsorship-content-sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cta-modal-content .sponsorship-info {
+    display: flex;
+    width: 48%;
+}
+.cta-modal-content .sponsorship-methods {
+    display: flex;
+    width: 48%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.cta-modal-content.sponsorship a:not(.button) {
+    color: #de4c73;
+    text-decoration: none;
+}
+.cta-modal-content.sponsorship a:not(.button):hover {
+    text-decoration: underline;
+}
+.cta-modal-content .sponsorship-button {
+    display: flex;
+    align-items: center;
+    font-size: 1.25em;
+}
+.cta-modal-content .sponsorship-button.monthly {
+    font-weight: 500;
+    transition: .25s;
+    color: #fff;
+    background: #de4c73;
+    border-color: #de4c73;
+    margin-bottom: 2em;
+}
+.cta-modal-content .sponsorship-button.monthly:hover {
+    background: #b13c5c;
+    border-color: #b13c5c;    
+}
+.cta-modal-content .sponsorship-button.monthly:focus {
+    box-shadow: none;
+}
+.cta-modal-content .sponsorship-button.one-time {
+    color: #de4c73;
+    background: transparent;
+    border-color: #de4c73;
+    transition: .1s;
+}
+.cta-modal-content .sponsorship-button.one-time:hover {
+    color: #fff;
+    background: #de4c73;
+}
+.cta-modal-content .sponsorship-button.one-time:focus {
+    box-shadow: none;
+}
+
+.cta-modal-content .sponsorship-button .dashicons {
+    margin-left: 4px;
 }

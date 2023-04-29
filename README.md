@@ -1,18 +1,18 @@
 # Admin and Site Enhancements
 
 Contributors: qriouslad  
-Donate link: https://bowo.io/dotorg-sponsor-asenha  
+Donate link: https://bowo.io/asenha-sp-rdm  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 4.9.2  
+Stable tag: 5.0.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ![](.wordpress-org/banner-772x250.png)
 
-Duplicate post, image resize / optimize, email via SMTP, admin menu editor, custom css / code, disable gutenberg and much more in a single plugin.
+Duplicate post, post order, image resize, email via SMTP, admin menu editor, custom css / code, disable gutenberg and much more in a single plugin.
 
 ## Description
 
@@ -49,7 +49,8 @@ _"**p.s. There are bugs**. This is software development after all and **I'm the 
 
 ### Content Management
 
-* **Page and Post Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
+* **Content Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
+* **Content Order**. Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, etc.
 * **Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
 * **SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
 * **External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. The rel="noopener noreferrer nofollow" attribute will also be added for enhanced security and SEO benefits. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
@@ -66,7 +67,7 @@ _"**p.s. There are bugs**. This is software development after all and **I'm the 
 ### Admin Interface
 
 * **Hide Admin Notices**. Clean up admin pages by moving notices into a separate panel easily accessible via the admin bar.
-* **Admin Menu Organizer**. Customize the order of the admin menu and optionally change menu item title or hide some items.
+* **Admin Menu Editor / Organizer**. Customize the order of the admin menu and optionally change menu item title or hide some items.
 * **Disable Dashboard Widgets**. Clean up and speed up the dashboard by completely disabling some or all widgets. Disabled widgets won't load any assets nor show up under Screen Options.
 * **Clean Up Admin Bar**. Remove various elements from the admin bar.
   * Remove WordPress logo/menu
@@ -134,10 +135,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 
 ### Give Back
 
-* [A nice review](https://bowo.io/add-review-asenha) would be great!
-* [Give feedback](https://bowo.io/feedback-asenha) and help improve future versions.
-* [Github repo](https://bowo.io/github-asenha) to contribute code.
-* [Sponsor](https://bowo.io/dotorg-sponsor-asenha) my work.
+* [**A nice review**](https://bowo.io/asenha-rvw-dsc) would be great!
+* [**Give feedback**](https://bowo.io/asenha-fdbk-dsc) and help improve future versions.
+* [**Help translate**](https://bowo.io/asenha-trnslt-dsc) plugin description on this page into your language.
+* [**Github repo**](https://bowo.io/asenha-gthb-dsc) to contribute code.
+* **Sponsor my work** with as little as USD 1, [**monthly**](https://bowo.io/asenha-sp-gth-rdm) or [**one-time**](https://bowo.io/asenha-sp-ppl-rdm).
 
 ### Check These Out Too
 
@@ -146,7 +148,7 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 * [Variable Inspector](https://wordpress.org/plugins/variable-inspector/): Inspect PHP variables on a central dashboard in wp-admin for convenient debugging.
 * [Code Explorer](https://wordpress.org/plugins/code-explorer/): Fast directory explorer and file/code viewer with syntax highlighting.
 * [Flexible Scroll Top](https://wordpress.org/plugins/flexible-scroll-top/) and [Floating Share Buttons](https://wordpress.org/plugins/floating-share-button/) is a lightweight combo with minimalist UI.
-* [WordPress Newsboard](https://www.wpnewsboard.com/): The latest news, articles, podcasts and videos from 100+ WordPress-focused sources.
+* [WordPress Newsboard](https://bowo.io/asenha-wpn-dsc): The latest news, articles, podcasts and videos from 100+ WordPress-focused sources.
 
 ## Screenshots
 
@@ -177,7 +179,16 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ### Sponsor Admin and Site Enhancements
 
-If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider [**sponsoring from as little as USD 1**](https://bowo.io/dotorg-sponsor-asenha) (monthly or one-time). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider **sponsoring from as little as USD 1** ([monthly](https://bowo.io/asenha-sp-gth-chnlg) or [one-time](https://bowo.io/asenha-sp-ppl-chnlg)). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+
+### 5.0.0 (2023.04.29)
+
+* **[ADDED] Content Management >> Content Order**. Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, etc.
+* **[FIXED] Utilities >> Password Protection**: Fix PHP Warning error. Props to [@cvladan](https://github.com/cvladan) for [reporting it](https://wordpress.org/support/topic/minor-php-warning/).
+* **[CHANGED] Content Management >> Page and Post Duplication** module has been renamed to "Content Duplication".
+* **[ADDED] Translate link** on plugin page's header and in the .org plugin description page. Please [consider helping to translate](https://translate.wordpress.org/projects/wp-plugins/admin-site-enhancements/) the plugin description (a.k.a. README). There are about 100 strings/sentences in it. This will help expand the reach of Admin and Site Enhancements into people who read/speak your language. Special props to [Angelika Reisiger
+](https://profiles.wordpress.org/la-geek/), General Translation Editor for Deutsch (German) #de_DE, for tackling translation of the plugin description into [German](https://translate.wordpress.org/locale/de/default/wp-plugins/admin-site-enhancements/) and [German (formal)](https://translate.wordpress.org/locale/de/formal/wp-plugins/admin-site-enhancements/).
+* **[ADDED] Link to [WordPress Newsboard](https://bowo.io/asenha-wpn-dsc)** in plugin page's footer. This is another thing I created back in 2014 and is still working to aggregate the latest news, articles, tutorials, podcasts and videos from 100+ WordPress-centric sources.
 
 ### 4.9.3 (2023.04.22)
 
@@ -198,7 +209,7 @@ If this plugin has been useful for your **personal project(s), paid dev work, cl
 
 ### 4.8.3 (2023.04.15)
 
-* **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
+* **[FIXED] Content Management >> Content Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
 
 ### 4.8.2 (2023.04.03)
 

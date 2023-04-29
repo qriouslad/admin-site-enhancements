@@ -2,6 +2,7 @@
 
 namespace ASENHA\Classes;
 use enshrined\svgSanitize\Sanitizer; // For Enable SVG Upload
+use WP_Query;
 
 /**
  * Class related to Content Management features
@@ -571,7 +572,335 @@ class Content_Management {
 		return $new_actions;
 
 	}
+	
+	/** 
+	 * Add "Custom Order" sub-menu for post types
+	 * 
+	 * @since 5.0.0
+	 */
+	public function add_content_order_submenu( $context ) {
+		$options = get_option( ASENHA_SLUG_U, array() );
+		$content_order_for = $options['content_order_for'];
+		$content_order_enabled_post_types = array();
+		
+		foreach ( $options['content_order_for'] as $post_type_slug => $is_custom_order_enabled ) {
+			if ( $is_custom_order_enabled ) {
+				$post_type_object = get_post_type_object( $post_type_slug );
+				$post_type_name_plural = $post_type_object->labels->name;
+				if ( 'post' == $post_type_slug ) {
+					$hook_suffix = add_posts_page(
+						$post_type_name_plural . ' Order', // Page title
+						'Order', // Menu title
+						'edit_pages', // Capability required
+						'custom-order-posts', // Menu and page slug
+						[ $this, 'custom_order_page_output' ], // Callback function that outputs page content
+					);
+				} else {
+					$hook_suffix = add_submenu_page(
+						'edit.php?post_type=' . $post_type_slug, // Parent (menu) slug. Ref: https://developer.wordpress.org/reference/functions/add_submenu_page/#comment-1404
+						$post_type_name_plural . ' Order', // Page title
+						'Order', // Menu title
+						'edit_pages', // Capability required
+						'custom-order-' . $post_type_slug, // Menu and page slug
+						[ $this, 'custom_order_page_output' ],  // Callback function that outputs page content
+					);
+				}
 
+				add_action( 'admin_print_styles-' . $hook_suffix, [ $this, 'enqueue_content_order_styles' ] );
+				add_action( 'admin_print_scripts-' . $hook_suffix, [ $this, 'enqueue_content_order_scripts' ] );
+			}
+		}		
+	}
+	
+	/**
+	 * Output content for the custom order page for each enabled post types
+	 * Not using settings API because all done via AJAX
+	 * 
+	 * @since 5.0.0
+	 */
+	public function custom_order_page_output() {
+
+		$parent_slug = get_admin_page_parent();
+		if ( 'edit.php' == $parent_slug ) {
+			$post_type_slug = 'post';
+		} else {
+			$post_type_slug = str_replace( 'edit.php?post_type=', '', $parent_slug );
+		}
+
+		// Object with properties for each post status and the count of posts for each status
+		// $post_count_object = wp_count_posts( $post_type_slug );
+
+		// Number of items with the status 'publish(ed)', 'future' (scheduled), 'draft', 'pending' and 'private'
+		// $post_count = absint( $post_count_object->publish )
+		// 			  + absint( $post_count_object->future )
+		// 			  + absint( $post_count_object->draft )
+		// 			  + absint( $post_count_object->pending )
+		// 			  + absint( $post_count_object->private );
+		?>
+		<div class="wrap">
+			<h2>
+				<?php
+					echo get_admin_page_title();
+				?>
+			</h2>
+		<?php
+		// Get posts
+		$query = new WP_Query( array(
+				'post_type'			=> $post_type_slug,
+				'posts_per_page'	=> -1, // Get all posts
+				'orderby'			=> 'menu_order title', // By menu order then by title
+				'order'				=> 'ASC',
+				'post_status'		=> array( 'publish', 'future', 'draft', 'pending', 'private' ),
+				'post_parent'		=> 0, // In hierarchical post types, only return top-level / parent posts
+		) );
+
+		if ( $query->have_posts() ) {
+			?>
+			<ul id="item-list">
+				<?php
+				while( $query->have_posts() ) {
+					$query->the_post();
+					$post = get_post( get_the_ID() );
+					$this->custom_order_single_item_output( $post );
+				}
+				?>
+			</ul>
+			<div id="updating-order-notice" class="updating-order-notice" style="display: none;"><img src="<?php echo ASENHA_URL . 'assets/img/oval.svg'; ?>" id="spinner-img" class="spinner-img" /><span class="dashicons dashicons-saved" style="display:none;"></span>Updating order...</div>
+			<?php
+		} else {
+			?>
+			<h3>There is nothing to sort for this post type.</h3>
+			<?php
+		}
+		?>
+		</div> <!-- End of div.wrap -->
+		<?php
+		wp_reset_postdata();
+	}
+	
+	/**
+	 * Output single item sortable for custom content order
+	 * 
+	 * @since 5.0.0
+	 */
+	private function custom_order_single_item_output( $post ) {
+		if ( is_post_type_hierarchical( $post->post_type ) ) {
+			$post_type_object = get_post_type_object( $post->post_type );
+
+			$children = get_pages( array( 
+				'child_of'	=> $post->ID, 
+				'post_type'	=> $post->post_type,
+			) );
+
+			if ( count( $children ) > 0 ) {
+				$has_child_label = '<span class="has-child-label"> <span class="dashicons dashicons-arrow-right"></span> Has child ' . strtolower( $post_type_object->label ) . '</span>';
+				$has_child = 'true';
+			} else {
+				$has_child_label = '';						
+				$has_child = 'false';
+			}						
+		} else {
+			$has_child_label = '';
+			$has_child = 'false';
+		}
+		$post_status_label_class = ( $post->post_status == 'publish' ) ? ' item-status-hidden' : '';
+		$post_status_object = get_post_status_object( $post->post_status );
+		?>
+		<li id="list_<?php echo $post->ID; ?>" data-id="<?php echo $post->ID; ?>" data-menu-order="<?php echo $post->menu_order; ?>" data-parent="<?php echo $post->post_parent; ?>" data-has-child="<?php echo $has_child; ?>" data-post-type="<?php echo $post->post_type; ?>">
+			<div class="row">
+				<div class="row-content">
+					<?php 
+					echo    '<div class="content-main">
+								<span class="dashicons dashicons-menu"></span><a href="' . get_edit_post_link( $post->ID ) . '" class="item-title">' . $post->post_title . '</a><span class="item-status' . $post_status_label_class . '"> — ' . $post_status_object->label . '</span>' . $has_child_label . '
+							</div>
+							<div class="content-additional">
+								<a href="' . get_the_permalink( $post->ID ) . '" target="_blank" class="item-view-link">View</a>
+							</div>';
+					?>
+				</div>
+			</div>
+		</li>
+		<?php
+	}
+	
+	/**
+	 * Enqueue styles for content order pages
+	 * 
+	 * @since 5.0.0
+	 */
+	public function enqueue_content_order_styles() {
+		wp_enqueue_style( 
+			'content-order-style', 
+			ASENHA_URL . 'assets/css/content-order.css', 
+			array(), 
+			ASENHA_VERSION 
+		);
+	}
+
+	/**
+	 * Enqueue scripts for content order pages
+	 * 
+	 * @since 5.0.0
+	 */
+	public function enqueue_content_order_scripts() {
+		global $typenow;
+		wp_enqueue_script( 
+			'content-order-jquery-ui-touch-punch', 
+			ASENHA_URL . 'assets/js/jquery.ui.touch-punch.min.js', 
+			array( 'jquery-ui-sortable' ), 
+			'0.2.3', 
+			true 
+		);
+		wp_register_script( 
+			'content-order-nested-sortable', 
+			ASENHA_URL . 'assets/js/jquery.mjs.nestedSortable.js', 
+			array( 'content-order-jquery-ui-touch-punch' ), 
+			'2.0.0', 
+			true 
+		);
+		wp_enqueue_script( 
+			'content-order-sort', 
+			ASENHA_URL . 'assets/js/content-order-sort.js', 
+			array( 'content-order-nested-sortable' ), 
+			ASENHA_VERSION, 
+			true 
+		);
+		wp_localize_script(
+			'content-order-sort',
+			'contentOrderSort',
+			array(
+				'action'		=> 'save_custom_order',
+				'nonce'			=> wp_create_nonce( 'order_sorting_nonce' ),
+				'hirarchical'	=> is_post_type_hierarchical( $typenow ) ? 'true' : 'false',
+			)
+		);
+	}
+	
+	/**
+	 * Save custom content order coming from ajax call
+	 * 
+	 * @since 5.0.0
+	 */
+	public function save_custom_content_order() {
+		global $wpdb;
+		
+		// Check user capabilities
+		if ( ! current_user_can( 'edit_pages' ) ) {
+			wp_send_json( 'Something went wrong.' );
+		}
+		
+		// Verify nonce
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'order_sorting_nonce' ) ) {
+			wp_send_json( 'Something went wrong.' );
+		}
+		
+		// Get ajax variables
+		$action = isset( $_POST['action'] ) ? $_POST['action'] : '' ;
+		$item_parent = isset( $_POST['item_parent'] ) ? absint( $_POST['item_parent'] ) : 0 ;
+		$menu_order_start = isset( $_POST['start'] ) ? absint( $_POST['start'] ) : 0 ;
+		$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0 ;
+		$item_menu_order = isset( $_POST['menu_order'] ) ? absint( $_POST['menu_order'] ) : 0 ;
+		$items_to_exclude = isset( $_POST['excluded_items'] ) ? absint( $_POST['excluded_items'] ) : array();
+		$post_type = isset( $_POST['post_type'] ) ? $_POST['post_type'] : false ;
+		
+		// Make processing faster by removing certain actions
+		remove_action( 'pre_post_update', 'wp_save_post_revision' );
+		
+		// $response array for ajax response
+		$response = array();
+
+		// Update the item whose order/position was moved
+		if ( $post_id > 0 && ! isset( $_POST['more_posts'] ) ) {
+			// https://developer.wordpress.org/reference/classes/wpdb/update/
+			$wpdb->update(
+				$wpdb->posts, // The table
+				array( // The data
+					'menu_order' 	=> $item_menu_order,
+				),
+				array( // The post ID
+					'ID'			=> $post_id
+				)
+			);
+			clean_post_cache( $post_id );
+			$items_to_exclude[] = $post_id;
+		}
+		
+		// Get all posts from the post type related to ajax request
+		$query_args = array(
+			'post_type'					=> $post_type,
+			'orderby'					=> 'menu_order title',
+			'order'						=> 'ASC',
+			'posts_per_page'			=> -1, // Get all posts
+			'suppress_filters'			=> true,
+			'ignore_sticky_posts'		=> true,
+			'post_status'				=> array( 'publish', 'future', 'draft', 'pending', 'private' ),
+			'post_parent'				=> $item_parent,
+			'post__not_in'				=> $items_to_exclude,
+			'update_post_term_cache'	=> false, // Speed up processing by not updating term cache
+			'update_post_meta_cache'	=> false, // Speed up processing by not updating meta cache
+		);
+		
+		$posts = new WP_Query( $query_args );
+						
+		if ( $posts->have_posts() ) {
+			// Iterate through posts and update menu order and post parent
+			foreach ( $posts->posts as $post ) {
+				// If the $post is the one being displaced (shited downward) by the moved item, increment it's menu_order by one
+				if ( $menu_order_start == $item_menu_order && $post_id > 0 ) {
+					$menu_order_start++;
+				}
+				
+				// Only process posts other than the moved item, which has been processed earlier outside this loop
+				if ( $post_id != $post->ID ) {
+					// Update menu_order
+					$wpdb->update(
+						$wpdb->posts,
+						array(
+							'menu_order'	=> $menu_order_start,
+						),
+						array(
+							'ID'			=> $post->ID
+						)
+					);
+					clean_post_cache( $post->ID );
+				}
+				
+				$items_to_exclude[] = $post->ID;
+				$menu_order_start++;
+			}
+			die( json_encode( $response ) );
+		} else {
+			die( json_encode( $response ) );
+		}
+	}
+
+	/**
+	 * Set default ordering of list tables of sortable post types in wp-admin by 'menu_order title'
+	 * 
+	 * @since 5.0.0
+	 */
+	public function orderby_menu_order_in_admin_lists( $wp_query ) {
+		global $pagenow, $typenow;
+
+		$options = get_option( ASENHA_SLUG_U, array() );
+		$content_order_for = $options['content_order_for'];
+		$content_order_enabled_post_types = array();
+		foreach ( $options['content_order_for'] as $post_type_slug => $is_custom_order_enabled ) {
+			if ( $is_custom_order_enabled ) {
+				$content_order_enabled_post_types[] = $post_type_slug;
+			}
+		}
+		
+		if ( is_admin() && 'edit.php' == $pagenow && ! isset( $_GET['orderby'] ) ) {
+			if ( in_array( $typenow, $content_order_enabled_post_types ) 
+				&& ( post_type_supports( $typenow, 'page-attributes' ) || is_post_type_hierarchical( $typenow ) ) 
+			) {
+			    $wp_query->set( 'orderby', 'menu_order title' );
+			    $wp_query->set( 'order', 'ASC' );				
+			}
+		}
+	}
+	
 	/**
 	 * Add media replacement button in the edit screen of media/attachment
 	 *

@@ -29,13 +29,18 @@ function asenha_add_settings_page() {
 
 		<div id="asenha-header" class="asenha-header">
 			<div class="asenha-header-left">
-				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io/bowoio-asenha" target="_blank">Bowo</a></small></h1>
+				<h1 class="asenha-heading"><?php echo get_admin_page_title(); ?> <small><?php esc_html_e( 'by', 'admin-site-enhancements' ); ?> <a href="https://bowo.io/asenha-bw" target="_blank">Bowo</a></small></h1>
 				<!-- <a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php // esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a> -->
 			</div>
 			<div class="asenha-header-right">
-				<a href="https://bowo.io/review-asenha" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
-				<a href="https://bowo.io/feedback-asenha" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
-				<a href="https://bowo.io/sponsor-asenha" target="_blank" class="asenha-header-action button button-primary plugin-sponsor">&#9829; <?php esc_html_e( 'Sponsor', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/asenha-rvw" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/asenha-fdbk" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/asenha-trnslt" target="_blank" class="asenha-header-action">&#9654; <?php esc_html_e( 'Translate', 'admin-site-enhancements' ); ?></a>
+                <div id="plugin-sponsor" class="button button-primary plugin-sponsor">&#10084;
+                    <?php 
+                        esc_html_e( 'Sponsor', 'admin-site-enhancements' ); 
+                    ?>
+                </div>
 				<a class="button button-primary asenha-save-button">Save Changes</a>
 				<div class="asenha-changes-saved" style="display:none;">Changes have been saved.</div>
 			</div>
@@ -114,6 +119,31 @@ function asenha_add_settings_page() {
 		<div class="asenha-footer">
 		</div>
 
+        <div id="asenha-sponsor" class="cta-modal-content sponsorship" style="display:none;">
+            <div class="sponsorship-content">
+                <div class="sponsorship-header">
+                    <div class="sponsorship-image">
+                        <img src="<?php echo esc_attr( ASENHA_URL . 'assets/img/undraw_Programming_re_kg9v.png' ); ?>" />
+                    </div>
+                    <h2>Thank you for your interest in sponsoring!</h2>
+                </div>
+                <div class="sponsorship-content-sections">
+                    <div class="sponsorship-info">
+                        <p class="sponsorship-description">I love building <strong>useful and free <a href="https://bowo.io/asenha-other-plugins" target="_blank">plugins</a></strong>. Your sponsorship will help justify the time and effort I spend in <strong>developing and maintaining this plugin</strong>, so it can remain functional and useful for <strong>your personal project(s), paid dev work, client site(s) and/or agency workflow</strong>... hopefully for years to come.</p>                                
+                    </div>
+                    <div class="sponsorship-methods">
+                        <p class="sponsorship-amount">Sponsorship can be <strong>as little as USD 1</strong>, monthly or one-time.</p>
+                        <div class="sponsorship-method sponsor-via-github">
+                            <a href="https://bowo.io/asenha-sp-gth" target="_blank" class="button button-primary button-hero sponsorship-button monthly">Monthly Sponsorship via Github <span class="dashicons dashicons-arrow-right-alt2"></span></a>
+                        </div>
+                        <div class="sponsorship-method sponsor-via-paypal">
+                            <a href="https://bowo.io/asenha-sp-ppl" target="_blank" class="button button-hero sponsorship-button one-time">One-time Sponsorship via PayPal <span class="dashicons dashicons-arrow-right-alt2"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <p>More about me and my work at <a href="https://bowo.io/asenha-bw-sp" target="_blank">bowo.io</a>.</p>
+            </div>
+        </div>
 	</div>
 	<?php
 
@@ -348,7 +378,7 @@ function asenha_footer_text() {
 
 	if ( is_asenha() ) {
 		?>
-		<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank">Admin Site Enhancements</a> is on <a href="https://github.com/qriouslad/admin-site-enhancements" target="_blank">github</a>.
+		<a href="https://bowo.io/asenha-dotorg" target="_blank">Admin Site Enhancements</a> is on <a href="https://bowo.io/asenha-gthb" target="_blank">github</a>.
 		<?php
 	}
 
@@ -361,9 +391,8 @@ function asenha_footer_text() {
  */
 function asenha_footer_version_text()
 {
-    return 'Also by Bowo &#8594; <a href="https://bowo.io/wpn-asenha" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources';
+    return 'Also by Bowo &#8594; <a href="https://bowo.io/asenha-wpn" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources';
 }
-
 
 /**
  * Check if current screen is this plugin's main page

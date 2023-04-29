@@ -64,10 +64,10 @@ class Admin_Site_Enhancements {
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
 		// Update footer text
-		add_filter( 'admin_footer_text', 'asenha_footer_text' );
+		add_filter( 'admin_footer_text', 'asenha_footer_text', 20 );
 
 		// Update footer version text
-		add_filter( 'update_footer', 'asenha_footer_version_text' );
+		add_filter( 'update_footer', 'asenha_footer_version_text', 20 );
 
 		// ===== Activate features based on settings ===== 
 
@@ -81,11 +81,20 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Enable Page and Post Duplication
+		// Content Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
 			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
 			add_filter( 'page_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 			add_filter( 'post_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
+		}
+
+		// Content Order
+		if ( array_key_exists( 'content_order', $options ) && $options['content_order'] ) {
+			if ( array_key_exists( 'content_order_for', $options ) && ! empty( $options['content_order_for'] ) )  {
+				add_action( 'admin_menu', [ $content_management, 'add_content_order_submenu' ] );
+				add_action( 'wp_ajax_save_custom_order', [ $content_management, 'save_custom_content_order' ] );
+				add_filter( 'pre_get_posts', [ $content_management, 'orderby_menu_order_in_admin_lists' ] );
+			}
 		}
 
 		// Enable Media Replacement
@@ -404,7 +413,7 @@ class Admin_Site_Enhancements {
 				add_filter( 'rest_enabled', '__return_false' );
 				add_filter( 'rest_jsonp_enabled', '__return_false' );
 			}
-			remove_action('wp_head', 'rest_output_link_wp_head', 10 ); // Disable REST API links in HTML <head>
+			remove_action( 'wp_head', 'rest_output_link_wp_head', 10 ); // Disable REST API links in HTML <head>
 			remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 ); // Disable REST API link in HTTP headers
 			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' ); // Remove REST API URL from the WP RSD endpoint.
 		}

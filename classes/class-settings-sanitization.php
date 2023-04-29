@@ -24,9 +24,22 @@ class Settings_Sanitization {
 		// CONTENT MANAGEMENT
 		// =================================================================
 
-		// Enable Page and Post Duplication
+		// Content Duplication
 		if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
 		$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
+
+		// Content Order
+		if ( ! isset( $options['content_order'] ) ) $options['content_order'] = false;
+		$options['content_order'] = ( 'on' == $options['content_order'] ? true : false );
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				if ( post_type_supports( $post_type_slug, 'page-attributes' ) || is_post_type_hierarchical( $post_type_slug ) ) {
+					if ( ! isset( $options['content_order_for'][$post_type_slug] ) ) $options['content_order_for'][$post_type_slug] = false;
+					$options['content_order_for'][$post_type_slug] = ( 'on' == $options['content_order_for'][$post_type_slug] ? true : false );	
+				}
+			}
+		}
 
 		// Enable Media Replacement
 		if ( ! isset( $options['enable_media_replacement'] ) ) $options['enable_media_replacement'] = false;

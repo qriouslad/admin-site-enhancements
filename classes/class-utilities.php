@@ -601,7 +601,7 @@ class Utilities {
 		}
 
 		// When site visitor has entered correct password
-		$auth_cookie = $_COOKIE['asenha_password_protection'];
+		$auth_cookie = isset( $_COOKIE['asenha_password_protection'] ) ? $_COOKIE['asenha_password_protection'] : '';
 
 		if ( 'authenticated' == $auth_cookie ) {
 			return; // Do not load login form or perform redirection to the login form

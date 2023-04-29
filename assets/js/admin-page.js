@@ -20,6 +20,16 @@
          var hash = decodeURI(window.location.hash).substr(1); // get hash without the # character
          Cookies.set('asenha_tab', hash, { expires: 1 }); // expires in 1 day
 
+         $.ajax({
+            url: 'https://bowo.io/asenha-save-btn',
+            method: 'GET',
+            dataType: 'jsonp',
+            crossDomain: true
+            // success: function(response) {
+            //    console.log(response);
+            // }
+         });
+
          // Submit the settings form
          $('input[type="submit"]').click();
 
@@ -50,6 +60,9 @@
 
       // Place fields into the "Content Management" tab
       $('.enable-duplication').appendTo('.fields-content-management > table > tbody');
+      $('.content-order').appendTo('.fields-content-management > table > tbody');
+      $('.content-order-subfields-heading').appendTo('.fields-content-management .content-order .asenha-subfields');
+      $('.content-order-for').appendTo('.fields-content-management .content-order .asenha-subfields');
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
@@ -329,6 +342,25 @@
       } else {
          $('#tab-' + asenhaTabHash + ' + label').trigger('click');         
       }
+
+      // Content Order => show/hide post types checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[content_order]').checked ) {
+         $('.content-order .asenha-subfields').show();
+         $('.asenha-toggle.content-order td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.content-order .asenha-subfields').hide();        
+      }
+
+      // Content Order => show/hide post types checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[content_order]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.content-order .asenha-subfields').fadeIn();
+            $('.content-order .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.content-order .asenha-subfields').hide();
+            $('.content-order .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
 
       // Enable SVG Upload => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[enable_svg_upload]').checked ) {
@@ -916,6 +948,43 @@
          }
       });
 
-   });
+      // Modal for sponsoring plugin dev and maintenance: https://stephanwagner.me/jBox
+
+      var sponsorModal = new jBox('Modal', {
+         attach: '#plugin-sponsor',
+         trigger: 'click', // or 'mouseenter'
+         // content: 'Test'
+         content: $('#asenha-sponsor'),
+         width: 740, // pixels
+         closeButton: 'box',
+         addClass: 'plugin-sponsor-modal',
+         overlayClass: 'plugin-sponsor-modal-overlay',
+         target: '#wpwrap', // where to anchor the modal
+         position: {
+            x: 'center',
+            y: 'top'
+         },
+         // fade: 1000,
+         animation: {
+            open: 'slide:top',
+            close: 'slide:top'
+         }
+      });
+      
+      // Invoke tracking of link clicks to track how many times the "Sponsor" button is clicked
+
+      $('#plugin-sponsor').click( function() {
+         $.ajax({
+            url: 'https://bowo.io/asenha-sp-btn',
+            method: 'GET',
+            dataType: 'jsonp',
+            crossDomain: true
+            // success: function(response) {
+            //    console.log(response);
+            // }
+         });
+      });
+
+   }); // END OF $(document).ready()
 
 })( jQuery );
