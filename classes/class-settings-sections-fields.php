@@ -122,7 +122,7 @@ class Settings_Sections_Fields {
 				'field_id'					=> $field_id, // Custom argument
 				'field_slug'				=> $field_slug, // Custom argument
 				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Enable custom ordering of various content types. Useful for displaying them in the desired order on the frontend. e.g. projects, services, FAQs, team members, etc.', // Custom argument
+				'field_description'			=> 'Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, etc.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
