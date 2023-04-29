@@ -64,10 +64,10 @@ class Admin_Site_Enhancements {
 		add_filter( 'plugin_action_links_' . ASENHA_SLUG . '/' . ASENHA_SLUG . '.php', 'asenha_plugin_action_links' );
 
 		// Update footer text
-		add_filter( 'admin_footer_text', 'asenha_footer_text' );
+		add_filter( 'admin_footer_text', 'asenha_footer_text', 20 );
 
 		// Update footer version text
-		add_filter( 'update_footer', 'asenha_footer_version_text' );
+		add_filter( 'update_footer', 'asenha_footer_version_text', 20 );
 
 		// ===== Activate features based on settings ===== 
 
