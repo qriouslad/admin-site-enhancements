@@ -87,14 +87,14 @@ class Settings_Sections_Fields {
 		// CONTENT MANAGEMENT
 		// =================================================================
 
-		// Enable Page and Post Duplication
+		// Enable Content Duplication
 
 		$field_id = 'enable_duplication';
 		$field_slug = 'enable-duplication';
 
 		add_settings_field(
 			$field_id, // Field ID
-			'Page and Post Duplication', // Field title
+			'Content Duplication', // Field title
 			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
 			ASENHA_SLUG, // Settings page slug
 			'main-section', // Section ID

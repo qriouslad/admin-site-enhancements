@@ -24,7 +24,7 @@ class Settings_Sanitization {
 		// CONTENT MANAGEMENT
 		// =================================================================
 
-		// Enable Page and Post Duplication
+		// Content Duplication
 		if ( ! isset( $options['enable_duplication'] ) ) $options['enable_duplication'] = false;
 		$options['enable_duplication'] = ( 'on' == $options['enable_duplication'] ? true : false );
 

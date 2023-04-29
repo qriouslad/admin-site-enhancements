@@ -81,7 +81,7 @@ class Admin_Site_Enhancements {
 		// Instantiate object for Content Management features
 		$content_management = new ASENHA\Classes\Content_Management;
 
-		// Enable Page and Post Duplication
+		// Content Duplication
 		if ( array_key_exists( 'enable_duplication', $options ) && $options['enable_duplication'] ) {
 			add_action( 'admin_action_asenha_enable_duplication', [ $content_management, 'asenha_enable_duplication' ] );
 			add_filter( 'page_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
