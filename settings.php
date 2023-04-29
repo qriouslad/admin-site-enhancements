@@ -378,7 +378,7 @@ function asenha_footer_text() {
 
 	if ( is_asenha() ) {
 		?>
-		<a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank">Admin Site Enhancements</a> is on <a href="https://bowo.io/asenha-gthb" target="_blank">github</a>.
+		<a href="https://bowo.io/asenha-dotorg" target="_blank">Admin Site Enhancements</a> is on <a href="https://bowo.io/asenha-gthb" target="_blank">github</a>.
 		<?php
 	}
 
