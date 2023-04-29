@@ -107,6 +107,68 @@ class Settings_Sections_Fields {
 			)
 		);
 
+		// Content Order
+
+		$field_id = 'content_order';
+		$field_slug = 'content-order';
+
+		add_settings_field(
+			$field_id, // Field ID
+			'Content Order', // Field title
+			[ $render_field, 'render_checkbox_toggle' ], // Callback to render field with custom arguments in the array below
+			ASENHA_SLUG, // Settings page slug
+			'main-section', // Section ID
+			array(
+				'field_id'					=> $field_id, // Custom argument
+				'field_slug'				=> $field_slug, // Custom argument
+				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
+				'field_description'			=> 'Enable custom ordering of various content types. Useful for displaying them in the desired order on the frontend. e.g. projects, services, FAQs, team members, etc.', // Custom argument
+				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
+				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
+				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
+			)
+		);
+
+		// $field_id = 'content_order_subfields_heading';
+		// $field_slug = 'content-order-subfields-heading';
+
+		// add_settings_field(
+		// 	$field_id, // Field ID
+		// 	'', // Field title
+		// 	[ $render_field, 'render_subfields_heading' ], // Callback to render field with custom arguments in the array below
+		// 	ASENHA_SLUG, // Settings page slug
+		// 	'main-section', // Section ID
+		// 	array(
+		// 		'subfields_heading'		=> 'Custom Post Types (Non-Hierarchical)', // Custom argument
+		// 		'class'					=> 'asenha-heading shift-more-up content-management ' . $field_slug, // Custom class for the <tr> element
+		// 	)
+		// );
+
+		$field_id = 'content_order_for';
+		$field_slug = 'content-order-for';
+
+		if ( is_array( $asenha_public_post_types ) ) {
+			foreach ( $asenha_public_post_types as $post_type_slug => $post_type_label ) { // e.g. $post_type_slug is post, $post_type_label is Posts
+				$is_hierarchical_label = ( is_post_type_hierarchical( $post_type_slug ) ) ? ' <span class="faded">- Hierarchical</span>' : '';
+				if ( post_type_supports( $post_type_slug, 'page-attributes' ) || is_post_type_hierarchical( $post_type_slug ) ) {
+					add_settings_field(
+						$field_id . '_' . $post_type_slug, // Field ID
+						'', // Field title
+						[ $render_field, 'render_checkbox_subfield' ], // Callback to render field with custom arguments in the array below
+						ASENHA_SLUG, // Settings page slug
+						'main-section', // Section ID
+						array(
+							'parent_field_id'		=> $field_id, // Custom argument
+							'field_id'				=> $post_type_slug, // Custom argument
+							'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
+							'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>' . $is_hierarchical_label, // Custom argument
+							'class'					=> 'asenha-checkbox asenha-hide-th asenha-half content-management ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+						)
+					);
+				}
+			}
+		}
+
 		// Enable Media Replacement
 
 		$field_id = 'enable_media_replacement';
@@ -212,7 +274,7 @@ class Settings_Sections_Fields {
 							'field_id'				=> $post_type_slug, // Custom argument
 							'field_name'			=> ASENHA_SLUG_U . '['. $field_id .'][' . $post_type_slug . ']', // Custom argument
 							'field_label'			=> $post_type_label . ' <span class="faded">('. $post_type_slug .')</span>', // Custom argument
-							'class'					=> 'asenha-checkbox asenha-hide-th asenha-half disable-components ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
+							'class'					=> 'asenha-checkbox asenha-hide-th asenha-half content-management ' . $field_slug . ' ' . $post_type_slug, // Custom class for the <tr> element
 						)
 					);
 				}

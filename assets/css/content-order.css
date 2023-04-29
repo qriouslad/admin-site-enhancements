@@ -1,0 +1,84 @@
+/* Styling for Content Management >> Content Order pages */
+
+#item-list {
+	margin-bottom: -20px;
+}
+#item-list li {
+	position: relative;
+	background: #fff;
+	margin-bottom: 4px;
+	border: 1px solid #c3c4c7;
+	clear: both;
+	overflow: hidden;
+}
+.row-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 11px 16px 9px;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: move;
+}
+.row-content:hover {
+	background: #fff6e5;
+}
+.ui-sortable-placeholder {
+	border-radius: 0 !important;
+	background: #cdddd6 !important;
+	border: 1px dashed #508871 !important;
+	visibility: visible !important;
+}
+.row-content .dashicons.dashicons-menu {
+	position: relative;
+	top: -1px;
+	margin-right: 4px;
+}
+.row-content .dashicons.dashicons-menu {
+	color: #ddd;
+}
+.row-content:hover .dashicons.dashicons-menu {
+	color: inherit;
+}
+a.item-title,
+a.item-view-link {
+	text-decoration: none;
+}
+a.item-title:hover,
+a.item-view-link:hover {
+	text-decoration: underline;
+}
+.item-status-hidden,
+a.item-view-link {
+	display: none;
+}
+.row-content:hover a.item-view-link {
+	display: inherit;
+}
+a.item-view-link {
+	font-weight: normal;
+}
+.has-child-label {
+}
+.updating-order-notice {
+	box-sizing: border-box;
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	z-index: 10;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	background: #eee;
+	padding: 6px 12px 6px 8px;
+	border: 1px solid #c3c4c7;
+}
+.spinner-img {
+	width: 16px;
+	height: 16px;
+	margin: 2px 6px 2px 2px;
+}
+.updating-order-notice .dashicons.dashicons-saved {
+	color: green;
+	margin-right: 4px;
+}

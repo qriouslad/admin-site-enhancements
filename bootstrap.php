@@ -88,6 +88,15 @@ class Admin_Site_Enhancements {
 			add_filter( 'post_row_actions', [ $content_management, 'add_duplication_action_link' ], 10, 2 );
 		}
 
+		// Content Order
+		if ( array_key_exists( 'content_order', $options ) && $options['content_order'] ) {
+			if ( array_key_exists( 'content_order_for', $options ) && ! empty( $options['content_order_for'] ) )  {
+				add_action( 'admin_menu', [ $content_management, 'add_content_order_submenu' ] );
+				add_action( 'wp_ajax_save_custom_order', [ $content_management, 'save_custom_content_order' ] );
+				add_filter( 'pre_get_posts', [ $content_management, 'orderby_menu_order_in_admin_lists' ] );
+			}
+		}
+
 		// Enable Media Replacement
 		if ( array_key_exists( 'enable_media_replacement', $options ) && $options['enable_media_replacement'] ) {
 			add_filter( 'media_row_actions', [ $content_management, 'modify_media_list_table_edit_link' ], 10, 2 );
@@ -404,7 +413,7 @@ class Admin_Site_Enhancements {
 				add_filter( 'rest_enabled', '__return_false' );
 				add_filter( 'rest_jsonp_enabled', '__return_false' );
 			}
-			remove_action('wp_head', 'rest_output_link_wp_head', 10 ); // Disable REST API links in HTML <head>
+			remove_action( 'wp_head', 'rest_output_link_wp_head', 10 ); // Disable REST API links in HTML <head>
 			remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 ); // Disable REST API link in HTTP headers
 			remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' ); // Remove REST API URL from the WP RSD endpoint.
 		}

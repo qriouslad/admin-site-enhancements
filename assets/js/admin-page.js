@@ -50,6 +50,9 @@
 
       // Place fields into the "Content Management" tab
       $('.enable-duplication').appendTo('.fields-content-management > table > tbody');
+      $('.content-order').appendTo('.fields-content-management > table > tbody');
+      $('.content-order-subfields-heading').appendTo('.fields-content-management .content-order .asenha-subfields');
+      $('.content-order-for').appendTo('.fields-content-management .content-order .asenha-subfields');
       $('.enable-media-replacement').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload').appendTo('.fields-content-management > table > tbody');
       $('.enable-svg-upload-for').appendTo('.fields-content-management .enable-svg-upload .asenha-subfields');
@@ -329,6 +332,25 @@
       } else {
          $('#tab-' + asenhaTabHash + ' + label').trigger('click');         
       }
+
+      // Content Order => show/hide post types checkboxes on document ready
+      if ( document.getElementById('admin_site_enhancements[content_order]').checked ) {
+         $('.content-order .asenha-subfields').show();
+         $('.asenha-toggle.content-order td .asenha-field-with-options').addClass('is-enabled');  
+      } else {
+         $('.content-order .asenha-subfields').hide();        
+      }
+
+      // Content Order => show/hide post types checkboxes on toggle click
+      document.getElementById('admin_site_enhancements[content_order]').addEventListener('click', event => {
+         if (event.target.checked) {
+            $('.content-order .asenha-subfields').fadeIn();
+            $('.content-order .asenha-field-with-options').toggleClass('is-enabled');
+         } else {
+            $('.content-order .asenha-subfields').hide();
+            $('.content-order .asenha-field-with-options').toggleClass('is-enabled');
+         }
+      });
 
       // Enable SVG Upload => show/hide roles checkboxes on document ready
       if ( document.getElementById('admin_site_enhancements[enable_svg_upload]').checked ) {

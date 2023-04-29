@@ -385,8 +385,10 @@
     border-top: 1px solid #eee;
 }
 
+.asenha-subfields-heading,
 .form-table .asenha-subfields th {
     width: 100%;
+    font-weight: 600;
     color: #3c434a;
 }
 
@@ -541,6 +543,10 @@
 
 .form-table .asenha-subfields tr:not(.datatable-tr).shift-up {
     margin-top: -4px;
+}
+
+.form-table .asenha-subfields tr:not(.datatable-tr).shift-more-up {
+    margin-top: -12px;
 }
 
 .form-table .asenha-subfields tr:not(.datatable-tr).top-border {

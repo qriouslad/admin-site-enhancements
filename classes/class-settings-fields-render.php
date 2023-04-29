@@ -177,6 +177,19 @@ class Settings_Fields_Render {
 	}
 
 	/**
+	 * Render heading for sub-fields of a toggle/switcher checkbox
+	 *
+	 * @since 5.0.0
+	 */
+	function render_subfields_heading( $args ) {
+
+		$subfields_heading = $args['subfields_heading'];
+
+		echo '<div class="asenha-subfields-heading">' . $subfields_heading . '</div>';
+
+	}
+
+	/**
 	 * Render password field as sub-field of a toggle/switcher checkbox
 	 *
 	 * @since 4.1.0
