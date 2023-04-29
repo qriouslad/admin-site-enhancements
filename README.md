@@ -1,7 +1,7 @@
 # Admin and Site Enhancements
 
 Contributors: qriouslad  
-Donate link: https://bowo.io/dotorg-sponsor-asenha  
+Donate link: https://bowo.io/asenha-sp-rdm  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
@@ -134,10 +134,11 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 
 ### Give Back
 
-* [A nice review](https://bowo.io/add-review-asenha) would be great!
-* [Give feedback](https://bowo.io/feedback-asenha) and help improve future versions.
-* [Github repo](https://bowo.io/github-asenha) to contribute code.
-* [Sponsor](https://bowo.io/dotorg-sponsor-asenha) my work.
+* [**A nice review**](https://bowo.io/asenha-rvw-dsc) would be great!
+* [**Give feedback**](https://bowo.io/asenha-fdbk-dsc) and help improve future versions.
+* [**Help translate**](https://bowo.io/asenha-trnslt-dsc) plugin description on this page into your language.
+* [**Github repo**](https://bowo.io/asenha-gthb-dsc) to contribute code.
+* Sponsor my work with as little as USD 1 [monthly](https://bowo.io/asenha-sp-gth-rdm) or [one-time](https://bowo.io/asenha-sp-ppl-rdm).
 
 ### Check These Out Too
 
@@ -146,7 +147,7 @@ Admin and Site Enhancements will include more enhancements, tweaks and useful fe
 * [Variable Inspector](https://wordpress.org/plugins/variable-inspector/): Inspect PHP variables on a central dashboard in wp-admin for convenient debugging.
 * [Code Explorer](https://wordpress.org/plugins/code-explorer/): Fast directory explorer and file/code viewer with syntax highlighting.
 * [Flexible Scroll Top](https://wordpress.org/plugins/flexible-scroll-top/) and [Floating Share Buttons](https://wordpress.org/plugins/floating-share-button/) is a lightweight combo with minimalist UI.
-* [WordPress Newsboard](https://www.wpnewsboard.com/): The latest news, articles, podcasts and videos from 100+ WordPress-focused sources.
+* [WordPress Newsboard](https://bowo.io/asenha-wpn-dsc): The latest news, articles, podcasts and videos from 100+ WordPress-focused sources.
 
 ## Screenshots
 
@@ -177,7 +178,7 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 
 ### Sponsor Admin and Site Enhancements
 
-If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider [**sponsoring from as little as USD 1**](https://bowo.io/dotorg-sponsor-asenha) (monthly or one-time). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider **sponsoring from as little as USD 1** ([monthly](https://bowo.io/asenha-sp-gth-chnlg) or [one-time](https://bowo.io/asenha-sp-ppl-chnlg)). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
 
 ### 4.9.3 (2023.04.22)
 
@@ -198,7 +199,7 @@ If this plugin has been useful for your **personal project(s), paid dev work, cl
 
 ### 4.8.3 (2023.04.15)
 
-* **[FIXED] Content Management >> Page and Post Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
+* **[FIXED] Content Management >> Content Duplication**: fixed isses when duplicating pages built with Oxygen and Bricks builder. May also solve similar issues with other page builders. Please try this on your page builder installation and report in the forum if you're still experiencing issues.
 
 ### 4.8.2 (2023.04.03)
 

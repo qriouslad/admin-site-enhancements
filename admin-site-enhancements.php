@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name:       Admin and Site Enhancements
- * Plugin URI:        https://wordpress.org/plugins/admin-site-enhancements/
+ * Plugin URI:        https://bowo.io/asenha-php
  * Description:       Easily enable enhancements and features that usually require multiple plugins.
  * Version:           4.9.3
  * Author:            Bowo
- * Author URI:        https://bowo.io
+ * Author URI:        https://bowo.io/asenha-bw-php
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       admin-site-enhancements

@@ -33,8 +33,8 @@ function asenha_add_settings_page() {
 				<!-- <a href="https://wordpress.org/plugins/admin-site-enhancements/" target="_blank" class="asenha-header-action"><span>&#8505;</span> <?php // esc_html_e( 'Info', 'admin-site-enhancements' ); ?></a> -->
 			</div>
 			<div class="asenha-header-right">
-				<a href="https://bowo.io/review-asenha" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
-				<a href="https://bowo.io/feedback-asenha" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/asenha-rvw" target="_blank" class="asenha-header-action"><span>&starf;</span> <?php esc_html_e( 'Review', 'admin-site-enhancements' ); ?></a>
+				<a href="https://bowo.io/asenha-fdbk" target="_blank" class="asenha-header-action">&#10010; <?php esc_html_e( 'Feedback', 'admin-site-enhancements' ); ?></a>
 				<a href="https://bowo.io/asenha-trnslt" target="_blank" class="asenha-header-action">&#9654; <?php esc_html_e( 'Translate', 'admin-site-enhancements' ); ?></a>
                 <div id="plugin-sponsor" class="button button-primary plugin-sponsor">&#10084;
                     <?php 
