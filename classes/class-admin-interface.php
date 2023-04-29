@@ -157,8 +157,6 @@ class Admin_Interface {
 
 		$dashboard_widgets = wp_list_sort( $dashboard_widgets, 'title', 'ASC', true );
 
-		do_action( 'inspect', [ 'dashboard_widgets', $dashboard_widgets ] );
-
 		return $dashboard_widgets;
 
 	}
