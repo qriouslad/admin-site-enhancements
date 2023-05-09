@@ -5,7 +5,7 @@ Donate link: https://bowo.io/asenha-sp-rdm
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
 Tested up to: 6.2  
-Stable tag: 5.0.1  
+Stable tag: 5.0.2  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,6 +17,14 @@ Duplicate post, post order, image resize, email via SMTP, admin menu editor, cus
 ## Description
 
 Admin and Site Enhancements helps you to **easily enhance** various admin workflows and site aspects while **replacing multiple plugins** doing it. 
+
+Here's a quick review by Nathan Wrigley @wpbuilds.
+
+https://www.youtube.com/watch?v=QwaWL6znuZg&t=3242s
+
+Here's a quick walkthrough of the plugin at v4.8.2 by Nathan Ingram.
+
+https://www.youtube.com/watch?v=_qXGDEBfMp0&t=2984s
 
 ### What Users Say
 
@@ -41,6 +49,8 @@ _"\[This\] is a Swiss Army Knife in terms of features that will **keep your Word
 _"**Incredibly powerful and well organized**. It’s a real accomplishment to put this many features into a plugin and still make it easy to navigate."_ ~[Nathan Ingram](https://wordpress.org/support/topic/holy-cow-this-is-excellent/)
 
 _"**...everything is clear, fast, consistent and lightweight**."_ ~[Peter](https://wordpress.org/support/topic/amazing-job-premium-functions-in-free-plugin/)
+
+_"**Every single thing works as expected**."_ ~[Nathan Wrigley @wpbuilds](https://www.youtube.com/watch?v=QwaWL6znuZg&t=3242s)
 
 _"**Greatest plugin ever**."_ ~[@angelaustr](https://wordpress.org/support/topic/greatest-plugin-ever-11/)
 
@@ -180,6 +190,12 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 ### Sponsor Admin and Site Enhancements
 
 If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider **sponsoring from as little as USD 1** ([monthly](https://bowo.io/asenha-sp-gth-chnlg) or [one-time](https://bowo.io/asenha-sp-ppl-chnlg)). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+
+### 5.0.2 (2023.05.09)
+
+* **[FIXED] Utilities >> View Admin as Role**: is now only accessible / usable for administrators.
+* **[ENHANCE] Admin Interface >> Admin Menu Organizer**: improved description and UI for better clarity.
+* **[POLISH] General code polish** to resolve several PHP warnings.
 
 ### 5.0.1 (2023.04.29)
 
