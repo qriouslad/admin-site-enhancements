@@ -122,7 +122,7 @@ class Settings_Sections_Fields {
 				'field_id'					=> $field_id, // Custom argument
 				'field_slug'				=> $field_slug, // Custom argument
 				'field_name'				=> ASENHA_SLUG_U . '['. $field_id .']', // Custom argument
-				'field_description'			=> 'Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, etc.', // Custom argument
+				'field_description'			=> 'Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend.', // Custom argument
 				'field_options_wrapper'		=> true, // Custom argument. Add container for additional options
 				'field_options_moreless'	=> true,  // Custom argument. Add show more/less toggler.
 				'class'						=> 'asenha-toggle content-management ' . $field_slug, // Custom class for the <tr> element
@@ -742,7 +742,7 @@ class Settings_Sections_Fields {
 			}
 		}
 
-		// Customize Admin Menu
+		// Admin Menu Organizer
 
 		$field_id = 'customize_admin_menu';
 		$field_slug = 'customize-admin-menu';
@@ -1997,7 +1997,7 @@ class Settings_Sections_Fields {
 				),
 				'field_default'			=> 'default',
 				'class'					=> 'asenha-radio-buttons optimizations ' . $field_slug, // Custom class for the <tr> element
-			),
+			)
 		);
 
 		$field_id = 'heartbeat_interval_for_admin_pages';
@@ -2052,7 +2052,7 @@ class Settings_Sections_Fields {
 				),
 				'field_default'			=> 'default',
 				'class'					=> 'asenha-radio-buttons optimizations top-border ' . $field_slug, // Custom class for the <tr> element
-			),
+			)
 		);
 
 		$field_id = 'heartbeat_interval_for_post_edit';
@@ -2106,7 +2106,7 @@ class Settings_Sections_Fields {
 				),
 				'field_default'			=> 'default',
 				'class'					=> 'asenha-radio-buttons optimizations top-border ' . $field_slug, // Custom class for the <tr> element
-			),
+			)
 		);
 
 		$field_id = 'heartbeat_interval_for_frontend';
@@ -2228,7 +2228,7 @@ class Settings_Sections_Fields {
 				),
 				'field_default'			=> 'default',
 				'class'					=> 'asenha-radio-buttons with-prefix-suffix utilities ' . $field_slug, // Custom class for the <tr> element
-			),
+			)
 		);
 
 		$field_id = 'smtp_username';
@@ -2511,7 +2511,7 @@ class Settings_Sections_Fields {
 				),
 				'field_default'			=> 'default',
 				'class'					=> 'asenha-radio-buttons utilities ' . $field_slug, // Custom class for the <tr> element
-			),
+			)
 		);
 
 		$field_id = 'maintenance_mode_description';

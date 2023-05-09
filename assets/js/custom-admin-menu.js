@@ -5,14 +5,17 @@
 
       // ----- Menu Ordering -----
 
-      // Initialize sortable elements: https://api.jqueryui.com/sortable/
+      // Initialize sortable elements for parent menu items: https://api.jqueryui.com/sortable/
       $('#custom-admin-menu').sortable({
-         placeholder: 'sortable-placeholder'
+         items: '> li',
+         opacity: 0.6,
+         placeholder: 'sortable-placeholder',
+         tolerance: 'pointer',
+         revert: 250
       });
 
       // Get the default/current menu order
       let menuOrder = $('#custom-admin-menu').sortable("toArray").toString();
-      // console.log( menuOrder );
 
       // Set hidden input value for saving in options
       document.getElementById('admin_site_enhancements[custom_menu_order]').value = menuOrder;
@@ -24,41 +27,49 @@
 
          // Get the updated menu order
          let menuOrder = $('#custom-admin-menu').sortable("toArray").toString();
-         // console.log( menuOrder );
 
          // Set hidden input value for saving in options
          document.getElementById('admin_site_enhancements[custom_menu_order]').value = menuOrder;
 
-         // jQuery.ajax({
-         //    url: ajaxurl,
-         //    data: {
-         //       'action': 'save_custom_menu_order',
-         //       'menu_order': menuOrder
-         //    },
-         //    success:function(data) {
-         //       var data = data.slice(0,-1); // remove strange trailing zero in string returned by AJAX call
-         //       var dataObj = JSON.parse(data);
-         //       console.log(dataObj.message);
-         //    },
-         //    error:function(errorThrown) {
-         //       console.log(errorThrown);
-         //    }
-         // });
-
       });
 
-      // Define a function to delay execution of script by x miliecnods. Ref: https://stackoverflow.com/a/28173606
-      // var delay = ( function() {
-      //    var timer = 0;
-      //    return function(callback, ms) {
-      //       clearTimeout (timer);
-      //       timer = setTimeout(callback, ms);
-      //    };
-      // })();
+      
 
-      // If Customize Admin Menu is enabled
-      // if ( document.getElementById('admin_site_enhancements[customize_admin_menu]').checked ) {
-      // }
+      // ----- Parent Menu Item Hiding -----
+
+      // Prepare constant to store IDs of menu items that will be hidden
+      if ( document.getElementById('admin_site_enhancements[custom_menu_hidden]') != null ) {
+         var hiddenMenuItems = document.getElementById('admin_site_enhancements[custom_menu_hidden]').value.split(","); // array
+      } else {
+         var hiddenMenuItems = []; // array
+      }
+
+
+      // Detect which menu items are being checked. Ref: https://stackoverflow.com/a/3871602
+      Array.from(document.getElementsByClassName('parent-menu-hide-checkbox')).forEach(function(item,index,array) {
+
+         item.addEventListener('click', event => {
+
+            if (event.target.checked) {
+
+               // Add ID of menu item to array
+               hiddenMenuItems.push(event.target.dataset.menuItemId);
+               
+            } else {
+
+               // Remove ID of menu item from array
+               const start = hiddenMenuItems.indexOf(event.target.dataset.menuItemId);
+               const deleteCount = 1;
+               hiddenMenuItems.splice(start, deleteCount);
+
+            }
+
+            // Set hidden input value
+            document.getElementById('admin_site_enhancements[custom_menu_hidden]').value = hiddenMenuItems;
+
+         });
+
+      });
 
       // Clicking on header save button
       $('.asenha-save-button').click( function(e) {
@@ -81,75 +92,8 @@
 
          });
 
-         // console.log(customMenuTitles.toString());
-
          // Set hidden input value
          document.getElementById('admin_site_enhancements[custom_menu_titles]').value = customMenuTitles;
-
-      });
-
-      // ----- Menu Item Hiding -----
-
-      // Prepare constant to store IDs of menu items that will be hidden
-      if ( document.getElementById('admin_site_enhancements[custom_menu_hidden]').value ) {
-
-         var hiddenMenuItems = document.getElementById('admin_site_enhancements[custom_menu_hidden]').value.split(","); // array
-
-      } else {
-
-         var hiddenMenuItems = []; // array
-
-      }
-
-      // console.log(hiddenMenuItems);
-
-      // Detect which menu items are being checked. Ref: https://stackoverflow.com/a/3871602
-      Array.from(document.getElementsByClassName('menu-item-checkbox')).forEach(function(item,index,array) {
-
-         item.addEventListener('click', event => {
-
-            if (event.target.checked) {
-
-               // Add ID of menu item to array
-               // alert(event.target.dataset.menuItemId + ' will be hidden');
-               hiddenMenuItems.push(event.target.dataset.menuItemId);
-
-            } else {
-
-               // Remove ID of menu item from array
-               // alert(event.target.dataset.menuItemId + ' will not be hidden');
-               const start = hiddenMenuItems.indexOf(event.target.dataset.menuItemId);
-               const deleteCount = 1;
-               hiddenMenuItems.splice(start, deleteCount);
-
-            }
-
-            // console.log(hiddenMenuItems.toString());
-
-            // Set hidden input value
-            document.getElementById('admin_site_enhancements[custom_menu_hidden]').value = hiddenMenuItems;
-
-            // delay(function() {
-
-            //    jQuery.ajax({
-            //       url: ajaxurl,
-            //       data: {
-            //          'action': 'save_hidden_menu_items',
-            //          'hidden_menu_items': hiddenMenuItems.toString()
-            //       },
-            //       success:function(data) {
-            //          var data = data.slice(0,-1); // remove strange trailing zero in string returned by AJAX call
-            //          var dataObj = JSON.parse(data);
-            //          console.log(dataObj.message );
-            //       },
-            //       error:function(errorThrown) {
-            //          console.log(errorThrown);
-            //       }
-            //    });
-
-            // }, 3000);
-
-         });
 
       });
 

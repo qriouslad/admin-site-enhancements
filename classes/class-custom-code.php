@@ -72,7 +72,7 @@ class Custom_Code {
 					[ $this, 'output_custom_body_class_meta_box' ], // Callback function
 					$post_type_slug, // The screen on which the meta box should be output to
 					'normal', // context
-					'high', // priority
+					'high' // priority
 					// array(), // $args to pass to callback function. Ref: https://developer.wordpress.org/reference/functions/add_meta_box/#comment-342
 				);
 
