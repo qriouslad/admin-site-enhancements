@@ -137,6 +137,9 @@ class Utilities {
 	 * @since 1.8.0
 	 */
 	public function view_admin_as_admin_bar_menu( $wp_admin_bar ) {
+		
+		$current_user = wp_get_current_user();
+		$current_user_roles = array_values( $current_user->roles ); // indexed array
 
 		// Get which role slug is currently set to "View as"
 		$viewing_admin_as = get_user_meta( get_current_user_id(), '_asenha_viewing_admin_as', true );
@@ -170,16 +173,20 @@ class Utilities {
 
 		if ( 'administrator' == $viewing_admin_as ) {
 
-			// Add parent menu
-			$wp_admin_bar->add_menu( array(
-				'id'		=> 'asenha-view-admin-as-role',
-				'parent'	=> 'top-secondary',
-				'title'		=> 'View as <span style="font-size:0.8125em;">&#9660;</span>',
-				'href'		=> '#',
-				'meta'		=> array(
-					'title'	=> 'View admin pages and the site (logged-in) as one of the following user roles.'
-				),
-			) );
+			if ( in_array( 'administrator', $current_user_roles ) ) {
+
+				// Add parent menu for administrators
+				$wp_admin_bar->add_menu( array(
+					'id'		=> 'asenha-view-admin-as-role',
+					'parent'	=> 'top-secondary',
+					'title'		=> 'View as <span style="font-size:0.8125em;">&#9660;</span>',
+					'href'		=> '#',
+					'meta'		=> array(
+						'title'	=> 'View admin pages and the site (logged-in) as one of the following user roles.'
+					),
+				) );
+
+			}
 
 		} else {
 
@@ -200,20 +207,24 @@ class Utilities {
 
 		if ( 'administrator' == $viewing_admin_as ) {
 
-			// Add submenu for each role other than Administrator
+			if ( in_array( 'administrator', $current_user_roles ) ) {
+				
+				// Add submenu for each role other than Administrator
 
-			$i = 1;
+				$i = 1;
 
-			foreach ( $roles_to_switch_to as $role_slug => $data ) {
+				foreach ( $roles_to_switch_to as $role_slug => $data ) {
 
-				$wp_admin_bar->add_menu( array(
-					'id'		=> 'role' . $i . '_' . $role_slug, // id based on role slug, e.g. role1_editor, role5_shop_manager
-					'parent'	=> 'asenha-view-admin-as-role',
-					'title'		=> $data['role_name'], // role name, e.g. Editor, Shop Manager
-					'href'		=> $data['nonce_url'], // nonce URL for each role
-				) );
+					$wp_admin_bar->add_menu( array(
+						'id'		=> 'role' . $i . '_' . $role_slug, // id based on role slug, e.g. role1_editor, role5_shop_manager
+						'parent'	=> 'asenha-view-admin-as-role',
+						'title'		=> $data['role_name'], // role name, e.g. Editor, Shop Manager
+						'href'		=> $data['nonce_url'], // nonce URL for each role
+					) );
 
-				$i++;
+					$i++;
+
+				}
 
 			}
 
@@ -271,8 +282,8 @@ class Utilities {
 												'role'		=> $wp_role_slug,
 											) ), // add query parameters to current URl, this is the $actionurl that will be appended with the nonce action
 											'asenha_view_admin_as_' . $wp_role_slug, // the nonce $action name
-											'nonce', // the nonce url parameter name
-										), // will result in a URL that looks like https://www.example.com/wp-admin/index.php?action=switch_role_to&role=editor&nonce=2ced3a40df
+											'nonce' // the nonce url parameter name
+										) // will result in a URL that looks like https://www.example.com/wp-admin/index.php?action=switch_role_to&role=editor&nonce=2ced3a40df
 					);
 
 				}
@@ -291,8 +302,8 @@ class Utilities {
 										'role'		=> 'administrator',
 									) ), // add query parameters to current URl, this is the $actionurl that will be appended with the nonce action
 									'asenha_view_admin_as_administrator', // the nonce $action name
-									'nonce', // the nonce url parameter name
-								), // will result in a URL that looks like https://www.example.com/wp-admin/index.php?action=switch_role_to&role=editor&nonce=2ced3a40df
+									'nonce' // the nonce url parameter name
+								) // will result in a URL that looks like https://www.example.com/wp-admin/index.php?action=switch_role_to&role=editor&nonce=2ced3a40df
 			);
 		}
 

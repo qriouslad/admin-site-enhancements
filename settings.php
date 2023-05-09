@@ -110,7 +110,7 @@ function asenha_add_settings_page() {
 						'primary', // Type: 'primary', 'small', or 'large'
 						'submit', // The 'name' attribute
 						true, // Whether to wrap in <p> tag
-						array( 'id' => 'asenha-submit' ), // additional attributes
+						array( 'id' => 'asenha-submit' ) // additional attributes
 					); ?>
 				</div>
 			</form>
@@ -129,7 +129,7 @@ function asenha_add_settings_page() {
                 </div>
                 <div class="sponsorship-content-sections">
                     <div class="sponsorship-info">
-                        <p class="sponsorship-description">I love building <strong>useful and free <a href="https://bowo.io/asenha-other-plugins" target="_blank">plugins</a></strong>. Your sponsorship will help justify the time and effort I spend in <strong>developing and maintaining this plugin</strong>, so it can remain functional and useful for <strong>your personal project(s), paid dev work, client site(s) and/or agency workflow</strong>... hopefully for years to come.</p>                                
+                        <p class="sponsorship-description">I love building <strong>useful and free <a href="https://bowo.io/asenha-other-plugins" target="_blank">plugins</a></strong>. Your sponsorship will help justify the time and effort I spend in <strong>developing and maintaining this plugin</strong>, so it can remain functional and be more useful for <strong>your personal project(s), paid dev work, client site(s) and/or agency workflow</strong>... hopefully for years to come.</p>                                
                     </div>
                     <div class="sponsorship-methods">
                         <p class="sponsorship-amount">Sponsorship can be <strong>as little as USD 1</strong>, monthly or one-time.</p>

@@ -593,7 +593,7 @@ class Content_Management {
 						'Order', // Menu title
 						'edit_pages', // Capability required
 						'custom-order-posts', // Menu and page slug
-						[ $this, 'custom_order_page_output' ], // Callback function that outputs page content
+						[ $this, 'custom_order_page_output' ] // Callback function that outputs page content
 					);
 				} else {
 					$hook_suffix = add_submenu_page(
@@ -602,7 +602,7 @@ class Content_Management {
 						'Order', // Menu title
 						'edit_pages', // Capability required
 						'custom-order-' . $post_type_slug, // Menu and page slug
-						[ $this, 'custom_order_page_output' ],  // Callback function that outputs page content
+						[ $this, 'custom_order_page_output' ]  // Callback function that outputs page content
 					);
 				}
 
@@ -1310,7 +1310,7 @@ class Content_Management {
 					[ $this, 'output_external_permalink_meta_box' ], // Callback function
 					$post_type_slug, // The screen on which the meta box should be output to
 					'normal', // context
-					'high', // priority
+					'high' // priority
 					// array(), // $args to pass to callback function. Ref: https://developer.wordpress.org/reference/functions/add_meta_box/#comment-342
 				);
 

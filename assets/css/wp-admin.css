@@ -3,6 +3,11 @@
 	display: none;
 }
 
+/* Admin Interface >> Admin Menu Organizer */
+.always-hidden {
+	display: none !important;
+}
+
 /* Utilities >> Enable Login Logout */
 .accordion-section #login-logout-links-checklist.categorychecklist {
 	margin: -13px 0 13px 0;

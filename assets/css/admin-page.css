@@ -97,7 +97,7 @@
 
 /* Button Style - Outlined */
 
-.wp-core-ui .vi-header .button-primary {
+.wp-core-ui .asenha-header .button-primary {
     font-weight: 500;
     transition: .1s;
 }
@@ -105,15 +105,14 @@
 .wp-core-ui .button-primary.plugin-sponsor {
     margin-left: 16px;
     margin-right: 16px;
-    color: #de4c73;
-    background: transparent;
+    color: #fff;
+    background: #de4c73;
     border-color: #de4c73;
 }
 
 .wp-core-ui .button-primary.plugin-sponsor:hover {
-    color: #fff;
-    background: #de4c73;
-    text-decoration: none;
+    background: #b13c5c;
+    border-color: #b13c5c;    
 }
 
 .wp-core-ui .button-primary.plugin-sponsor:focus {
@@ -578,11 +577,23 @@
     overflow: auto;
 }
 
+.custom-menu-order .menu-item-bar {
+    display: flex;
+    align-items: center;
+}
+
 .custom-menu-order .menu-item-bar .menu-item-handle {
-    padding: 7px 15px;
-    max-width: 320px;
-    width: 320px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 7px 15px 7px 7px;
+    max-width: 500px;
+    width: 500px;
     min-height: 30px;
+}
+
+.custom-menu-order .title-wrapper {
+    display: flex;
 }
 
 .custom-menu-order .menu-item-handle .menu-item-checkbox {
@@ -591,6 +602,7 @@
 
 .custom-menu-order .menu-item-handle .item-title {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     margin-right: 0;
@@ -609,7 +621,8 @@
 
 .menu-item-title input[type="text"] {
     border: 1px solid #dcdcde;
-    margin-left: -9px;
+    margin-left: -5px;
+    padding: 0 8px 0 4px;
     font-size: 13px;
 }
 
@@ -641,12 +654,13 @@
 }
 
 .sortable-placeholder {
-    width: 350px;
-    max-width: 350px;
+    width: 500px !important;
+    max-width: 500px !important;
     height: 46px;
     min-height: 42px;
     max-height: 42px;
-    border: 1px dotted #ccc;
+    background: #cdddd6;
+    border: 1px dashed #508871;
 }
 
 .form-table .asenha-subfields td:not(.datatable-td) label.menu-item-checkbox-label {
@@ -656,6 +670,22 @@
 #custom-admin-menu .menu-item-depth-0 {
     display: list-item !important;
 }
+
+/*
+#custom-admin-menu .menu-item > .menu-item-bar > .menu-item-handle:hover,
+#custom-admin-menu .menu-item:hover > .menu-item-bar > .menu-item-handle {
+    cursor: default;
+}*/
+
+#custom-admin-menu .menu-item-depth-0 .dashicons-menu {
+    padding: 5px 8px;
+    cursor: move;
+    color: #ddd;
+}
+#custom-admin-menu .menu-item-bar .menu-item-handle:hover .dashicons-menu {
+    color: #1d2327;
+}
+
 
 /* CodeMirror*/
 
