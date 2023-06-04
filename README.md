@@ -4,8 +4,8 @@ Contributors: qriouslad
 Donate link: https://bowo.io/asenha-sp-rdm  
 Tags: enhancements, tweaks, optimizations, tools  
 Requires at least: 4.6  
-Tested up to: 6.2  
-Stable tag: 5.0.2  
+Tested up to: 6.2.2  
+Stable tag: 5.1.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,11 +18,15 @@ Duplicate post, post order, image resize, email via SMTP, admin menu editor, cus
 
 Admin and Site Enhancements helps you to **easily enhance** various admin workflows and site aspects while **replacing multiple plugins** doing it. 
 
+Here's a review at v5.0.2 by Imran Siddiq @websquadron.
+
+https://www.youtube.com/watch?v=Ja8GxOPGqKY
+
 Here's a quick review by Nathan Wrigley @wpbuilds.
 
 https://www.youtube.com/watch?v=QwaWL6znuZg&t=3242s
 
-Here's a quick walkthrough of the plugin at v4.8.2 by Nathan Ingram.
+Here's a walkthrough of the plugin at v4.8.2 by Nathan Ingram.
 
 https://www.youtube.com/watch?v=_qXGDEBfMp0&t=2984s
 
@@ -34,9 +38,15 @@ _"Amazing **how many separate plugins this replaces**!"_ ~[@yudayuda](https://wo
 
 _"**This plugin is what I have been waiting for to see for years!**"_ ~[@AlexGraphicD](https://wordpress.org/support/topic/amazing-swiss-army-tool-for-wordpress/)
 
+_"Great job! **Saved me lots of time to add lots of plugins** to get ready for my work. It's a relief to have **everything streamlined and ready to go**."_ ~[Tao Sheng](https://wordpress.org/support/topic/super-2817/)
+
 _"I really love how this plugin incorporates **so many small fixes or tweaks** that are needed with WordPress - I can now get rid of many other plugins."_ ~[Dale Reardon](https://wordpress.org/support/topic/fantastic-plugin-replacing-many-other-plugins/)
 
+_"This plugin is simply amazing. It **easily replaces a dozen or more plugins I install on every website project**. It is **super lightweight**, easy to use, and support has been wonderful and responsive. Highly recommended!"_ ~[NetzzJD](https://wordpress.org/support/topic/amazing-must-have-plugin-2/)
+
 _"This plugin allows you to install and maintain **one plugin instead of a host of smaller ones**. My tests were all successful and I was happy to simplify my maintenance with fewer plugins."_ ~[Vic Drover](https://wordpress.org/support/topic/replaced-4-plugins-worked-well-a/)
+
+_"With this plugin, I can remove tons of plugins to **reduce the possibility of plugin conflicts**."_ ~[@chiehliniceday](https://wordpress.org/support/topic/very-powerful-tool-13/)
 
 _"**It’s worth 10 stars (or more)**. This plugin eliminates the need to install many other plugins and also **makes functions.php smaller** since I have to insert fewer code snippets."_ ~[Angelika Reisiger](https://wordpress.org/support/topic/its-worth-10-stars-or-more/)
 
@@ -44,7 +54,13 @@ _"**I was super skeptical** that this plugin could do so much without any proble
 
 _"Normally, I tend to steer clear of “all-in-one” plugins; however, I believe that the **selection of tools** incorporated into this plugin has been astutely deliberated, given that it **nearly aligns entirely with the options I typically apply to each website**."_ ~[@cvladan](https://wordpress.org/support/topic/excellent-features-selection/)
 
+_"I love the **modular approach**. And I love that the whole plugin - with all its potential functionality - is **smaller in file-size than some of the plugins that it replaces**, which do only one of these things. Thank you for the great work!"_ ~[Dave](https://wordpress.org/support/topic/very-useful-swiss-army-knife/)
+
 _"\[This\] is a Swiss Army Knife in terms of features that will **keep your WordPress clean and optimal**."_ ~[@samirhp](https://wordpress.org/support/topic/there-are-no-words-just-amazing/)
+
+_"Thank You for **killing the dashboard SPAM!**"_ ~[@happyfrank73](https://wordpress.org/support/topic/this-is-what-freedom-tastes-like/)
+
+_"Great compilation of settings and options. **It had quickly become one of my essential plugins**."_ ~[@unapersona](https://wordpress.org/support/topic/very-useful-3276/)
 
 _"**Incredibly powerful and well organized**. It’s a real accomplishment to put this many features into a plugin and still make it easy to navigate."_ ~[Nathan Ingram](https://wordpress.org/support/topic/holy-cow-this-is-excellent/)
 
@@ -59,8 +75,8 @@ _"**p.s. There are bugs**. This is software development after all and **I'm the 
 
 ### Content Management
 
-* **Content Duplication**. Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
-* **Content Order**. Enable custom ordering of various content types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, etc.
+* **Content Duplication**. Enable one-click duplication / clone / copy of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
+* **Content Order**. Enable custom order for pages, posts and custom post types. Useful for displaying them in the desired order in wp-admin and on the frontend. e.g. projects, services, FAQs, team members, testimonials, etc.
 * **Media Replacement**. Easily replace any type of media file with a new one while retaining the existing media ID, publish date and file name. So, no existing links will break.
 * **SVG Upload**. Allow some or all user roles to upload SVG files, which will then be sanitized to keep things secure.
 * **External Permalinks**. Enable pages, posts and/or custom post types to have permalinks that point to external URLs. The rel="noopener noreferrer nofollow" attribute will also be added for enhanced security and SEO benefits. Compatible with links added using [Page Links To](https://wordpress.org/plugins/page-links-to/).
@@ -108,6 +124,7 @@ _"**p.s. There are bugs**. This is software development after all and **I'm the 
 ### Disable Components
 
 * **Disable Gutenberg**. Disable the Gutenberg block editor for some or all applicable post types. Optionally disable frontend block styles / CSS files for the selected post types.
+* **Disable Block-Based Widgets Settings Screen**. Restores the classic widgets settings screen when using a classic (non-block) theme.
 * **Disable Comments**. Disable comments for some or all public post types. When disabled, existing comments will also be hidden on the frontend.
 * **Disable REST API**. Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
 * **Disable Feeds**. Disable all RSS, Atom and RDF feeds. This includes feeds for posts, categories, tags, comments, authors and search. Also removes traces of feed URLs from &lt;head&gt;.
@@ -190,6 +207,26 @@ Hoping that this is useful in reducing the number of plugins we install the firs
 ### Sponsor Admin and Site Enhancements
 
 If this plugin has been useful for your **personal project(s), paid dev work, client site(s) and or agency's workflow**, please kindly consider **sponsoring from as little as USD 1** ([monthly](https://bowo.io/asenha-sp-gth-chnlg) or [one-time](https://bowo.io/asenha-sp-ppl-chnlg)). This helps ensure you're going to continue seeing **new features and/or fixes**, hopefully for years to come. Thank you!
+
+### 5.1.0 (2023.06.04)
+
+* **[ADDED] Disable Components >> Disable Block-Based Widgets Settings Screen**. Restores the classic widgets settings screen when using a classic (non-block) theme. Props to [@ruralinfo](https://profiles.wordpress.org/ruralinfo/) and [@dvaer](https://profiles.wordpress.org/dvaer/) for [suggesting this](https://wordpress.org/support/topic/feature-request-disable-gutenberg-for-widget-page/).
+* **[FIXED] UTILITIES >> SMTP Email Delivery**: fixed an issue where 'from' email is using WP default wordpress@site.com instead of the email defined in module settings. Props to [@scarlywebs](https://wordpress.org/support/users/scarlywebs/) for [reporting it](https://wordpress.org/support/topic/smtp-from-not-working/) and the continued help in testing.
+* **[ENHANCED] UTILITIES >> SMTP Email Delivery**: added option to force the usage of the FROM name/email defined in module settings. [Suggested](https://wordpress.org/support/topic/smtp-from-not-working/#post-16762588) by [@scarlywebs](https://wordpress.org/support/users/scarlywebs/).
+* **[FIXED]** Custom, right-side footer text now only shows on the plugin's main settings page.
+
+### 5.0.2.4 (2023.06.01)
+
+* **[FIXED] Utilities >> SMTP Email Delivery**: fixed an issue with encoding / decoding of stored password that prevented proper functioning of this module. **Please re-enter your password and save changes**.
+* **[FIXED] Utilities >> Password Protection**: fixed an issue with encoding / decoding of stored password that prevented proper functioning of this module. **Please re-enter your password and save changes**.
+
+### 5.0.2.3 (2023.05.25)
+
+* **[FIXED] Log In | Log Out >> Change Login URL**: URLs that start with the custom login slug no longer redirects to the login page. Props to [@netzzjd](https://profiles.wordpress.org/netzzjd/) for [reporting it](https://wordpress.org/support/topic/change-login-url-redirects/).
+
+### 5.0.2.2 (2023.05.24)
+
+* **[FIXED] Log In | Log Out >> Change Login URL**: URLs for lost password flow, i.e. password reset flow, are now accessible when this module is enabled. It will no longer redirect to the not_found (404) page. Props to [@scarlywebs](https://wordpress.org/support/users/scarlywebs/) for [reporting it](https://wordpress.org/support/topic/password-reset-url-link/) and help with testing all the way.
 
 ### 5.0.2 (2023.05.09)
 
