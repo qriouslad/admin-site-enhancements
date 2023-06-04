@@ -59,6 +59,7 @@
       });
 
       // Place fields into the "Content Management" tab
+      
       $('.enable-duplication').appendTo('.fields-content-management > table > tbody');
       $('.content-order').appendTo('.fields-content-management > table > tbody');
       $('.content-order-subfields-heading').appendTo('.fields-content-management .content-order .asenha-subfields');
@@ -132,6 +133,7 @@
       $('.disable-gutenberg').appendTo('.fields-disable-components > table > tbody');
       $('.disable-gutenberg-for').appendTo('.fields-disable-components .disable-gutenberg .asenha-subfields');
       $('.disable-gutenberg-frontend-styles').appendTo('.fields-disable-components .disable-gutenberg .asenha-subfields');
+      $('.disable-block-widgets').appendTo('.fields-disable-components > table > tbody');
       $('.disable-comments').appendTo('.fields-disable-components > table > tbody');
       $('.disable-comments-for').appendTo('.fields-disable-components .disable-comments .asenha-subfields');
       $('.disable-rest-api').appendTo('.fields-disable-components > table > tbody');
@@ -178,6 +180,7 @@
       $('.smtp-default-from-name').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.smtp-default-from-email').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.smtp-default-from-description').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
+      $('.smtp-force-from').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.smtp-debug').appendTo('.fields-utilities .smtp-email-delivery .asenha-subfields');
       $('.multiple-user-roles').appendTo('.fields-utilities > table > tbody');
       $('.view-admin-as-role').appendTo('.fields-utilities > table > tbody');
@@ -973,17 +976,17 @@
       
       // Invoke tracking of link clicks to track how many times the "Sponsor" button is clicked
 
-      $('#plugin-sponsor').click( function() {
-         $.ajax({
-            url: 'https://bowo.io/asenha-sp-btn',
-            method: 'GET',
-            dataType: 'jsonp',
-            crossDomain: true
-            // success: function(response) {
-            //    console.log(response);
-            // }
-         });
-      });
+      // $('#plugin-sponsor').click( function() {
+      //    $.ajax({
+      //       url: 'https://bowo.io/asenha-sp-btn',
+      //       method: 'GET',
+      //       dataType: 'jsonp',
+      //       crossDomain: true
+      //       // success: function(response) {
+      //       //    console.log(response);
+      //       // }
+      //    });
+      // });
 
    }); // END OF $(document).ready()
 

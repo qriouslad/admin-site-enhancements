@@ -51,7 +51,9 @@ class Admin_Site_Enhancements
         // Update footer text
         add_filter( 'admin_footer_text', 'asenha_footer_text', 20 );
         // Update footer version text
-        add_filter( 'update_footer', 'asenha_footer_version_text', 20 );
+        if ( is_asenha() ) {
+            add_filter( 'update_footer', 'asenha_footer_version_text', 20 );
+        }
         // ===== Activate features based on settings =====
         // Get all WP Enhancements options, default to empty array in case it's not been created yet
         $options = get_option( ASENHA_SLUG_U, array() );
@@ -429,6 +431,15 @@ class Admin_Site_Enhancements
             }
         
         }
+        // Disable Block-Based Widgets Screen
+        
+        if ( array_key_exists( 'disable_block_widgets', $options ) && $options['disable_block_widgets'] ) {
+            // Disables the block editor from managing widgets in the Gutenberg plugin.
+            add_filter( 'gutenberg_use_widgets_block_editor', '__return_false' );
+            // Disables the block editor from managing widgets.
+            add_filter( 'use_widgets_block_editor', '__return_false' );
+        }
+        
         // Disable Comments
         if ( array_key_exists( 'disable_comments', $options ) && $options['disable_comments'] ) {
             
@@ -675,7 +686,7 @@ class Admin_Site_Enhancements
         $utilities = new ASENHA\Classes\Utilities();
         // SMTP Email Delivery
         if ( array_key_exists( 'smtp_email_delivery', $options ) && $options['smtp_email_delivery'] ) {
-            add_action( 'phpmailer_init', [ $utilities, 'deliver_email_via_smtp' ] );
+            add_action( 'phpmailer_init', [ $utilities, 'deliver_email_via_smtp' ], 99999 );
         }
         // Multiple User Roles
         
