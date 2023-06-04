@@ -663,7 +663,7 @@ class Utilities {
 
 			if ( ! empty( $password_input ) ) {
 
-				if ( $password_input == base64_decode( $stored_password ) ) { // Password is correct
+				if ( $password_input == $stored_password ) { // Password is correct
 
 					// Set auth cookie
 					// $expiration = time() + DAY_IN_SECONDS; // in 24 hours
@@ -771,10 +771,11 @@ class Utilities {
 		$smtp_port 					= $options['smtp_port'];
 		$smtp_security 				= $options['smtp_security'];
 		$smtp_username 				= $options['smtp_username'];
-		$smtp_password 				= base64_decode( $options['smtp_password'] );
+		$smtp_password 				= $options['smtp_password'];
 		$smtp_default_from_name 	= $options['smtp_default_from_name'];
 		$smtp_default_from_email 	= $options['smtp_default_from_email'];
-		$smtp_debug 					= $options['smtp_debug'];
+		$smtp_force_from 			= $options['smtp_force_from'];
+		$smtp_debug 				= $options['smtp_debug'];
 
 		// Do nothing if host or password is empty
 		if ( empty( $smtp_host ) || empty( $smtp_password ) ) {
@@ -800,23 +801,27 @@ class Utilities {
 		// Maybe override FROM email and/or name if the sender is "WordPress <wordpress@sitedomain.com>", the default from WordPress core and not yet overridden by another plugin.
 
 		$from_name = $phpmailer->FromName;
+		$from_email_beginning = substr( $phpmailer->From, 0, 9 ); // Get the first 9 characters of the current FROM email
 
-		if ( ( 'WordPress' === $from_name ) && ! empty( $smtp_default_from_name ) ) {
-			$phpmailer->FromName = $smtp_default_from_name;
-		}
+		if ( $smtp_force_from ) {
+			$phpmailer->FromName 	= $smtp_default_from_name;			
+			$phpmailer->From 		= $smtp_default_from_email;
+		} else {
+			if ( ( 'WordPress' === $from_name ) && ! empty( $smtp_default_from_name ) ) {
+				$phpmailer->FromName = $smtp_default_from_name;
+			}
 
-		$from_email_beginning = substr( $phpmailer->From, 0, 0 ); // Get the first 9 characters of the current FROM email
-
-		if ( ( 'wordpress' === $from_email_beginning ) && ! empty( $smtp_default_from_email ) ) {
-			$phpmailer->From = $smtp_default_from_email;
+			if ( ( 'wordpress' === $from_email_beginning ) && ! empty( $smtp_default_from_email ) ) {
+				$phpmailer->From = $smtp_default_from_email;
+			}			
 		}
 
 		// If debug mode is enabled, send debug info (SMTP::DEBUG_CONNECTION) to WordPress debug.log file set in wp-config.php
 		// Reference: https://github.com/PHPMailer/PHPMailer/wiki/SMTP-Debugging
 
 		if ( $smtp_debug ) {
-			$phpmailer->SMTPDebug 	= 3; 	//phpcs:ignore
-			$phpmailer->Debugoutput = 'error_log'; 				//phpcs:ignore
+			$phpmailer->SMTPDebug 	= 3; 			//phpcs:ignore
+			$phpmailer->Debugoutput = 'error_log';	//phpcs:ignore
 		}
 
 	}

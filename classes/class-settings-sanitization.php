@@ -24,9 +24,6 @@ class Settings_Sanitization
             $asenha_revisions_post_types
         ;
         $roles = $wp_roles->get_names();
-        // =================================================================
-        // CONTENT MANAGEMENT
-        // =================================================================
         // Content Duplication
         if ( !isset( $options['enable_duplication'] ) ) {
             $options['enable_duplication'] = false;
@@ -410,6 +407,11 @@ class Settings_Sanitization
             $options['disable_gutenberg_frontend_styles'] = false;
         }
         $options['disable_gutenberg_frontend_styles'] = ( 'on' == $options['disable_gutenberg_frontend_styles'] ? true : false );
+        // Disable Block-Based Widgets Screen
+        if ( !isset( $options['disable_block_widgets'] ) ) {
+            $options['disable_block_widgets'] = false;
+        }
+        $options['disable_block_widgets'] = ( 'on' == $options['disable_block_widgets'] ? true : false );
         // Disable Comments
         if ( !isset( $options['disable_comments'] ) ) {
             $options['disable_comments'] = false;
@@ -583,9 +585,9 @@ class Settings_Sanitization
         }
         $options['smtp_username'] = ( !empty($options['smtp_username']) ? sanitize_text_field( $options['smtp_username'] ) : '' );
         if ( !isset( $options['smtp_password'] ) ) {
-            $options['smtp_password'] = base64_encode( '' );
+            $options['smtp_password'] = '';
         }
-        $options['smtp_password'] = ( !empty($options['smtp_password']) ? base64_encode( $options['smtp_password'] ) : base64_encode( '' ) );
+        $options['smtp_password'] = ( !empty($options['smtp_password']) ? $options['smtp_password'] : '' );
         if ( !isset( $options['smtp_default_from_name'] ) ) {
             $options['smtp_default_from_name'] = '';
         }
@@ -597,6 +599,10 @@ class Settings_Sanitization
         if ( !isset( $options['smtp_default_from_description'] ) ) {
             $options['smtp_default_from_description'] = '';
         }
+        if ( !isset( $options['smtp_force_from'] ) ) {
+            $options['smtp_force_from'] = false;
+        }
+        $options['smtp_force_from'] = ( 'on' == $options['smtp_force_from'] ? true : false );
         if ( !isset( $options['smtp_debug'] ) ) {
             $options['smtp_debug'] = false;
         }
@@ -617,9 +623,9 @@ class Settings_Sanitization
         }
         $options['enable_password_protection'] = ( 'on' == $options['enable_password_protection'] ? true : false );
         if ( !isset( $options['password_protection_password'] ) ) {
-            $options['password_protection_password'] = base64_encode( 'secret' );
+            $options['password_protection_password'] = 'secret';
         }
-        $options['password_protection_password'] = ( !empty($options['password_protection_password']) ? base64_encode( $options['password_protection_password'] ) : base64_encode( 'secret' ) );
+        $options['password_protection_password'] = ( !empty($options['password_protection_password']) ? $options['password_protection_password'] : 'secret' );
         // Redirect 404 to Homepage
         if ( !isset( $options['maintenance_mode'] ) ) {
             $options['maintenance_mode'] = false;

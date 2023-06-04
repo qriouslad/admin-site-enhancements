@@ -26,19 +26,30 @@ class Login_Logout {
 		// Exclude interim login URL, which is inside modal popup when user is logged out in the background
 		// URL looks like https://www.example.com/wp-login.php?interim-login=1&wp_lang=en_US
 		if ( false !== strpos( $url_input, 'interim-login=1' ) ) {
-
 			remove_action( 'login_head', [ $this, 'redirect_on_default_login_urls' ] );
-
 		}
 
+		// Exclude URLs in the "Lost your password" flow
+		// URL looks like https://www.example.com/wp-login.php?action=lostpassword
+		if ( false !== strpos( $url_input, 'action=lostpassword' ) 
+			|| false !== strpos( $url_input, 'checkemail=confirm' ) 
+			|| false !== strpos( $url_input, 'action=rp' ) 
+			|| false !== strpos( $url_input, 'action=resetpass' ) 
+		) {
+			remove_action( 'login_head', [ $this, 'redirect_on_default_login_urls' ] );
+		}
+		
+		// Make sure $url_input ends with /
+		if ( false !== strpos( $url_input, $custom_login_slug ) ) {
+			if ( substr( $url_input, -1 ) != '/' ) {
+				$url_input = $url_input . '/';
+			}
+		}
+		
 		// If URL contains the custom login slug, redirect to the login URL with custom login slug in the query parameters
-		if ( 
-			( false !== strpos( $url_input, '/' . $custom_login_slug ) ) || 
-			( false !== strpos( $url_input, '/' . $custom_login_slug . '/' ) ) ) 
-		{
+		if ( false !== strpos( $url_input, '/' . $custom_login_slug . '/' ) ) {
 			wp_safe_redirect( home_url( 'wp-login.php?' . $custom_login_slug . '&redirect=false' ) );
 			exit();
-
 		}
 
 	}
