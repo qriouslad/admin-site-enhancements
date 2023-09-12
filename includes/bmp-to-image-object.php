@@ -10,13 +10,13 @@
 function bmp_to_image_object( $filename, $context = null ) {
 
     if (!function_exists("imagecreatetruecolor")) {
-        trigger_error("The PHP GD extension is required, but is not installed.", E_ERROR);
+        trigger_error(__("The PHP GD extension is required, but is not installed.", 'admin-site-enhancements'), E_ERROR);
         return false;
     }
 
     // version 1.00
     if (!($fh = fopen($filename, 'rb'))) {
-        trigger_error('imagecreatefrombmp: Can not open ' . $filename, E_USER_WARNING);
+        trigger_error(sprintf(__('imagecreatefrombmp: Can not open %s', 'admin-site-enhancements'), $filename), E_USER_WARNING);
         return false;
     }
 
@@ -27,7 +27,7 @@ function bmp_to_image_object( $filename, $context = null ) {
 
     // check for bitmap
     if ($meta['type'] != 19778) {
-        trigger_error('imagecreatefrombmp: ' . $filename . ' is not a bitmap!', E_USER_WARNING);
+        trigger_error(sprintf(__('imagecreatefrombmp: %s is not a bitmap!', 'admin-site-enhancements'), $filename), E_USER_WARNING);
         return false;
     }
 
@@ -55,7 +55,7 @@ function bmp_to_image_object( $filename, $context = null ) {
         if ($meta['imagesize'] < 1) {
             $meta['imagesize'] = @filesize($filename) - $meta['offset'];
             if ($meta['imagesize'] < 1) {
-                trigger_error('imagecreatefrombmp: Can not obtain filesize of ' . $filename . '!', E_USER_WARNING);
+                trigger_error(sprintf(__('imagecreatefrombmp: Can not obtain filesize of %s!', 'admin-site-enhancements'), $filename), E_USER_WARNING);
                 return false;
             }
         }
@@ -98,7 +98,7 @@ function bmp_to_image_object( $filename, $context = null ) {
     $p = 0;
     $vide = chr(0);
     $y = $meta['height'] - 1;
-    $error = 'imagecreatefrombmp: ' . $filename . ' has not enough data!';
+    $error = sprintf(__('imagecreatefrombmp: %s has not enough data!', 'admin-site-enhancements'), $filename);
 
     // loop through the image data beginning with the lower left corner
     while ($y >= 0) {
@@ -166,7 +166,7 @@ function bmp_to_image_object( $filename, $context = null ) {
                     $color[1] = $palette[$color[1] + 1];
                     break;
                 default:
-                    trigger_error('imagecreatefrombmp: ' . $filename . ' has ' . $meta['bits'] . ' bits and this is not supported!', E_USER_WARNING);
+                    trigger_error(sprintf(__('imagecreatefrombmp: %1s has %2s bits and this is not supported!', 'admin-site-enhancements'), $filename, $meta['bits']), E_USER_WARNING);
                     return false;
             }
             imagesetpixel($im, $x, $y, $color[1]);
