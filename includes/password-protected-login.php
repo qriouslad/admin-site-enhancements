@@ -49,10 +49,10 @@ if ( $password_protected_errors->get_error_code() && in_array( $password_protect
 <div id="login">
 	<?php do_action( 'asenha_password_protection_error_messages' ); ?>
 	<form name="loginform" id="loginform" action="<?php echo esc_url( add_query_arg( 'protected-page', 'view', home_url() ) ); ?>" method="post">
-		<label for="protected_page_pwd" >Password</label>
+		<label for="protected_page_pwd" ><?php esc_html_e('Password', 'admin-site-enhancements'); ?></label>
 		<input type="password" name="protected_page_pwd" id="protected_page_pwd" class="input" value="" size="20" />
 		<p class="submit">
-			<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="View Content" />
+			<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_html_e('View Content', 'admin-site-enhancements'); ?>" />
 			<input type="hidden" name="protected-page" value="view" />
 			<input type="hidden" name="source" value="<?php echo esc_attr( ! empty( $_REQUEST['source'] ) ? $_REQUEST['source'] : '' ); ?>" />
 		</p>
