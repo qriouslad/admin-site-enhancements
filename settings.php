@@ -10,9 +10,9 @@ function asenha_register_admin_menu()
     add_submenu_page(
         'tools.php',
         // Parent page/menu
-        'Admin and Site Enhancements',
+        __('Admin and Site Enhancements', 'admin-site-enhancements'),
         // Browser tab/window title
-        'Enhancements',
+        __('Enhancements', 'admin-site-enhancements'),
         // Sube menu title
         'manage_options',
         // Minimal user capabililty
@@ -58,8 +58,8 @@ function asenha_add_settings_page()
     esc_html_e( 'Sponsor', 'admin-site-enhancements' );
     ?>
                 </div>
-				<a class="button button-primary asenha-save-button">Save Changes</a>
-				<div class="asenha-changes-saved" style="display:none;">Changes have been saved.</div>
+				<a class="button button-primary asenha-save-button"><?php esc_html_e('Save Changes', 'admin-site-enhancements'); ?></a>
+				<div class="asenha-changes-saved" style="display:none;"><?php esc_html_e('Changes have been saved.', 'admin-site-enhancements'; ?></div>
 			</div>
 		</div>
 
@@ -67,14 +67,14 @@ function asenha_add_settings_page()
 			<form action="options.php" method="post">
 				<div class="asenha-vertical-tabs">
 					<div class="asenha-tab-buttons">
-					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management">Content Management</label>
-					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface">Admin Interface</label>
-					    <input id="tab-login-logout" type="radio" name="tabs"><label for="tab-login-logout">Log In | Log Out</label>
-					    <input id="tab-custom-code" type="radio" name="tabs"><label for="tab-custom-code">Custom Code</label>
-					    <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components">Disable Components</label>
-					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security">Security</label>
-					    <input id="tab-optimizations" type="radio" name="tabs"><label for="tab-optimizations">Optimizations</label>
-					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities">Utilities</label>
+					    <input id="tab-content-management" type="radio" name="tabs" checked><label for="tab-content-management"><?php esc_html_e('Content Management', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-admin-interface" type="radio" name="tabs"><label for="tab-admin-interface"><?php esc_html_e('Admin Interface', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-login-logout" type="radio" name="tabs"><label for="tab-login-logout"><?php esc_html_e('Log In | Log Out', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-custom-code" type="radio" name="tabs"><label for="tab-custom-code"><?php esc_html_e('Custom Code', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-disable-components" type="radio" name="tabs"><label for="tab-disable-components"><?php esc_html_e('Disable Components', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-security" type="radio" name="tabs"><label for="tab-security"><?php esc_html_e('Security', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-optimizations" type="radio" name="tabs"><label for="tab-optimizations"><?php esc_html_e('Optimizations', 'admin-site-enhancements'); ?></label>
+					    <input id="tab-utilities" type="radio" name="tabs"><label for="tab-utilities"><?php esc_html_e('Utilities', 'admin-site-enhancements'); ?></label>
 					</div>
 					<div class="asenha-tab-contents">
 					    <section class="asenha-fields fields-content-management"> 
@@ -128,7 +128,7 @@ function asenha_add_settings_page()
     ?>
 					<?php 
     submit_button(
-        'Save Changes',
+        __('Save Changes', 'admin-site-enhancements'),
         // Button copy
         'primary',
         // Type: 'primary', 'small', or 'large'
@@ -156,23 +156,23 @@ function asenha_add_settings_page()
     echo  esc_attr( ASENHA_URL . 'assets/img/undraw_Programming_re_kg9v.png' ) ;
     ?>" />
                     </div>
-                    <h2>Thank you for your interest in sponsoring!</h2>
+                    <h2><?php esc_html_e('Thank you for your interest in sponsoring!', 'admin-site-enhancements'); ?></h2>
                 </div>
                 <div class="sponsorship-content-sections">
                     <div class="sponsorship-info">
-                        <p class="sponsorship-description">I love building <strong>useful and free <a href="https://bowo.io/asenha-other-plugins" target="_blank">plugins</a></strong>. Your sponsorship will help justify the time and effort I spend in <strong>developing and maintaining this plugin</strong>, so it can remain functional and be more useful for <strong>your personal project(s), paid dev work, client site(s) and/or agency workflow</strong>... hopefully for years to come.</p>                                
+                        <p class="sponsorship-description"><?php esc_html_e('I love building <strong>useful and free <a href="https://bowo.io/asenha-other-plugins" target="_blank">plugins</a></strong>. Your sponsorship will help justify the time and effort I spend in <strong>developing and maintaining this plugin</strong>, so it can remain functional and be more useful for <strong>your personal project(s), paid dev work, client site(s) and/or agency workflow</strong>... hopefully for years to come.', 'admin-site-enhancements'); ?></p>                                
                     </div>
                     <div class="sponsorship-methods">
-                        <p class="sponsorship-amount">Sponsorship can be <strong>as little as USD 1</strong>, monthly or one-time.</p>
+                        <p class="sponsorship-amount"><?php esc_html_e('Sponsorship can be <strong>as little as USD 1</strong>, monthly or one-time.', 'admin-site-enhancements'); ?></p>
                         <div class="sponsorship-method sponsor-via-github">
-                            <a href="https://bowo.io/asenha-sp-gth" target="_blank" class="button button-primary button-hero sponsorship-button monthly">Monthly Sponsorship via Github <span class="dashicons dashicons-arrow-right-alt2"></span></a>
+                            <a href="https://bowo.io/asenha-sp-gth" target="_blank" class="button button-primary button-hero sponsorship-button monthly"><?php esc_html_e('Monthly Sponsorship via Github', 'admin-site-enhancements'); ?> <span class="dashicons dashicons-arrow-right-alt2"></span></a>
                         </div>
                         <div class="sponsorship-method sponsor-via-paypal">
-                            <a href="https://bowo.io/asenha-sp-ppl" target="_blank" class="button button-hero sponsorship-button one-time">One-time Sponsorship via PayPal <span class="dashicons dashicons-arrow-right-alt2"></span></a>
+                            <a href="https://bowo.io/asenha-sp-ppl" target="_blank" class="button button-hero sponsorship-button one-time"><?php esc_html_e('One-time Sponsorship via PayPal', 'admin-site-enhancements'); ?> <span class="dashicons dashicons-arrow-right-alt2"></span></a>
                         </div>
                     </div>
                 </div>
-                <p>More about me and my work at <a href="https://bowo.io/asenha-bw-sp" target="_blank">bowo.io</a>.</p>
+                <p><?php echo sprintf(__('More about me and my work at %1sbowo.io%2s.', 'admin-site-enhancements'), '<a href="https://bowo.io/asenha-bw-sp" target="_blank">', '</a>'); ?></p>
             </div>
         </div>
 	</div>
@@ -565,9 +565,7 @@ function asenha_plugin_action_links( $links )
 function asenha_footer_text()
 {
     if ( is_asenha() ) {
-        ?>
-		<a href="https://bowo.io/asenha-dotorg" target="_blank">Admin Site Enhancements</a> is on <a href="https://bowo.io/asenha-gthb" target="_blank">github</a>.
-		<?php 
+	    echo sprintf(__('%1sAdmin Site Enhancements%2s is on %3sGithub%4s.', 'admin-site-enhancements'), '<a href="https://bowo.io/asenha-dotorg" target="_blank">', '</a>', '<a href="https://bowo.io/asenha-gthb" target="_blank">', '</a>');
     }
 }
 
@@ -578,9 +576,7 @@ function asenha_footer_text()
  */
 function asenha_footer_version_text()
 {
-    ?>
-    Also by Bowo &#8594; <a href="https://bowo.io/asenha-wpn" target="_blank">WordPress Newsboard</a>: The latest from 100+ sources
-	<?php 
+	echo sprintf(__('Also by Bowo → %1sWordPress Newsboard%2s : The latest from 100+ sources', 'admin-site-enhancements'), '<a href="https://bowo.io/asenha-wpn" target="_blank">', '</a>');
 }
 
 /**
